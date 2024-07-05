@@ -21,7 +21,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val notificationsViewModel =
-            ViewModelProvider(this).get(OrdersViewModel::class.java)
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         _binding = FragmentProfileAdminBinding.inflate(inflater, container, false)
         val root: View = binding.root

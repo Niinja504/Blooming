@@ -71,7 +71,7 @@ class Password_recovery1 : AppCompatActivity() {
 
 
         RecuerdaSuContra.setOnClickListener {
-            val intent = Intent(this,Sing_In::class.java)
+            val intent = Intent(this,Sing_in::class.java)
             startActivity(intent)
             finish()
         }

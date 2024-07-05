@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import proyecto.expotecnica.blooming.databinding.FragmentOrdersDeliveredEmployedBinding
+import proyecto.expotecnica.blooming.databinding.FragmentOrderDeliveredEmployedBinding
 
 class OrdersDeliveredFragment : Fragment()  {
-    private var _binding: FragmentOrdersDeliveredEmployedBinding? = null
+    private var _binding: FragmentOrderDeliveredEmployedBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,7 +23,7 @@ class OrdersDeliveredFragment : Fragment()  {
         val notificationsViewModel =
             ViewModelProvider(this).get(OrdersDeliveredViewModel::class.java)
 
-        _binding = FragmentOrdersDeliveredEmployedBinding.inflate(inflater, container, false)
+        _binding = FragmentOrderDeliveredEmployedBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
