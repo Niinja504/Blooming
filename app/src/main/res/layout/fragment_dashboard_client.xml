@@ -92,7 +92,7 @@
         app:layout_constraintVertical_bias="0.021" />
 
     <TextView
-        android:id="@+id/lbl_VerMas_Inicio_client"
+        android:id="@+id/lbl_VerMasOfertas_Inicio_client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/underlined_text4"
@@ -104,6 +104,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.142"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/lbl_VerMasPopulares_Inicio_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/underlined_text4"
+        android:textColor="#FF4D4B50"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.407"
         tools:ignore="MissingConstraints" />
 
 

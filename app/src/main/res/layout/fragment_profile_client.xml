@@ -26,10 +26,10 @@
             android:src="@drawable/ic_shopping_cart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.778"
+            app:layout_constraintHorizontal_bias="0.915"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.024" />
+            app:layout_constraintVertical_bias="0.021" />
 
         <View
             android:id="@+id/circle_edit"
@@ -91,6 +91,7 @@
             android:id="@+id/button2"
             android:layout_width="370dp"
             android:layout_height="50dp"
+            android:backgroundTint="#F38F9A"
             android:text="Cerrar sesión"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
