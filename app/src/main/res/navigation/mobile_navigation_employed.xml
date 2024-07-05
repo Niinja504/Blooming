@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_cash_register_employed">
+
+    <fragment
+        android:id="@+id/navigation_cash_register_employed"
+        android:name="proyecto.expotecnica.blooming.ui_employed.cash_register.CashRegisterFragment"
+        android:label="Cash Register"
+        tools:layout="@layout/fragment_cash_register_employed" />
+
+    <fragment
+        android:id="@+id/navigation_inventory_employed"
+        android:name="proyecto.expotecnica.blooming.ui_employed.inventory.InventoryFragment"
+        android:label="Inventory"
+        tools:layout="@layout/fragment_inventory_employed" />
+
+    <fragment
+        android:id="@+id/navigation_orders_employed"
+        android:name="proyecto.expotecnica.blooming.ui_employed.orders.OrdersFragment"
+        android:label="Orders"
+        tools:layout="@layout/fragment_orders_employed" />
+
+    <fragment
+        android:id="@+id/navigation_profile_employed"
+        android:name="proyecto.expotecnica.blooming.ui_employed.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile_employed" />
+
+</navigation>

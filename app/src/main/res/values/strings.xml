@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Blooming</string>
+    <string name="underlined_text"><u>¿Ha olvidado su contraseña?</u></string>
+    <string name="underlined_text2"><u>¿No tienes una cuenta? Registrate</u></string>
+    <string name="underlined_text3"><u>¿Ya tiene una cuenta? Iniciar sesión</u></string>
+    <string name="underlined_text4"><u>Ver mas...</u></string>
+    <string name="underlined_text5"><u>Sobre nosotros</u></string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_dashboard_employed">Dashboard_Employed</string>
+    <string name="title_activity_admin">Admin</string>
+    <string name="title_activity_dashboard_client">dashboard_client</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_dashboard_admin">dashboard_admin</string>
+</resources>

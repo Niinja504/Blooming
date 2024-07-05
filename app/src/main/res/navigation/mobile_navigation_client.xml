@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_dashboard_client">
+
+    <fragment
+        android:id="@+id/navigation_dashboard_client"
+        android:name="proyecto.expotecnica.blooming.ui_client.dashboard.DashboardFragment"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_dashboard_client" />
+
+    <fragment
+        android:id="@+id/navigation_shop_client"
+        android:name="proyecto.expotecnica.blooming.ui_client.shop.ShopFragment"
+        android:label="Tienda"
+        tools:layout="@layout/fragment_shop_client" />
+
+    <fragment
+        android:id="@+id/navigation_orders_client"
+        android:name="proyecto.expotecnica.blooming.ui_client.orders.OrderFragment"
+        android:label="Pedidos"
+        tools:layout="@layout/fragment_orders_client" />
+
+    <fragment
+        android:id="@+id/navigation_profile_client"
+        android:name="proyecto.expotecnica.blooming.ui_client.profile.ProfileFragment"
+        android:label="Pefil"
+        tools:layout="@layout/fragment_profile_client" />
+</navigation>
