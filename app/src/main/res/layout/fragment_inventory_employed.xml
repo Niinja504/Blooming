@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.14" />
 
     <EditText
-        android:id="@+id/txt_Nombre_Registrer"
+        android:id="@+id/txt_Nombres_Registrer"
         android:layout_width="285dp"
         android:layout_height="24dp"
         android:background="@drawable/rectangle"

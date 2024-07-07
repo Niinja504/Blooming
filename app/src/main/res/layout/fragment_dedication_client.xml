@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/txt_Nombre_Registrer"
+        android:id="@+id/txt_Nombres_Registrer"
         android:layout_width="331dp"
         android:layout_height="96dp"
         android:background="@drawable/edittext_border"
