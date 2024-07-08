@@ -1,26 +1,51 @@
 package proyecto.expotecnica.blooming
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.FirebaseApp
-import kotlinx.coroutines.*
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import org.checkerframework.common.returnsreceiver.qual.This
+import modelo.ImageUtils
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import modelo.AuFi
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.tasks.await
+import java.security.MessageDigest
+import java.util.UUID
 
 class Register : AppCompatActivity() {
     private lateinit var CampoNombres: EditText
@@ -32,12 +57,31 @@ class Register : AppCompatActivity() {
     private lateinit var CampoConfirmarContra: EditText
     private lateinit var lbl_IniciarSesion: TextView
     private lateinit var Btn_SubirFoto: Button
+    private lateinit var dialogView: View
+    private var currentPhotoPath: String? = null
+    private var selectedImageUri: Uri? = null
+    private lateinit var authManager: AuFi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FirebaseApp.initializeApp(this) // Inicializar Firebase
-        enableEdgeToEdge()
+
+        // Inicializar Firebase App Check
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            PlayIntegrityAppCheckProviderFactory.getInstance()
+        )
+
+        FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_register)
+
+        authManager = AuFi(this)
+        authManager.authenticateUser(
+            onSuccess = {},
+            onFailure = {
+                // Manejar el fallo de autenticación
+                finish()
+            }
+        )
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -46,23 +90,27 @@ class Register : AppCompatActivity() {
         }
 
         // Inicialización de vistas
-        CampoNombres = findViewById<EditText>(R.id.txt_Nombres_Registrer).apply { filters = arrayOf(InputFilter.LengthFilter(10)) }
-        CampoApellidos = findViewById<EditText>(R.id.txt_Apellidos_Registrer).apply { filters = arrayOf(InputFilter.LengthFilter(10)) }
-        CampoUsuario = findViewById<EditText>(R.id.txt_Usuario_Registrer).apply { filters = arrayOf(InputFilter.LengthFilter(10)) }
-        CampoTelefono = findViewById<EditText>(R.id.txt_Telefono_Registrer).apply {
-            filters = arrayOf(InputFilter.LengthFilter(11))
-            inputType = InputType.TYPE_CLASS_NUMBER
-            addTextChangedListener(TelefonoTextWatcher())
-        }
+        CampoNombres = findViewById(R.id.txt_Nombres_Registrer)
+        CampoApellidos = findViewById(R.id.txt_Apellidos_Registrer)
+        CampoUsuario = findViewById(R.id.txt_Usuario_Registrer)
+        CampoTelefono = findViewById(R.id.txt_Telefono_Registrer)
+        CampoCorreo = findViewById(R.id.txt_Correo_Registrer)
+        CampoContra = findViewById(R.id.txt_Contrasena_Registrer)
+        CampoConfirmarContra = findViewById(R.id.txt_ConfirmarContra_Registrer)
+        lbl_IniciarSesion = findViewById(R.id.lbl_IniciarSesion_Register)
+        Btn_SubirFoto = findViewById(R.id.btn_foto_perfil_register)
 
-        CampoCorreo = findViewById<EditText>(R.id.txt_Correo_Registrer).apply {
-            filters = arrayOf(InputFilter.LengthFilter(20))
-            inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-        }
-        CampoContra = findViewById<EditText>(R.id.txt_Contrasena_Registrer).apply { filters = arrayOf(InputFilter.LengthFilter(15)) }
-        CampoConfirmarContra = findViewById<EditText>(R.id.txt_ConfirmarContra_Registrer).apply { filters = arrayOf(InputFilter.LengthFilter(15)) }
-        lbl_IniciarSesion = findViewById<TextView>(R.id.lbl_IniciarSesion_Register)
-        Btn_SubirFoto = findViewById<Button>(R.id.btn_foto_perfil_register)
+        CampoNombres.filters = arrayOf(InputFilter.LengthFilter(15))
+        CampoApellidos.filters = arrayOf(InputFilter.LengthFilter(15))
+        CampoUsuario.filters = arrayOf(InputFilter.LengthFilter(10))
+        CampoTelefono.filters = arrayOf(InputFilter.LengthFilter(11))
+        CampoTelefono.inputType = InputType.TYPE_CLASS_NUMBER
+        CampoTelefono.addTextChangedListener(TelefonoTextWatcher())
+
+        CampoCorreo.filters = arrayOf(InputFilter.LengthFilter(30))
+        CampoCorreo.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+        CampoContra.filters = arrayOf(InputFilter.LengthFilter(20))
+        CampoConfirmarContra.filters = arrayOf(InputFilter.LengthFilter(20))
 
         CampoNombres.requestFocus()
 
@@ -133,6 +181,13 @@ class Register : AppCompatActivity() {
             CampoTelefono.error = null
         }
 
+        if (Telefono.length < 8) {
+            CampoTelefono.error = "El número telefonico debe de tener 8 digitos"
+            HayErrores = true
+        } else {
+            CampoContra.error = null
+        }
+
         if (Correo.isEmpty()) {
             CampoCorreo.error = "Este campo es obligatorio"
             HayErrores = true
@@ -174,48 +229,8 @@ class Register : AppCompatActivity() {
         return !HayErrores
     }
 
-
-    private fun abrirVentanaEmergente() {
-        val inflater = layoutInflater
-        val dialogView = inflater.inflate(R.layout.imagen_register, null)
-
-        val dialog = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .create()
-
-        val imgPerfil = dialogView.findViewById<ImageView>(R.id.ImgPerfil_reg)
-        val btnSubirImagen = dialogView.findViewById<Button>(R.id.btn_subir_imagen_reg)
-        val btnCrearCuenta = dialogView.findViewById<Button>(R.id.btn_CrearCuenta_reg)
-        val btnCancelar = dialogView.findViewById<Button>(R.id.btn_cancelar_reg)
-
-        btnSubirImagen.setOnClickListener {
-            // Lógica para subir la imagen
-            Toast.makeText(this, "Subir imagen", Toast.LENGTH_SHORT).show()
-        }
-
-        btnCrearCuenta.setOnClickListener {
-            // Lógica para crear la cuenta
-            Toast.makeText(this, "Cuenta creada", Toast.LENGTH_SHORT).show()
-            dialog.dismiss()
-        }
-
-        btnCancelar.setOnClickListener {
-            LimpiarCampos()
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
-
-
     private suspend fun usuarioExiste(usuario: String): Boolean {
-        val sql = """
-        SELECT COUNT(*) AS usuario_existe
-        FROM TbUsers
-        WHERE Nombre_de_Usuario = ?
-        """.trimIndent()
-
+        val sql = "SELECT COUNT(*) AS usuario_existe FROM TbUsers WHERE Nombre_de_Usuario = ?"
         val claseConexion = ClaseConexion()
         val conexion = claseConexion.CadenaConexion()
 
@@ -224,7 +239,7 @@ class Register : AppCompatActivity() {
         if (conexion != null) {
             try {
                 val statement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
-                statement.setString(1, usuario)
+                statement.setString(1, usuario) // Pasamos el parámetro de manera segura
 
                 val resultado = withContext(Dispatchers.IO) { statement.executeQuery() }
 
@@ -249,12 +264,7 @@ class Register : AppCompatActivity() {
     }
 
     private suspend fun correoExiste(correo: String): Boolean {
-        val sql = """
-        SELECT COUNT(*) AS correo_existe
-        FROM TbUsers
-        WHERE Email_User = ?
-        """.trimIndent()
-
+        val sql = "SELECT COUNT(*) AS correo_existe FROM TbUsers WHERE Email_User = ?"
         val claseConexion = ClaseConexion()
         val conexion = claseConexion.CadenaConexion()
 
@@ -263,7 +273,7 @@ class Register : AppCompatActivity() {
         if (conexion != null) {
             try {
                 val statement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
-                statement.setString(1, correo)
+                statement.setString(1, correo) // Pasamos el parámetro de manera segura
 
                 val resultado = withContext(Dispatchers.IO) { statement.executeQuery() }
 
@@ -285,6 +295,162 @@ class Register : AppCompatActivity() {
         }
 
         return correoExiste
+    }
+
+    private fun abrirVentanaEmergente() {
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.imagen_register, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        this.dialogView = dialogView // Guardar la referencia del dialogView
+
+        val imgPerfil = dialogView.findViewById<ImageView>(R.id.ImgPerfil_reg)
+        val btnSubirImagen = dialogView.findViewById<Button>(R.id.btn_subir_imagen_reg)
+        val btnCrearCuenta = dialogView.findViewById<Button>(R.id.btn_CrearCuenta_reg)
+        val btnCancelar = dialogView.findViewById<Button>(R.id.btn_cancelar_reg)
+
+        btnSubirImagen.setOnClickListener {
+            mostrarDialogoSeleccionImagen()
+        }
+
+        btnCrearCuenta.setOnClickListener {
+            lifecycleScope.launch {
+                val imageUrl = if (selectedImageUri != null) {
+                    val imageBitmap = getBitmapFromUri(selectedImageUri!!)
+                    val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
+                    uploadImageToFirebase(resizedBitmap, "Images${System.currentTimeMillis()}")
+                } else {
+                    "El usuario eligio la imagen predeternimada"
+                }
+
+                // Inserción en la base de datos
+                withContext(Dispatchers.IO) {
+                    val ObjConexion = ClaseConexion().CadenaConexion()
+
+                    // Encripto la contraseña
+                    val ContraEncrip = hashSHA256(CampoContra.text.toString())
+
+                    val Crear = ObjConexion?.prepareStatement(
+                        "INSERT INTO TbUsers (ID_User, UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Email_User, Contra_User, Img_User) VALUES (SEQ_Users.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)"
+                    )!!
+
+                    Crear.setString(1, UUID.randomUUID().toString())
+                    Crear.setString(2, CampoNombres.text.toString())
+                    Crear.setString(3, CampoApellidos.text.toString())
+                    Crear.setString(4, CampoUsuario.text.toString())
+                    Crear.setString(5, CampoTelefono.text.toString())
+                    Crear.setString(6, CampoCorreo.text.toString())
+                    Crear.setString(7, ContraEncrip)
+                    Crear.setString(8, imageUrl)
+                    Crear.executeUpdate()
+                }
+
+                dialog.dismiss()
+                LimpiarCampos()
+                CampoNombres.requestFocus()
+            }
+        }
+
+        btnCancelar.setOnClickListener {
+            LimpiarCampos()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun mostrarDialogoSeleccionImagen() {
+        val opciones = arrayOf("Cámara", "Galería")
+        AlertDialog.Builder(this)
+            .setTitle("Seleccionar imagen")
+            .setItems(opciones) { dialog, which ->
+                when (which) {
+                    0 -> abrirCamara()
+                    1 -> abrirGaleria()
+                }
+            }
+            .show()
+    }
+
+    private fun abrirCamara() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val photoFile: File? = try {
+            ImageUtils.createImageFile(this)
+        } catch (ex: IOException) {
+            null
+        }
+        photoFile?.also {
+            currentPhotoPath = it.absolutePath
+            val photoURI: Uri = FileProvider.getUriForFile(
+                this,
+                "${applicationContext.packageName}.fileprovider",
+                it
+            )
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+        }
+    }
+
+    private fun abrirGaleria() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            val imgPerfil = dialogView.findViewById<ImageView>(R.id.ImgPerfil_reg)
+            when (requestCode) {
+                REQUEST_IMAGE_CAPTURE -> {
+                    currentPhotoPath?.let {
+                        val fileUri = Uri.fromFile(File(it))
+                        selectedImageUri = fileUri // Actualizar selectedImageUri con la URI de la cámara
+                        Glide.with(this)
+                            .load(fileUri)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(imgPerfil)
+                    }
+                }
+                REQUEST_IMAGE_PICK -> {
+                    val fileUri = data?.data
+                    selectedImageUri = fileUri // Actualizar selectedImageUri con la URI de la galería
+                    Glide.with(this)
+                        .load(fileUri)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(imgPerfil)
+                }
+            }
+        }
+    }
+
+    private fun getBitmapFromUri(uri: Uri): Bitmap {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val source = ImageDecoder.createSource(contentResolver, uri)
+            ImageDecoder.decodeBitmap(source)
+        } else {
+            MediaStore.Images.Media.getBitmap(contentResolver, uri)
+        }
+    }
+
+    private suspend fun uploadImageToFirebase(bitmap: Bitmap, fileName: String): String? {
+        return withContext(Dispatchers.IO) {
+            val storageRef = FirebaseStorage.getInstance().reference.child("Clientes/$fileName.jpg")
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+
+            val uploadTask = storageRef.putBytes(data).await()
+            val downloadUrl = uploadTask.storage.downloadUrl.await()
+            downloadUrl.toString()
+        }
+    }
+
+    private fun hashSHA256(contraseniaEscrita: String): String {
+        val bytes = MessageDigest.getInstance("SHA-256").digest(contraseniaEscrita.toByteArray())
+        return bytes.joinToString("") { "%02x".format(it) }
     }
 
     inner class TelefonoTextWatcher : TextWatcher {
@@ -312,6 +478,11 @@ class Register : AppCompatActivity() {
 
             isUpdating = false
         }
+    }
+
+    companion object {
+        private const val REQUEST_IMAGE_CAPTURE = 1
+        private const val REQUEST_IMAGE_PICK = 2
     }
 
     private fun LimpiarCampos() {

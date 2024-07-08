@@ -31,7 +31,6 @@ class Sing_in : AppCompatActivity() {
 
 
 
-
         //Funciones para abrir las otras pantallas
         OlvidoSuContra.setOnClickListener{
             val PantallaRecuperarContra = Intent(this, Password_recovery1::class.java)

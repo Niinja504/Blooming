@@ -61,6 +61,8 @@ android {
         implementation(libs.androidx.navigation.fragment.ktx)
         implementation(libs.androidx.navigation.ui.ktx)
         implementation(libs.androidx.media3.exoplayer)
+        implementation(libs.play.services.cast.framework)
+        implementation(libs.filament.android)
         testImplementation(libs.junit)
         implementation("com.oracle.database.jdbc:ojdbc6:11.2.0.4")
         androidTestImplementation(libs.androidx.junit)
@@ -91,4 +93,9 @@ android {
         implementation ("de.hdodenhof:circleimageview:3.1.0")
 
         implementation ("androidx.cardview:cardview:1.0.0")
+
+        implementation ("com.google.firebase:firebase-appcheck:16.0.0")
+        implementation ("com.google.firebase:firebase-appcheck-playintegrity:16.0.0")
+        implementation ("com.google.firebase:firebase-appcheck-safetynet:16.0.0")
+
     }
