@@ -23,6 +23,10 @@
             android:name=".Sing_in"
             android:exported="false" />
         <activity
+            android:name=".Dashboard_client"
+            android:exported="false"
+            android:label="@string/title_activity_dashboard_admin" />
+        <activity
             android:name=".Dashboard_admin"
             android:exported="false"
             android:label="@string/title_activity_dashboard_admin" />

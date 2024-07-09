@@ -72,6 +72,7 @@ android {
         implementation ("com.google.firebase:firebase-auth-ktx:21.0.3")
         implementation ("com.google.android.gms:play-services-auth:20.0.1")
         implementation("com.google.firebase:firebase-storage")
+        implementation ("com.google.android.gms:play-services-auth:20.0.0")
 
         //Dependecias que nos permitira el envio de correos (código de seguridad)
         implementation ("com.sun.mail:android-mail:1.6.7")

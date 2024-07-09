@@ -448,8 +448,8 @@ class Register : AppCompatActivity() {
         }
     }
 
-    private fun hashSHA256(contraseniaEscrita: String): String {
-        val bytes = MessageDigest.getInstance("SHA-256").digest(contraseniaEscrita.toByteArray())
+    private fun hashSHA256(contrasenaEscrita: String): String {
+        val bytes = MessageDigest.getInstance("SHA-256").digest(contrasenaEscrita.toByteArray())
         return bytes.joinToString("") { "%02x".format(it) }
     }
 

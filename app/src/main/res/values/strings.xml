@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Blooming</string>
+    <string name="default_web_client_id">205845154655-j4vop9bsr39n8hsse0dnf9bushd0me0q.apps.googleusercontent.com</string>
     <string name="underlined_text"><u>¿Ha olvidado su contraseña?</u></string>
     <string name="underlined_text2"><u>¿No tienes una cuenta? Registrate</u></string>
     <string name="underlined_text3"><u>¿Ya tiene una cuenta? Iniciar sesión</u></string>
