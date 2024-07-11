@@ -71,6 +71,21 @@ class Register : AppCompatActivity() {
             PlayIntegrityAppCheckProviderFactory.getInstance()
         )
 
+        // Asegúrate de inicializar Firebase antes de usar otras funcionalidades de Firebase
+        FirebaseApp.initializeApp(this)
+
+        setContentView(R.layout.activity_register)
+
+        authManager = AuFi(this)
+        authManager.authenticateUser(
+            onSuccess = {},
+            onFailure = {
+                // Manejar el fallo de autenticación
+                finish()
+            }
+        )
+
+
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_register)
 

@@ -12,7 +12,20 @@
           "package_name": "proyecto.expotecnica.blooming"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "205845154655-hsfa8s987a4tth65pfc5hrpi410065qd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "proyecto.expotecnica.blooming",
+            "certificate_hash": "ec337318c8ae36d5190d9d436db1a2a49531b528"
+          }
+        },
+        {
+          "client_id": "205845154655-j4vop9bsr39n8hsse0dnf9bushd0me0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBjLiEkaWzqLmhQUefPWklGDYm1RLIH_Lo"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205845154655-j4vop9bsr39n8hsse0dnf9bushd0me0q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
