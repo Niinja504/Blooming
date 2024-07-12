@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".ui_client.delivery_date.DeliveryDateFragment" >
+    tools:context=".Client.delivery_date.DeliveryDateFragment" >
 
     <Button
         android:id="@+id/btn_Agregar_DetallesProducto_client"
@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.04" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/Regresar_Delivery_Date_client"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_arrow"

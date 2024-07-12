@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".ui_admin.orders.OrdersFragment" />
+    tools:context=".Admin.orders.OrdersFragment" />

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".OffersFragment" >
+    tools:context=".Client.offers.OffersFragment" >
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/ic_Regresar_Offers_Client"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_arrow"

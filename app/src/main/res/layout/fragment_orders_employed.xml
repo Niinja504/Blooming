@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".ui_employed.orders.OrdersFragment">
+    tools:context=".Employed.orders.OrdersFragment">
 
     <ImageView
         android:id="@+id/imageViewSettings"

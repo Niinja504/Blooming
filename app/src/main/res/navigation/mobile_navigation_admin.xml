@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_employed_admin"
-        android:name="proyecto.expotecnica.blooming.ui_admin.employed.EmployedFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.employed.EmployedFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_employed_admin" />
 
     <fragment
         android:id="@+id/navigation_inventory_admin"
-        android:name="proyecto.expotecnica.blooming.ui_admin.inventory.InventoryFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.inventory.InventoryFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_inventory_admin" />
 
     <fragment
         android:id="@+id/navigation_orders_admin"
-        android:name="proyecto.expotecnica.blooming.ui_admin.orders.OrdersFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.orders.OrdersFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_orders_admin" />
 
     <fragment
         android:id="@+id/navigation_profile_admin"
-        android:name="proyecto.expotecnica.blooming.ui_admin.profile.ProfileFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.profile.ProfileFragment"
         android:label="fragment_profile_admin"
         tools:layout="@layout/fragment_profile_admin" />
 

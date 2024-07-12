@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context="ui_client.profile.ProfileFragment"
+    tools:context="Client.profile.ProfileFragment"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-9dp">
 
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:background="#FFFCF5"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:context="ui_admin.profile.ProfileFragment"
+        tools:context="Admin.profile.ProfileFragment"
         tools:layout_editor_absoluteX="-46dp">
 
         <ImageView

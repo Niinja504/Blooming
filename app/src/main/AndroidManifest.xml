@@ -31,14 +31,14 @@
             android:exported="false"
             android:label="@string/title_activity_dashboard_admin" />
         <activity
-            android:name=".Dashboard_employed"
+            android:name=".MainActivity"
             android:exported="false"
             android:label="@string/title_activity_dashboard_employed" />
         <activity
             android:name=".Sing_in"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Dashboard_employed"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

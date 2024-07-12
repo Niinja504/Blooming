@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context="ui_employed.orders_delivered.OrdersDeliveredFragment" >
+    tools:context="Employed.orders_delivered.OrdersDeliveredFragment" >
 
     <TextView
         android:id="@+id/textViewInicio"

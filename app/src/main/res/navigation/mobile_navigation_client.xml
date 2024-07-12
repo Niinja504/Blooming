@@ -7,25 +7,46 @@
 
     <fragment
         android:id="@+id/navigation_dashboard_client"
-        android:name="proyecto.expotecnica.blooming.ui_client.dashboard.DashboardFragment"
+        android:name="proyecto.expotecnica.blooming.Client.dashboard.DashboardFragment"
         android:label="Inicio"
-        tools:layout="@layout/fragment_dashboard_client" />
+        tools:layout="@layout/fragment_dashboard_client">
+        <action
+            android:id="@+id/action_setting_client"
+            app:destination="@+id/setting_client" />
+        <action
+            android:id="@+id/action_ver_mas_ofertas"
+            app:destination="@+id/ver_mas_ofertas"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_shop_client"
-        android:name="proyecto.expotecnica.blooming.ui_client.shop.ShopFragment"
+        android:name="proyecto.expotecnica.blooming.Client.shop.ShopFragment"
         android:label="Tienda"
         tools:layout="@layout/fragment_shop_client" />
 
     <fragment
         android:id="@+id/navigation_orders_client"
-        android:name="proyecto.expotecnica.blooming.ui_client.orders.OrderFragment"
+        android:name="proyecto.expotecnica.blooming.Client.orders.OrderFragment"
         android:label="Pedidos"
         tools:layout="@layout/fragment_orders_client" />
 
     <fragment
         android:id="@+id/navigation_profile_client"
-        android:name="proyecto.expotecnica.blooming.ui_client.profile.ProfileFragment"
+        android:name="proyecto.expotecnica.blooming.Client.profile.ProfileFragment"
         android:label="Pefil"
         tools:layout="@layout/fragment_profile_client" />
+
+    <!---->
+    <fragment
+        android:id="@+id/setting_client"
+        android:name="proyecto.expotecnica.blooming.Client.setting.SettingFragment"
+        android:label="Ajustes"
+        tools:layout="@layout/fragment_setting_client" />
+
+    <fragment
+        android:id="@+id/ver_mas_ofertas"
+        android:name="proyecto.expotecnica.blooming.Client.offers.OffersFragment"
+        android:label="Ver más ofertas"
+        tools:layout="@layout/fragment_offers_client"/>
+
 </navigation>

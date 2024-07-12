@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".ui_client.shop.ShopFragment" >
+    tools:context=".Client.shop.ShopFragment" >
 
     <ImageView
         android:id="@+id/imageViewCart"
@@ -64,7 +64,7 @@
         app:layout_constraintVertical_bias="0.021" />
 
     <ImageView
-        android:id="@+id/imageViewSettings"
+        android:id="@+id/ic_Setting_Shop_Client"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:src="@drawable/ic_setting"
