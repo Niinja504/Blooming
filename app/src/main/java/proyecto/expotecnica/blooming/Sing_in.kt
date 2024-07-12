@@ -379,6 +379,7 @@ class Sing_in : AppCompatActivity() {
         alertDialog.show()
     }
 
+    //Ventana Emergete para seleccionar la galeria o la camara
     private fun mostrarDialogoSeleccionImagen() {
         val opciones = arrayOf("Cámara", "Galería")
         AlertDialog.Builder(this)

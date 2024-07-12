@@ -48,7 +48,7 @@ class Password_recovery2 : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "El código es incorrecto", Toast.LENGTH_SHORT).show()
+                campoCodigo.error = "El código es incorrecto"
             }
         }
 

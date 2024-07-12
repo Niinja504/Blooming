@@ -37,13 +37,11 @@ class Password_recovery1 : AppCompatActivity() {
 
             when {
                 text.isEmpty() -> {
-                    Toast.makeText(this, "Error: El campo de texto está vacío", Toast.LENGTH_SHORT)
-                        .show()
+                    CampoCorreo.error = "El campo de texto está vacío"
                 }
 
                 !text.contains("@") -> {
-                    Toast.makeText(this, "Error: El texto debe contener un '@'", Toast.LENGTH_SHORT)
-                        .show()
+                    CampoCorreo.error = "El campo debe de contener un @"
                 }
 
                 else -> {
