@@ -104,4 +104,6 @@ dependencies {
 
     implementation("com.google.firebase:firebase-appcheck-playintegrity")
 
+    implementation ("com.google.android.material:material:1.7.0")
+
 }
