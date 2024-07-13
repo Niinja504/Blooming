@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/Img_AddProduct"
         android:layout_width="228dp"
         android:layout_height="478dp"
         app:layout_constraintBottom_toBottomOf="parent"

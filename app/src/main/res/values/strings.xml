@@ -16,4 +16,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_dashboard_admin">dashboard_admin</string>
+    <!--DropDown-->
+    <string name="Titulo">Drop Down</string>
+    <string name="Select">Seleccione una opción</string>
 </resources>

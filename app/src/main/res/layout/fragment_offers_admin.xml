@@ -5,21 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Employed.inventory.InventoryFragment">
+    tools:context=".Admin.offers.Offers" >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewProfile"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile_user"
+    <Button
+        android:id="@+id/btn_AgregarProducto_Inventory"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
+        android:text=" Agregar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintVertical_bias="0.177"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -28,7 +27,7 @@
         android:src="@drawable/ic_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.957"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.093" />
@@ -49,18 +48,6 @@
         app:layout_constraintVertical_bias="0.093"
         tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="21dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.815"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106" />
-
     <EditText
         android:id="@+id/txt_Nombres_Registrer"
         android:layout_width="285dp"
@@ -74,35 +61,35 @@
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintHorizontal_bias="0.214"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.106"
         tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="21dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.106" />
 
     <TextView
         android:id="@+id/textViewInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
-        android:text="Inventario"
+        android:text="Ofertas"
         android:textColor="#F38F9A"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
-    <ImageView
-        android:id="@+id/imageViewSettings"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />

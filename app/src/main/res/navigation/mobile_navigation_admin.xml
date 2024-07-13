@@ -3,30 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_employed_admin">
+    app:startDestination="@+id/navigation_users_admin">
 
     <fragment
-        android:id="@+id/navigation_employed_admin"
-        android:name="proyecto.expotecnica.blooming.Admin.employed.EmployedFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_employed_admin" />
+        android:id="@+id/navigation_users_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.users.UsersFragment"
+        android:label="Usuarios"
+        tools:layout="@layout/fragment_users_admin">
+        <action
+            android:id="@+id/action_AddUsers_Admin"
+            app:destination="@+id/AddUsers_admin"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_inventory_admin"
         android:name="proyecto.expotecnica.blooming.Admin.inventory.InventoryFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_inventory_admin" />
+        android:label="Inventario"
+        tools:layout="@layout/fragment_inventory_admin">
+        <action
+            android:id="@+id/action_AddProduct_admin"
+            app:destination="@+id/AddProduct_Admin" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_orders_admin"
         android:name="proyecto.expotecnica.blooming.Admin.orders.OrdersFragment"
-        android:label="@string/title_notifications"
+        android:label="Pedidos"
         tools:layout="@layout/fragment_orders_admin" />
+
+    <fragment
+        android:id="@+id/navigation_offers_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.offers.Offers"
+        android:label="Ofertas"
+        tools:layout="@layout/fragment_offers_admin"/>
 
     <fragment
         android:id="@+id/navigation_profile_admin"
         android:name="proyecto.expotecnica.blooming.Admin.profile.ProfileFragment"
-        android:label="fragment_profile_admin"
+        android:label="Perfil"
         tools:layout="@layout/fragment_profile_admin" />
+
+    <!---->
+    <fragment
+        android:id="@+id/AddProduct_Admin"
+        android:name="proyecto.expotecnica.blooming.Admin.add_product.AddProduct"
+        android:label="Agregar producto"
+        tools:layout="@layout/fragment_add_product_inventory" />
+
+    <fragment
+        android:id="@+id/AddUsers_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.add_user.AddUser"
+        android:label="Agregar usuarios"
+        tools:layout="@layout/fragment_add_user_admin"/>
 
 </navigation>

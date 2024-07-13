@@ -27,12 +27,14 @@
             android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".Dashboard_client"
+            android:name=".Dashboard_employed"
             android:exported="false"
+            android:windowSoftInputMode="adjustNothing"
             android:label="@string/title_activity_dashboard_admin" />
         <activity
-            android:name=".Dashboard_admin"
+            android:name=".Dashboard_client"
             android:exported="false"
+            android:windowSoftInputMode="adjustNothing"
             android:label="@string/title_activity_dashboard_admin" />
         <activity
             android:name=".MainActivity"
@@ -42,8 +44,9 @@
             android:name=".Sing_in"
             android:exported="false" />
         <activity
-            android:name=".Dashboard_employed"
-            android:exported="true">
+            android:name=".Dashboard_admin"
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

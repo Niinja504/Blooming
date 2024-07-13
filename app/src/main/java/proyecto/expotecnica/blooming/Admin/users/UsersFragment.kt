@@ -1,4 +1,4 @@
-package proyecto.expotecnica.blooming.Admin.inventory
+package proyecto.expotecnica.blooming.Admin.users
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import proyecto.expotecnica.blooming.R
 
-class InventoryFragment : Fragment() {
+class UsersFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -20,17 +20,16 @@ class InventoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_inventory_admin, container, false)
+        val root = inflater.inflate(R.layout.fragment_users_admin, container, false)
 
         //Variables que se van a utilizar
-        val AgregarProducto = root.findViewById<Button>(R.id.btn_AgregarProducto_Inventory)
+        val Agregar = root.findViewById<Button>(R.id.btn_AgregarEmpleados_Admin)
 
-
-        AgregarProducto.setOnClickListener{
-            findNavController().navigate(R.id.action_AddProduct_admin)
+        Agregar.setOnClickListener{
+            findNavController().navigate(R.id.action_AddUsers_Admin)
         }
+
 
         return root
     }
 }
-

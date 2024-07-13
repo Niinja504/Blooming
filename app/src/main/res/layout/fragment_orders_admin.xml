@@ -5,4 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Admin.orders.OrdersFragment" />
+    tools:context=".Admin.orders.OrdersFragment" >
+
+    <ImageView
+        android:id="@+id/ic_Settings_inventory"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <TextView
+        android:id="@+id/textViewInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Pedidos"
+        android:textColor="#F38F9A"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+</androidx.constraintlayout.widget.ConstraintLayout>

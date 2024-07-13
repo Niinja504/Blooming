@@ -131,27 +131,33 @@ class Sing_in : AppCompatActivity() {
             }
         }
 
-        // Inicio de sesión con correo y contraseña
-        btnIniciarSesion.setOnClickListener {
-            val pantallaPrincipal = Intent(this, Dashboard_client::class.java)
-            GlobalScope.launch(Dispatchers.IO) {
-                val objConexion: Connection? = ClaseConexion().CadenaConexion()
-                val contraseniaEncriptada: String = hashSHA256(campoContrasena.text.toString())
-                val comprobarUsuario: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
-                comprobarUsuario.setString(1, campoCorreo.text.toString())
-                comprobarUsuario.setString(2, contraseniaEncriptada)
-                val resultado: ResultSet = comprobarUsuario.executeQuery()
-                if (resultado.next()) {
-                    startActivity(pantallaPrincipal)
-                    enviarCorreo(campoCorreo.text.toString())
-                    finish()
-                } else {
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@Sing_in, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+            // Inicio de sesión con correo y contraseña
+            btnIniciarSesion.setOnClickListener {
+                val pantallaPrincipal = Intent(this, Dashboard_client::class.java)
+                GlobalScope.launch(Dispatchers.IO) {
+                    val objConexion: Connection? = ClaseConexion().CadenaConexion()
+                    val contrasenaEncriptada: String = hashSHA256(campoContrasena.text.toString())
+                    //Busqueda en la primera tabla
+                    val ComprobarUsuario_Tb1: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
+                    ComprobarUsuario_Tb1.setString(1, campoCorreo.text.toString())
+                    ComprobarUsuario_Tb1.setString(2, contrasenaEncriptada)
+                    val Resultado_Tb1: ResultSet = ComprobarUsuario_Tb1.executeQuery()
+                    //Busqueda en la segunda tabla
+                    val ComprobarUsuario_Tb2 : PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ? AND Contra_Employed_Admin = ?")!!
+                    ComprobarUsuario_Tb2.setString(1, campoCorreo.text.toString())
+                    ComprobarUsuario_Tb2.setString(2, contrasenaEncriptada)
+                    val Resultado_Tb2: ResultSet = ComprobarUsuario_Tb2.executeQuery()
+                    if (Resultado_Tb1.next() || Resultado_Tb2.next()) {
+                        startActivity(pantallaPrincipal)
+                        enviarCorreo(campoCorreo.text.toString())
+                        finish()
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@Sing_in, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
-        }
 
         // Funciones para abrir las otras pantallas
         olvidoSuContra.setOnClickListener {
