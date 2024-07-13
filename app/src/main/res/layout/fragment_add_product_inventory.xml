@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFCF5"
+    tools:context=".Admin.add_product.AddProduct">
+
+    <EditText
+        android:id="@+id/txt_Descripcion_AddProduct"
+        android:layout_width="370dp"
+        android:layout_height="85dp"
+        android:background="@drawable/edittext_border"
+        android:backgroundTint="@null"
+        android:ems="10"
+        android:gravity="top|start"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="8dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.917"
+        tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/txt_Nombre_AddProduct"
+        android:layout_width="310dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textEmailAddress"
+        android:textColor="#554D4D"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.336"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.323"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txt_Precio_AddProduct"
+        android:layout_width="310dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Precio"
+        android:inputType="textEmailAddress"
+        android:textColor="#554D4D"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.336"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.399"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textViewInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:text="Agregar producto"
+        android:textColor="#F38F9A"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.045" />
+
+    <ImageView
+        android:id="@+id/ic_AddProduct_Inventory"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021"
+        tools:ignore="ContentDescription" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView2"
+        android:layout_width="413dp"
+        android:layout_height="133dp"
+        android:background="#988E8E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.121"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad en stock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464" />
+
+    <Button
+        android:id="@+id/btn_Guardar_AddProduct"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:text="Guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.998"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="165dp"
+        android:background="#ECD9D9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.692"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="ExtraText">
+
+            <TextView
+                android:id="@+id/text_Flores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Flores"
+                android:layout_marginStart="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/Brown" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Hortensias_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Hortensias"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Rosas_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Rosas"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Tulipanes_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Tulipanes"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Girasoles_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Girasoles"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Mixtas_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Mixtas"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>/>
+
+            <TextView
+                android:id="@+id/text_diseno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diseño"
+                android:layout_marginStart="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/Brown"/>
+
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Cajas_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Cajas"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Ramos_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Ramos"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Botellas_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Botellas"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Corazones_Botellas_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Corazones"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_RosaPreservadas_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Rosas preservadas"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <TextView
+                android:id="@+id/text_Eventos_y_ocasiones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Eventos y ocaciones"
+                android:layout_marginStart="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/Brown" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Cumpleaños_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Cumpleaños"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Aniversario_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Aniversario"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Amor_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Amor"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Nacimiento_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Nacimiento"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbx_Condolencia_Filtro_AddProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="checkBoxClick"
+                android:text="Condolencia"
+                android:textSize="14sp"
+                android:layout_marginStart="30dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción del producto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categoria / Filtro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="28dp"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_edit2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.323" />
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="28dp"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_edit2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.399" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
