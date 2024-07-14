@@ -242,6 +242,7 @@
             android:layout_height="28dp"
             android:inputType="none"
             android:textColor="#000000"
+            android:textSize="12sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>

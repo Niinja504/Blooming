@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import modelo.ClaseConexion
 import modelo.EnvioCorreo
 import java.security.SecureRandom
 
@@ -47,23 +48,31 @@ class Password_recovery1 : AppCompatActivity() {
                 else -> {
                     val code = generateRandomCode()
                     CoroutineScope(Dispatchers.IO).launch {
-                        try {
-                            EnvioCorreo.EnvioDeCorreo(text, "Your Verification Code", "Your verification code is: $code")
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(this@Password_recovery1, "Código enviado a $text", Toast.LENGTH_SHORT).show()
-                                val intent = Intent(this@Password_recovery1, Password_recovery2::class.java)
-                                intent.putExtra("SENT_CODE", code)
-                                intent.putExtra("USER_EMAIL", text)
-                                startActivity(intent)
-                                finish()
+                        val correoExiste = correoExisteBD(CampoCorreo.text.toString())
+                        if (correoExiste) {
+                            try {
+                                EnvioCorreo.EnvioDeCorreo(CampoCorreo.text.toString(), "Your Verification Code", "Your verification code is: $code")
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(this@Password_recovery1, "Código enviado a ${CampoCorreo.text.toString()}", Toast.LENGTH_SHORT).show()
+                                    val intent = Intent(this@Password_recovery1, Password_recovery2::class.java)
+                                    intent.putExtra("SENT_CODE", code)
+                                    intent.putExtra("USER_EMAIL", CampoCorreo.text.toString())
+                                    startActivity(intent)
+                                    finish()
+                                }
+                            } catch (e: Exception) {
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(this@Password_recovery1, "Error al enviar el correo: ${e.message}", Toast.LENGTH_SHORT).show()
+                                }
                             }
-                        } catch (e: Exception) {
+                        } else {
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(this@Password_recovery1, "Error al enviar el correo: ${e.message}", Toast.LENGTH_SHORT).show()
+                                CampoCorreo.error = "El correo no existe"
                             }
                         }
                     }
                 }
+
             }
         }
 
@@ -76,6 +85,53 @@ class Password_recovery1 : AppCompatActivity() {
 
 
     }
+
+    private suspend fun correoExisteBD(correo: String): Boolean {
+        val sql_BD1 = "SELECT COUNT(*) AS correo_existe FROM TbUsers WHERE Email_User = ?"
+        val sql_BD2 = "SELECT COUNT(*) AS correo_existe FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ?"
+        val claseConexion = ClaseConexion()
+        val conexion = claseConexion.CadenaConexion()
+        var correoExiste = false
+
+        if (conexion != null) {
+            try {
+                // Verificar en la primera tabla
+                val statement1 = withContext(Dispatchers.IO) { conexion.prepareStatement(sql_BD1) }
+                statement1.setString(1, correo)
+
+                val resultado1 = withContext(Dispatchers.IO) { statement1.executeQuery() }
+                if (resultado1.next()) {
+                    val count1 = resultado1.getInt("correo_existe")
+                    correoExiste = count1 > 0
+                }
+
+                // Verificar en la segunda tabla si no se encontró en la primera
+                if (!correoExiste) {
+                    val statement2 = withContext(Dispatchers.IO) { conexion.prepareStatement(sql_BD2) }
+                    statement2.setString(1, correo)
+
+                    val resultado2 = withContext(Dispatchers.IO) { statement2.executeQuery() }
+                    if (resultado2.next()) {
+                        val count2 = resultado2.getInt("correo_existe")
+                        correoExiste = count2 > 0
+                    }
+                }
+            } catch (e: Exception) {
+                println("Error al ejecutar la consulta SQL: $e")
+            } finally {
+                try {
+                    withContext(Dispatchers.IO) { conexion.close() }
+                } catch (e: Exception) {
+                    println("Error al cerrar la conexión: $e")
+                }
+            }
+        } else {
+            println("No se pudo establecer la conexión a la base de datos.")
+        }
+
+        return correoExiste
+    }
+
 
     private fun generateRandomCode(): String {
         val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
