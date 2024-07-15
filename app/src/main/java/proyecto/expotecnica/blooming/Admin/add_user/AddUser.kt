@@ -156,6 +156,7 @@ class AddUser : Fragment() {
                             Crear.setString(9, selectedRole)
                             Crear.executeUpdate()
                         }
+                        LimpiarCampo()
                     }
                     else{
                         if (correoExiste) {
@@ -287,7 +288,6 @@ class AddUser : Fragment() {
             .show()
     }
 
-    ////////////////////////////////
     private fun abrirCamara() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             // El permiso no está concedido, solicitar el permiso
@@ -422,5 +422,15 @@ class AddUser : Fragment() {
         private const val REQUEST_IMAGE_CAPTURE_AddUser = 1
         private const val REQUEST_IMAGE_PICK_AddUser = 2
         private const val REQUEST_CAMERA_PERMISSION_AddUser = 100
+    }
+
+    private fun LimpiarCampo(){
+        CampoNombres.text.clear()
+        CampoApellidos.text.clear()
+        CampoCorreo.text.clear()
+        CampoContra.text.clear()
+        CampoConfirmarContra.text.clear()
+        CampoEdad.text.clear()
+        CampoTelefono.text.clear()
     }
 }
