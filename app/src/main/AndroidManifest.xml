@@ -37,11 +37,11 @@
             android:windowSoftInputMode="adjustNothing"
             android:label="@string/title_activity_dashboard_admin" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Sing_in"
             android:exported="false"
             android:label="@string/title_activity_dashboard_employed" />
         <activity
-            android:name=".Sing_in"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Dashboard_admin"

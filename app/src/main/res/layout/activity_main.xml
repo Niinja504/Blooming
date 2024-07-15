@@ -5,15 +5,22 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAD4D4"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/Img_AddProduct"
-        android:layout_width="227dp"
-        android:layout_height="225dp"
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="wrap_content"
+        android:layout_height="267dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_logo" />
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/splash1"
+        tools:ignore="MissingConstraints"></com.airbnb.lottie.LottieAnimationView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
