@@ -186,23 +186,22 @@ class AddOffers : Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_DOCUMENT_PICK_AddOffer -> {
-                    // Handle camera capture result
-                    currentPhotoPath?.let {
-                        val fileUri = Uri.fromFile(File(it))
-                        selectedImageUri = fileUri // Update selectedImageUri with the camera URI
+                    // Handle document selection result
+                    val fileUri = data?.data
+                    fileUri?.let {
+                        selectedImageUri = it // Update selectedImageUri with the document URI
                         Glide.with(requireContext())
-                            .load(fileUri)
-                            .apply(RequestOptions.circleCropTransform())
+                            .load(it)
                             .into(Archivo_Offer)
                     }
                 }
+
                 REQUEST_IMAGE_PICK_AddOffer -> {
                     // Handle gallery selection result
                     val fileUri = data?.data
                     selectedImageUri = fileUri // Update selectedImageUri with the gallery URI
                     Glide.with(requireContext())
                         .load(fileUri)
-                        .apply(RequestOptions.circleCropTransform())
                         .into(Archivo_Offer)
                 }
             }
