@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/Img_AddProduct"
-        android:layout_width="228dp"
-        android:layout_height="478dp"
+        android:layout_width="227dp"
+        android:layout_height="225dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/splash_screen" />
+        app:srcCompat="@mipmap/ic_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

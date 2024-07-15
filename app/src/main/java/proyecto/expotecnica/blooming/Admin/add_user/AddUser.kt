@@ -61,6 +61,7 @@ class AddUser : Fragment() {
     private lateinit var dialogView: View
     private var currentPhotoPath: String? = null
     private var selectedImageUri: Uri? = null
+    private lateinit var IMG_Perfil: ImageView
     private lateinit var authManager: AuFi
     private var selectedRole: String? = null  // Variable para almacenar el rol seleccionado
 
@@ -98,7 +99,7 @@ class AddUser : Fragment() {
         CampoConfirmarContra = root.findViewById(R.id.txt_ConfirmarContra_Reg_Admin)
         CampoEdad = root.findViewById(R.id.txt_Edad_Reg_Admin)
         CampoTelefono = root.findViewById(R.id.txt_Telefono_Reg_Admin)
-        val IMG_Perfil = root.findViewById<ImageView>(R.id.Img_AddUser_Admin)
+        IMG_Perfil = root.findViewById(R.id.Img_AddUser_Admin)
         val SubirFoto = root.findViewById<ImageView>(R.id.ic_SubirIMG_AddUser_Admin)
         val Btn_CrearCuenta = root.findViewById<Button>(R.id.btn_AgregarUser_Admin)
 
@@ -142,7 +143,7 @@ class AddUser : Fragment() {
                             val ContraEncrip = hashSHA256(CampoContra.text.toString())
 
                             val Crear = ObjConexion?.prepareStatement(
-                                "INSERT INTO TbUsers (ID_User_Employed, UUID_Employed_Admin, Img_Employed_Admin, Nombres_Employed_Admin, Apellidos_Employed_Admin, Correo_Employed_Admin, Contra_Employed_Admin, Edad_Employed_Admin, Num_Telefono_Employed_Admin, Rol_Employed_Admin) VALUES (SEQ_USers_Employed_Admin.NEXTVALL, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                                "INSERT INTO TbUSers_Employed_Admin (ID_User_Employed, UUID_Employed_Admin, Img_Employed_Admin, Nombres_Employed_Admin, Apellidos_Employed_Admin, Correo_Employed_Admin, Contra_Employed_Admin, Edad_Employed_Admin, Num_Telefono_Employed_Admin, Rol_Employed_Admin) VALUES (SEQ_USers_Employed_Admin.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                             )!!
 
                             Crear.setString(1, UUID.randomUUID().toString())
@@ -153,7 +154,7 @@ class AddUser : Fragment() {
                             Crear.setString(6, ContraEncrip)
                             Crear.setString(7, CampoEdad.text.toString())
                             Crear.setString(8, CampoTelefono.text.toString())
-                            Crear.setString(9, selectedRole.toString())
+                            Crear.setString(9, selectedRole)
                             Crear.executeUpdate()
                         }
                     }
@@ -331,40 +332,38 @@ class AddUser : Fragment() {
 
     private fun abrirGaleria() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE_AddUser)
+        startActivityForResult(intent, REQUEST_IMAGE_PICK_AddUser) // Corrected request code
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            view?.findViewById<ImageView>(R.id.Img_AddUser_Admin)?.let { imgPerfil ->
-                when (requestCode) {
-                    REQUEST_IMAGE_CAPTURE_AddUser -> {
-                        currentPhotoPath?.let {
-                            val fileUri = Uri.fromFile(File(it))
-                            selectedImageUri = fileUri // Actualizar selectedImageUri con la URI de la cámara
-                            Glide.with(requireContext())
-                                .load(fileUri)
-                                .apply(RequestOptions.circleCropTransform())
-                                .into(imgPerfil)
-                        }
-                    }
-                    REQUEST_IMAGE_PICK_AddUser -> {
-                        val fileUri = data?.data
-                        selectedImageUri = fileUri // Actualizar selectedImageUri con la URI de la galería
+            when (requestCode) {
+                REQUEST_IMAGE_CAPTURE_AddUser -> {
+                    // Handle camera capture result
+                    currentPhotoPath?.let {
+                        val fileUri = Uri.fromFile(File(it))
+                        selectedImageUri = fileUri // Update selectedImageUri with the camera URI
                         Glide.with(requireContext())
                             .load(fileUri)
                             .apply(RequestOptions.circleCropTransform())
-                            .into(imgPerfil)
+                            .into(IMG_Perfil)
                     }
-                    else -> {
-                        // Maneja otros posibles casos
-                        Toast.makeText(requireContext(), "Operación no reconocida", Toast.LENGTH_SHORT).show()
-                    }
+                }
+                REQUEST_IMAGE_PICK_AddUser -> {
+                    // Handle gallery selection result
+                    val fileUri = data?.data
+                    selectedImageUri = fileUri // Update selectedImageUri with the gallery URI
+                    Glide.with(requireContext())
+                        .load(fileUri)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(IMG_Perfil)
                 }
             }
         }
     }
+
 
     private fun getBitmapFromUri(context: Context, uri: Uri): Bitmap {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
