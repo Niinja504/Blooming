@@ -132,32 +132,74 @@ class Sing_in : AppCompatActivity() {
         }
 
             // Inicio de sesión con correo y contraseña
-            btnIniciarSesion.setOnClickListener {
-                val pantallaPrincipal = Intent(this, Dashboard_client::class.java)
-                GlobalScope.launch(Dispatchers.IO) {
+        btnIniciarSesion.setOnClickListener {
+            val pantallaPrincipal = Intent(this, Dashboard_client::class.java)
+            val pantallaAdmin = Intent(this, Dashboard_admin::class.java)
+            val pantallaEmpleado = Intent(this, Dashboard_employed::class.java)
+
+            GlobalScope.launch(Dispatchers.IO) {
+                try {
                     val objConexion: Connection? = ClaseConexion().CadenaConexion()
                     val contrasenaEncriptada: String = hashSHA256(campoContrasena.text.toString())
-                    //Busqueda en la primera tabla
+                    val email = campoCorreo.text.toString()
+
+                    var rol: Int? = null
+                    var usuarioEncontrado = false
+
+                    // Búsqueda en la primera tabla (TbUsers)
                     val ComprobarUsuario_Tb1: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
-                    ComprobarUsuario_Tb1.setString(1, campoCorreo.text.toString())
+                    ComprobarUsuario_Tb1.setString(1, email)
                     ComprobarUsuario_Tb1.setString(2, contrasenaEncriptada)
                     val Resultado_Tb1: ResultSet = ComprobarUsuario_Tb1.executeQuery()
-                    //Busqueda en la segunda tabla
-                    val ComprobarUsuario_Tb2 : PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ? AND Contra_Employed_Admin = ?")!!
-                    ComprobarUsuario_Tb2.setString(1, campoCorreo.text.toString())
-                    ComprobarUsuario_Tb2.setString(2, contrasenaEncriptada)
-                    val Resultado_Tb2: ResultSet = ComprobarUsuario_Tb2.executeQuery()
-                    if (Resultado_Tb1.next() || Resultado_Tb2.next()) {
-                        startActivity(pantallaPrincipal)
-                        enviarCorreo(campoCorreo.text.toString())
-                        finish()
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(this@Sing_in, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+
+                    // Verificar si el usuario existe en TbUsers y asignar rol por defecto
+                    if (Resultado_Tb1.next()) {
+                        rol = 2 // Cliente por defecto
+                        usuarioEncontrado = true
+                    }
+
+                    // Si no se encontró en la primera tabla, verificar en la segunda tabla (TbUsers_Employed_Admin)
+                    if (!usuarioEncontrado) {
+                        val ComprobarUsuario_Tb2: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers_Employed_Admin WHERE Correo_Employed_Admin = ? AND Contra_Employed_Admin = ?")!!
+                        ComprobarUsuario_Tb2.setString(1, email)
+                        ComprobarUsuario_Tb2.setString(2, contrasenaEncriptada)
+                        val Resultado_Tb2: ResultSet = ComprobarUsuario_Tb2.executeQuery()
+
+                        // Verificar el rol en la segunda tabla
+                        if (Resultado_Tb2.next()) {
+                            usuarioEncontrado = true
+                            val rolString = Resultado_Tb2.getString("Rol_Employed_Admin")
+                            rol = when (rolString) {
+                                "Administrador" -> 0
+                                "Empleado" -> 1
+                                else -> null
+                            }
                         }
+                    }
+
+                    // Redireccionar según el rol encontrado
+                    withContext(Dispatchers.Main) {
+                        if (usuarioEncontrado) {
+                            when (rol) {
+                                0 -> startActivity(pantallaAdmin) // Administrador
+                                1 -> startActivity(pantallaEmpleado) // Empleado
+                                2 -> startActivity(pantallaPrincipal) // Cliente por defecto
+                                else -> Toast.makeText(this@Sing_in, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                            }
+                            enviarCorreo(email)
+                            finish()
+                        } else {
+                            Toast.makeText(this@Sing_in, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@Sing_in, "Error: ${e.message}", Toast.LENGTH_LONG).show()
                     }
                 }
             }
+        }
+
 
         // Funciones para abrir las otras pantallas
         olvidoSuContra.setOnClickListener {
@@ -523,6 +565,42 @@ class Sing_in : AppCompatActivity() {
         }
     }
 
+    suspend fun obtenerRolPorEmail(email: String): String? {
+        val sql = "SELECT Rol_Employed_Admin FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ?"
+        val claseConexion = ClaseConexion()
+        val conexion: Connection? = claseConexion.CadenaConexion()
+
+        var rol: String? = null
+
+        if (conexion != null) {
+            try {
+                val statement: PreparedStatement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
+                statement.setString(1, email)
+
+                val resultado: ResultSet = withContext(Dispatchers.IO) { statement.executeQuery() }
+
+                if (resultado.next()) {
+                    rol = resultado.getString("Rol_Employed_Admin")
+                }
+            } catch (e: Exception) {
+                println("Error al ejecutar la consulta SQL: $e")
+            } finally {
+                try {
+                    withContext(Dispatchers.IO) { conexion.close() }
+                } catch (e: Exception) {
+                    println("Error al cerrar la conexión: $e")
+                }
+            }
+        } else {
+            println("No se pudo establecer la conexión a la base de datos.")
+        }
+
+        return rol
+    }
+
+    private fun LimpiarCampos(){
+
+    }
 
     // Método para obtener los detalles del dispositivo
     data class DeviceDetails(val deviceName: String, val manufacturer: String, val model: String)

@@ -151,7 +151,7 @@ class AddUser : Fragment() {
                             Crear.setString(4, CampoApellidos.text.toString())
                             Crear.setString(5, CampoCorreo.text.toString())
                             Crear.setString(6, ContraEncrip)
-                            Crear.setString(7, CampoEdad.text.toString())
+                            Crear.setInt(7, CampoEdad.text.toString().toInt())
                             Crear.setString(8, CampoTelefono.text.toString())
                             Crear.setString(9, selectedRole)
                             Crear.executeUpdate()
@@ -330,8 +330,15 @@ class AddUser : Fragment() {
     }
 
     private fun abrirGaleria() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_IMAGE_PICK_AddUser) // Corrected request code
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+        }
+        if (intent.resolveActivity(requireActivity().packageManager) != null) {
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_PICK_AddUser)
+        } else {
+            // Show an error message to the user
+            Toast.makeText(requireContext(), "No application available to pick an image", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

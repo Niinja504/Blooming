@@ -48,18 +48,24 @@ class Password_recovery1 : AppCompatActivity() {
                 else -> {
                     val code = generateRandomCode()
                     CoroutineScope(Dispatchers.IO).launch {
-                        val correoExiste = correoExisteBD(CampoCorreo.text.toString())
+                        val correo = CampoCorreo.text.toString()
+                        val correoExiste = correoExisteBD(correo)
+
                         if (correoExiste) {
                             try {
-                                EnvioCorreo.EnvioDeCorreo(CampoCorreo.text.toString(), "Your Verification Code", "Your verification code is: $code")
+                                EnvioCorreo.EnvioDeCorreo(correo, "Your Verification Code", "Your verification code is: $code")
+
                                 withContext(Dispatchers.Main) {
-                                    Toast.makeText(this@Password_recovery1, "Código enviado a ${CampoCorreo.text.toString()}", Toast.LENGTH_SHORT).show()
-                                    val intent = Intent(this@Password_recovery1, Password_recovery2::class.java)
-                                    intent.putExtra("SENT_CODE", code)
-                                    intent.putExtra("USER_EMAIL", CampoCorreo.text.toString())
-                                    startActivity(intent)
-                                    finish()
+                                    Toast.makeText(this@Password_recovery1, "Código enviado a $correo", Toast.LENGTH_SHORT).show()
+
+                                    // Intent para Password_recovery2
+                                    val intentToRecovery2 = Intent(this@Password_recovery1, Password_recovery2::class.java)
+                                    intentToRecovery2.putExtra("SENT_CODE", code)
+                                    intentToRecovery2.putExtra("USER_EMAIL", correo)
+                                    startActivity(intentToRecovery2)
+
                                 }
+
                             } catch (e: Exception) {
                                 withContext(Dispatchers.Main) {
                                     Toast.makeText(this@Password_recovery1, "Error al enviar el correo: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -72,6 +78,7 @@ class Password_recovery1 : AppCompatActivity() {
                         }
                     }
                 }
+
 
             }
         }

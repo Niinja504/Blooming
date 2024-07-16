@@ -35,16 +35,20 @@
         android:id="@+id/navigation_offers_admin"
         android:name="proyecto.expotecnica.blooming.Admin.offers.Offers"
         android:label="Ofertas"
-        tools:layout="@layout/fragment_offers_admin"/>
+        tools:layout="@layout/fragment_offers_admin">
+        <action
+        android:id="@+id/action_AddOffers_Admin"
+        app:destination="@id/AddOffers_admin"/>
+        <action
+            android:id="@+id/action_DetailsOffers_Admin"
+            app:destination="@+id/Details_Offers"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile_admin"
         android:name="proyecto.expotecnica.blooming.Admin.profile.ProfileFragment"
         android:label="Perfil"
         tools:layout="@layout/fragment_profile_admin">
-        <action
-            android:id="@+id/action_AddOffers_Admin"
-            app:destination="@id/AddOffers_admin"/>
     </fragment>
 
     <!---->
@@ -65,5 +69,11 @@
         android:name="proyecto.expotecnica.blooming.Admin.add_offers.AddOffers"
         android:label="Agregar ofertas"
         tools:layout="@layout/fragment_add_offers"/>
+
+    <fragment
+        android:id="@+id/Details_Offers"
+        android:name="proyecto.expotecnica.blooming.Admin.offers.DetailsOffers"
+        android:label="Agregar ofertas"
+        tools:layout="@layout/fragment_details_offers"/>
 
 </navigation>

@@ -410,9 +410,17 @@ class Register : AppCompatActivity() {
     }
 
     private fun abrirGaleria() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+            type = "image/*"
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_PICK)
+        } else {
+            // Show an error message to the user
+            Toast.makeText(this, "No application available to pick an image", Toast.LENGTH_SHORT).show()
+        }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -29,22 +32,22 @@
         <activity
             android:name=".Dashboard_employed"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"
-            android:label="@string/title_activity_dashboard_admin" />
+            android:label="@string/title_activity_dashboard_admin"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Dashboard_client"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"
-            android:label="@string/title_activity_dashboard_admin" />
+            android:label="@string/title_activity_dashboard_admin"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".Sing_in"
+            android:name=".Dashboard_admin"
             android:exported="false"
             android:label="@string/title_activity_dashboard_employed" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Dashboard_admin"
+            android:name=".Sing_in"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
