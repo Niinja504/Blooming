@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_users_admin"
-        android:name="proyecto.expotecnica.blooming.Admin.users.UsersFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.users.Users"
         android:label="Usuarios"
         tools:layout="@layout/fragment_users_admin">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_orders_admin"
-        android:name="proyecto.expotecnica.blooming.Admin.orders.OrdersFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.orders.Orders"
         android:label="Pedidos"
         tools:layout="@layout/fragment_orders_admin" />
 
@@ -46,9 +46,12 @@
 
     <fragment
         android:id="@+id/navigation_profile_admin"
-        android:name="proyecto.expotecnica.blooming.Admin.profile.ProfileFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.profile.Profile"
         android:label="Perfil"
         tools:layout="@layout/fragment_profile_admin">
+        <action
+            android:id="@+id/action_ChangePassword"
+            app:destination="@+id/ChangePassword_admin"/>
     </fragment>
 
     <!---->
@@ -73,7 +76,13 @@
     <fragment
         android:id="@+id/Details_Offers"
         android:name="proyecto.expotecnica.blooming.Admin.offers.DetailsOffers"
-        android:label="Agregar ofertas"
+        android:label="Dettalles de la oferta"
         tools:layout="@layout/fragment_details_offers"/>
+
+    <fragment
+        android:id="@+id/ChangePassword_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.change_password.ChangePassword"
+        android:label="Cambiar contraseña"
+        tools:layout="@layout/fragment_change_password"/>
 
 </navigation>

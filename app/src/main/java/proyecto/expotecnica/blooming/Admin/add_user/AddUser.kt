@@ -86,7 +86,7 @@ class AddUser : Fragment() {
         autoComplete.onItemClickListener = AdapterView.OnItemClickListener {
                 adapterView, view, i, l ->
             selectedRole = adapterView.getItemAtPosition(i) as String
-            Toast.makeText(requireContext(), "Item: $selectedRole", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Rol: $selectedRole", Toast.LENGTH_SHORT).show()
         }
 
         //Variables que se van a utilizar
@@ -340,7 +340,6 @@ class AddUser : Fragment() {
             Toast.makeText(requireContext(), "No application available to pick an image", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

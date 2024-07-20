@@ -54,6 +54,8 @@ class AddOffers : Fragment() {
 
         campoTitulo.filters = arrayOf(InputFilter.LengthFilter(12))
 
+        campoTitulo.requestFocus()
+
         regresar.setOnClickListener {
             findNavController().navigate(R.id.navigation_offers_admin)
         }

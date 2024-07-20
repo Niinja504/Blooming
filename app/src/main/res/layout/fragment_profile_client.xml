@@ -16,20 +16,8 @@
         android:layout_height="match_parent"
         android:background="#FFFCF5"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:context="Admin.profile.ProfileFragment"
+        tools:context="Admin.profile.Profile"
         tools:layout_editor_absoluteX="-46dp">
-
-        <ImageView
-            android:id="@+id/imageViewCart"
-            android:layout_width="31dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_shopping_cart"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.915"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.021" />
 
         <View
             android:id="@+id/circle_edit"
@@ -201,5 +189,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
+
+    <ImageView
+        android:id="@+id/IC_ChangePassword_Admin"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:src="@drawable/ic_change_password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

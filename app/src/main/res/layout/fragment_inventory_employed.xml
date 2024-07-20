@@ -72,6 +72,8 @@
         android:inputType="text"
         android:minHeight="48dp"
         android:textAllCaps="false"
+        android:textColor="#595959"
+        android:textColorHint="#919191"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.198"

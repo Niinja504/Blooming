@@ -34,12 +34,6 @@ class DetailsOffers : Fragment() {
             findNavController().navigate(R.id.navigation_offers_admin)
         }
 
-        val UUIDRecibido = arguments?.getString("UUID_Oferta")
-        val TituloRecibido = arguments?.getString("Titulo")
-
-        val lblTitulo = root.findViewById<TextView>(R.id.lbl_DetalleOffers)
-        lblTitulo.text = TituloRecibido
-
         return root
     }
 }

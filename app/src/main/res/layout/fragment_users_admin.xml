@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Admin.users.UsersFragment" >
+    tools:context=".Admin.users.Users" >
 
     <Button
         android:id="@+id/btn_AgregarEmpleados_Admin"
@@ -71,6 +71,8 @@
         android:inputType="text"
         android:minHeight="48dp"
         android:textAllCaps="false"
+        android:textColor="#595959"
+        android:textColorHint="#FF919191"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.214"
