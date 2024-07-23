@@ -349,8 +349,9 @@ class Register : AppCompatActivity() {
                     val ContraEncrip = hashSHA256(CampoContra.text.toString())
 
                     val Crear = ObjConexion?.prepareStatement(
-                        "INSERT INTO TbUsers (ID_User, UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Email_User, Contra_User, Img_User) VALUES (SEQ_Users.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO TbUsers (UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Email_User, Contra_User, Img_User, Sesion_User) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
                     )!!
+                    val Sesion = 1
 
                     Crear.setString(1, UUID.randomUUID().toString())
                     Crear.setString(2, CampoNombres.text.toString())
@@ -360,6 +361,7 @@ class Register : AppCompatActivity() {
                     Crear.setString(6, CampoCorreo.text.toString())
                     Crear.setString(7, ContraEncrip)
                     Crear.setString(8, imageUrl)
+                    Crear.setInt(9, Sesion)
                     Crear.executeUpdate()
                 }
 
