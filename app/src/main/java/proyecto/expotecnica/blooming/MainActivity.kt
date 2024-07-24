@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         //Corrutine
         GlobalScope.launch(Dispatchers.Main) {
-            //Espera 5 segundos antes de abrir la activity por medio de un delay
-            delay(5000)
+            //Espera 5.5 segundos antes de abrir la activity por medio de un delay
+            delay(5400)
             //Inicia  la activity de sing in
             startActivity(Intent(this@MainActivity, Sing_in::class.java))
             //Con esto nos aseguramos que se cierre la activity y no se pueda volver a atras

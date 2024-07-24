@@ -7,9 +7,12 @@
 
     <fragment
         android:id="@+id/navigation_dashboard_client"
-        android:name="proyecto.expotecnica.blooming.Client.dashboard.DashboardFragment"
+        android:name="proyecto.expotecnica.blooming.Client.dashboard.Dashboard"
         android:label="Inicio"
         tools:layout="@layout/fragment_dashboard_client">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
         <action
             android:id="@+id/action_setting_client"
             app:destination="@+id/setting_client" />
@@ -20,21 +23,30 @@
 
     <fragment
         android:id="@+id/navigation_shop_client"
-        android:name="proyecto.expotecnica.blooming.Client.shop.ShopFragment"
+        android:name="proyecto.expotecnica.blooming.Client.shop.Shop"
         android:label="Tienda"
         tools:layout="@layout/fragment_shop_client" />
+    <argument
+        android:name="UUID"
+        app:argType="string" />
 
     <fragment
         android:id="@+id/navigation_orders_client"
-        android:name="proyecto.expotecnica.blooming.Client.orders.OrderFragment"
+        android:name="proyecto.expotecnica.blooming.Client.orders.Orders"
         android:label="Pedidos"
         tools:layout="@layout/fragment_orders_client" />
+    <argument
+        android:name="UUID"
+        app:argType="string" />
 
     <fragment
         android:id="@+id/navigation_profile_client"
-        android:name="proyecto.expotecnica.blooming.Client.profile.ProfileFragment"
+        android:name="proyecto.expotecnica.blooming.Client.profile.Profile"
         android:label="Pefil"
         tools:layout="@layout/fragment_profile_client" />
+    <argument
+        android:name="UUID"
+        app:argType="string" />
 
     <!---->
     <fragment

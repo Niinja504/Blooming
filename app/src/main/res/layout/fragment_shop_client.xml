@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Client.shop.ShopFragment" >
+    tools:context=".Client.shop.Shop" >
 
     <ImageView
         android:id="@+id/imageViewCart"
@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewProfile"
+        android:id="@+id/IMG_User_Shop"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="center"

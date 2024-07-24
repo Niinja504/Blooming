@@ -10,8 +10,8 @@ class ClaseConexion {
         return withContext(Dispatchers.IO) {
             try {
                 val url = "jdbc:oracle:thin:@192.168.1.3:1521:xe"
-                val usuario = "SYSTEM"
-                val contrasena = "ITR2024"
+                val usuario = "BLOOM"
+                val contrasena = "BloX5558"
                 DriverManager.getConnection(url, usuario, contrasena)
             } catch (e: Exception) {
                 println("Error en la cadena de conexión: $e")

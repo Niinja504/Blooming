@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context="Client.profile.ProfileFragment"
+    tools:context="Client.profile.Profile"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-9dp">
 
@@ -148,7 +148,7 @@
             app:layout_constraintVertical_bias="0.164" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageViewProfile"
+            android:id="@+id/IMG_User_Profile_Client"
             android:layout_width="230dp"
             android:layout_height="230dp"
             android:layout_gravity="center"

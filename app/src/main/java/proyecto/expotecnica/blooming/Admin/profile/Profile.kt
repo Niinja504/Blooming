@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import proyecto.expotecnica.blooming.Client.ImageViewModel
 import proyecto.expotecnica.blooming.R
-import proyecto.expotecnica.blooming.databinding.FragmentProfileAdminBinding
 
 class Profile : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,6 @@ class Profile : Fragment() {
         ChangePassword.setOnClickListener{
             findNavController().navigate(R.id.action_ChangePassword)
         }
-
 
         return root
     }

@@ -133,10 +133,6 @@ class Sing_in : AppCompatActivity() {
 
             // Inicio de sesión con correo y contraseña
         btnIniciarSesion.setOnClickListener {
-            val pantallaPrincipal = Intent(this, Dashboard_client::class.java)
-            val pantallaAdmin = Intent(this, Dashboard_admin::class.java)
-            val pantallaEmpleado = Intent(this, Dashboard_employed::class.java)
-
             GlobalScope.launch(Dispatchers.IO) {
                 try {
                     val objConexion: Connection? = ClaseConexion().CadenaConexion()
@@ -145,6 +141,8 @@ class Sing_in : AppCompatActivity() {
 
                     var rol: Int? = null
                     var usuarioEncontrado = false
+                    var uuid: String? = null
+
 
                     // Búsqueda en la primera tabla (TbUsers)
                     val ComprobarUsuario_Tb1: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
@@ -156,6 +154,7 @@ class Sing_in : AppCompatActivity() {
                     if (Resultado_Tb1.next()) {
                         rol = 2 // Cliente por defecto
                         usuarioEncontrado = true
+                        uuid = Resultado_Tb1.getString("UUID_User")
                     }
 
                     // Si no se encontró en la primera tabla, verificar en la segunda tabla (TbUsers_Employed_Admin)
@@ -174,24 +173,39 @@ class Sing_in : AppCompatActivity() {
                                 "Empleado" -> 1
                                 else -> null
                             }
+                            uuid = Resultado_Tb2.getString("UUID_Employed_Admin")
                         }
                     }
 
                     // Redireccionar según el rol encontrado
-                    withContext(Dispatchers.Main) {
-                        if (usuarioEncontrado) {
-                            when (rol) {
-                                0 -> startActivity(pantallaAdmin) // Administrador
-                                1 -> startActivity(pantallaEmpleado) // Empleado
-                                2 -> startActivity(pantallaPrincipal) // Cliente por defecto
-                                else -> Toast.makeText(this@Sing_in, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                        withContext(Dispatchers.Main) {
+                            if (usuarioEncontrado) {
+                                when (rol) {
+                                    0 -> {
+                                        val pantallaAdmin = Intent(this@Sing_in, Dashboard_client::class.java)
+                                        pantallaAdmin.putExtra("UUID", uuid)
+                                        startActivity(pantallaAdmin) // Administrador
+                                    }
+
+                                    1 -> {
+                                        val pantallaEmpleado = Intent(this@Sing_in, Dashboard_client::class.java)
+                                        pantallaEmpleado.putExtra("UUID", uuid)
+                                        startActivity(pantallaEmpleado) // Empleado
+                                    }
+
+                                    2 -> {
+                                        val pantallaPrincipal = Intent(this@Sing_in, Dashboard_client::class.java)
+                                        pantallaPrincipal.putExtra("UUID", uuid)
+                                        startActivity(pantallaPrincipal) // Cliente
+                                    }
+                                    else -> Toast.makeText(this@Sing_in, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                                }
+                                enviarCorreo(email)
+                                finish()
+                            } else {
+                                Toast.makeText(this@Sing_in, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
                             }
-                            enviarCorreo(email)
-                            finish()
-                        } else {
-                            Toast.makeText(this@Sing_in, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
                         }
-                    }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@Sing_in, "Error: ${e.message}", Toast.LENGTH_LONG).show()
@@ -403,8 +417,10 @@ class Sing_in : AppCompatActivity() {
                 withContext(Dispatchers.IO) {
                     val ObjConexion = ClaseConexion().CadenaConexion()
 
+                    val Sesion = 0
+
                     val CrearCuentaFireb = ObjConexion?.prepareStatement(
-                        "INSERT INTO TbUsers_Firebase (ID_User_Firebase, UUID_User_Firebase, Token_Google_Firebase, Nombres_User_Firebase, Num_Telefono_Firebase, Img_User_Firebase) VALUES (SEQ_Firebase.NEXTVAL, ?, ?, ?, ?, ?)"
+                        "INSERT INTO TbUsers_Firebase (UUID_User_Firebase, Token_Google_Firebase, Nombres_User_Firebase, Num_Telefono_Firebase, Img_User_Firebase, Sesion_User_Firebase) VALUES (?, ?, ?, ?, ?, ?)"
                     )!!
 
                     CrearCuentaFireb.setString(1, UUID.randomUUID().toString())
@@ -412,6 +428,7 @@ class Sing_in : AppCompatActivity() {
                     CrearCuentaFireb.setString(3, username)
                     CrearCuentaFireb.setString(4, phoneNumber)
                     CrearCuentaFireb.setString(5, imageUrl)
+                    CrearCuentaFireb.setInt(6, Sesion)
                     CrearCuentaFireb.executeUpdate()
                 }
 
@@ -520,7 +537,6 @@ class Sing_in : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Inicio de sesión exitoso, muestra el cuadro de diálogo para el nombre de usuario
                     showUsernameDialog(account)
                 } else {
                     Toast.makeText(this, "Error al iniciar sesión con Google", Toast.LENGTH_SHORT).show()
@@ -596,10 +612,6 @@ class Sing_in : AppCompatActivity() {
         }
 
         return rol
-    }
-
-    private fun LimpiarCampos(){
-
     }
 
     // Método para obtener los detalles del dispositivo

@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.7.1")
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.play.services.cast.framework)

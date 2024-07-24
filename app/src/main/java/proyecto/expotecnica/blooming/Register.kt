@@ -131,9 +131,7 @@ class Register : AppCompatActivity() {
 
         // Función para abrir la otra pantalla
         lbl_IniciarSesion.setOnClickListener {
-            val PantallaIniciarSesion = Intent(this, Sing_in::class.java)
-            startActivity(PantallaIniciarSesion)
-            finish()
+            AbrirVenSingIn()
         }
 
         Btn_SubirFoto.setOnClickListener {
@@ -155,6 +153,12 @@ class Register : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun AbrirVenSingIn(){
+        val PantallaIniciarSesion = Intent(this, Sing_in::class.java)
+        startActivity(PantallaIniciarSesion)
+        finish()
     }
 
     private suspend fun validarCampos(): Boolean {
@@ -347,11 +351,11 @@ class Register : AppCompatActivity() {
 
                     // Encripto la contraseña
                     val ContraEncrip = hashSHA256(CampoContra.text.toString())
+                    val Sesion = 0
 
                     val Crear = ObjConexion?.prepareStatement(
                         "INSERT INTO TbUsers (UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Email_User, Contra_User, Img_User, Sesion_User) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
                     )!!
-                    val Sesion = 1
 
                     Crear.setString(1, UUID.randomUUID().toString())
                     Crear.setString(2, CampoNombres.text.toString())
@@ -366,8 +370,7 @@ class Register : AppCompatActivity() {
                 }
 
                 dialog.dismiss()
-                LimpiarCampos()
-                CampoNombres.requestFocus()
+                AbrirVenSingIn()
             }
         }
 
