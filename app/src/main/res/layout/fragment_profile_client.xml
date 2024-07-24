@@ -32,7 +32,7 @@
             app:layout_constraintVertical_bias="0.409" />
 
         <ImageView
-            android:id="@+id/imageView16"
+            android:id="@+id/ic_SubirIMG_Profile_Client"
             android:layout_width="28dp"
             android:layout_height="27dp"
             android:src="@drawable/ic_edit"
@@ -76,7 +76,7 @@
         </HorizontalScrollView>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btn_CerrarSesion_Client"
             android:layout_width="370dp"
             android:layout_height="50dp"
             android:backgroundTint="#F38F9A"

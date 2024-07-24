@@ -8,18 +8,6 @@
     tools:context=".Admin.add_offers.AddOffers" >
 
     <View
-        android:id="@+id/circle_edit2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/circle_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.374" />
-
-    <View
         android:id="@+id/circle_edit3"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -29,20 +17,19 @@
         app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283" />
+        app:layout_constraintVertical_bias="0.226" />
 
-    <ImageView
-        android:id="@+id/Ic_upload_AddOffer"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_upload_file"
+    <View
+        android:id="@+id/circle_edit2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.376" />
-
+        app:layout_constraintVertical_bias="0.317" />
 
     <ImageView
         android:id="@+id/IC_Edit_CardOffer"
@@ -54,7 +41,20 @@
         app:layout_constraintHorizontal_bias="0.926"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291" />
+        app:layout_constraintVertical_bias="0.235" />
+
+    <ImageView
+        android:id="@+id/Ic_upload_AddOffer"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_upload_file"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32" />
+
 
     <Button
         android:id="@+id/btn_Agregar_AddOffers"
@@ -63,15 +63,15 @@
         android:text="Guardar Cambios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.648"
+        app:layout_constraintVertical_bias="0.991"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
         android:id="@+id/txt_Titulo_AddOffers"
-        android:layout_width="310dp"
+        android:layout_width="332dp"
         android:layout_height="45dp"
         android:ems="10"
         android:hint="Titulo de oferta"
@@ -80,10 +80,49 @@
         android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.469"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txt_Porcentaje_AddOffers"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Porcentaje oferta"
+        android:inputType="text"
+        android:textColor="#554D4D"
+        android:textColorHint="#FF6E6E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.202"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.693"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txt_Descripcion_AddOffers"
+        android:layout_width="331dp"
+        android:layout_height="96dp"
+        android:background="@drawable/edittext_border"
+        android:backgroundTint="@null"
+        android:ems="10"
+        android:gravity="top|start"
+        android:hint="Descripción"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:paddingStart="8dp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"
+        tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/Regresar_AddOffers_Offers"

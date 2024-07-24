@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/ver_mas_ofertas"
-        android:name="proyecto.expotecnica.blooming.Client.offers.OffersFragment"
+        android:name="proyecto.expotecnica.blooming.Client.offers.Offers"
         android:label="Ver más ofertas"
         tools:layout="@layout/fragment_offers_client"/>
 
