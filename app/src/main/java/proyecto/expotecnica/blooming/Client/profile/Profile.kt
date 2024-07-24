@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import modelo.ImageUtils
@@ -53,6 +54,11 @@ class Profile : Fragment() {
         val IMG_Perfil = root.findViewById<ImageView>(R.id.IMG_User_Profile_Client)
         val SubirFoto = root.findViewById<ImageView>(R.id.ic_SubirIMG_Profile_Client)
         val CerrarS = root.findViewById<Button>(R.id.btn_CerrarSesion_Client)
+        val ChangePassword = root.findViewById<ImageView>(R.id.IC_ChangePassword_Client)
+
+        ChangePassword.setOnClickListener{
+            findNavController().navigate(R.id.action_ChangePassword_Client)
+        }
 
         SubirFoto.setOnClickListener{
             mostrarDialogoSeleccionImagen()

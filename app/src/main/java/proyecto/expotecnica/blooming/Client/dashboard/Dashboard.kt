@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -39,7 +40,13 @@ class Dashboard : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val root = inflater.inflate(R.layout.fragment_dashboard_client, container, false)
+
+        val IC_Setting = root.findViewById<ImageView>(R.id.ic_Settings_client)
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Dashboard)
+
+        IC_Setting.setOnClickListener{
+            findNavController().navigate(R.id.action_setting_client)
+        }
 
         imageUrl?.let { url ->
             Log.d("Dashboard", "Cargando imagen desde URL: $url")

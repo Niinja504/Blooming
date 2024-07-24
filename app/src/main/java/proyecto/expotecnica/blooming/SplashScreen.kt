@@ -11,11 +11,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.splash_screen)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             //Espera 5.5 segundos antes de abrir la activity por medio de un delay
             delay(5400)
             //Inicia  la activity de sing in
-            startActivity(Intent(this@MainActivity, Sing_in::class.java))
+            startActivity(Intent(this@SplashScreen, Sing_in::class.java))
             //Con esto nos aseguramos que se cierre la activity y no se pueda volver a atras
             finish()
         }

@@ -29,8 +29,6 @@ class Users : Fragment() {
             findNavController().navigate(R.id.action_AddUsers_Admin)
         }
 
-
-
         return root
     }
 }

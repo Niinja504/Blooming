@@ -16,19 +16,18 @@
         <action
             android:id="@+id/action_setting_client"
             app:destination="@+id/setting_client" />
-        <action
-            android:id="@+id/action_ver_mas_ofertas"
-            app:destination="@+id/ver_mas_ofertas"/>
     </fragment>
 
     <fragment
         android:id="@+id/navigation_shop_client"
         android:name="proyecto.expotecnica.blooming.Client.shop.Shop"
         android:label="Tienda"
-        tools:layout="@layout/fragment_shop_client" />
-    <argument
-        android:name="UUID"
-        app:argType="string" />
+        tools:layout="@layout/fragment_shop_client">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_orders_client"
@@ -43,22 +42,25 @@
         android:id="@+id/navigation_profile_client"
         android:name="proyecto.expotecnica.blooming.Client.profile.Profile"
         android:label="Pefil"
-        tools:layout="@layout/fragment_profile_client" />
-    <argument
-        android:name="UUID"
-        app:argType="string" />
+        tools:layout="@layout/fragment_profile_client">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+        <action
+           android:id="@+id/action_ChangePassword_Client"
+           app:destination="@+id/ChangePassword_client"/>
+    </fragment>
 
     <!---->
     <fragment
         android:id="@+id/setting_client"
-        android:name="proyecto.expotecnica.blooming.Client.setting.SettingFragment"
+        android:name="proyecto.expotecnica.blooming.Client.setting.Setting"
         android:label="Ajustes"
         tools:layout="@layout/fragment_setting_client" />
-
     <fragment
-        android:id="@+id/ver_mas_ofertas"
-        android:name="proyecto.expotecnica.blooming.Client.offers.Offers"
-        android:label="Ver más ofertas"
-        tools:layout="@layout/fragment_offers_client"/>
+        android:id="@+id/ChangePassword_client"
+        android:name="proyecto.expotecnica.blooming.Client.change_password.ChangePassword"
+        android:label="Cambio de contraseña"
+        tools:layout="@layout/fragment_change_password_client"/>
 
 </navigation>

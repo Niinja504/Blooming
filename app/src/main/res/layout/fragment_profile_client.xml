@@ -58,7 +58,7 @@
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
-            android:layout_width="412dp"
+            android:layout_width="414dp"
             android:layout_height="145dp"
             android:background="#735252"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +66,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.889"
+            app:layout_constraintVertical_bias="0.887"
             tools:ignore="SpeakableTextPresentCheck">
 
             <LinearLayout
@@ -191,7 +191,7 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <ImageView
-        android:id="@+id/IC_ChangePassword_Admin"
+        android:id="@+id/IC_ChangePassword_Client"
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:src="@drawable/ic_change_password"

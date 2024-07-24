@@ -1,4 +1,4 @@
-package proyecto.expotecnica.blooming.Admin.profile
+package proyecto.expotecnica.blooming.Employed.change_password
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import proyecto.expotecnica.blooming.Client.ImageViewModel
 import proyecto.expotecnica.blooming.R
 
-class Profile : Fragment() {
+class ChangePassword : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -22,13 +20,14 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_profile_admin, container, false)
+        val root = inflater.inflate(R.layout.fragment_change_password_employed, container, false)
 
-        val ChangePassword = root.findViewById<ImageView>(R.id.IC_ChangePassword_Admin)
+        val Regresar_ChangePassword = root.findViewById<ImageView>(R.id.IC_Regresar_ChangePassword_Employed)
 
-        ChangePassword.setOnClickListener{
-            findNavController().navigate(R.id.action_ChangePassword_Admin)
+        Regresar_ChangePassword.setOnClickListener{
+            findNavController().navigate(R.id.navigation_profile_employed)
         }
+
 
         return root
     }

@@ -1,15 +1,18 @@
 package proyecto.expotecnica.blooming.Client.setting
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import proyecto.expotecnica.blooming.R
 
-class SettingFragment : Fragment() {
+class Setting : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -25,10 +28,25 @@ class SettingFragment : Fragment() {
         //Variables que se van a utilizar
         val Ic_Regresar = root.findViewById<ImageView>(R.id.Regresar_setting_client)
 
+        val IG = root.findViewById<ImageView>(R.id.IC_IG_Setting_Client)
+        val X = root.findViewById<ImageView>(R.id.IC_X_Setting_Client)
+        val TikTok = root.findViewById<ImageView>(R.id.IC_TikTok_Setting_Client)
+
         Ic_Regresar.setOnClickListener{
             findNavController().navigate(R.id.navigation_dashboard_client)
         }
 
+        IG.setOnClickListener {
+            openUrl("https://www.instagram.com/_sistema_blooming?igsh=aWRtOWZ4cHZsMnli")
+        }
+
         return root
+    }
+
+    private fun openUrl(link: String){
+        val uri = Uri.parse(link)
+        val inte = Intent(Intent.ACTION_VIEW, uri)
+
+        startActivity(inte)
     }
 }

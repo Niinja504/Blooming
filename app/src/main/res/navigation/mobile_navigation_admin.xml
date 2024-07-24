@@ -50,7 +50,7 @@
         android:label="Perfil"
         tools:layout="@layout/fragment_profile_admin">
         <action
-            android:id="@+id/action_ChangePassword"
+            android:id="@+id/action_ChangePassword_Admin"
             app:destination="@+id/ChangePassword_admin"/>
     </fragment>
 
@@ -83,6 +83,6 @@
         android:id="@+id/ChangePassword_admin"
         android:name="proyecto.expotecnica.blooming.Admin.change_password.ChangePassword"
         android:label="Cambiar contraseña"
-        tools:layout="@layout/fragment_change_password"/>
+        tools:layout="@layout/fragment_change_password_admin"/>
 
 </navigation>

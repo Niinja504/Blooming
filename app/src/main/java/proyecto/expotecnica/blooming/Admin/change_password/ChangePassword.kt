@@ -20,9 +20,9 @@ class ChangePassword : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_change_password, container, false)
+        val root = inflater.inflate(R.layout.fragment_change_password_admin, container, false)
 
-        val Regresar_ChangePassword = root.findViewById<ImageView>(R.id.IC_Regresar_ChangePassword)
+        val Regresar_ChangePassword = root.findViewById<ImageView>(R.id.IC_Regresar_ChangePassword_Admin)
 
         Regresar_ChangePassword.setOnClickListener{
             findNavController().navigate(R.id.navigation_profile_admin)

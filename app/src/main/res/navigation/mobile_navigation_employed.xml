@@ -25,8 +25,20 @@
 
     <fragment
         android:id="@+id/navigation_profile_employed"
-        android:name="proyecto.expotecnica.blooming.Employed.profile.ProfileFragment"
+        android:name="proyecto.expotecnica.blooming.Employed.profile.Profile"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile_employed" />
+        tools:layout="@layout/fragment_profile_employed">
+        <action
+            android:id="@+id/action_ChangePassword_Employed"
+            app:destination="@+id/ChangePassword_employed"/>
+    </fragment>
+
+    <!---->
+    <fragment
+        android:id="@+id/ChangePassword_employed"
+        android:name="proyecto.expotecnica.blooming.Employed.change_password.ChangePassword"
+        android:label="Cambiar contraseña"
+        tools:layout="@layout/fragment_change_password_employed"/>
+
 
 </navigation>
