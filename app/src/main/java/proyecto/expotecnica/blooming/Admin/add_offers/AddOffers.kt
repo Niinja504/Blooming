@@ -36,6 +36,8 @@ import java.util.UUID
 
 class AddOffers : Fragment() {
     private lateinit var campoTitulo: EditText
+    private lateinit var campoPorcentaje: EditText
+    private lateinit var campoDescripcion: EditText
     private lateinit var archivoOffer: ImageView
     private var selectedImageUri: Uri? = null
 
@@ -49,6 +51,8 @@ class AddOffers : Fragment() {
         val regresar = root.findViewById<ImageView>(R.id.Regresar_AddOffers_Offers)
         archivoOffer = root.findViewById(R.id.ArchivoIMG_Offer)
         campoTitulo = root.findViewById(R.id.txt_Titulo_AddOffers)
+        campoPorcentaje = root.findViewById(R.id.txt_Porcentaje_AddOffers)
+        campoDescripcion = root.findViewById(R.id.txt_Descripcion_AddOffers)
         val uploadImg = root.findViewById<ImageView>(R.id.Ic_upload_AddOffer)
         val agregar = root.findViewById<Button>(R.id.btn_Agregar_AddOffers)
 
@@ -80,12 +84,14 @@ class AddOffers : Fragment() {
                         withContext(Dispatchers.IO) {
                             val objConexion = ClaseConexion().CadenaConexion()
                             val agregar = objConexion?.prepareStatement(
-                                "INSERT INTO TbOfertas (ID_Oferta, UUID_Oferta, Titulo, Img_oferta) VALUES (SEQ_Ofertas.NEXTVAL, ?, ?, ?)"
+                                "INSERT INTO TbOfertas (UUID_Oferta, Titulo, Porcentaje_Oferta, Decripcion_Oferta, Img_oferta) VALUES (?, ?, ?, ?, ?)"
                             )!!
 
                             agregar.setString(1, UUID.randomUUID().toString())
                             agregar.setString(2, campoTitulo.text.toString())
-                            agregar.setString(3, imageUrl)
+                            agregar.setString(3, campoPorcentaje.text.toString())
+                            agregar.setString(4, campoDescripcion.text.toString())
+                            agregar.setString(5, imageUrl)
                             agregar.executeUpdate()
                         }
                     } else {
@@ -100,6 +106,8 @@ class AddOffers : Fragment() {
 
     private fun validarCampos(): Boolean {
         val titulo = campoTitulo.text.toString()
+        val porcentaje = campoPorcentaje.text.toString()
+        val descripcion = campoDescripcion.text.toString()
 
         var hayErrores = false
 
@@ -108,6 +116,20 @@ class AddOffers : Fragment() {
             hayErrores = true
         } else {
             campoTitulo.error = null
+        }
+
+        if (porcentaje.isEmpty()) {
+            campoPorcentaje.error = "Este campo es obligatorio"
+            hayErrores = true
+        } else {
+            campoPorcentaje.error = null
+        }
+
+        if (descripcion.isEmpty()) {
+            campoDescripcion.error = "Este campo es obligatorio"
+            hayErrores = true
+        } else {
+            campoDescripcion.error = null
         }
 
         return !hayErrores

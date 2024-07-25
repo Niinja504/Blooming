@@ -39,14 +39,14 @@
             android:label="@string/title_activity_dashboard_admin"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".Dashboard_admin"
+            android:name=".SplashScreen"
             android:exported="false"
             android:label="@string/title_activity_dashboard_employed" />
         <activity
             android:name=".Sing_in"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Dashboard_admin"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
