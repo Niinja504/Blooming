@@ -1,4 +1,4 @@
-package Recycler_View
+package RecyclerViewHelpers
 
 import DataClass.DataClassOffers
 import android.app.AlertDialog
@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firestore.admin.v1.Index
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

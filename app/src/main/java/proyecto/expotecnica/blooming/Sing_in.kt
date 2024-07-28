@@ -504,8 +504,6 @@ class Sing_in : AppCompatActivity() {
         }
     }
 
-    data class UserInfo(val username: String, val phoneNumber: String, val profilePictureUri: Uri?)
-
     private fun registerUserInFirebase(account: GoogleSignInAccount, username: String, phoneNumber: String, imageUrl: String?) {
         val user = hashMapOf(
             "username" to username,

@@ -64,8 +64,6 @@ class Profile : Fragment() {
             mostrarDialogoSeleccionImagen()
         }
 
-
-
         // Observar los cambios en imageUrl
         imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
             url?.let { imageUrl ->

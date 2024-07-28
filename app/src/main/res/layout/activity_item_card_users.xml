@@ -11,50 +11,66 @@
 
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    tools:context=".Item_card_inventory">
+    tools:context=".Item_Card_Users">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView20"
-            android:layout_width="65dp"
-            android:layout_height="66dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/IMG_Users_CardAdmin"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lbl_Titulo_Inventory"
+            android:id="@+id/lbl_NombreUsuario_CardAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.275"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.512" />
+
+        <TextView
+            android:id="@+id/lbl_NombreDeUsu_CardAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.364"
-            app:layout_constraintStart_toEndOf="@+id/imageView20"
+            app:layout_constraintHorizontal_bias="0.598"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.957" />
 
         <ImageView
-            android:id="@+id/ic_Edit_Card"
-            android:layout_width="33dp"
-            android:layout_height="30dp"
+            android:id="@+id/IC_Edit_Users_CardAdmin"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView20"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_edit" />
+            app:srcCompat="@drawable/ic_edit2" />
 
         <ImageView
-            android:id="@+id/ic_Delete_Card"
-            android:layout_width="33dp"
-            android:layout_height="30dp"
+            android:id="@+id/IC_Delete_Users_CardAdmin"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -63,27 +79,8 @@
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ic_delete" />
 
-        <TextView
-            android:id="@+id/lbl_Disponibilidad_Inventory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.273"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/lbl_Precio_Inventory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="228dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </androidx.cardview.widget.CardView>

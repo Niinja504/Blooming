@@ -63,6 +63,7 @@ class AddUser : Fragment() {
     private var selectedImageUri: Uri? = null
     private lateinit var IMG_Perfil: ImageView
     private var selectedRole: String? = null  // Variable para almacenar el rol seleccionado
+    private var ContaUsu = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +80,7 @@ class AddUser : Fragment() {
         dialogView = root
 
         //DropDown
-        val Items = listOf("Administrador", "Empleado")
+        val Items = listOf("Administrador", "Empleado", "Cliente")
         val autoComplete : AutoCompleteTextView = root.findViewById(R.id.autoComplete_AddUser_Admin)
         val Adaptador = ArrayAdapter(requireContext(), R.layout.list_item, Items)
         autoComplete.setAdapter(Adaptador)
@@ -134,6 +135,7 @@ class AddUser : Fragment() {
                             "El usuario eligio la imagen predeternimada"
                         }
 
+                        ContaUsu++
                         // Inserción en la base de datos
                         withContext(Dispatchers.IO) {
                             val ObjConexion = ClaseConexion().CadenaConexion()
@@ -141,19 +143,30 @@ class AddUser : Fragment() {
                             // Encripto la contraseña
                             val ContraEncrip = hashSHA256(CampoContra.text.toString())
 
+                            var Usuario = if (selectedRole == "Administrador") {
+                                "Administrador $ContaUsu"
+                            } else {
+                                "Empleado $ContaUsu"
+                            }
+
+
+                            val  Sesion = 0
+
                             val Crear = ObjConexion?.prepareStatement(
-                                "INSERT INTO TbUSers_Employed_Admin (ID_User_Employed, UUID_Employed_Admin, Img_Employed_Admin, Nombres_Employed_Admin, Apellidos_Employed_Admin, Correo_Employed_Admin, Contra_Employed_Admin, Edad_Employed_Admin, Num_Telefono_Employed_Admin, Rol_Employed_Admin) VALUES (SEQ_USers_Employed_Admin.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                                "INSERT INTO TbUsers (UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Edad_User, Email_User, Contra_User, Img_User, Rol_User, Sesion_User) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                             )!!
 
                             Crear.setString(1, UUID.randomUUID().toString())
-                            Crear.setString(2, imageUrl)
-                            Crear.setString(3, CampoNombres.text.toString())
-                            Crear.setString(4, CampoApellidos.text.toString())
-                            Crear.setString(5, CampoCorreo.text.toString())
-                            Crear.setString(6, ContraEncrip)
-                            Crear.setInt(7, CampoEdad.text.toString().toInt())
-                            Crear.setString(8, CampoTelefono.text.toString())
-                            Crear.setString(9, selectedRole)
+                            Crear.setString(2, CampoNombres.text.toString())
+                            Crear.setString(3, CampoApellidos.text.toString())
+                            Crear.setString(4, Usuario)
+                            Crear.setString(5, CampoTelefono.text.toString())
+                            Crear.setInt(6, CampoEdad.text.toString().toInt())
+                            Crear.setString(7, CampoCorreo.text.toString())
+                            Crear.setString(8, ContraEncrip)
+                            Crear.setString(9, imageUrl)
+                            Crear.setString(10, selectedRole)
+                            Crear.setInt(11, Sesion)
                             Crear.executeUpdate()
                         }
                         LimpiarCampo()
@@ -166,7 +179,6 @@ class AddUser : Fragment() {
                 }
             }
         }
-
 
         return root
     }
@@ -211,6 +223,13 @@ class AddUser : Fragment() {
         }
 
         if (VerificarContra.isEmpty()) {
+            CampoConfirmarContra.error = "Este campo es obligatorio"
+            HayErrores = true
+        } else {
+            CampoConfirmarContra.error = null
+        }
+
+        if (VerificarContra.isEmpty()) {
             CampoConfirmarContra.error = "Este campo es obligatorio para verificar su contraseña"
             HayErrores = true
         } else if (VerificarContra != Contra) {
@@ -228,16 +247,25 @@ class AddUser : Fragment() {
         }
 
         if (Edad.isEmpty()) {
-            CampoNombres.error = "Este campo es obligatorio"
+            CampoEdad.error = "Este campo es obligatorio"
             HayErrores = true
         } else {
-            CampoNombres.error = null
+            CampoEdad.error = null
         }
+
+        if (Edad < 18.toString()) {
+            CampoEdad.error = "Debes ser mayor de edad"
+            HayErrores = true
+        } else {
+            CampoEdad.error = null
+        }
+
+
         if (Telefono.length < 8) {
             CampoTelefono.error = "El número telefonico debe de tener 8 digitos"
             HayErrores = true
         } else {
-            CampoContra.error = null
+            CampoTelefono.error = null
         }
         return !HayErrores
     }

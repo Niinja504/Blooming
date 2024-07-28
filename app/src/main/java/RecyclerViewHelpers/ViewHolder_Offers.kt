@@ -1,4 +1,4 @@
-package Recycler_View
+package RecyclerViewHelpers
 
 import android.view.View
 import android.widget.ImageView

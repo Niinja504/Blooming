@@ -85,4 +85,11 @@
         android:label="Cambiar contraseña"
         tools:layout="@layout/fragment_change_password_admin"/>
 
+    <!---->
+    <fragment
+        android:id="@+id/navigation_Details_Users"
+        android:name="proyecto.expotecnica.blooming.Admin.Details.Details_Users"
+        android:label="Detalles del usuario"
+        tools:layout="@layout/fragment_details_users"/>
+
 </navigation>

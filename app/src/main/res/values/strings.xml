@@ -19,4 +19,5 @@
     <!--DropDown-->
     <string name="Titulo">Drop Down</string>
     <string name="Select">Seleccione una opción</string>
+    <string name="title_activity_card_users">Card_Users</string>
 </resources>

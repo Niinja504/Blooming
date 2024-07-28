@@ -1,7 +1,9 @@
 package proyecto.expotecnica.blooming
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -20,6 +22,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -52,6 +57,7 @@ class Register : AppCompatActivity() {
     private lateinit var CampoApellidos: EditText
     private lateinit var CampoUsuario: EditText
     private lateinit var CampoTelefono: EditText
+    private lateinit var CampoEdad: EditText
     private lateinit var CampoCorreo: EditText
     private lateinit var CampoContra: EditText
     private lateinit var CampoConfirmarContra: EditText
@@ -109,6 +115,7 @@ class Register : AppCompatActivity() {
         CampoApellidos = findViewById(R.id.txt_Apellidos_Registrer)
         CampoUsuario = findViewById(R.id.txt_Usuario_Registrer)
         CampoTelefono = findViewById(R.id.txt_Telefono_Registrer)
+        CampoEdad = findViewById(R.id.txt_Edad_Registrer)
         CampoCorreo = findViewById(R.id.txt_Correo_Registrer)
         CampoContra = findViewById(R.id.txt_Contrasena_Registrer)
         CampoConfirmarContra = findViewById(R.id.txt_ConfirmarContra_Registrer)
@@ -122,6 +129,7 @@ class Register : AppCompatActivity() {
         CampoTelefono.inputType = InputType.TYPE_CLASS_NUMBER
         CampoTelefono.addTextChangedListener(TelefonoTextWatcher())
 
+        CampoEdad.filters = arrayOf(InputFilter.LengthFilter(2))
         CampoCorreo.filters = arrayOf(InputFilter.LengthFilter(30))
         CampoCorreo.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
         CampoContra.filters = arrayOf(InputFilter.LengthFilter(20))
@@ -166,6 +174,7 @@ class Register : AppCompatActivity() {
         val Apellidos = CampoApellidos.text.toString()
         val Usuario = CampoUsuario.text.toString()
         val Telefono = CampoTelefono.text.toString()
+        val Edad = CampoEdad.text.toString()
         val Correo = CampoCorreo.text.toString()
         val Contra = CampoContra.text.toString()
         val ConfirmarContra = CampoConfirmarContra.text.toString()
@@ -198,6 +207,20 @@ class Register : AppCompatActivity() {
             HayErrores = true
         } else {
             CampoTelefono.error = null
+        }
+
+        if (Edad.isEmpty()) {
+            CampoEdad.error = "Este campo es obligatorio"
+            HayErrores = true
+        } else {
+            CampoEdad.error = null
+        }
+
+        if (Edad < 18.toString()) {
+            CampoEdad.error = "Debes ser mayor de edad"
+            HayErrores = true
+        } else {
+            CampoEdad.error = null
         }
 
         if (Telefono.length < 8) {
@@ -352,9 +375,10 @@ class Register : AppCompatActivity() {
                     // Encripto la contraseña
                     val ContraEncrip = hashSHA256(CampoContra.text.toString())
                     val Sesion = 0
+                    val Rol = "Cliente"
 
                     val Crear = ObjConexion?.prepareStatement(
-                        "INSERT INTO TbUsers (UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Email_User, Contra_User, Img_User, Sesion_User) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO TbUsers (UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Edad_User, Email_User, Contra_User, Img_User, Rol_User, Sesion_User) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                     )!!
 
                     Crear.setString(1, UUID.randomUUID().toString())
@@ -362,10 +386,12 @@ class Register : AppCompatActivity() {
                     Crear.setString(3, CampoApellidos.text.toString())
                     Crear.setString(4, CampoUsuario.text.toString())
                     Crear.setString(5, CampoTelefono.text.toString())
-                    Crear.setString(6, CampoCorreo.text.toString())
-                    Crear.setString(7, ContraEncrip)
-                    Crear.setString(8, imageUrl)
-                    Crear.setInt(9, Sesion)
+                    Crear.setInt(6, CampoEdad.text.toString().toInt())
+                    Crear.setString(7, CampoCorreo.text.toString())
+                    Crear.setString(8, ContraEncrip)
+                    Crear.setString(9, imageUrl)
+                    Crear.setString(10, Rol)
+                    Crear.setInt(11, Sesion)
                     Crear.executeUpdate()
                 }
 
@@ -395,22 +421,44 @@ class Register : AppCompatActivity() {
             .show()
     }
 
-    private fun abrirCamara() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val photoFile: File? = try {
-            ImageUtils.createImageFile(this)
-        } catch (ex: IOException) {
-            null
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            REQUEST_CAMERA_PERMISSION -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    // El permiso ha sido concedido, abrir la cámara
+                    abrirCamara()
+                } else {
+                    // El permiso ha sido denegado, mostrar un mensaje o manejarlo apropiadamente
+                    Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
         }
-        photoFile?.also {
-            currentPhotoPath = it.absolutePath
-            val photoURI: Uri = FileProvider.getUriForFile(
-                this,
-                "${applicationContext.packageName}.fileprovider",
-                it
-            )
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+    }
+
+    private fun abrirCamara() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // El permiso no está concedido, solicitar el permiso
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSION)
+        } else {
+            // El permiso está concedido, abrir la cámara
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val photoFile: File? = try {
+                ImageUtils.createImageFile(this)
+            } catch (ex: IOException) {
+                null
+            }
+            photoFile?.also {
+                currentPhotoPath = it.absolutePath
+                val photoURI: Uri = FileProvider.getUriForFile(
+                    this,
+                    "${this.packageName}.fileprovider",
+                    it
+                )
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+            }
         }
     }
 
@@ -511,6 +559,7 @@ class Register : AppCompatActivity() {
     companion object {
         private const val REQUEST_IMAGE_CAPTURE = 1
         private const val REQUEST_IMAGE_PICK = 2
+        private const val REQUEST_CAMERA_PERMISSION = 100
     }
 
     private fun LimpiarCampos() {
@@ -518,6 +567,7 @@ class Register : AppCompatActivity() {
         CampoApellidos.text.clear()
         CampoUsuario.text.clear()
         CampoTelefono.text.clear()
+        CampoEdad.text.clear()
         CampoCorreo.text.clear()
         CampoContra.text.clear()
         CampoConfirmarContra.text.clear()

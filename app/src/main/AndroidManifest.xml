@@ -5,13 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,8 +24,9 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
-            android:name=".Item_card_inventory"
-            android:exported="false" />
+            android:name=".Item_Card_Users"
+            android:exported="false"
+            android:label="@string/title_activity_card_users" />
         <activity
             android:name=".Register"
             android:exported="false" />
@@ -79,4 +81,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>
