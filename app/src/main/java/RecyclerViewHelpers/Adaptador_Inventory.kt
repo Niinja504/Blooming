@@ -74,7 +74,7 @@ class Adaptador_Inventory (var Datos: List<DataInventory>): RecyclerView.Adapter
             val ObjConexion = ClaseConexion().CadenaConexion()
 
             val UpdateProducto = ObjConexion?.prepareStatement(
-                "UPDATE TbInventario SET Nombre_Producto = ?, Precio_Producto = ?, Cantidad_Bodega_Productos  = ?, Categoria_Producto = ?, Descripcion_Producto  = ? WHERE UUID_Producto = ?"
+                "UPDATE TbInventario SET Nombre_Producto = ?, Precio_Producto = ?, Cantidad_Bodega_Productos  = ?, Categoria_Flores = ?, Categoria_Diseno = ?, Categoria_Evento = ?, Descripcion_Producto  = ? WHERE UUID_Producto = ?"
             )
             UpdateProducto?.apply {
                 setString(1, NombreProducto)
@@ -107,6 +107,7 @@ class Adaptador_Inventory (var Datos: List<DataInventory>): RecyclerView.Adapter
         val item = Datos[position]
         holder.Nombre_Producto.text = item.Nombre
         holder.Precio_Producto.text = item.Precio.toString()
+        holder.CantidadDisponible.text = item.CantidadBode.toString()
 
         Glide.with(holder.IMG_Producto_View.context)
             .load(item.IMG_Product)
@@ -157,7 +158,7 @@ class Adaptador_Inventory (var Datos: List<DataInventory>): RecyclerView.Adapter
 
             Update_Nombre.setText(item.Nombre)
             Update_Precio.setText(item.Precio.toString())
-            Update_CantidadBodega.setText(item.CantidadBode)
+            Update_CantidadBodega.setText(item.CantidadBode.toString())
             Update_Descripcion.setText(item.Descripcion)
 
             val builder = AlertDialog.Builder(context)
@@ -187,14 +188,16 @@ class Adaptador_Inventory (var Datos: List<DataInventory>): RecyclerView.Adapter
             val bundle = Bundle().apply {
                 putString("img", item.IMG_Product)
                 putString("nombre", item.Nombre)
-                putString("precio", item.Precio.toString())
-                putString("cantidadBodega", item.CantidadBode.toString())
-                putString("categoria", item.CategoriaFlores)
+                putFloat("precio", item.Precio)
+                putInt("cantidadBodega", item.CantidadBode)
+                putString("categoriaFlores", item.CategoriaFlores)
+                putString("categoriaDiseno", item.CategoriaDiseno)
+                putString("categoriaEvento", item.CategoriaEventos)
                 putString("descripcion", item.Descripcion)
             }
 
             val navController = findNavController(holder.itemView)
-            navController.navigate(R.id.navigation_Details_Users, bundle)
+            navController.navigate(R.id.navigation_Details_Products, bundle)
         }
     }
 

@@ -156,6 +156,7 @@ class AddProduct : Fragment() {
 
                     }
                     LimpiarCampo()
+                    findNavController().navigate(R.id.navigation_inventory_admin)
                 }
             }
         }

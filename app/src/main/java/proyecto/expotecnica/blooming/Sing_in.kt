@@ -143,37 +143,23 @@ class Sing_in : AppCompatActivity() {
                     var usuarioEncontrado = false
                     var uuid: String? = null
 
-
-                    // Búsqueda en la primera tabla (TbUsers)
-                    val ComprobarUsuario_Tb1: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
-                    ComprobarUsuario_Tb1.setString(1, email)
-                    ComprobarUsuario_Tb1.setString(2, contrasenaEncriptada)
-                    val Resultado_Tb1: ResultSet = ComprobarUsuario_Tb1.executeQuery()
-
-                    // Verificar si el usuario existe en TbUsers y asignar rol por defecto
-                    if (Resultado_Tb1.next()) {
-                        rol = 2 // Cliente por defecto
-                        usuarioEncontrado = true
-                        uuid = Resultado_Tb1.getString("UUID_User")
-                    }
-
-                    // Si no se encontró en la primera tabla, verificar en la segunda tabla (TbUsers_Employed_Admin)
                     if (!usuarioEncontrado) {
-                        val ComprobarUsuario_Tb2: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers_Employed_Admin WHERE Correo_Employed_Admin = ? AND Contra_Employed_Admin = ?")!!
-                        ComprobarUsuario_Tb2.setString(1, email)
-                        ComprobarUsuario_Tb2.setString(2, contrasenaEncriptada)
-                        val Resultado_Tb2: ResultSet = ComprobarUsuario_Tb2.executeQuery()
+                        val ComprobarUsuario: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
+                        ComprobarUsuario.setString(1, email)
+                        ComprobarUsuario.setString(2, contrasenaEncriptada)
+                        val Resultado: ResultSet = ComprobarUsuario.executeQuery()
 
                         // Verificar el rol en la segunda tabla
-                        if (Resultado_Tb2.next()) {
+                        if (Resultado.next()) {
                             usuarioEncontrado = true
-                            val rolString = Resultado_Tb2.getString("Rol_Employed_Admin")
+                            val rolString = Resultado.getString("Rol_User")
                             rol = when (rolString) {
                                 "Administrador" -> 0
                                 "Empleado" -> 1
+                                "Cliente" -> 2
                                 else -> null
                             }
-                            uuid = Resultado_Tb2.getString("UUID_Employed_Admin")
+                            uuid = Resultado.getString("UUID_User")
                         }
                     }
 

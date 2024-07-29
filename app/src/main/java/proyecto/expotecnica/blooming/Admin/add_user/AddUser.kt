@@ -143,12 +143,12 @@ class AddUser : Fragment() {
                             // Encripto la contraseña
                             val ContraEncrip = hashSHA256(CampoContra.text.toString())
 
-                            var Usuario = if (selectedRole == "Administrador") {
-                                "Administrador $ContaUsu"
-                            } else {
-                                "Empleado $ContaUsu"
+                            val Usuario = when (selectedRole) {
+                                "Administrador" -> "Administrador $ContaUsu"
+                                "Empleado" -> "Empleado $ContaUsu"
+                                "Cliente" -> "Cliente $ContaUsu"
+                                else -> "Rol desconocido $ContaUsu"
                             }
-
 
                             val  Sesion = 0
 
@@ -170,6 +170,7 @@ class AddUser : Fragment() {
                             Crear.executeUpdate()
                         }
                         LimpiarCampo()
+                        findNavController().navigate(R.id.navigation_users_admin)
                     }
                     else{
                         if (correoExiste) {

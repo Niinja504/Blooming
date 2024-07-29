@@ -13,7 +13,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import proyecto.expotecnica.blooming.Admin.offers.DetailsOffers
+import proyecto.expotecnica.blooming.Admin.Details.DetailsOffers
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_Offers(var Datos: List<DataClassOffers>, private val fragment: Fragment) : RecyclerView.Adapter<ViewHolder_Offers>() {

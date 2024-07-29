@@ -28,7 +28,7 @@
             android:exported="false"
             android:theme="@style/Theme.Blooming" />
         <activity
-            android:name=".Item_Card_Users"
+            android:name=".Admin.users.CardUsers"
             android:exported="false"
             android:label="@string/title_activity_card_users" />
         <activity

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import proyecto.expotecnica.blooming.R
 
@@ -14,32 +15,35 @@ class Orders : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            // Manejar los argumentos si es necesario
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_orders_admin, container, false)
 
         val toggleGroup = root.findViewById<MaterialButtonToggleGroup>(R.id.toggleButton)
+        val btnPedidosPendientes = root.findViewById<MaterialButton>(R.id.btn_Pedidos_Pendientes_Admin)
+
+        toggleGroup.check(btnPedidosPendientes.id)
+
         toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
                     R.id.btn_Pedidos_Pendientes_Admin -> {
-                        // Load the Pending Orders Fragment
                         loadFragment(PendingOrdersFragment())
                     }
                     R.id.btn_Pedidos_Entregados_Admin -> {
-                        // Load the Delivered Orders Fragment
                         loadFragment(DeliveredOrdersFragment())
                     }
                 }
             }
         }
 
-        //Fragment por defecto
+        // Cargar el Fragmento por defecto
         loadFragment(PendingOrdersFragment())
 
         return root

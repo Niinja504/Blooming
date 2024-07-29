@@ -7,6 +7,16 @@
     android:background="#FFFCF5"
     tools:context=".Admin.offers.Offers" >
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RCV_Offers_Admin"
+        android:layout_width="409dp"
+        android:layout_height="634dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.730" />
+
     <ImageView
         android:id="@+id/ic_Settings_inventory"
         android:layout_width="32dp"
@@ -26,10 +36,10 @@
         android:text=" Agregar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.060"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177"
+        app:layout_constraintVertical_bias="0.156"
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
@@ -108,14 +118,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RCV_Offers_Admin"
-        android:layout_width="414dp"
-        android:layout_height="548dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

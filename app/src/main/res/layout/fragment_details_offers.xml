@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Admin.offers.DetailsOffers">
+    tools:context=".Admin.Details.DetailsOffers">
 
     <ImageView
         android:id="@+id/ArchivoIMG_OfferDetails"
