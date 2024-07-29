@@ -2,6 +2,10 @@ package RecyclerViewHelpers
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.InputType
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,15 +22,18 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import modelo.DataUsers
+import DataC.DataUsers
 import proyecto.expotecnica.blooming.R
 import java.security.MessageDigest
 
 class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHolder_Users>()  {
-    fun ActualizarListaDespuesDeEditar(uuid: String, NuevoNombre: String, NuevoUsuario: String){
+    fun ActualizarListaDespuesDeEditar(uuid: String, NuevoNombre: String, NuevoUsuario: String, NuevoApellido: String, NuevoTelefono: String, NuevoCorreo: String){
         val Index = Datos.indexOfFirst { it.uuid == uuid }
         Datos[Index].Nombres = NuevoNombre
         Datos[Index].NombreUser = NuevoUsuario
+        Datos[Index].Apellidos = NuevoApellido
+        Datos[Index].Num_Telefono = NuevoTelefono
+        Datos[Index].Email_User = NuevoCorreo
         notifyItemChanged(Index)
     }
 
@@ -56,11 +63,11 @@ class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHol
 
     fun actualizarDato(
         nombreUsuario: String,
-        apellidoUsuario: String?,
+        apellidoUsuario: String,
         nombreDeUsuario: String,
-        telefono: String?,
-        email: String?,
-        contra: String?,
+        telefono: String,
+        email: String,
+        contra: String,
         uuid: String,
         scope: CoroutineScope
     ) {
@@ -82,7 +89,7 @@ class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHol
             }
 
             withContext(Dispatchers.Main){
-                ActualizarListaDespuesDeEditar(uuid, nombreUsuario, nombreDeUsuario)
+                ActualizarListaDespuesDeEditar(uuid, nombreUsuario, nombreDeUsuario, apellidoUsuario, telefono, email)
             }
         }
     }
@@ -100,6 +107,7 @@ class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHol
         val item = Datos[position]
         holder.Nombre_Usuario.text = item.Nombres
         holder.NomberDeUsuario.text = item.NombreUser
+        holder.RolUsuario.text = item.Rol
 
         Glide.with(holder.IMG_User_View.context)
             .load(item.IMG_User)
@@ -145,7 +153,17 @@ class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHol
             val Update_Correo = dialogView.findViewById<EditText>(R.id.Txt_Correo)
             val Update_Contra = dialogView.findViewById<EditText>(R.id.Txt_Contra)
 
+            Update_Telefono.addTextChangedListener(TelefonoTextWatcher(Update_Telefono))
+
             val ContrasenaEncriptada: String = hashSHA256(Update_Contra.text.toString())
+
+            Update_Nombres.filters = arrayOf(InputFilter.LengthFilter(15))
+            Update_Apellidos.filters = arrayOf(InputFilter.LengthFilter(15))
+            Update_NombreUsuario.filters = arrayOf(InputFilter.LengthFilter(15))
+            Update_Telefono.filters = arrayOf(InputFilter.LengthFilter(11))
+            Update_Telefono.inputType = InputType.TYPE_CLASS_NUMBER
+            Update_Correo.filters = arrayOf(InputFilter.LengthFilter(35))
+            Update_Contra.filters = arrayOf(InputFilter.LengthFilter(30))
 
             Update_Nombres.setText(item.Nombres)
             Update_Apellidos.setText(item.Apellidos)
@@ -188,6 +206,7 @@ class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHol
                 putString("correo_usuario", item.Email_User)
                 putString("contra", item.Contra)
                 putString("img", item.IMG_User)
+                putString("Rol", item.Rol)
                 putInt("sesion_user", item.Sesion_User)
             }
             val navController = findNavController(holder.itemView)
@@ -199,6 +218,34 @@ class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHol
         val bytes = MessageDigest.getInstance("SHA-256").digest(contrasenaEscrita.toByteArray())
         return bytes.joinToString("") { "%02x".format(it) }
     }
+
+    inner class TelefonoTextWatcher(private val editText: EditText) : TextWatcher {
+        private var isUpdating = false
+        private val hyphen = " - "
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) {
+            if (isUpdating) return
+            isUpdating = true
+
+            var str = s.toString().replace(hyphen, "").replace(" ", "")
+            val formatted = StringBuilder()
+
+            for (i in str.indices) {
+                formatted.append(str[i])
+                if ((i == 3 || i == 7) && i != str.length - 1) {
+                    formatted.append(hyphen)
+                }
+            }
+
+            editText.setText(formatted.toString())
+            editText.setSelection(formatted.length)
+
+            isUpdating = false
+        }
+    }
+
 
     private fun findNavController(view: View): NavController {
         val fragment = view.findFragment<Fragment>()

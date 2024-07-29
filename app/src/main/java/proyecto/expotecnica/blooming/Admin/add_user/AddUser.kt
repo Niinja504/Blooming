@@ -318,10 +318,8 @@ class AddUser : Fragment() {
 
     private fun abrirCamara() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            // El permiso no está concedido, solicitar el permiso
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSION_AddUser)
         } else {
-            // El permiso está concedido, abrir la cámara
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             val photoFile: File? = try {
                 ImageUtils.createImageFile(requireContext())
@@ -374,10 +372,9 @@ class AddUser : Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_IMAGE_CAPTURE_AddUser -> {
-                    // Handle camera capture result
                     currentPhotoPath?.let {
                         val fileUri = Uri.fromFile(File(it))
-                        selectedImageUri = fileUri // Update selectedImageUri with the camera URI
+                        selectedImageUri = fileUri
                         Glide.with(requireContext())
                             .load(fileUri)
                             .apply(RequestOptions.circleCropTransform())
@@ -385,9 +382,8 @@ class AddUser : Fragment() {
                     }
                 }
                 REQUEST_IMAGE_PICK_AddUser -> {
-                    // Handle gallery selection result
                     val fileUri = data?.data
-                    selectedImageUri = fileUri // Update selectedImageUri with the gallery URI
+                    selectedImageUri = fileUri
                     Glide.with(requireContext())
                         .load(fileUri)
                         .apply(RequestOptions.circleCropTransform())

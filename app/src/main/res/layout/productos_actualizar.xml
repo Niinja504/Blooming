@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/Txt_Nombre_Product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/Txt_Precio_Product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Precio"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/Txt_CantidadBode_Product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Cantidad disponible"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/Txt_Descripcion_Product"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/edittext_border"
+        android:backgroundTint="@null"
+        android:ems="10"
+        android:gravity="top|start"
+        android:hint="Descripción"
+        android:padding="8dp"
+        tools:ignore="TouchTargetSizeCheck" />
+
+</LinearLayout>

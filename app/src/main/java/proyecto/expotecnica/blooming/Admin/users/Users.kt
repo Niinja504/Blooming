@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import modelo.DataUsers
+import DataC.DataUsers
 import proyecto.expotecnica.blooming.R
 
 class Users : Fragment() {
@@ -56,7 +56,7 @@ class Users : Fragment() {
             while (resultSet.next()){
                 val Nombre = resultSet.getString("Nombres_User")
                 val Apellido = resultSet.getString("Apellido_User")
-                val NombreUsuario= resultSet.getString("Nombre_de_Usuario")
+                val NombreUsuario = resultSet.getString("Nombre_de_Usuario")
                 val Telefono = resultSet.getString("Num_Telefono_User")
                 val Edad = resultSet.getInt("Edad_User")
                 val Correo = resultSet.getString("Email_User")

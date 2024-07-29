@@ -142,18 +142,6 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <View
-        android:id="@+id/circle_edit"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/circle_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.352" />
-
-    <View
         android:id="@+id/circleView"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -164,6 +152,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.104" />
+
+    <View
+        android:id="@+id/circle_edit"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.352" />
 
     <ImageView
         android:id="@+id/ic_SubirIMG_AddUser_Admin"
@@ -196,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
-        android:text="Usuarios"
+        android:text="Agregar usuario"
         android:textColor="#F38F9A"
         android:textSize="24sp"
         android:textStyle="bold"

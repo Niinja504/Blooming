@@ -54,6 +54,7 @@ class Details_Users : Fragment()  {
         val TelefonoRecibidos = arguments?.getString("num_telefono")
         val CorreoRecibidos = arguments?.getString("correo_usuario")
         val ImgRecibida = arguments?.getString("img")
+        val RolRecibido = arguments?.getString("Rol")
         var SesionUserRecibida = arguments?.getInt("sesion_user")
 
 
@@ -62,6 +63,7 @@ class Details_Users : Fragment()  {
         val lbl_NombreDeUsu = root.findViewById<TextView>(R.id.lbl_NombreDeUsuario_DetailsUser_Admin)
         val lbl_Telefono = root.findViewById<TextView>(R.id.lbl_Telefono_DetailsUser_Admin)
         val lbl_Correo = root.findViewById<TextView>(R.id.lbl_Correo_DetailsUser_Admin)
+        val lbl_Rol = root.findViewById<TextView>(R.id.lbl_RolUser_Admin)
         val lbl_Sesion = root.findViewById<TextView>(R.id.lbl_Sesion_DetailsUser_Admin)
 
         val EstadoSesion = if (SesionUserRecibida == 0) {
@@ -75,6 +77,7 @@ class Details_Users : Fragment()  {
         lbl_NombreDeUsu.text = NombreDeUsuarioRecibidos
         lbl_Telefono.text = TelefonoRecibidos
         lbl_Correo.text = CorreoRecibidos
+        lbl_Rol.text = RolRecibido
         lbl_Sesion.text = EstadoSesion
 
         Glide.with(IMG_User)

@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_inventory_admin"
-        android:name="proyecto.expotecnica.blooming.Admin.inventory.InventoryFragment"
+        android:name="proyecto.expotecnica.blooming.Admin.inventory.Inventory"
         android:label="Inventario"
         tools:layout="@layout/fragment_inventory_admin">
         <action
