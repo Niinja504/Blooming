@@ -68,7 +68,7 @@
         android:layout_height="45dp"
         android:ems="10"
         android:hint="Porcentaje oferta"
-        android:inputType="text"
+        android:inputType="number"
         android:textColor="#554D4D"
         android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -76,7 +76,7 @@
         app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.679"
+        app:layout_constraintVertical_bias="0.658"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
@@ -97,7 +97,7 @@
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836"
+        app:layout_constraintVertical_bias="0.795"
         tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
 
     <ImageView

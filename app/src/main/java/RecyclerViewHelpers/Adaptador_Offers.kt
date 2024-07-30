@@ -1,23 +1,28 @@
 package RecyclerViewHelpers
 
-import DataClass.DataClassOffers
+import DataC.DataOffers
 import android.app.AlertDialog
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import proyecto.expotecnica.blooming.Admin.Details.DetailsOffers
+import proyecto.expotecnica.blooming.Admin.Details.Details_Offers
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_Offers(var Datos: List<DataClassOffers>, private val fragment: Fragment) : RecyclerView.Adapter<ViewHolder_Offers>() {
-    fun ActualizarListado(NuevaLista: List<DataClassOffers>){
+class Adaptador_Offers (var Datos: List<DataOffers>): RecyclerView.Adapter<ViewHolder_Offers>() {
+    fun ActualizarListado(NuevaLista: List<DataOffers>){
         Datos = NuevaLista
         notifyDataSetChanged()
     }
@@ -28,15 +33,16 @@ class Adaptador_Offers(var Datos: List<DataClassOffers>, private val fragment: F
         notifyItemChanged(Index)
     }
 
-    fun EliminarDatos(Titulo: String, posicion: Int){
+    fun EliminarDatos(UUID_Oferta: String, posicion: Int){
+        println(UUID_Oferta)
         val ListaDatos = Datos.toMutableList()
         ListaDatos.removeAt(posicion)
 
         GlobalScope.launch(Dispatchers.IO) {
             val ObjConexion = ClaseConexion().CadenaConexion()
 
-            val DeleteTitulo = ObjConexion?.prepareStatement("DELETE TbOfertas WHERE Titulo = ?")!!
-            DeleteTitulo.setString(1, Titulo)
+            val DeleteTitulo = ObjConexion?.prepareStatement("DELETE TbOfertas WHERE UUID_Oferta = ?")!!
+            DeleteTitulo.setString(1, UUID_Oferta)
             DeleteTitulo.executeUpdate()
 
             val COMMIT = ObjConexion.prepareStatement("commit")
@@ -76,16 +82,20 @@ class Adaptador_Offers(var Datos: List<DataClassOffers>, private val fragment: F
         val item = Datos[posicion]
         holder.CampoTitulo.text = item.Titulo
 
-        holder.IC_Delete.setOnClickListener{
+        holder.IC_Delete.setOnClickListener {
+            //Creo la alerta para confirmar la eliminacion
+            //1) Invoco el contexto
+
             val context = holder.itemView.context
 
+            //2)Creo la alerta en blanco
             val builder = AlertDialog.Builder(context)
 
             builder.setTitle("Confirmación")
             builder.setMessage("¿Estás seguro que quiere borrar?")
 
             builder.setPositiveButton("Si"){dialog, wich ->
-                EliminarDatos(item.Titulo, posicion)
+                EliminarDatos(item.UUID_Oferta, posicion)
             }
 
             builder.setNegativeButton("No"){dialog, wich ->
@@ -120,14 +130,18 @@ class Adaptador_Offers(var Datos: List<DataClassOffers>, private val fragment: F
         }
 
         holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
+            val bundle = Bundle().apply {
+                putString("img", item.Img_oferta)
+                putString("nombre", item.Titulo)
+            }
 
-            val pantallaDetalle = Intent(context, DetailsOffers::class.java)
-            //Mandamos los valores
-            pantallaDetalle.putExtra("uuid", item.UUID_Oferta)
-            pantallaDetalle.putExtra("Titulo", item.Titulo)
-            pantallaDetalle.putExtra("Img_oferta", item.Img_oferta)
-            context.startActivity(pantallaDetalle)
+            val navController = findNavController(holder.itemView)
+            /*navController.navigate(R.id.navigation_inventory_admin, bundle)*/
         }
+    }
+
+    private fun findNavController(view: View): NavController {
+        val fragment = view.findFragment<Fragment>()
+        return NavHostFragment.findNavController(fragment)
     }
 }

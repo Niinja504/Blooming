@@ -24,7 +24,7 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
-            android:name=".activity_item_card_inventory"
+            android:name=".Admin.inventory.CardInventory"
             android:exported="false"
             android:theme="@style/Theme.Blooming" />
         <activity

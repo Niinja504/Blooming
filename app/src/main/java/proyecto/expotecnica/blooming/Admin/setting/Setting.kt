@@ -1,4 +1,4 @@
-package proyecto.expotecnica.blooming.Client.setting
+package proyecto.expotecnica.blooming.Admin.setting
 
 import android.content.Intent
 import android.net.Uri
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import proyecto.expotecnica.blooming.R
@@ -23,17 +22,17 @@ class Setting : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_setting_client, container, false)
+        val root = inflater.inflate(R.layout.fragment_setting_admin, container, false)
 
         //Variables que se van a utilizar
-        val Ic_Regresar = root.findViewById<ImageView>(R.id.Regresar_setting_client)
+        val Ic_Regresar = root.findViewById<ImageView>(R.id.Regresar_setting_admin)
 
-        val IG = root.findViewById<ImageView>(R.id.IC_IG_Setting_Client)
-        val X = root.findViewById<ImageView>(R.id.IC_X_Setting_Client)
-        val TikTok = root.findViewById<ImageView>(R.id.IC_TikTok_Setting_Client)
+        val IG = root.findViewById<ImageView>(R.id.IC_IG_Setting_Admin)
+        val X = root.findViewById<ImageView>(R.id.IC_X_Setting_Admin)
+        val TikTok = root.findViewById<ImageView>(R.id.IC_TikTok_Setting_Admin)
 
         Ic_Regresar.setOnClickListener{
-            findNavController().navigate(R.id.navigation_dashboard_client)
+            findNavController().navigate(R.id.navigation_profile_admin)
         }
 
         IG.setOnClickListener {

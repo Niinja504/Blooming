@@ -45,16 +45,27 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_shipping_cost_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.shipping_cost.ShippingCost"
+        android:label="Costo de envio"
+        tools:layout="@layout/fragment_shipping_cost_admin">
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_profile_admin"
         android:name="proyecto.expotecnica.blooming.Admin.profile.Profile"
         android:label="Perfil"
         tools:layout="@layout/fragment_profile_admin">
         <action
+            android:id="@+id/action_Setting_Admin"
+            app:destination="@+id/Setting_Admin"/>
+        <action
             android:id="@+id/action_ChangePassword_Admin"
             app:destination="@+id/ChangePassword_admin"/>
     </fragment>
 
-    <!---->
+
+    <!--Action-->
     <fragment
         android:id="@+id/AddProduct_Admin"
         android:name="proyecto.expotecnica.blooming.Admin.add_product.AddProduct"
@@ -75,9 +86,15 @@
 
     <fragment
         android:id="@+id/Details_Offers"
-        android:name="proyecto.expotecnica.blooming.Admin.Details.DetailsOffers"
+        android:name="proyecto.expotecnica.blooming.Admin.Details.Details_Offers"
         android:label="Dettalles de la oferta"
         tools:layout="@layout/fragment_details_offers"/>
+
+    <fragment
+        android:id="@+id/Setting_Admin"
+        android:name="proyecto.expotecnica.blooming.Admin.setting.Setting"
+        android:label="Ajustes"
+        tools:layout="@layout/fragment_setting_admin" />
 
     <fragment
         android:id="@+id/ChangePassword_admin"

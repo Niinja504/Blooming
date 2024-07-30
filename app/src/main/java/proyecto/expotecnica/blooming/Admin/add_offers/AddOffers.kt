@@ -1,5 +1,6 @@
 package proyecto.expotecnica.blooming.Admin.add_offers
 
+import DataC.DataListProducts
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -9,10 +10,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -32,20 +38,29 @@ import modelo.ClaseConexion
 import modelo.ImageUtils
 import proyecto.expotecnica.blooming.R
 import java.io.ByteArrayOutputStream
+import java.sql.SQLException
 import java.util.UUID
 
 class AddOffers : Fragment() {
     private lateinit var campoTitulo: EditText
+    private var selectedProduct: DataListProducts? = null // Cambiado para almacenar DataOffers
     private lateinit var campoPorcentaje: EditText
     private lateinit var campoDescripcion: EditText
     private lateinit var archivoOffer: ImageView
     private var selectedImageUri: Uri? = null
+    private lateinit var dialogView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val root = inflater.inflate(R.layout.fragment_add_offers, container, false)
+        dialogView = root
+
+        lifecycleScope.launch {
+            val items = NombresProductos()
+            setupAutoCompleteTextView(root, items)
+        }
 
         // Variables que se van a utilizar
         val regresar = root.findViewById<ImageView>(R.id.Regresar_AddOffers_Offers)
@@ -56,7 +71,10 @@ class AddOffers : Fragment() {
         val uploadImg = root.findViewById<ImageView>(R.id.Ic_upload_AddOffer)
         val agregar = root.findViewById<Button>(R.id.btn_Agregar_AddOffers)
 
-        campoTitulo.filters = arrayOf(InputFilter.LengthFilter(12))
+        campoTitulo.filters = arrayOf(InputFilter.LengthFilter(30))
+        campoPorcentaje.filters = arrayOf(InputFilter.LengthFilter(3))
+        setupPercentageField(campoPorcentaje)
+        campoDescripcion.filters = arrayOf(InputFilter.LengthFilter(400))
 
         campoTitulo.requestFocus()
 
@@ -84,16 +102,19 @@ class AddOffers : Fragment() {
                         withContext(Dispatchers.IO) {
                             val objConexion = ClaseConexion().CadenaConexion()
                             val agregar = objConexion?.prepareStatement(
-                                "INSERT INTO TbOfertas (UUID_Oferta, Titulo, Porcentaje_Oferta, Decripcion_Oferta, Img_oferta) VALUES (?, ?, ?, ?, ?)"
+                                "INSERT INTO TbOfertas (UUID_Oferta, UUID_Producto, Titulo, Porcentaje_Oferta, Decripcion_Oferta, Img_oferta) VALUES (?, ?, ?, ?, ?, ?)"
                             )!!
 
                             agregar.setString(1, UUID.randomUUID().toString())
-                            agregar.setString(2, campoTitulo.text.toString())
-                            agregar.setString(3, campoPorcentaje.text.toString())
-                            agregar.setString(4, campoDescripcion.text.toString())
-                            agregar.setString(5, imageUrl)
+                            agregar.setString(2, selectedProduct!!.uuid)
+                            agregar.setString(3, campoTitulo.text.toString())
+                            agregar.setString(4, campoPorcentaje.text.toString())
+                            agregar.setString(5, campoDescripcion.text.toString())
+                            agregar.setString(6, imageUrl)
                             agregar.executeUpdate()
                         }
+                        LimpiarCampos()
+                        findNavController().navigate(R.id.navigation_offers_admin)
                     } else {
                         campoTitulo.error = "Ya hay otra oferta con ese título"
                     }
@@ -102,6 +123,44 @@ class AddOffers : Fragment() {
         }
 
         return root
+    }
+
+
+    private fun setupAutoCompleteTextView(root: View, items: List<DataListProducts>) {
+        val autoComplete: AutoCompleteTextView = root.findViewById(R.id.autoComplete_AddOffers_Admin)
+        val adaptador = ArrayAdapter(requireContext(), R.layout.list_item, items.map { it.nombre }) // Obtener solo los nombres
+        autoComplete.setAdapter(adaptador)
+        autoComplete.onItemClickListener = AdapterView.OnItemClickListener { adapterView, _, position, _ ->
+            selectedProduct = items[position]
+            selectedProduct?.uuid
+            Toast.makeText(requireContext(), "Flores: ${selectedProduct?.nombre}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    suspend fun NombresProductos(): List<DataListProducts> {
+        return withContext(Dispatchers.IO) {
+            val nombresProductos = mutableListOf<DataListProducts>()
+
+            val conexion = ClaseConexion().CadenaConexion()
+            conexion?.let {
+                try {
+                    val query = "SELECT UUID_Producto, Nombre_Producto FROM TbInventario"
+                    val statement = it.createStatement()
+                    val resultSet = statement.executeQuery(query)
+
+                    while (resultSet.next()) {
+                        val uuid = resultSet.getString("UUID_Producto")
+                        val nombreProducto = resultSet.getString("Nombre_Producto")
+                        nombresProductos.add(DataListProducts(uuid, nombreProducto))
+                    }
+                } catch (e: SQLException) {
+                    e.printStackTrace()
+                } finally {
+                    it.close()
+                }
+            }
+            nombresProductos
+        }
     }
 
     private fun validarCampos(): Boolean {
@@ -118,7 +177,9 @@ class AddOffers : Fragment() {
             campoTitulo.error = null
         }
 
-        if (porcentaje.isEmpty()) {
+        val Simbolo = porcentaje.replace("%", "").trim()
+
+        if (Simbolo.isEmpty() || Simbolo.toIntOrNull() == null) {
             campoPorcentaje.error = "Este campo es obligatorio"
             hayErrores = true
         } else {
@@ -184,8 +245,8 @@ class AddOffers : Fragment() {
     private fun abrirDocumentos() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "image/*" // Tipo de archivos a seleccionar (imágenes en este caso)
-            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png")) // Tipos MIME permitidos
+            type = "image/*"
+            putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg", "image/png"))
         }
         startActivityForResult(intent, REQUEST_DOCUMENT_PICK_AddOffer)
     }
@@ -233,8 +294,40 @@ class AddOffers : Fragment() {
         }
     }
 
+    fun setupPercentageField(campoPorcentaje: EditText) {
+        campoPorcentaje.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No se hace nada aqui xd
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No se hace nada aqui xd
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString()
+
+                if (text.length > 1 && text.matches(Regex("\\d{2}")) && !text.endsWith("%")) {
+                    campoPorcentaje.removeTextChangedListener(this)
+
+                    val newText = text + "%"
+                    campoPorcentaje.setText(newText)
+                    campoPorcentaje.setSelection(newText.length)
+
+                    campoPorcentaje.addTextChangedListener(this)
+                }
+            }
+        })
+    }
+
     companion object {
         private const val REQUEST_DOCUMENT_PICK_AddOffer = 1002
         private const val REQUEST_IMAGE_PICK_AddOffer = 2
+    }
+
+    private fun LimpiarCampos(){
+        campoTitulo.text.clear()
+        campoPorcentaje.text.clear()
+        campoDescripcion.text.clear()
     }
 }

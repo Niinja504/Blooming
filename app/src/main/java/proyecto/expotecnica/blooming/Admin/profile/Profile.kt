@@ -25,9 +25,14 @@ class Profile : Fragment() {
         val root = inflater.inflate(R.layout.fragment_profile_admin, container, false)
 
         val ChangePassword = root.findViewById<ImageView>(R.id.IC_ChangePassword_Admin)
+        val IC_Settings = root.findViewById<ImageView>(R.id.IC_Settings_Admin)
 
         ChangePassword.setOnClickListener{
             findNavController().navigate(R.id.action_ChangePassword_Admin)
+        }
+
+        IC_Settings.setOnClickListener {
+            findNavController().navigate(R.id.action_Setting_Admin)
         }
 
         return root

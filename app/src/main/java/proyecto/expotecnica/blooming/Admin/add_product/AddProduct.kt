@@ -113,7 +113,7 @@ class AddProduct : Fragment() {
         val SubirIMG = root.findViewById<ImageView>(R.id.ic_SubirIMG_AddProduct_Admin)
         val Btn_Add = root.findViewById<Button>(R.id.btn_AddProduct_Admin)
 
-        CampoNombre.filters = arrayOf(InputFilter.LengthFilter(18))
+        CampoNombre.filters = arrayOf(InputFilter.LengthFilter(28))
         CampoPrecio.filters = arrayOf(InputFilter.LengthFilter(8))
         CampoDescripcion.filters = arrayOf(InputFilter.LengthFilter(2000))
 
