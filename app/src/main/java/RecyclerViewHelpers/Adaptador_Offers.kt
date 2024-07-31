@@ -2,7 +2,6 @@ package RecyclerViewHelpers
 
 import DataC.DataOffers
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,20 +12,15 @@ import androidx.fragment.app.findFragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import proyecto.expotecnica.blooming.Admin.Details.Details_Offers
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_Offers (var Datos: List<DataOffers>): RecyclerView.Adapter<ViewHolder_Offers>() {
-    fun ActualizarListado(NuevaLista: List<DataOffers>){
-        Datos = NuevaLista
-        notifyDataSetChanged()
-    }
-
     fun ActualizarListaDespuesDeEditar(UUID: String, NuevoTitulo: String){
         val Index = Datos.indexOfFirst { it.UUID_Oferta == UUID }
         Datos[Index].Titulo = NuevoTitulo
@@ -82,6 +76,12 @@ class Adaptador_Offers (var Datos: List<DataOffers>): RecyclerView.Adapter<ViewH
         val item = Datos[posicion]
         holder.CampoTitulo.text = item.Titulo
 
+        Glide.with(holder.IMG_Archivo.context)
+            .load(item.Img_oferta)
+            .placeholder(R.drawable.profile_user)
+            .error(R.drawable.profile_user)
+            .into(holder.IMG_Archivo)
+
         holder.IC_Delete.setOnClickListener {
             //Creo la alerta para confirmar la eliminacion
             //1) Invoco el contexto
@@ -131,12 +131,14 @@ class Adaptador_Offers (var Datos: List<DataOffers>): RecyclerView.Adapter<ViewH
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
+                putString("titulo", item.Titulo)
+                putString("porcentaje", item.Porcentaje)
+                putString("descripcion", item.Descripcion)
                 putString("img", item.Img_oferta)
-                putString("nombre", item.Titulo)
             }
 
             val navController = findNavController(holder.itemView)
-            /*navController.navigate(R.id.navigation_inventory_admin, bundle)*/
+            navController.navigate(R.id.navigation_Details_Offers, bundle)
         }
     }
 

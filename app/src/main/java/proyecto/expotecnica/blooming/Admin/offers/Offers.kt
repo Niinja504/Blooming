@@ -1,8 +1,6 @@
 package proyecto.expotecnica.blooming.Admin.offers
 
-import DataC.DataInventory
 import DataC.DataOffers
-import RecyclerViewHelpers.Adaptador_Inventory
 import RecyclerViewHelpers.Adaptador_Offers
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +17,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
-import java.util.UUID
 
 class Offers : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,12 +55,12 @@ class Offers : Fragment() {
 
             while (ResultSet.next()){
                 val UUID_Oferta = ResultSet.getString("UUID_Oferta")
-                val Titulo = ResultSet.getString("Titulo")
                 val UUIDProducts = ResultSet.getString("UUID_Producto")
+                val Titulo = ResultSet.getString("Titulo")
                 val Porcentaje = ResultSet.getString("Porcentaje_Oferta")
                 val Descripcion = ResultSet.getString("Decripcion_Oferta")
                 val IMG_Offer = ResultSet.getString("Img_oferta")
-                val Oferta = DataOffers(UUID_Oferta, Titulo, UUIDProducts, Porcentaje, Descripcion, IMG_Offer)
+                val Oferta = DataOffers(UUID_Oferta, UUIDProducts, Titulo, Porcentaje, Descripcion, IMG_Offer)
                 Ofertas.add(Oferta)
             }
             return Ofertas

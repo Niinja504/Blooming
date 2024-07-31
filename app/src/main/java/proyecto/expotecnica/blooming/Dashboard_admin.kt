@@ -24,7 +24,7 @@ class Dashboard_admin : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_dashboard_admin)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_users_admin, R.id.navigation_inventory_admin, R.id.navigation_orders_admin, R.id.navigation_profile_admin, R.id.navigation_shipping_cost_admin
+                R.id.navigation_users_admin, R.id.navigation_inventory_admin, R.id.navigation_orders_admin, R.id.navigation_profile_admin
             )
         )
         navView.setupWithNavController(navController)

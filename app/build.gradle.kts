@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -110,6 +111,5 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.4.1")
 
     implementation ("com.github.bumptech.glide:glide:4.13.0")
-
 
 }

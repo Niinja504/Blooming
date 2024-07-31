@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import modelo.ClaseConexion
 import RecyclerViewHelpers.Adaptador_Inventory
+import android.widget.ImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,12 +33,16 @@ class Inventory : Fragment() {
         val root = inflater.inflate(R.layout.fragment_inventory_admin, container, false)
 
         //Variables que se van a utilizar
+        val IC_ShippinCost = root.findViewById<ImageView>(R.id.IC_ShippingCost)
         val AgregarProducto = root.findViewById<Button>(R.id.btn_AgregarProducto_Inventory)
 
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_Inventory_Admin)
         //Asignarle un Layout al RecyclerView
         RCV_Inventory.layoutManager = LinearLayoutManager(requireContext())
 
+        IC_ShippinCost.setOnClickListener {
+            findNavController().navigate(R.id.navigation_shipping_cost_admin)
+        }
 
         AgregarProducto.setOnClickListener{
             findNavController().navigate(R.id.action_AddProduct_admin)
