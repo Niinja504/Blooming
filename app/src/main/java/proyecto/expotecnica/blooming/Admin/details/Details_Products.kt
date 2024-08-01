@@ -1,4 +1,4 @@
-package proyecto.expotecnica.blooming.Admin.Details
+package proyecto.expotecnica.blooming.Admin.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -45,7 +45,7 @@ class Details_Products : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_details_products, container, false)
+        val root = inflater.inflate(R.layout.fragment_details_products_admin, container, false)
 
         val Ic_Regresar = root.findViewById<ImageView>(R.id.IC_Regresar_DetailsProducts)
 

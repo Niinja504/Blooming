@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_cash_register_employed" />
 
     <fragment
+        android:id="@+id/navigation_shop_cart_employed"
+        android:name="proyecto.expotecnica.blooming.Employed.shop_cart.ShopCart"
+        android:label="Compra"
+        tools:layout="@layout/fragment_shop_cart_employed" />
+
+    <fragment
         android:id="@+id/navigation_inventory_employed"
         android:name="proyecto.expotecnica.blooming.Employed.inventory.InventoryFragment"
         android:label="Inventory"
@@ -29,16 +35,55 @@
         android:label="Profile"
         tools:layout="@layout/fragment_profile_employed">
         <action
+            android:id="@+id/action_Setting_Employed"
+            app:destination="@+id/Setting_employed"/>
+        <action
             android:id="@+id/action_ChangePassword_Employed"
             app:destination="@+id/ChangePassword_employed"/>
     </fragment>
 
-    <!---->
+    <!--Action-->
     <fragment
         android:id="@+id/ChangePassword_employed"
         android:name="proyecto.expotecnica.blooming.Employed.change_password.ChangePassword"
         android:label="Cambiar contraseña"
         tools:layout="@layout/fragment_change_password_employed"/>
 
+    <fragment
+        android:id="@+id/Setting_employed"
+        android:name="proyecto.expotecnica.blooming.Employed.setting.Setting"
+        android:label="Ajustes"
+        tools:layout="@layout/fragment_setting_employed"/>
+
+    <!--Details-->
+    <fragment
+        android:id="@+id/navigation_Details_ItemCashier"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_Cashier"
+        android:label="Detalles de articulos"
+        tools:layout="@layout/fragment_details_cashier_employed"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_ShopCart"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_ShopCart"
+        android:label="Detalles de producto"
+        tools:layout="@layout/fragment_details_shop_cart_employed"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_Inventory"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_Inventory"
+        android:label="Detalles de inventario"
+        tools:layout="@layout/fragment_details_inventory_employed"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_BackOrder"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_BackOrder"
+        android:label="Detalles Pedidos pendientes"
+        tools:layout="@layout/fragment_details_back_order__employed"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_OrderDelivered"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_OrderDelivered"
+        android:label="Detalles Pedidos entregados"
+        tools:layout="@layout/fragment_details_order_delivered_employed"/>
 
 </navigation>

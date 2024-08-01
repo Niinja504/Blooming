@@ -39,9 +39,6 @@
         <action
         android:id="@+id/action_AddOffers_Admin"
         app:destination="@id/AddOffers_admin"/>
-        <action
-            android:id="@+id/action_DetailsOffers_Admin"
-            app:destination="@+id/Details_Offers"/>
     </fragment>
 
     <fragment
@@ -49,6 +46,9 @@
         android:name="proyecto.expotecnica.blooming.Admin.shipping_cost.ShippingCost"
         android:label="Costo de envio"
         tools:layout="@layout/fragment_shipping_cost_admin">
+        <action
+            android:id="@+id/action_AddShippingCost_Admin"
+            app:destination="@+id/AddShippingCost_admin"/>
     </fragment>
 
     <fragment
@@ -85,10 +85,10 @@
         tools:layout="@layout/fragment_add_offers"/>
 
     <fragment
-        android:id="@+id/Details_Offers"
-        android:name="proyecto.expotecnica.blooming.Admin.Details.Details_Offers"
-        android:label="Dettalles de la oferta"
-        tools:layout="@layout/fragment_details_offers"/>
+        android:id="@+id/AddShippingCost_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.add_shipping_cost.AddShippingCost"
+        android:label="Agregar costos de envio"
+        tools:layout="@layout/fragment_add_shipping_cost_admin"/>
 
     <fragment
         android:id="@+id/Setting_Admin"
@@ -105,14 +105,26 @@
     <!--Details-->
     <fragment
         android:id="@+id/navigation_Details_Users"
-        android:name="proyecto.expotecnica.blooming.Admin.Details.Details_Users"
+        android:name="proyecto.expotecnica.blooming.Admin.details.Details_Users"
         android:label="Detalles del usuario"
-        tools:layout="@layout/fragment_details_users"/>
+        tools:layout="@layout/fragment_details_users_admin"/>
 
     <fragment
         android:id="@+id/navigation_Details_Products"
-        android:name="proyecto.expotecnica.blooming.Admin.Details.Details_Products"
+        android:name="proyecto.expotecnica.blooming.Admin.details.Details_Products"
         android:label="Detalles del producto"
-        tools:layout="@layout/fragment_details_products"/>
+        tools:layout="@layout/fragment_details_products_admin"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_Offers"
+        android:name="proyecto.expotecnica.blooming.Admin.details.Details_Offers"
+        android:label="Dettalles de la oferta"
+        tools:layout="@layout/fragment_details_offers_admin"/>
+
+    <fragment
+        android:id="@+id/navigation_Shipping_Offers"
+        android:name="proyecto.expotecnica.blooming.Admin.details.Details_Shipping"
+        android:label="Dettalles del envio"
+        tools:layout="@layout/fragment_details_shipping_cost_admin"/>
 
 </navigation>

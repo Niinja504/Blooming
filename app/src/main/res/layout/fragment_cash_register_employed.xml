@@ -8,20 +8,6 @@
     tools:context=".Employed.cash_register.CashRegisterFragment">
 
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="370dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#F38F9A"
-        android:text="Confirmar venta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991"
-        tools:ignore="MissingConstraints" />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageViewProfile"
         android:layout_width="45dp"
@@ -35,18 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
-
-    <ImageView
-        android:id="@+id/imageViewSettings"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/textViewInicio"

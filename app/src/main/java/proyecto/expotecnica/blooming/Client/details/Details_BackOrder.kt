@@ -1,15 +1,13 @@
-package proyecto.expotecnica.blooming.Admin.shipping_cost
+package proyecto.expotecnica.blooming.Client.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import proyecto.expotecnica.blooming.R
 
-class ShippingCost : Fragment()  {
+class Details_BackOrder : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -20,13 +18,9 @@ class ShippingCost : Fragment()  {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_shipping_cost_admin, container, false)
+        val root = inflater.inflate(R.layout.fragment_details_back_order_client, container, false)
 
-        val AgregarCosto = root.findViewById<Button>(R.id.btn_AgregarCostoEnvio_Offers)
 
-        AgregarCosto.setOnClickListener {
-            findNavController().navigate(R.id.action_AddShippingCost_Admin)
-        }
 
         return root
     }
