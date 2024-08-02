@@ -24,9 +24,14 @@ class Profile : Fragment() {
     ): View {
         val root = inflater.inflate(R.layout.fragment_profile_employed, container, false)
 
-        val ChangePassword = root.findViewById<ImageView>(R.id.IC_ChangePassword_Employed)
+        val IC_ChangePassword = root.findViewById<ImageView>(R.id.IC_ChangePassword_Employed)
+        val IC_Setting = root.findViewById<ImageView>(R.id.IC_Settings_Employed)
 
-        ChangePassword.setOnClickListener{
+        IC_Setting.setOnClickListener {
+            findNavController().navigate(R.id.action_Setting_Employed)
+        }
+
+        IC_ChangePassword.setOnClickListener{
             findNavController().navigate(R.id.action_ChangePassword_Employed)
         }
 
