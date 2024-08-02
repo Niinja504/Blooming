@@ -24,6 +24,10 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31" >
 
+        <meta-data
+            android:name="com.google.android.geo.API"
+            android:value="@string/GoogleMap"/>
+
         <activity
             android:name=".Admin.inventory.CardInventory"
             android:exported="false"
