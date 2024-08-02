@@ -18,15 +18,15 @@
         <TextView
             android:id="@+id/lbl_Titulo_CardOffers"
             android:layout_width="104dp"
-            android:layout_height="24dp"
+            android:layout_height="64dp"
             android:text="TextView"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.019"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.156" />
+            app:layout_constraintVertical_bias="0.009" />
 
         <ImageView
             android:id="@+id/IMG_Archivo_CardOffers"
