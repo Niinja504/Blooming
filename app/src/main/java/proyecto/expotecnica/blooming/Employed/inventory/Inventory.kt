@@ -1,22 +1,19 @@
-package proyecto.expotecnica.blooming.Admin.inventory
+package proyecto.expotecnica.blooming.Employed.inventory
 
-import DataC.DataInventory_Admin
+import DataC.DataInventory_Employed
+import RecyclerViewHelpers.Adaptador_Inventory_Employed
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import modelo.ClaseConexion
-import RecyclerViewHelpers.Adaptador_Inventory_Admin
-import android.widget.ImageView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
 class Inventory : Fragment() {
@@ -30,25 +27,13 @@ class Inventory : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_inventory_admin, container, false)
+        val root = inflater.inflate(R.layout.fragment_inventory_employed, container, false)
 
-        //Variables que se van a utilizar
-        val IC_ShippinCost = root.findViewById<ImageView>(R.id.IC_ShippingCost)
-        val AgregarProducto = root.findViewById<Button>(R.id.btn_AgregarProducto_Inventory)
-
-        val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_Inventory_Admin)
+        val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_Inventory_Employed)
         //Asignarle un Layout al RecyclerView
         RCV_Inventory.layoutManager = LinearLayoutManager(requireContext())
 
-        IC_ShippinCost.setOnClickListener {
-            findNavController().navigate(R.id.navigation_shipping_cost_admin)
-        }
-
-        AgregarProducto.setOnClickListener{
-            findNavController().navigate(R.id.action_AddProduct_admin)
-        }
-
-        suspend fun MostrarDatos(): List<DataInventory_Admin> {
+        suspend fun MostrarDatos(): List<DataInventory_Employed> {
             //1- Creo un objeto de la clase conexion
             val objConexion = ClaseConexion().CadenaConexion()
 
@@ -58,7 +43,7 @@ class Inventory : Fragment() {
 
             //Voy a guardar all lo que me traiga el Select
 
-            val Productos = mutableListOf<DataInventory_Admin>()
+            val Productos = mutableListOf<DataInventory_Employed>()
 
             while (ResultSet.next()){
                 val IMG_Produc = ResultSet.getString("Img_Producto")
@@ -70,7 +55,7 @@ class Inventory : Fragment() {
                 val CategoriaEvento = ResultSet.getString("Categoria_Evento")
                 val Descripcion = ResultSet.getString("Descripcion_Producto")
                 val uuid = ResultSet.getString("UUID_Producto")
-                val Producto = DataInventory_Admin(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
+                val Producto = DataInventory_Employed(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
                 Productos.add(Producto)
             }
             return Productos
@@ -80,7 +65,7 @@ class Inventory : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val ProductosDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Inventory_Admin(ProductosDB)
+                val miAdaptador = Adaptador_Inventory_Employed(ProductosDB)
                 RCV_Inventory.adapter = miAdaptador
             }
         }
@@ -88,4 +73,3 @@ class Inventory : Fragment() {
         return root
     }
 }
-

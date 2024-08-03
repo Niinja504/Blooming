@@ -1,6 +1,6 @@
 package RecyclerViewHelpers
 
-import DataC.DataOffers
+import DataC.DataOffers_Admin
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,7 +20,7 @@ import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_Offers (var Datos: List<DataOffers>): RecyclerView.Adapter<ViewHolder_Offers>() {
+class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.Adapter<ViewHolder_Offers_Admin>() {
     fun ActualizarListaDespuesDeEditar(UUID: String, NuevoTitulo: String){
         val Index = Datos.indexOfFirst { it.UUID_Oferta == UUID }
         Datos[Index].Titulo = NuevoTitulo
@@ -65,14 +65,14 @@ class Adaptador_Offers (var Datos: List<DataOffers>): RecyclerView.Adapter<ViewH
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Offers{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Offers_Admin {
         val Vista = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_offer, parent, false)
-        return  ViewHolder_Offers(Vista)
+        return  ViewHolder_Offers_Admin(Vista)
     }
 
     override fun getItemCount() = Datos.size
 
-    override fun onBindViewHolder(holder: ViewHolder_Offers, posicion: Int){
+    override fun onBindViewHolder(holder: ViewHolder_Offers_Admin, posicion: Int){
         val item = Datos[posicion]
         holder.CampoTitulo.text = item.Titulo
 

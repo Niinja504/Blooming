@@ -1,6 +1,6 @@
 package proyecto.expotecnica.blooming.Admin.add_offers
 
-import DataC.DataListProducts
+import DataC.DataListProducts_Admin
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -43,7 +43,7 @@ import java.util.UUID
 
 class AddOffers : Fragment() {
     private lateinit var campoTitulo: EditText
-    private var selectedProduct: DataListProducts? = null // Cambiado para almacenar DataOffers
+    private var selectedProduct: DataListProducts_Admin? = null // Cambiado para almacenar DataOffers
     private lateinit var campoPorcentaje: EditText
     private lateinit var campoDescripcion: EditText
     private lateinit var archivoOffer: ImageView
@@ -126,7 +126,7 @@ class AddOffers : Fragment() {
     }
 
 
-    private fun setupAutoCompleteTextView(root: View, items: List<DataListProducts>) {
+    private fun setupAutoCompleteTextView(root: View, items: List<DataListProducts_Admin>) {
         val autoComplete: AutoCompleteTextView = root.findViewById(R.id.autoComplete_AddOffers_Admin)
         val adaptador = ArrayAdapter(requireContext(), R.layout.list_item, items.map { it.nombre }) // Obtener solo los nombres
         autoComplete.setAdapter(adaptador)
@@ -137,9 +137,9 @@ class AddOffers : Fragment() {
         }
     }
 
-    suspend fun NombresProductos(): List<DataListProducts> {
+    suspend fun NombresProductos(): List<DataListProducts_Admin> {
         return withContext(Dispatchers.IO) {
-            val nombresProductos = mutableListOf<DataListProducts>()
+            val nombresProductos = mutableListOf<DataListProducts_Admin>()
 
             val conexion = ClaseConexion().CadenaConexion()
             conexion?.let {
@@ -151,7 +151,7 @@ class AddOffers : Fragment() {
                     while (resultSet.next()) {
                         val uuid = resultSet.getString("UUID_Producto")
                         val nombreProducto = resultSet.getString("Nombre_Producto")
-                        nombresProductos.add(DataListProducts(uuid, nombreProducto))
+                        nombresProductos.add(DataListProducts_Admin(uuid, nombreProducto))
                     }
                 } catch (e: SQLException) {
                     e.printStackTrace()

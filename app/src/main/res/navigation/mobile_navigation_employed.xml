@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_inventory_employed"
-        android:name="proyecto.expotecnica.blooming.Employed.inventory.InventoryFragment"
+        android:name="proyecto.expotecnica.blooming.Employed.inventory.Inventory"
         android:label="Inventory"
         tools:layout="@layout/fragment_inventory_employed" />
 

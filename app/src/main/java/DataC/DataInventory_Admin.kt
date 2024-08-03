@@ -1,6 +1,6 @@
 package DataC
 
-data class DataInventory(
+data class DataInventory_Admin(
     var uuid: String,
     var IMG_Product: String,
     var Nombre: String,
@@ -10,4 +10,5 @@ data class DataInventory(
     var CategoriaDiseno: String,
     var CategoriaEventos: String,
     var Descripcion: String
+
 )

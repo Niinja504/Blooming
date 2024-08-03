@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import proyecto.expotecnica.blooming.R
 
-class ViewHolder_Inventory (view: View): RecyclerView.ViewHolder(view)  {
+class ViewHolder_Inventory_Admin (view: View): RecyclerView.ViewHolder(view)  {
     val IMG_Producto_View: ImageView = view.findViewById(R.id.IMG_Inventory_CardAdmin)
     val Nombre_Producto: TextView = view.findViewById(R.id.lbl_NombreProducto_CardAdmin)
     val Precio_Producto: TextView = view.findViewById(R.id.lbl_PrecioProducto_CardAdmin)

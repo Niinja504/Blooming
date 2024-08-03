@@ -1,5 +1,6 @@
 package proyecto.expotecnica.blooming.Admin.users
-import RecyclerViewHelpers.Adaptador_Users
+import DataC.DataUsers_Admin
+import RecyclerViewHelpers.Adaptador_Users_Admin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import DataC.DataUsers
 import proyecto.expotecnica.blooming.R
 
 class Users : Fragment() {
@@ -41,7 +41,7 @@ class Users : Fragment() {
             findNavController().navigate(R.id.AddUsers_admin)
         }
 
-        suspend fun MostrarDatos(): List<DataUsers> {
+        suspend fun MostrarDatos(): List<DataUsers_Admin> {
             //1- Creo un objeto de la clase conexion
             val objConexion = ClaseConexion().CadenaConexion()
 
@@ -51,7 +51,7 @@ class Users : Fragment() {
 
             //Voy a guardar all lo que me traiga el Select
 
-            val Usuarios = mutableListOf<DataUsers>()
+            val Usuarios = mutableListOf<DataUsers_Admin>()
 
             while (resultSet.next()){
                 val Nombre = resultSet.getString("Nombres_User")
@@ -65,7 +65,7 @@ class Users : Fragment() {
                 val Rol = resultSet.getString("Rol_User")
                 val Sesion = resultSet.getInt("Sesion_User")
                 val uuid = resultSet.getString("UUID_User")
-                val Usuario = DataUsers(uuid, Nombre, Apellido, NombreUsuario, Telefono, Edad, Correo, Contra, IMG_User,Rol , Sesion)
+                val Usuario = DataUsers_Admin(uuid, Nombre, Apellido, NombreUsuario, Telefono, Edad, Correo, Contra, IMG_User,Rol , Sesion)
                 Usuarios.add(Usuario)
             }
             return Usuarios
@@ -75,7 +75,7 @@ class Users : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val UsuarioDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Users(UsuarioDB)
+                val miAdaptador = Adaptador_Users_Admin(UsuarioDB)
                 RCV_Users.adapter = miAdaptador
             }
         }

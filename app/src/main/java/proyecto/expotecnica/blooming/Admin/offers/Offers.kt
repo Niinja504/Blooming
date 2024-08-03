@@ -1,7 +1,7 @@
 package proyecto.expotecnica.blooming.Admin.offers
 
-import DataC.DataOffers
-import RecyclerViewHelpers.Adaptador_Offers
+import DataC.DataOffers_Admin
+import RecyclerViewHelpers.Adaptador_Offers_Admin
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +41,7 @@ class Offers : Fragment() {
             findNavController().navigate(R.id.action_AddOffers_Admin)
         }
 
-        suspend fun MostrarDatos(): List<DataOffers> {
+        suspend fun MostrarDatos(): List<DataOffers_Admin> {
             //1- Creo un objeto de la clase conexion
             val objConexion = ClaseConexion().CadenaConexion()
 
@@ -51,7 +51,7 @@ class Offers : Fragment() {
 
             //Voy a guardar all lo que me traiga el Select
 
-            val Ofertas = mutableListOf<DataOffers>()
+            val Ofertas = mutableListOf<DataOffers_Admin>()
 
             while (ResultSet.next()){
                 val UUID_Oferta = ResultSet.getString("UUID_Oferta")
@@ -60,7 +60,7 @@ class Offers : Fragment() {
                 val Porcentaje = ResultSet.getString("Porcentaje_Oferta")
                 val Descripcion = ResultSet.getString("Decripcion_Oferta")
                 val IMG_Offer = ResultSet.getString("Img_oferta")
-                val Oferta = DataOffers(UUID_Oferta, UUIDProducts, Titulo, Porcentaje, Descripcion, IMG_Offer)
+                val Oferta = DataOffers_Admin(UUID_Oferta, UUIDProducts, Titulo, Porcentaje, Descripcion, IMG_Offer)
                 Ofertas.add(Oferta)
             }
             return Ofertas
@@ -70,7 +70,7 @@ class Offers : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val ProductosDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Offers(ProductosDB)
+                val miAdaptador = Adaptador_Offers_Admin(ProductosDB)
                 RCV_Offers.adapter = miAdaptador
             }
         }

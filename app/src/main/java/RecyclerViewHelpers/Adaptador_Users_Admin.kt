@@ -1,5 +1,6 @@
 package RecyclerViewHelpers
 
+import DataC.DataUsers_Admin
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
@@ -22,11 +23,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import DataC.DataUsers
 import proyecto.expotecnica.blooming.R
 import java.security.MessageDigest
 
-class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHolder_Users>()  {
+class Adaptador_Users_Admin (var Datos: List<DataUsers_Admin>): RecyclerView.Adapter<ViewHolder_Users_Admin>()  {
     fun ActualizarListaDespuesDeEditar(uuid: String, NuevoNombre: String, NuevoUsuario: String, NuevoApellido: String, NuevoTelefono: String, NuevoCorreo: String){
         val Index = Datos.indexOfFirst { it.uuid == uuid }
         Datos[Index].Nombres = NuevoNombre
@@ -94,15 +94,15 @@ class Adaptador_Users (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHol
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Users {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Users_Admin {
         //Conectar el RecyclerView con la Card
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_card_users, parent, false)
-        return ViewHolder_Users(vista)
+        return ViewHolder_Users_Admin(vista)
     }
 
     override fun getItemCount() = Datos.size
 
-    override fun onBindViewHolder(holder: ViewHolder_Users, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder_Users_Admin, position: Int) {
         //Poder darle clic a la elemento de la card
         val item = Datos[position]
         holder.Nombre_Usuario.text = item.Nombres

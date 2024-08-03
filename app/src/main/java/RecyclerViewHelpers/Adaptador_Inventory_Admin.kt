@@ -1,6 +1,6 @@
 package RecyclerViewHelpers
 
-import DataC.DataInventory
+import DataC.DataInventory_Admin
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputFilter
@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_Inventory (var Datos: List<DataInventory>): RecyclerView.Adapter<ViewHolder_Inventory>() {
+class Adaptador_Inventory_Admin (var Datos: List<DataInventory_Admin>): RecyclerView.Adapter<ViewHolder_Inventory_Admin>() {
     fun ActualizarListaDespuesDeEditar(uuid: String, NuevoNombre: String, NuevoPrecio: Float, NuevaCantidadBode: Int, NuevaCategoriaFlores: String, NuevaCategoriaDiseno: String, NuevaCategoriaEventos: String, NuevaDescripcion: String){
         val Index = Datos.indexOfFirst { it.uuid == uuid }
         Datos[Index].Nombre = NuevoNombre
@@ -94,15 +94,15 @@ class Adaptador_Inventory (var Datos: List<DataInventory>): RecyclerView.Adapter
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Inventory {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Inventory_Admin {
         //Conectar el RecyclerView con la Card
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_card_inventory, parent, false)
-        return ViewHolder_Inventory(vista)
+        return ViewHolder_Inventory_Admin(vista)
     }
 
     override fun getItemCount() = Datos.size
 
-    override fun onBindViewHolder(holder: ViewHolder_Inventory, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder_Inventory_Admin, position: Int) {
         //Poder darle clic a la elemento de la card
         val item = Datos[position]
         holder.Nombre_Producto.text = item.Nombre

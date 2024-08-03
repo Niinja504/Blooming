@@ -1,6 +1,6 @@
 package DataC
 
-data class DataUsers(
+data class DataUsers_Admin(
     var uuid: String,
     var Nombres: String,
     var Apellidos: String,
@@ -12,4 +12,5 @@ data class DataUsers(
     var IMG_User: String,
     var Rol: String,
     var Sesion_User: Int
+
 )
