@@ -7,6 +7,11 @@
         android:title="Caja" />
 
     <item
+        android:id="@+id/navigation_shop_cart_employed"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="Compra" />
+
+    <item
         android:id="@+id/navigation_inventory_employed"
         android:icon="@drawable/ic_inventory"
         android:title="Inventario" />

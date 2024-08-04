@@ -13,26 +13,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_Inventory_Employed(var Datos: List<DataInventory_Employed>) : RecyclerView.Adapter<ViewHolder_Inventory_Employed>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Inventory_Employed {
-        val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_inventory_employed, parent, false)
-        return ViewHolder_Inventory_Employed(vista)
+class Adaptador_CashRegister_Employed (var Datos: List<DataInventory_Employed>) : RecyclerView.Adapter<ViewHolder_CashReg_Employed>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_CashReg_Employed {
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_cash_register_employed, parent, false)
+        return ViewHolder_CashReg_Employed(vista)
     }
-
     override fun getItemCount() = Datos.size
 
-    override fun onBindViewHolder(holder: ViewHolder_Inventory_Employed, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder_CashReg_Employed, position: Int) {
         val item = Datos[position]
         holder.Nombre_Producto.text = item.Nombre
         holder.Precio_Producto.text = item.Precio.toString()
-        holder.CantidadDisponible.text = item.CantidadBode.toString()
 
-        Glide.with(holder.IMG_Producto_View.context)
+        Glide.with(holder.IMG_Producto.context)
             .load(item.IMG_Product)
             .placeholder(R.drawable.profile_user)
             .error(R.drawable.profile_user)
-            .into(holder.IMG_Producto_View)
+            .into(holder.IMG_Producto)
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
@@ -47,7 +44,7 @@ class Adaptador_Inventory_Employed(var Datos: List<DataInventory_Employed>) : Re
             }
 
             val navController = findNavController(holder.itemView)
-            navController.navigate(R.id.navigation_Details_Inventory, bundle)
+            navController.navigate(R.id.navigation_Details_ItemCashier, bundle)
         }
     }
 

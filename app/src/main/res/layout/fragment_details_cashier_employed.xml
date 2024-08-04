@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".fragment_details_item_cashier_employed" >
+    tools:context=".Employed.details.Details_Cashier" >
 
     <ImageView
-        android:id="@+id/IC_Regresar_ChangePassword_Employed"
+        android:id="@+id/IC_Regresar_DetailsCashier_Employed"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_arrow"
