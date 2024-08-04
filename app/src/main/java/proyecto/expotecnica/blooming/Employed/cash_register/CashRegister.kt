@@ -1,17 +1,14 @@
 package proyecto.expotecnica.blooming.Employed.cash_register
 
-import DataC.DataInventory_Admin
 import DataC.DataInventory_Employed
 import RecyclerViewHelpers.Adaptador_CashRegister_Employed
-import RecyclerViewHelpers.Adaptador_Inventory_Admin
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,10 +17,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
 import proyecto.expotecnica.blooming.R
-import proyecto.expotecnica.blooming.databinding.FragmentCashRegisterEmployedBinding
 
 class CashRegister : Fragment() {
+    private val sharedViewModel: SharedViewModel_Product by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -71,11 +69,10 @@ class CashRegister : Fragment() {
             return Productos
         }
 
-        CoroutineScope(Dispatchers.IO).launch{
-            //Creo una variable que ejecute la funcion de mostrar datos
-            val ProductosDB = MostrarDatos()
-            withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_CashRegister_Employed(ProductosDB)
+        CoroutineScope(Dispatchers.IO).launch {
+            val productosDB = MostrarDatos()
+            withContext(Dispatchers.Main) {
+                val miAdaptador = Adaptador_CashRegister_Employed(productosDB, sharedViewModel)
                 RCV_Cash.adapter = miAdaptador
             }
         }

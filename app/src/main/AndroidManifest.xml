@@ -24,7 +24,10 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
-            android:name=".activity_card_cash_register_employed"
+            android:name=".Employed.shop_cart.CardShopCart"
+            android:exported="false" />
+        <activity
+            android:name=".Employed.cash_register.CardCashRegister"
             android:exported="false" />
         <activity
             android:name=".Employed.inventory.CardInventory"

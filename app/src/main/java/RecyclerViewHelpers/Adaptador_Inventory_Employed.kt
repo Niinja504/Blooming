@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_Inventory_Employed(var Datos: List<DataInventory_Employed>) : RecyclerView.Adapter<ViewHolder_Inventory_Employed>() {
+class Adaptador_Inventory_Employed (var Datos: List<DataInventory_Employed>) : RecyclerView.Adapter<ViewHolder_Inventory_Employed>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Inventory_Employed {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_inventory_employed, parent, false)
@@ -33,6 +33,7 @@ class Adaptador_Inventory_Employed(var Datos: List<DataInventory_Employed>) : Re
             .placeholder(R.drawable.profile_user)
             .error(R.drawable.profile_user)
             .into(holder.IMG_Producto_View)
+
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {

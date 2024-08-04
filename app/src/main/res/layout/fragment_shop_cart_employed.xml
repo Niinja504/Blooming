@@ -7,15 +7,35 @@
     android:background="#FFFCF5"
     tools:context=".Employed.shop_cart.ShopCart">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RCV_ShopCart_Employed"
-        android:layout_width="409dp"
-        android:layout_height="634dp"
+    <Button
+        android:id="@+id/btn_AgregarUser_Admin"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:text="Agregar compra"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.730" />
+        app:layout_constraintVertical_bias="0.913"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/txt_Nombres_Reg_Admin"
+        android:layout_width="332dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="Nombre de cliente"
+        android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView1_registrer"
@@ -94,4 +114,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.818" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RCV_ShopCart_Employed"
+        android:layout_width="409dp"
+        android:layout_height="434dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.309" />
 </androidx.constraintlayout.widget.ConstraintLayout>

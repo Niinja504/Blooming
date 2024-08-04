@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import proyecto.expotecnica.blooming.R
 
 class Details_ShopCart : Fragment() {
@@ -18,9 +20,20 @@ class Details_ShopCart : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_shop_cart_employed, container, false)
+        val root = inflater.inflate(R.layout.fragment_details_shop_cart_employed, container, false)
+
+        arguments?.let { bundle ->
+            val img = bundle.getString("img")
+            val nombre = bundle.getString("nombre")
+            val precio = bundle.getFloat("precio")
+            val cantidadBodega = bundle.getInt("cantidadBodega")
+            val categoriaFlores = bundle.getString("categoriaFlores")
+            val categoriaDiseno = bundle.getString("categoriaDiseno")
+            val categoriaEvento = bundle.getString("categoriaEvento")
+            val descripcion = bundle.getString("descripcion")
 
 
+        }
 
         return root
     }

@@ -1,23 +1,30 @@
 package RecyclerViewHelpers
 
 import DataC.DataInventory_Employed
+import DataC.ProductData_Employed
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_CashRegister_Employed (var Datos: List<DataInventory_Employed>) : RecyclerView.Adapter<ViewHolder_CashReg_Employed>() {
+class Adaptador_CashRegister_Employed(
+    var Datos: List<DataInventory_Employed>, private val sharedViewModel: SharedViewModel_Product
+) : RecyclerView.Adapter<ViewHolder_CashReg_Employed>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_CashReg_Employed {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_cash_register_employed, parent, false)
         return ViewHolder_CashReg_Employed(vista)
     }
+
     override fun getItemCount() = Datos.size
 
     override fun onBindViewHolder(holder: ViewHolder_CashReg_Employed, position: Int) {
@@ -30,6 +37,22 @@ class Adaptador_CashRegister_Employed (var Datos: List<DataInventory_Employed>) 
             .placeholder(R.drawable.profile_user)
             .error(R.drawable.profile_user)
             .into(holder.IMG_Producto)
+
+        holder.Add_Producto.setOnClickListener {
+            val productData = ProductData_Employed(
+                uuid = item.uuid,
+                img = item.IMG_Product,
+                nombre = item.Nombre,
+                precio = item.Precio,
+                cantidadBodega = item.CantidadBode,
+                categoriaFlores = item.CategoriaFlores,
+                categoriaDiseno = item.CategoriaDiseno,
+                categoriaEvento = item.CategoriaEventos,
+                descripcion = item.Descripcion
+            )
+            sharedViewModel.addProduct(productData)
+            Toast.makeText(it.context, "Se ha añadido al pedido", Toast.LENGTH_LONG).show()
+        }
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
@@ -53,3 +76,4 @@ class Adaptador_CashRegister_Employed (var Datos: List<DataInventory_Employed>) 
         return NavHostFragment.findNavController(fragment)
     }
 }
+

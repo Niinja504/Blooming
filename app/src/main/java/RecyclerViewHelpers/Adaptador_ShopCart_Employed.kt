@@ -1,0 +1,60 @@
+package RecyclerViewHelpers
+
+import DataC.ProductData_Employed
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
+import proyecto.expotecnica.blooming.R
+
+class Adaptador_ShopCart_Employed(
+    var Datos: List<ProductData_Employed>, private val sharedViewModel: SharedViewModel_Product
+) : RecyclerView.Adapter<ViewHolder_ShopCart_Employed>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_ShopCart_Employed {
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_shop_cart_employed, parent, false)
+        return ViewHolder_ShopCart_Employed(vista)
+    }
+
+    override fun getItemCount() = Datos.size
+
+    override fun onBindViewHolder(holder: ViewHolder_ShopCart_Employed, position: Int) {
+        val item = Datos[position]
+        holder.Nombre_Producto_Sh.text = item.nombre
+        holder.Precio_Producto_Sh.text = item.precio.toString()
+
+        Glide.with(holder.IMG_Producto_Sh.context)
+            .load(item.img)
+            .placeholder(R.drawable.profile_user)
+            .error(R.drawable.profile_user)
+            .into(holder.IMG_Producto_Sh)
+
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("img", item.img)
+                putString("nombre", item.nombre)
+                putFloat("precio", item.precio)
+                putInt("cantidadBodega", item.cantidadBodega)
+                putString("categoriaFlores", item.categoriaFlores)
+                putString("categoriaDiseno", item.categoriaDiseno)
+                putString("categoriaEvento", item.categoriaEvento)
+                putString("descripcion", item.descripcion)
+            }
+
+            val navController = findNavController(holder.itemView)
+            navController.navigate(R.id.navigation_Details_ShopCart, bundle)
+        }
+    }
+
+    private fun findNavController(view: View): NavController {
+        val fragment = view.findFragment<Fragment>()
+        return NavHostFragment.findNavController(fragment)
+    }
+}
