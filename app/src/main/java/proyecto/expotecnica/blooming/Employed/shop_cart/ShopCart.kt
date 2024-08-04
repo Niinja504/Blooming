@@ -21,6 +21,7 @@ class ShopCart : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val root = inflater.inflate(R.layout.fragment_shop_cart_employed, container, false)
+
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_ShopCart_Employed)
         RCV_Inventory.layoutManager = LinearLayoutManager(requireContext())
 
