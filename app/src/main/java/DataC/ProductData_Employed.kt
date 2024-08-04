@@ -9,5 +9,6 @@ data class ProductData_Employed(
     val categoriaFlores: String,
     val categoriaDiseno: String,
     val categoriaEvento: String,
-    val descripcion: String
+    val descripcion: String,
+    var cantidad: Int
 )

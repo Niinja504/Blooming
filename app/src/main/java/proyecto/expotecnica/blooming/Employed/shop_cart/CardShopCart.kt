@@ -23,21 +23,5 @@ class CardShopCart : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        buttonMinus = findViewById(R.id.button_minus)
-        buttonPlus = findViewById(R.id.button_plus)
-        textViewValue = findViewById(R.id.textview_value)
-
-        buttonMinus.setOnClickListener {
-            if (value > 1) {
-                value--
-                textViewValue.text = value.toString()
-            }
-        }
-
-        buttonPlus.setOnClickListener {
-            value++
-            textViewValue.text = value.toString()
-        }
     }
 }

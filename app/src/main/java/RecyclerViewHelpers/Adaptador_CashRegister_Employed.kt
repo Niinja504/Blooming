@@ -44,6 +44,7 @@ class Adaptador_CashRegister_Employed(
                 img = item.IMG_Product,
                 nombre = item.Nombre,
                 precio = item.Precio,
+                cantidad = 1,
                 cantidadBodega = item.CantidadBode,
                 categoriaFlores = item.CategoriaFlores,
                 categoriaDiseno = item.CategoriaDiseno,

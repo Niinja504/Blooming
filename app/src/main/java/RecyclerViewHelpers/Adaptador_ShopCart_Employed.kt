@@ -29,12 +29,25 @@ class Adaptador_ShopCart_Employed(
         val item = Datos[position]
         holder.Nombre_Producto_Sh.text = item.nombre
         holder.Precio_Producto_Sh.text = item.precio.toString()
+        holder.textViewValue.text = item.cantidad.toString()
 
         Glide.with(holder.IMG_Producto_Sh.context)
             .load(item.img)
             .placeholder(R.drawable.profile_user)
             .error(R.drawable.profile_user)
             .into(holder.IMG_Producto_Sh)
+
+        holder.buttonMinus.setOnClickListener {
+            if (item.cantidad > 1) {
+                item.cantidad--
+                holder.textViewValue.text = item.cantidad.toString()
+            }
+        }
+
+        holder.buttonPlus.setOnClickListener {
+            item.cantidad++
+            holder.textViewValue.text = item.cantidad.toString()
+        }
 
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
