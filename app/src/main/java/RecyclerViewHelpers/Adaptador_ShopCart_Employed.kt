@@ -15,7 +15,8 @@ import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_ShopCart_Employed(
-    var Datos: List<ProductData_Employed>, private val sharedViewModel: SharedViewModel_Product
+    var Datos: List<ProductData_Employed>, private val sharedViewModel: SharedViewModel_Product,
+    private val ActualizaTotalVenta: () -> Unit
 ) : RecyclerView.Adapter<ViewHolder_ShopCart_Employed>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_ShopCart_Employed {
@@ -41,12 +42,14 @@ class Adaptador_ShopCart_Employed(
             if (item.cantidad > 1) {
                 item.cantidad--
                 holder.textViewValue.text = item.cantidad.toString()
+                ActualizaTotalVenta()
             }
         }
 
         holder.buttonPlus.setOnClickListener {
             item.cantidad++
             holder.textViewValue.text = item.cantidad.toString()
+            ActualizaTotalVenta()
         }
 
         holder.itemView.setOnClickListener {

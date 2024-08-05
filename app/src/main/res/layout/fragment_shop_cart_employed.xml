@@ -7,8 +7,23 @@
     android:background="#FFFCF5"
     tools:context=".Employed.shop_cart.ShopCart">
 
+    <TextView
+        android:id="@+id/lbl_TotalVenta_ShopCart_Employed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.752"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.833" />
+
     <Button
-        android:id="@+id/btn_AgregarUser_Admin"
+        android:id="@+id/btn_CrearVenta_Employed"
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:text="Agregar compra"
@@ -21,7 +36,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/txt_Nombres_Reg_Admin"
+        android:id="@+id/txt_NombreCliente_Venta_Employed"
         android:layout_width="332dp"
         android:layout_height="39dp"
         android:ems="10"
