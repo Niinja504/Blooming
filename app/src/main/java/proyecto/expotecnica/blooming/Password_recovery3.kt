@@ -90,74 +90,23 @@ class Password_recovery3 : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (userEmail != null) {  // Asegurarse de que userEmail no sea nulo
-                CoroutineScope(Dispatchers.Main).launch {
-                    if (actualizarContrasena(userEmail, nuevaContra)) {
-                        Toast.makeText(this@Password_recovery3, "Contraseña actualizada exitosamente", Toast.LENGTH_LONG).show()
-                    } else {
-                        Toast.makeText(this@Password_recovery3, "Usuario no encontrado", Toast.LENGTH_LONG).show()
-                    }
-                }
-            } else {
-                Toast.makeText(this@Password_recovery3, "Correo electrónico no encontrado", Toast.LENGTH_LONG).show()
+            GlobalScope.launch {
+                val ObjConexion = ClaseConexion().CadenaConexion()
+
+                val ContraEncrip = hashSHA256(CampoNuevaContra.text.toString())
+
+                val Actualizar = ObjConexion?.prepareStatement("UPDATE TbUsers SET Contra_User = ? WHERE Email_User = ?")!!
+                Actualizar.setString(1, ContraEncrip)
+                Actualizar.setString(2, userEmail)
+                Actualizar.executeUpdate()
+
+                val COMMIT = ObjConexion.prepareStatement("COMMIT")
+                COMMIT.executeUpdate()
+
+                println("se actualizo exitosamente")
             }
+
         }
-    }
-
-    suspend fun buscarUUIDEnTbUsers(userEmail: String): String? {
-        val conexion = ClaseConexion().CadenaConexion()
-        return conexion?.use { conn ->
-            val query = "SELECT UUID_User FROM TbUsers WHERE Email_User = ?"
-            val stmt = conn.prepareStatement(query)
-            stmt.setString(1, userEmail)
-            val rs = stmt.executeQuery()
-            if (rs.next()) {
-                rs.getString("UUID_User")
-            } else {
-                null
-            }
-        }
-    }
-
-    suspend fun buscarUUIDEnTbUsersEmployedAdmin(userEmail: String): String? {
-        val conexion = ClaseConexion().CadenaConexion()
-        return conexion?.use { conn ->
-            val query = "SELECT UUID_Employed_Admin FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ?"
-            val stmt = conn.prepareStatement(query)
-            stmt.setString(1, userEmail)
-            val rs = stmt.executeQuery()
-            if (rs.next()) {
-                rs.getString("UUID_Employed_Admin")
-            } else {
-                null
-            }
-        }
-    }
-
-    suspend fun actualizarContrasena(userEmail: String, nuevaContrasena: String): Boolean {
-        val uuidTbUsers = buscarUUIDEnTbUsers(userEmail)
-
-        val conexion = ClaseConexion().CadenaConexion()
-        return conexion?.use { conn ->
-            if (uuidTbUsers != null) {
-                val updateQuery = "UPDATE TbUsers SET Contra_User = ? WHERE Email_User = ?"
-                val stmt = conn.prepareStatement(updateQuery)
-                stmt.setString(1, nuevaContrasena)
-                stmt.setString(2, userEmail)
-                stmt.executeUpdate() > 0
-            } else {
-                val uuidEmployedAdmin = buscarUUIDEnTbUsersEmployedAdmin(userEmail)
-                if (uuidEmployedAdmin != null) {
-                    val updateQuery = "UPDATE TbUSers_Employed_Admin SET Contra_Employed_Admin = ? WHERE Correo_Employed_Admin = ?"
-                    val stmt = conn.prepareStatement(updateQuery)
-                    stmt.setString(1, nuevaContrasena)
-                    stmt.setString(2, userEmail)
-                    stmt.executeUpdate() > 0
-                } else {
-                    false
-                }
-            }
-        } ?: false
     }
 
     private fun hashSHA256(input: String): String {
