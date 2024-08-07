@@ -8,11 +8,11 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import proyecto.expotecnica.blooming.Client.ImageViewModel
+import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
 import proyecto.expotecnica.blooming.R
 
 class Orders : Fragment() {
-    private val imageViewModel: ImageViewModel by activityViewModels()
+    private val imageViewModel: ImageViewModel_Client by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

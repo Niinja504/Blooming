@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_AddUsers_Admin"
             app:destination="@+id/AddUsers_admin"/>
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -23,13 +26,21 @@
         <action
             android:id="@+id/action_AddProduct_admin"
             app:destination="@+id/AddProduct_Admin" />
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_orders_admin"
         android:name="proyecto.expotecnica.blooming.Admin.orders.Orders"
         android:label="Pedidos"
-        tools:layout="@layout/fragment_orders_admin" />
+        tools:layout="@layout/fragment_orders_admin">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_offers_admin"
@@ -39,6 +50,9 @@
         <action
         android:id="@+id/action_AddOffers_Admin"
         app:destination="@id/AddOffers_admin"/>
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -49,6 +63,9 @@
         <action
             android:id="@+id/action_AddShippingCost_Admin"
             app:destination="@+id/AddShippingCost_admin"/>
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -62,6 +79,9 @@
         <action
             android:id="@+id/action_ChangePassword_Admin"
             app:destination="@+id/ChangePassword_admin"/>
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
 

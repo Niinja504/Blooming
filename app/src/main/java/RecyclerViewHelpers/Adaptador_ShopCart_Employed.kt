@@ -1,6 +1,7 @@
 package RecyclerViewHelpers
 
 import DataC.ProductData_Employed
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,24 @@ class Adaptador_ShopCart_Employed(
             item.cantidad++
             holder.textViewValue.text = item.cantidad.toString()
             ActualizaTotalVenta()
+        }
+
+        holder.IC_Delete.setOnClickListener {
+            val context = holder.itemView.context
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Confirmación")
+            builder.setMessage("¿Estás seguro que quiere borrar?")
+
+            builder.setPositiveButton("Si"){dialog, wich ->
+                sharedViewModel.EliminarProducto(item.uuid)
+            }
+
+            builder.setNegativeButton("No"){dialog, wich ->
+                dialog.dismiss()
+            }
+
+            val dialog = builder.create()
+            dialog.show()
         }
 
         holder.itemView.setOnClickListener {

@@ -9,25 +9,41 @@
         android:id="@+id/navigation_cash_register_employed"
         android:name="proyecto.expotecnica.blooming.Employed.cash_register.CashRegister"
         android:label="Cash Register"
-        tools:layout="@layout/fragment_cash_register_employed" />
+        tools:layout="@layout/fragment_cash_register_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_shop_cart_employed"
         android:name="proyecto.expotecnica.blooming.Employed.shop_cart.ShopCart"
         android:label="Compra"
-        tools:layout="@layout/fragment_shop_cart_employed" />
+        tools:layout="@layout/fragment_shop_cart_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_inventory_employed"
         android:name="proyecto.expotecnica.blooming.Employed.inventory.Inventory"
         android:label="Inventory"
-        tools:layout="@layout/fragment_inventory_employed" />
+        tools:layout="@layout/fragment_inventory_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_orders_employed"
         android:name="proyecto.expotecnica.blooming.Employed.orders.OrdersFragment"
         android:label="Orders"
-        tools:layout="@layout/fragment_orders_employed" />
+        tools:layout="@layout/fragment_orders_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile_employed"
@@ -40,6 +56,9 @@
         <action
             android:id="@+id/action_ChangePassword_Employed"
             app:destination="@+id/ChangePassword_employed"/>
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
     <!--Action-->

@@ -6,17 +6,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import proyecto.expotecnica.blooming.Employed.ImageViewModel_Employed
 import proyecto.expotecnica.blooming.R
 
 class Inventory : Fragment() {
+    private val imageViewModel: ImageViewModel_Employed by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -32,6 +37,17 @@ class Inventory : Fragment() {
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_Inventory_Employed)
         //Asignarle un Layout al RecyclerView
         RCV_Inventory.layoutManager = LinearLayoutManager(requireContext())
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Inventory)
+
+        imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
+            url?.let { imageUrl ->
+                Glide.with(IMGUser.context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.profile_user)
+                    .error(R.drawable.profile_user)
+                    .into(IMGUser)
+            }
+        }
 
         suspend fun MostrarDatos(): List<DataInventory_Employed> {
             //1- Creo un objeto de la clase conexion

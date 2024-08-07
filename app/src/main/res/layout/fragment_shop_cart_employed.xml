@@ -69,7 +69,7 @@
         tools:ignore="MissingConstraints" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewProfile"
+        android:id="@+id/IMG_User_ShopCart"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="center"

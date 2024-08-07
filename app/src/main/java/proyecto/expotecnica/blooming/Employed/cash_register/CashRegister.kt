@@ -3,6 +3,7 @@ package proyecto.expotecnica.blooming.Employed.cash_register
 import DataC.DataInventory_Employed
 import RecyclerViewHelpers.Adaptador_CashRegister_Employed
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +13,23 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import proyecto.expotecnica.blooming.Admin.ImageViewModel_Admin
 import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
 import proyecto.expotecnica.blooming.R
 
 class CashRegister : Fragment() {
+    private var imageUrl: String? = null
     private val sharedViewModel: SharedViewModel_Product by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            imageUrl = it.getString("URL_IMAGEN")
         }
     }
 
@@ -40,6 +45,17 @@ class CashRegister : Fragment() {
 
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         RCV_Cash.layoutManager = gridLayoutManager
+
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_CashRegister)
+
+        imageUrl?.let { url ->
+            Log.d("Dashboard", "Cargando imagen desde URL: $url")
+            Glide.with(IMGUser.context)
+                .load(url)
+                .placeholder(R.drawable.profile_user)
+                .error(R.drawable.profile_user)
+                .into(IMGUser)
+        } ?: Log.e("Dashboard", "URL de imagen no válida o vacía")
 
         suspend fun MostrarDatos(): List<DataInventory_Employed> {
             //1- Creo un objeto de la clase conexion

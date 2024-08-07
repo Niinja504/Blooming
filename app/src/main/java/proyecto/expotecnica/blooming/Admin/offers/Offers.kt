@@ -7,18 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import proyecto.expotecnica.blooming.Admin.ImageViewModel_Admin
 import proyecto.expotecnica.blooming.R
 
 class Offers : Fragment() {
+    private val imageViewModel: ImageViewModel_Admin by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -32,14 +37,26 @@ class Offers : Fragment() {
         val root = inflater.inflate(R.layout.fragment_offers_admin, container, false)
 
         val AgregarOferta = root.findViewById<Button>(R.id.btn_AgregarOferta_Offers)
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Offers)
 
         val RCV_Offers = root.findViewById<RecyclerView>(R.id.RCV_Offers_Admin)
         //Asignarle un Layout al RecyclerView
         RCV_Offers.layoutManager = LinearLayoutManager(requireContext())
 
+        imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
+            url?.let { imageUrl ->
+                Glide.with(IMGUser.context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.profile_user)
+                    .error(R.drawable.profile_user)
+                    .into(IMGUser)
+            }
+        }
+
         AgregarOferta.setOnClickListener{
             findNavController().navigate(R.id.action_AddOffers_Admin)
         }
+
 
         suspend fun MostrarDatos(): List<DataOffers_Admin> {
             //1- Creo un objeto de la clase conexion

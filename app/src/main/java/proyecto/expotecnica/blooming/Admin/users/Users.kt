@@ -3,14 +3,17 @@ import DataC.DataUsers_Admin
 import RecyclerViewHelpers.Adaptador_Users_Admin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,9 +22,11 @@ import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
 class Users : Fragment() {
+    private var imageUrl: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            imageUrl = it.getString("URL_IMAGEN")
         }
     }
 
@@ -32,6 +37,17 @@ class Users : Fragment() {
         val root = inflater.inflate(R.layout.fragment_users_admin, container, false)
 
         val Agregar = root.findViewById<Button>(R.id.btn_AddUsers_Admin)
+
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Users)
+
+        imageUrl?.let { url ->
+            Log.d("Dashboard", "Cargando imagen desde URL: $url")
+            Glide.with(IMGUser.context)
+                .load(url)
+                .placeholder(R.drawable.profile_user)
+                .error(R.drawable.profile_user)
+                .into(IMGUser)
+        } ?: Log.e("Dashboard", "URL de imagen no válida o vacía")
 
         val RCV_Users = root.findViewById<RecyclerView>(R.id.RCV_AddUser_Admin)
         //Asignarle un Layout al RecyclerView

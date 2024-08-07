@@ -13,4 +13,5 @@ class ViewHolder_ShopCart_Employed (view: View): RecyclerView.ViewHolder(view) {
     val buttonMinus: ImageView = view.findViewById(R.id.button_minus)
     val buttonPlus: ImageView = view.findViewById(R.id.button_plus)
     val textViewValue: TextView = view.findViewById(R.id.textview_value)
+    val IC_Delete: ImageView = view.findViewById(R.id.Ic_Delete)
 }

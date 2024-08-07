@@ -8,19 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import proyecto.expotecnica.blooming.Employed.ImageViewModel_Employed
 import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
 import proyecto.expotecnica.blooming.R
 import java.text.SimpleDateFormat
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.Date
 import java.util.Locale
 import java.util.UUID
@@ -28,6 +33,7 @@ import java.util.UUID
 class ShopCart : Fragment() {
     private lateinit var CampoNombre: EditText
     private lateinit var lbl_Total: TextView
+    private val imageViewModel: ImageViewModel_Employed by activityViewModels()
     private val sharedViewModel: SharedViewModel_Product by activityViewModels()
     private lateinit var adapter: Adaptador_ShopCart_Employed
     private var Hora: String? = null
@@ -41,6 +47,17 @@ class ShopCart : Fragment() {
 
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_ShopCart_Employed)
         RCV_Inventory.layoutManager = LinearLayoutManager(requireContext())
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_ShopCart)
+
+        imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
+            url?.let { imageUrl ->
+                Glide.with(IMGUser.context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.profile_user)
+                    .error(R.drawable.profile_user)
+                    .into(IMGUser)
+            }
+        }
 
         adapter = Adaptador_ShopCart_Employed(emptyList(), sharedViewModel, this::ActualizaTotalVenta)
         RCV_Inventory.adapter = adapter
@@ -64,7 +81,7 @@ class ShopCart : Fragment() {
         BtnAdd_Venta.setOnClickListener {
             lifecycleScope.launch {
                 if (ValidarCampo()) {
-                    val totalVenta = calcularTotalVenta()
+                    val totalVenta = calcularTotalVenta().toFloat()
                     val UUID_Ven = UUID.randomUUID().toString()
                     withContext(Dispatchers.IO) {
                         val ObjConexion = ClaseConexion().CadenaConexion()
@@ -90,6 +107,7 @@ class ShopCart : Fragment() {
                             AddProducto.executeUpdate()
                         }
                     }
+                    sharedViewModel.LimpiarListaProductos()
                     LimpiarCampos()
                 }
             }
@@ -122,16 +140,24 @@ class ShopCart : Fragment() {
         Fecha = fechaFormat.format(currentDate)
     }
 
-    private fun calcularTotalVenta(): Float {
+    private fun calcularTotalVenta(): BigDecimal {
         val products = sharedViewModel.productList.value ?: emptyList()
-        return products
-            .map { it.precio * it.cantidad }
-            .sum()
+        return if (products.isEmpty()) {
+            BigDecimal.ZERO
+        } else {
+            products
+                .map { producto ->
+                    val precio = BigDecimal.valueOf(producto.precio.toDouble())
+                    val cantidad = BigDecimal(producto.cantidad)
+                    precio.multiply(cantidad)
+                }
+                .reduce { acc, value -> acc.add(value) }
+        }
     }
 
     private fun ActualizaTotalVenta() {
         val totalVenta = calcularTotalVenta()
-        lbl_Total.text = totalVenta.toString()
+        lbl_Total.text = totalVenta.setScale(2, RoundingMode.HALF_EVEN).toString()
     }
 
     private fun LimpiarCampos(){

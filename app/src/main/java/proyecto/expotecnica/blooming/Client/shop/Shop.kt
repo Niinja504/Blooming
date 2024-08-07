@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import proyecto.expotecnica.blooming.R
-import proyecto.expotecnica.blooming.Client.ImageViewModel
+import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
 
 class Shop : Fragment() {
-    private val imageViewModel: ImageViewModel by activityViewModels()
+    private val imageViewModel: ImageViewModel_Client by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

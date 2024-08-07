@@ -22,4 +22,21 @@ class SharedViewModel_Product : ViewModel() {
             _toastMessage.value = "Se ha añadido al pedido"
         }
     }
+
+    fun EliminarProducto(productUuid: String) {
+        val currentList = _productList.value?.toMutableList() ?: mutableListOf()
+        val productToRemove = currentList.find { it.uuid == productUuid }
+        if (productToRemove != null) {
+            currentList.remove(productToRemove)
+            _productList.value = currentList
+            _toastMessage.value = "Producto eliminado"
+        } else {
+            _toastMessage.value = "Producto no encontrado"
+        }
+    }
+
+    fun LimpiarListaProductos() {
+        _productList.value?.clear()
+        _productList.value = mutableListOf()
+    }
 }

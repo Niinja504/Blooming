@@ -28,12 +28,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import modelo.ImageUtils
 import proyecto.expotecnica.blooming.R
-import proyecto.expotecnica.blooming.Client.ImageViewModel
+import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
 import java.io.File
 import java.io.IOException
 
 class Profile : Fragment() {
-    private val imageViewModel: ImageViewModel by activityViewModels()
+    private val imageViewModel: ImageViewModel_Client by activityViewModels()
     private var currentPhotoPath: String? = null
     private var selectedImageUri: Uri? = null
     private lateinit var IMG_Perfil: ImageView

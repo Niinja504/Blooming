@@ -12,14 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import modelo.ClaseConexion
 import RecyclerViewHelpers.Adaptador_Inventory_Admin
+import android.util.Log
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import proyecto.expotecnica.blooming.Admin.ImageViewModel_Admin
+import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
 import proyecto.expotecnica.blooming.R
 
 class Inventory : Fragment() {
+    private val imageViewModel: ImageViewModel_Admin by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,6 +41,17 @@ class Inventory : Fragment() {
         //Variables que se van a utilizar
         val IC_ShippinCost = root.findViewById<ImageView>(R.id.IC_ShippingCost)
         val AgregarProducto = root.findViewById<Button>(R.id.btn_AgregarProducto_Inventory)
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Inventory)
+
+        imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
+            url?.let { imageUrl ->
+                Glide.with(IMGUser.context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.profile_user)
+                    .error(R.drawable.profile_user)
+                    .into(IMGUser)
+            }
+        }
 
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_Inventory_Admin)
         //Asignarle un Layout al RecyclerView

@@ -116,7 +116,7 @@
         app:layout_constraintVertical_bias="0.02" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewProfile"
+        android:id="@+id/IMG_User_Profile_Admin"
         android:layout_width="230dp"
         android:layout_height="230dp"
         android:layout_gravity="center"

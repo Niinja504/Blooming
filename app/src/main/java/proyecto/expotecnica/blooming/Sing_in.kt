@@ -168,13 +168,13 @@ class Sing_in : AppCompatActivity() {
                             if (usuarioEncontrado) {
                                 when (rol) {
                                     0 -> {
-                                        val pantallaAdmin = Intent(this@Sing_in, Dashboard_client::class.java)
+                                        val pantallaAdmin = Intent(this@Sing_in, Dashboard_admin::class.java)
                                         pantallaAdmin.putExtra("UUID", uuid)
                                         startActivity(pantallaAdmin) // Administrador
                                     }
 
                                     1 -> {
-                                        val pantallaEmpleado = Intent(this@Sing_in, Dashboard_client::class.java)
+                                        val pantallaEmpleado = Intent(this@Sing_in, Dashboard_employed::class.java)
                                         pantallaEmpleado.putExtra("UUID", uuid)
                                         startActivity(pantallaEmpleado) // Empleado
                                     }
