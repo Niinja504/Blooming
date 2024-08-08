@@ -8,6 +8,16 @@
     android:background="#FFFCF5"
     tools:context=".Client.dashboard.Dashboard">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RCV_Offers_Client"
+        android:layout_width="409dp"
+        android:layout_height="634dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.730" />
+
     <TextView
         android:id="@+id/textViewInicio"
         android:layout_width="wrap_content"

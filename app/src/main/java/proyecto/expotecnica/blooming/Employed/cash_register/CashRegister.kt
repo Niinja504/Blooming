@@ -1,6 +1,6 @@
 package proyecto.expotecnica.blooming.Employed.cash_register
 
-import DataC.DataInventory_Employed
+import DataC.DataInventory
 import RecyclerViewHelpers.Adaptador_CashRegister_Employed
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import proyecto.expotecnica.blooming.Admin.ImageViewModel_Admin
 import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
 import proyecto.expotecnica.blooming.R
 
@@ -57,7 +56,7 @@ class CashRegister : Fragment() {
                 .into(IMGUser)
         } ?: Log.e("Dashboard", "URL de imagen no válida o vacía")
 
-        suspend fun MostrarDatos(): List<DataInventory_Employed> {
+        suspend fun MostrarDatos(): List<DataInventory> {
             //1- Creo un objeto de la clase conexion
             val objConexion = ClaseConexion().CadenaConexion()
 
@@ -67,7 +66,7 @@ class CashRegister : Fragment() {
 
             //Voy a guardar all lo que me traiga el Select
 
-            val Productos = mutableListOf<DataInventory_Employed>()
+            val Productos = mutableListOf<DataInventory>()
 
             while (ResultSet.next()){
                 val IMG_Produc = ResultSet.getString("Img_Producto")
@@ -79,7 +78,7 @@ class CashRegister : Fragment() {
                 val CategoriaEvento = ResultSet.getString("Categoria_Evento")
                 val Descripcion = ResultSet.getString("Descripcion_Producto")
                 val uuid = ResultSet.getString("UUID_Producto")
-                val Producto = DataInventory_Employed(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
+                val Producto = DataInventory(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
                 Productos.add(Producto)
             }
             return Productos

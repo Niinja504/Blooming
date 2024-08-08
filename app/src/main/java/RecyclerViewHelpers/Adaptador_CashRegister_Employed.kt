@@ -1,6 +1,6 @@
 package RecyclerViewHelpers
 
-import DataC.DataInventory_Employed
+import DataC.DataInventory
 import DataC.ProductData_Employed
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_CashRegister_Employed(
-    var Datos: List<DataInventory_Employed>, private val sharedViewModel: SharedViewModel_Product
+    var Datos: List<DataInventory>, private val sharedViewModel: SharedViewModel_Product
 ) : RecyclerView.Adapter<ViewHolder_CashReg_Employed>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_CashReg_Employed {

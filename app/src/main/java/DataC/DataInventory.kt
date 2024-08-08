@@ -1,6 +1,6 @@
 package DataC
 
-data class DataInventory_Employed(
+data class DataInventory(
     var uuid: String,
     var IMG_Product: String,
     var Nombre: String,

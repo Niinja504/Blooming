@@ -1,6 +1,6 @@
 package proyecto.expotecnica.blooming.Employed.inventory
 
-import DataC.DataInventory_Employed
+import DataC.DataInventory
 import RecyclerViewHelpers.Adaptador_Inventory_Employed
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -49,7 +49,7 @@ class Inventory : Fragment() {
             }
         }
 
-        suspend fun MostrarDatos(): List<DataInventory_Employed> {
+        suspend fun MostrarDatos(): List<DataInventory> {
             //1- Creo un objeto de la clase conexion
             val objConexion = ClaseConexion().CadenaConexion()
 
@@ -59,7 +59,7 @@ class Inventory : Fragment() {
 
             //Voy a guardar all lo que me traiga el Select
 
-            val Productos = mutableListOf<DataInventory_Employed>()
+            val Productos = mutableListOf<DataInventory>()
 
             while (ResultSet.next()){
                 val IMG_Produc = ResultSet.getString("Img_Producto")
@@ -71,7 +71,7 @@ class Inventory : Fragment() {
                 val CategoriaEvento = ResultSet.getString("Categoria_Evento")
                 val Descripcion = ResultSet.getString("Descripcion_Producto")
                 val uuid = ResultSet.getString("UUID_Producto")
-                val Producto = DataInventory_Employed(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
+                val Producto = DataInventory(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
                 Productos.add(Producto)
             }
             return Productos

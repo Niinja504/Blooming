@@ -56,6 +56,9 @@ import com.google.firebase.auth.GoogleAuthProvider.getCredential
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.google.firebase.appcheck.FirebaseAppCheck
+import proyecto.expotecnica.blooming.Password_recovery3.DeviceDetails
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class Sing_in : AppCompatActivity() {
@@ -114,17 +117,43 @@ class Sing_in : AppCompatActivity() {
             return bytes.joinToString("") { "%02x".format(it) }
         }
 
-        fun enviarCorreo(text: String) {
+        fun enviarCorreo(destinatario: String) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val deviceDetails = getDeviceDetails()
                     val message = """
-                        Se ha iniciado sesión en un nuevo dispositivo.
-                        Nombre del dispositivo: ${deviceDetails.deviceName}
-                        Modelo: ${deviceDetails.model}
-                        Marca: ${deviceDetails.manufacturer}
-                    """.trimIndent()
-                    EnvioCorreo.EnvioDeCorreo(text, "Nuevo Inicio de Sesión", message)
+                <html>
+                <body>
+                    <p>Se ha iniciado sesión en un nuevo dispositivo.</p>
+                    <p><strong>Fecha:</strong> ${deviceDetails.date}</p>
+                    <p><strong>Hora:</strong> ${deviceDetails.time}</p>
+                    <p><strong>Nombre del dispositivo:</strong> ${deviceDetails.deviceName}</p>
+                    <p><strong>Modelo:</strong> ${deviceDetails.model}</p>
+                    <p><strong>Marca:</strong> ${deviceDetails.manufacturer}</p>
+                    <br>
+                    <p>Saludos cordiales,</p>
+                    <footer style="text-align: center; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
+                        <strong>Soporte de Blooming</strong>
+                        <p>Ubicación: San Salvador, El Salvador</p>
+                        <p>Correo: <a href="mailto:correo@empresa.com">correo@empresa.com</a></p>
+                        <p>Síguenos en nuestras redes sociales:</p>
+                        <p>
+                            <a href="https://facebook.com/empresa" target="_blank">
+                                <img src="https://example.com/icons/facebook.png" alt="Facebook" width="24" height="24"/>
+                            </a>
+                            <a href="https://twitter.com/empresa" target="_blank">
+                                <img src="https://example.com/icons/twitter.png" alt="Twitter" width="24" height="24"/>
+                            </a>
+                            <a href="https://instagram.com/empresa" target="_blank">
+                                <img src="https://example.com/icons/instagram.png" alt="Instagram" width="24" height="24"/>
+                            </a>
+                        </p>
+                    </footer>
+                </body>
+                </html>
+            """.trimIndent()
+
+                    EnvioCorreo.EnvioDeCorreo(destinatario, "Nuevo Inicio de Sesión", message)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -599,7 +628,7 @@ class Sing_in : AppCompatActivity() {
     }
 
     // Método para obtener los detalles del dispositivo
-    data class DeviceDetails(val deviceName: String, val manufacturer: String, val model: String)
+    data class DeviceDetails(val deviceName: String, val manufacturer: String, val model: String, val date: String, val time: String)
 
     private fun getDeviceDetails(): DeviceDetails {
         val manufacturer = Build.MANUFACTURER.capitalize()
@@ -609,6 +638,13 @@ class Sing_in : AppCompatActivity() {
         } else {
             "$manufacturer $model"
         }
-        return DeviceDetails(deviceName, manufacturer, model)
+
+        val now = LocalDateTime.now()
+        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+        val date = now.format(dateFormatter)
+        val time = now.format(timeFormatter)
+
+        return DeviceDetails(deviceName, manufacturer, model, date, time)
     }
 }
