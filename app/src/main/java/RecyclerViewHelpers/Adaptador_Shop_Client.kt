@@ -1,6 +1,7 @@
 package RecyclerViewHelpers
 
 import DataC.DataInventory
+import DataC.ProductData_Client
 import DataC.ProductData_Employed
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +14,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
+import proyecto.expotecnica.blooming.Client.SharedViewModel_Product_Client
+import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product_Employed
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_Shop_Client(
-    var Datos: List<DataInventory>, private val sharedViewModel: SharedViewModel_Product
+    var Datos: List<DataInventory>, private val sharedViewModel: SharedViewModel_Product_Client
 ) : RecyclerView.Adapter<ViewHolder_Shop_Client>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Shop_Client  {
@@ -39,13 +41,12 @@ class Adaptador_Shop_Client(
             .into(holder.IMG_Producto)
 
         holder.Add_Producto.setOnClickListener {
-            val productData = ProductData_Employed(
+            val productData = ProductData_Client(
                 uuid = item.uuid,
                 img = item.IMG_Product,
                 nombre = item.Nombre,
                 precio = item.Precio,
                 cantidad = 1,
-                cantidadBodega = item.CantidadBode,
                 categoriaFlores = item.CategoriaFlores,
                 categoriaDiseno = item.CategoriaDiseno,
                 categoriaEvento = item.CategoriaEventos,

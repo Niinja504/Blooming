@@ -20,6 +20,9 @@
         android:name="proyecto.expotecnica.blooming.Client.shop_cart.ShopCart"
         android:label="Carro de compra"
         tools:layout="@layout/fragment_shop_cart_client">
+        <action
+            android:id="@+id/action_Delivered_Date"
+            app:destination="@+id/delivered_date"/>
         <argument
             android:name="UUID"
             app:argType="string" />
@@ -34,7 +37,6 @@
             android:name="UUID"
             app:argType="string" />
     </fragment>
-
 
     <fragment
         android:id="@+id/navigation_orders_client"
@@ -58,12 +60,39 @@
            app:destination="@+id/ChangePassword_client"/>
     </fragment>
 
-    <!---->
+    <!--Actions-->
+    <fragment
+        android:id="@+id/delivered_date"
+        android:name="proyecto.expotecnica.blooming.Client.delivery_date.DeliveryDate"
+        android:label="Fecha de entrega"
+        tools:layout="@layout/fragment_delivery_date_client">
+        <action
+            android:id="@+id/action_Delivered_Address"
+            app:destination="@+id/delivered_Address"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/delivered_Address"
+        android:name="proyecto.expotecnica.blooming.Client.delivery_address.DeliveryAddress"
+        android:label="Dirección de entrega"
+        tools:layout="@layout/fragment_delivery_address_client">
+        <action
+            android:id="@+id/action_Dedication"
+            app:destination="@+id/Dedication"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/Dedication"
+        android:name="proyecto.expotecnica.blooming.Client.dedication.Dedication"
+        android:label="Dedicatión"
+        tools:layout="@layout/fragment_dedication_client"/>
+
     <fragment
         android:id="@+id/setting_client"
         android:name="proyecto.expotecnica.blooming.Client.setting.Setting"
         android:label="Ajustes"
         tools:layout="@layout/fragment_setting_client" />
+
     <fragment
         android:id="@+id/ChangePassword_client"
         android:name="proyecto.expotecnica.blooming.Client.change_password.ChangePassword"

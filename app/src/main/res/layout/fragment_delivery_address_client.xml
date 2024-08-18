@@ -5,65 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Client.delivery_address.DeliveryAddressFragment" >
+    tools:context=".Client.delivery_address.DeliveryAddress" >
 
-    <TextView
-        android:id="@+id/textView1_details1"
-        android:layout_width="313dp"
-        android:layout_height="160dp"
-        android:background="@drawable/rectangle_border"
-        android:gravity="center"
-        android:text="Rectángulo"
-        android:textColor="#FFFFFF"
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/SW_EntregaLocal"
+        android:layout_width="70dp"
+        android:layout_height="23dp"
+        android:checked="true"
+        android:textColorLink="#FF0A0A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.884"
-        tools:ignore="MissingConstraints" />
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="95dp"
-        android:layout_height="28dp"
-        android:thumbTint="#8A1111"
-        android:trackTint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.822"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27"
+        app:layout_constraintVertical_bias="0.238"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/lbl_ofertas_client"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DATOS DEL DESTINATARIO"
-        android:textColor="#665041"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137" />
-
     <Button
-        android:id="@+id/btn_Agregar_DetallesProducto_client"
+        android:id="@+id/btn_Agregar_DeliveryAddress_client"
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:backgroundTint="#F38F9A"
         android:text="Continuar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991"
+        app:layout_constraintVertical_bias="0.976"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -95,89 +64,103 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.04" />
 
+
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/txt_Nombre_DireEntrega_Pedido"
         android:layout_width="313dp"
         android:layout_height="39dp"
+        android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Nombre completo"
         android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.199"
+        app:layout_constraintVertical_bias="0.117"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextText1"
+        android:id="@+id/txt_Calle_DireEntrega_Pedido"
         android:layout_width="313dp"
         android:layout_height="39dp"
+        android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Calle"
         android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346"
+        app:layout_constraintVertical_bias="0.183"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/txt_Colonia_DireEntrega_Pedido"
         android:layout_width="313dp"
         android:layout_height="39dp"
-        android:ems="10"
-        android:hint="Número"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.413"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="313dp"
-        android:layout_height="39dp"
+        android:backgroundTint="#000000"
         android:ems="10"
         android:hint="Colonia"
         android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.484"
+        app:layout_constraintVertical_bias="0.283"
         tools:ignore="TouchTargetSizeCheck" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/MapFragmentDelivery"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.761" />
+
+    <ImageButton
+        android:id="@+id/MapOptionsMenuDelivery"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/ic_menu"
+        android:contentDescription="Image"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.389"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView_Entrega"
         android:layout_width="91dp"
         android:layout_height="28dp"
         android:text="Entrega local"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="91dp"
-        android:layout_height="28dp"
-        android:text="Entrega local"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.131"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.664" />
+        app:layout_constraintVertical_bias="0.238" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

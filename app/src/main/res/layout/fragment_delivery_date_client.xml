@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Client.delivery_date.DeliveryDateFragment" >
+    tools:context=".Client.delivery_date.DeliveryDate" >
 
     <Button
-        android:id="@+id/btn_Agregar_DetallesProducto_client"
+        android:id="@+id/btn_ADDFecha_Pedidio_client"
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:backgroundTint="#F38F9A"
@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991"
+        app:layout_constraintVertical_bias="0.942"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -50,31 +50,20 @@
         app:layout_constraintVertical_bias="0.021"
         tools:ignore="ContentDescription" />
 
-    <RadioButton
-        android:id="@+id/RD_Hora_4AM_date_client"
-        android:layout_width="27dp"
-        android:layout_height="23dp"
-        android:layout_margin="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822"
-        tools:ignore="TouchTargetSizeCheck" />
-
     <CalendarView
-        android:id="@+id/calendarView"
+        android:id="@+id/CVW_Entrega_Pedido_Client"
         android:layout_width="412dp"
         android:layout_height="332dp"
+        android:backgroundTint="#000000"
         android:foregroundTint="#000000"
         android:weekNumberColor="#000000"
+        android:weekSeparatorLineColor="#5F5F5F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34" />
+        app:layout_constraintVertical_bias="0.302" />
 
     <TextView
         android:id="@+id/textView_fecha"
@@ -89,7 +78,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.131" />
 
     <TextView
         android:id="@+id/textView_hora"
@@ -104,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.682" />
+        app:layout_constraintVertical_bias="0.650" />
 
     <View
         android:id="@+id/divider2"
@@ -116,68 +105,45 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.641" />
+        app:layout_constraintVertical_bias="0.621" />
 
-    <TextView
-        android:id="@+id/textView_hora2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8:00AM - 12:00PM"
+    <RadioGroup
+        android:id="@+id/radioGroupHora"
+        android:layout_width="183dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.120"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.835">
 
-    <TextView
-        android:id="@+id/textView_hora3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12:00AM - 4:00PM"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.772" />
+        <RadioButton
+            android:id="@+id/RD_Hora_8AM_date_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:text="8:00 AM - 12:00 PM"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/textView_hora4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4:00AM - 8:00PM"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.817" />
+        <RadioButton
+            android:id="@+id/RD_Hora_12AM_date_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:text="12:00 AM - 4:00 PM"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
 
-    <RadioButton
-        android:id="@+id/RD_Hora_8AM_date_client"
-        android:layout_width="27dp"
-        android:layout_height="23dp"
-        android:layout_margin="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <RadioButton
-        android:id="@+id/RD_Hora_12AM_date_client"
-        android:layout_width="27dp"
-        android:layout_height="23dp"
-        android:layout_margin="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.958"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.776"
-        tools:ignore="TouchTargetSizeCheck" />
+        <RadioButton
+            android:id="@+id/RD_Hora_4AM_date_client"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:text="4:00 AM - 8:00 PM"
+            android:textColor="#000000"
+            tools:ignore="TouchTargetSizeCheck" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,8 +20,6 @@ class CardOffers : Fragment() {
     ): View {
         val root = inflater.inflate(R.layout.fragment_card_offer, container, false)
 
-        //Variables que se van a utilizar
-
         return root
     }
 

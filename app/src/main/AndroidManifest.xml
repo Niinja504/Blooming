@@ -24,7 +24,16 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
-            android:name=".card_shop_client"
+            android:name=".card_orders_delivered_admin"
+            android:exported="false" />
+        <activity
+            android:name=".Client.delivery_address.Ven_Nombre"
+            android:exported="false" />
+        <activity
+            android:name=".Client.shop_cart.CardShopCart"
+            android:exported="false" />
+        <activity
+            android:name=".Client.shop.CardShop"
             android:exported="false" />
         <activity
             android:name=".Employed.shop_cart.CardShopCart"
@@ -52,24 +61,24 @@
             android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".Dashboard_admin"
+            android:name=".Dashboard_employed"
+            android:exported="false"
+            android:label="@string/title_activity_dashboard_admin"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".SplashScreen"
             android:exported="false"
             android:label="@string/title_activity_dashboard_admin"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Dashboard_client"
             android:exported="false"
-            android:label="@string/title_activity_dashboard_admin"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity
-            android:name=".Dashboard_employed"
-            android:exported="false"
             android:label="@string/title_activity_dashboard_employed" />
         <activity
             android:name=".Sing_in"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Dashboard_admin"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>

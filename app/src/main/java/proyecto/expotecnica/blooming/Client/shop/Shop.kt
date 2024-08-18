@@ -1,7 +1,7 @@
 package proyecto.expotecnica.blooming.Client.shop
 
 import DataC.DataInventory
-import RecyclerViewHelpers.Adaptador_CashRegister_Employed
+import RecyclerViewHelpers.Adaptador_Shop_Client
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,11 +20,11 @@ import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
-import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
+import proyecto.expotecnica.blooming.Client.SharedViewModel_Product_Client
 
 class Shop : Fragment() {
     private val imageViewModel: ImageViewModel_Client by activityViewModels()
-    private val sharedViewModel: SharedViewModel_Product by activityViewModels()
+    private val sharedViewModel: SharedViewModel_Product_Client by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,7 +82,7 @@ class Shop : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val productosDB = MostrarDatos()
             withContext(Dispatchers.Main) {
-                val miAdaptador = Adaptador_CashRegister_Employed(productosDB, sharedViewModel)
+                val miAdaptador = Adaptador_Shop_Client(productosDB, sharedViewModel)
                 RCV_Cash.adapter = miAdaptador
             }
         }

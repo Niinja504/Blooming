@@ -1,6 +1,6 @@
 package RecyclerViewHelpers
 
-import DataC.ProductData_Employed
+import DataC.ProductData_Client
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,22 +12,22 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product_Employed
+import proyecto.expotecnica.blooming.Client.SharedViewModel_Product_Client
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_ShopCart_Employed(
-    var Datos: List<ProductData_Employed>, private val sharedViewModel: SharedViewModel_Product_Employed,
+class Adaptador_ShopCart_Client(
+    var Datos: List<ProductData_Client>, private val sharedViewModel: SharedViewModel_Product_Client,
     private val ActualizaTotalVenta: () -> Unit
-) : RecyclerView.Adapter<ViewHolder_ShopCart_Employed>() {
+) : RecyclerView.Adapter<ViewHolder_ShopCart_Client>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_ShopCart_Employed {
-        val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_shop_cart_employed, parent, false)
-        return ViewHolder_ShopCart_Employed(vista)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_ShopCart_Client {
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_shop_cart_client, parent, false)
+        return ViewHolder_ShopCart_Client(vista)
     }
 
     override fun getItemCount() = Datos.size
 
-    override fun onBindViewHolder(holder: ViewHolder_ShopCart_Employed, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder_ShopCart_Client, position: Int) {
         val item = Datos[position]
         holder.Nombre_Producto_Sh.text = item.nombre
         holder.Precio_Producto_Sh.text = item.precio.toString()
@@ -76,7 +76,6 @@ class Adaptador_ShopCart_Employed(
                 putString("img", item.img)
                 putString("nombre", item.nombre)
                 putFloat("precio", item.precio)
-                putInt("cantidadBodega", item.cantidadBodega)
                 putString("categoriaFlores", item.categoriaFlores)
                 putString("categoriaDiseno", item.categoriaDiseno)
                 putString("categoriaEvento", item.categoriaEvento)
@@ -84,7 +83,6 @@ class Adaptador_ShopCart_Employed(
             }
 
             val navController = findNavController(holder.itemView)
-            navController.navigate(R.id.navigation_Details_ShopCart, bundle)
         }
     }
 
@@ -93,3 +91,4 @@ class Adaptador_ShopCart_Employed(
         return NavHostFragment.findNavController(fragment)
     }
 }
+

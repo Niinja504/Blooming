@@ -110,6 +110,7 @@ class Password_recovery3 : AppCompatActivity() {
                     COMMIT.executeUpdate()
                 }
                 LimpiarCampos()
+
                 EnviarCorreo(userEmail)
             } else {
                 Log.e("Error", "El correo electrónico no está disponible")

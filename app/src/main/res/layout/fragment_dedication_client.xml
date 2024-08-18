@@ -5,8 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Client.dedication.DedicationFragment">
+    tools:context=".Client.dedication.Dedication">
 
+
+    <Button
+        android:id="@+id/btn_Continuar_Didicatoria_client"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:backgroundTint="#F38F9A"
+        android:text="Continuar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/Regresar_Dedication_client"
@@ -22,7 +36,7 @@
         tools:ignore="ContentDescription" />
 
     <EditText
-        android:id="@+id/txt_Nombres_Registrer"
+        android:id="@+id/txt_Dedicatoria_Pedido_Client"
         android:layout_width="331dp"
         android:layout_height="96dp"
         android:background="@drawable/edittext_border"
@@ -61,9 +75,7 @@
         android:id="@+id/cbx_SinMensaje_Tarjeta_Client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:buttonTint="#F38F9A"
         android:text="Sin mensaje"
-        android:textColor="#665041"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.133"
@@ -71,13 +83,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.184" />
 
+
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/cbx_SinNombre_Tarjeta_Client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:buttonTint="#F38F9A"
         android:text="Anónimo"
-        android:textColor="#665041"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.124"
@@ -85,8 +96,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
+
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/txt_Nombre_Pedido_Client"
         android:layout_width="331dp"
         android:layout_height="39dp"
         android:ems="10"

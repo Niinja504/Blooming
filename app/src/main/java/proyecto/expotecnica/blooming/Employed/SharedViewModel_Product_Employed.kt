@@ -1,11 +1,11 @@
-package proyecto.expotecnica.blooming.Client
+package proyecto.expotecnica.blooming.Employed
 
 import DataC.ProductData_Employed
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SharedViewModel_Product : ViewModel() {
+class SharedViewModel_Product_Employed : ViewModel() {
     private val _productList = MutableLiveData<MutableList<ProductData_Employed>>(mutableListOf())
     val productList: LiveData<MutableList<ProductData_Employed>> get() = _productList
 

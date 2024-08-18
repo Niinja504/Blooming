@@ -9,7 +9,7 @@
     tools:context=".Client.dashboard.Dashboard">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RCV_Offers_Client"
+        android:id="@+id/RCV_BackOrder_Admin"
         android:layout_width="409dp"
         android:layout_height="634dp"
         app:layout_constraintBottom_toBottomOf="parent"

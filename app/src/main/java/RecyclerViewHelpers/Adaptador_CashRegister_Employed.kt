@@ -13,11 +13,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
+import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product_Employed
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_CashRegister_Employed(
-    var Datos: List<DataInventory>, private val sharedViewModel: SharedViewModel_Product
+    var Datos: List<DataInventory>, private val sharedViewModel: SharedViewModel_Product_Employed
 ) : RecyclerView.Adapter<ViewHolder_CashReg_Employed>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_CashReg_Employed {

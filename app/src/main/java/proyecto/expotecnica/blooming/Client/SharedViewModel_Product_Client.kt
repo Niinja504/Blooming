@@ -1,18 +1,18 @@
-package proyecto.expotecnica.blooming.Employed
+package proyecto.expotecnica.blooming.Client
 
-import DataC.ProductData_Employed
+import DataC.ProductData_Client
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SharedViewModel_Product : ViewModel() {
-    private val _productList = MutableLiveData<MutableList<ProductData_Employed>>(mutableListOf())
-    val productList: LiveData<MutableList<ProductData_Employed>> get() = _productList
+class SharedViewModel_Product_Client : ViewModel() {
+    private val _productList = MutableLiveData<MutableList<ProductData_Client>>(mutableListOf())
+    val productList: LiveData<MutableList<ProductData_Client>> get() = _productList
 
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
-    fun addProduct(productData: ProductData_Employed) {
+    fun addProduct(productData: ProductData_Client) {
         val list = _productList.value ?: mutableListOf()
         if (list.any { it.uuid == productData.uuid }) {
             _toastMessage.value = "Ya está registrado"

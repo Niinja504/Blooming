@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.Employed.ImageViewModel_Employed
-import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
+import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product_Employed
 import proyecto.expotecnica.blooming.R
 import java.text.SimpleDateFormat
 import java.math.BigDecimal
@@ -34,7 +34,7 @@ class ShopCart : Fragment() {
     private lateinit var CampoNombre: EditText
     private lateinit var lbl_Total: TextView
     private val imageViewModel: ImageViewModel_Employed by activityViewModels()
-    private val sharedViewModel: SharedViewModel_Product by activityViewModels()
+    private val sharedViewModel: SharedViewModel_Product_Employed by activityViewModels()
     private lateinit var adapter: Adaptador_ShopCart_Employed
     private var Hora: String? = null
     private var Fecha: String? = null

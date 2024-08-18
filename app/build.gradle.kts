@@ -116,4 +116,5 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-maps:19.0.0")
 
+    implementation ("com.google.android.material:material:1.4.0")
 }

@@ -19,12 +19,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product
+import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product_Employed
 import proyecto.expotecnica.blooming.R
 
 class CashRegister : Fragment() {
     private var imageUrl: String? = null
-    private val sharedViewModel: SharedViewModel_Product by activityViewModels()
+    private val sharedViewModel: SharedViewModel_Product_Employed by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
