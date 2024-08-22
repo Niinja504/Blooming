@@ -69,7 +69,7 @@ class Adaptador_Shop_Client(
             }
 
             val navController = findNavController(holder.itemView)
-            navController.navigate(R.id.navigation_Details_ItemCashier, bundle)
+            navController.navigate(R.id.navigation_Details_Inventory_Client, bundle)
         }
     }
 

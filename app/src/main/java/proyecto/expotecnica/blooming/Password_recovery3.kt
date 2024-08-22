@@ -110,7 +110,7 @@ class Password_recovery3 : AppCompatActivity() {
                     COMMIT.executeUpdate()
                 }
                 LimpiarCampos()
-
+                Toast.makeText(this, "Se ha cambiado correctamente la contraseña", Toast.LENGTH_LONG).show()
                 EnviarCorreo(userEmail)
             } else {
                 Log.e("Error", "El correo electrónico no está disponible")

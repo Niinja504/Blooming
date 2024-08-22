@@ -104,7 +104,7 @@
         android:id="@+id/navigation_Details_Offer_Client"
         android:name="proyecto.expotecnica.blooming.Client.details.Details_Offer"
         android:label="Detalles de oferta"
-        tools:layout="@layout/fragment_details_offer_client"/>
+        tools:layout="@layout/fragment_details_offers_client"/>
 
     <fragment
         android:id="@+id/navigation_Details_Inventory_Client"

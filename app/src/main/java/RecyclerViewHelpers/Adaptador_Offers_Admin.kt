@@ -66,7 +66,7 @@ class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Offers_Admin {
-        val Vista = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_offer, parent, false)
+        val Vista = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_offer_admin, parent, false)
         return  ViewHolder_Offers_Admin(Vista)
     }
 

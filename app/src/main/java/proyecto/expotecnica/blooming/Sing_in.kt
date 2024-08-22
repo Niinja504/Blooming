@@ -118,7 +118,7 @@ class Sing_in : AppCompatActivity() {
         }
 
         fun enviarCorreo(destinatario: String) {
-            CoroutineScope(Dispatchers.IO).launch {
+                  CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val deviceDetails = getDeviceDetails()
                     val message = """
@@ -135,17 +135,17 @@ class Sing_in : AppCompatActivity() {
                     <footer style="text-align: center; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
                         <strong>Soporte de Blooming</strong>
                         <p>Ubicación: San Salvador, El Salvador</p>
-                        <p>Correo: <a href="mailto:correo@empresa.com">correo@empresa.com</a></p>
+                        <p>Correo: <a href="mailto:bloomingservicee@gmail.com">bloomingservicee@gmail.com</a></p>
                         <p>Síguenos en nuestras redes sociales:</p>
                         <p>
-                            <a href="https://facebook.com/empresa" target="_blank">
-                                <img src="https://example.com/icons/facebook.png" alt="Facebook" width="24" height="24"/>
+                            <a href="https://www.instagram.com/_sistema_blooming?igsh=aWRtOWZ4cHZsMnli" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/15713/15713420.png" alt="Facebook" width="24" height="24"/>
                             </a>
-                            <a href="https://twitter.com/empresa" target="_blank">
-                                <img src="https://example.com/icons/twitter.png" alt="Twitter" width="24" height="24"/>
+                            <a href="https://x.com/SistemaBlooming" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/5968/5968830.png" alt="Twitter" width="24" height="24"/>
                             </a>
-                            <a href="https://instagram.com/empresa" target="_blank">
-                                <img src="https://example.com/icons/instagram.png" alt="Instagram" width="24" height="24"/>
+                            <a href="https://www.tiktok.com/@sistema_blooming?_t=8oRwbbrEw6g&_r=1" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/15713/15713399.png" alt="Instagram" width="24" height="24"/>
                             </a>
                         </p>
                     </footer>
@@ -160,7 +160,7 @@ class Sing_in : AppCompatActivity() {
             }
         }
 
-            // Inicio de sesión con correo y contraseña
+        // Inicio de sesión con correo y contraseña
         btnIniciarSesion.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
                 try {
@@ -178,7 +178,7 @@ class Sing_in : AppCompatActivity() {
                         ComprobarUsuario.setString(2, contrasenaEncriptada)
                         val Resultado: ResultSet = ComprobarUsuario.executeQuery()
 
-                        // Verificar el rol en la segunda tabla
+                        // Verificar el rol en la  tabla =)
                         if (Resultado.next()) {
                             usuarioEncontrado = true
                             val rolString = Resultado.getString("Rol_User")
@@ -592,39 +592,6 @@ class Sing_in : AppCompatActivity() {
 
             isUpdating = false
         }
-    }
-
-    suspend fun obtenerRolPorEmail(email: String): String? {
-        val sql = "SELECT Rol_Employed_Admin FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ?"
-        val claseConexion = ClaseConexion()
-        val conexion: Connection? = claseConexion.CadenaConexion()
-
-        var rol: String? = null
-
-        if (conexion != null) {
-            try {
-                val statement: PreparedStatement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
-                statement.setString(1, email)
-
-                val resultado: ResultSet = withContext(Dispatchers.IO) { statement.executeQuery() }
-
-                if (resultado.next()) {
-                    rol = resultado.getString("Rol_Employed_Admin")
-                }
-            } catch (e: Exception) {
-                println("Error al ejecutar la consulta SQL: $e")
-            } finally {
-                try {
-                    withContext(Dispatchers.IO) { conexion.close() }
-                } catch (e: Exception) {
-                    println("Error al cerrar la conexión: $e")
-                }
-            }
-        } else {
-            println("No se pudo establecer la conexión a la base de datos.")
-        }
-
-        return rol
     }
 
     // Método para obtener los detalles del dispositivo

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import proyecto.expotecnica.blooming.R
 
-class Details_OrderDelivered : Fragment() {
+class Details_OrdersDelivered : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -18,7 +18,7 @@ class Details_OrderDelivered : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_details_order_delivered_employed, container, false)
+        val root = inflater.inflate(R.layout.fragment_details_orders_delivered_employed, container, false)
 
 
 

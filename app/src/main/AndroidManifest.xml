@@ -24,6 +24,9 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
+            android:name=".card_offers_Client"
+            android:exported="false" />
+        <activity
             android:name=".card_orders_delivered_admin"
             android:exported="false" />
         <activity

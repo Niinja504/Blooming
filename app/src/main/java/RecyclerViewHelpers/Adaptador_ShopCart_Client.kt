@@ -83,6 +83,7 @@ class Adaptador_ShopCart_Client(
             }
 
             val navController = findNavController(holder.itemView)
+            navController.navigate(R.id.navigation_Details_ShopCart_Client, bundle)
         }
     }
 
