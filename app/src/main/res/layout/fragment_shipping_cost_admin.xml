@@ -7,6 +7,20 @@
     android:background="#FFFCF5"
     tools:context=".Admin.shipping_cost.ShippingCost" >
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/IMG_User_ShippingCost"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.012" />
+
     <ImageView
         android:id="@+id/Regresar_AddShippingCost_Admin"
         android:layout_width="40dp"

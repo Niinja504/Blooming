@@ -12,6 +12,11 @@
         android:title="Tienda" />
 
     <item
+        android:id="@+id/navigation_shop_cart_client"
+        android:icon="@drawable/ic_shopping_cart"
+        android:title="Compra" />
+
+    <item
         android:id="@+id/navigation_orders_client"
         android:icon="@drawable/ic_orders"
         android:title="Pedidos" />

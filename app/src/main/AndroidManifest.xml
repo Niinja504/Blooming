@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -22,7 +22,35 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Blooming"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".card_offers_Client"
+            android:exported="false" />
+        <activity
+            android:name=".card_orders_delivered_admin"
+            android:exported="false" />
+        <activity
+            android:name=".Client.delivery_address.Ven_Nombre"
+            android:exported="false" />
+        <activity
+            android:name=".Client.shop_cart.CardShopCart"
+            android:exported="false" />
+        <activity
+            android:name=".Client.shop.CardShop"
+            android:exported="false" />
+        <activity
+            android:name=".Employed.shop_cart.CardShopCart"
+            android:exported="false" />
+        <activity
+            android:name=".Employed.cash_register.CardCashRegister"
+            android:exported="false" />
+        <activity
+            android:name=".Employed.inventory.CardInventory"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/GoogleMap" />
 
         <activity
             android:name=".Admin.inventory.CardInventory"
@@ -41,12 +69,12 @@
             android:label="@string/title_activity_dashboard_admin"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".Dashboard_client"
+            android:name=".SplashScreen"
             android:exported="false"
             android:label="@string/title_activity_dashboard_admin"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".Dashboard_client"
             android:exported="false"
             android:label="@string/title_activity_dashboard_employed" />
         <activity
@@ -55,7 +83,7 @@
         <activity
             android:name=".Dashboard_admin"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing" >
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -76,7 +104,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />

@@ -513,7 +513,7 @@ class Register : AppCompatActivity() {
 
     private suspend fun uploadImageToFirebase(bitmap: Bitmap, fileName: String): String? {
         return withContext(Dispatchers.IO) {
-            val storageRef = FirebaseStorage.getInstance().reference.child("Clientes/$fileName.jpg")
+            val storageRef = FirebaseStorage.getInstance().reference.child("Usuarios/$fileName.jpg")
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
             val data = baos.toByteArray()

@@ -7,21 +7,43 @@
 
     <fragment
         android:id="@+id/navigation_cash_register_employed"
-        android:name="proyecto.expotecnica.blooming.Employed.cash_register.CashRegisterFragment"
+        android:name="proyecto.expotecnica.blooming.Employed.cash_register.CashRegister"
         android:label="Cash Register"
-        tools:layout="@layout/fragment_cash_register_employed" />
+        tools:layout="@layout/fragment_cash_register_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_shop_cart_employed"
+        android:name="proyecto.expotecnica.blooming.Employed.shop_cart.ShopCart"
+        android:label="Compra"
+        tools:layout="@layout/fragment_shop_cart_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_inventory_employed"
-        android:name="proyecto.expotecnica.blooming.Employed.inventory.InventoryFragment"
+        android:name="proyecto.expotecnica.blooming.Employed.inventory.Inventory"
         android:label="Inventory"
-        tools:layout="@layout/fragment_inventory_employed" />
+        tools:layout="@layout/fragment_inventory_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_orders_employed"
         android:name="proyecto.expotecnica.blooming.Employed.orders.OrdersFragment"
         android:label="Orders"
-        tools:layout="@layout/fragment_orders_employed" />
+        tools:layout="@layout/fragment_orders_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile_employed"
@@ -34,6 +56,9 @@
         <action
             android:id="@+id/action_ChangePassword_Employed"
             app:destination="@+id/ChangePassword_employed"/>
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
     <!--Action-->
@@ -51,10 +76,22 @@
 
     <!--Details-->
     <fragment
+        android:id="@+id/navigation_Details_ItemCashier"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_Cashier"
+        android:label="Detalles de articulos"
+        tools:layout="@layout/fragment_details_cashier_employed"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_ShopCart"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_ShopCart"
+        android:label="Detalles de producto"
+        tools:layout="@layout/fragment_details_shop_cart_employed"/>
+
+    <fragment
         android:id="@+id/navigation_Details_Inventory"
         android:name="proyecto.expotecnica.blooming.Employed.details.Details_Inventory"
         android:label="Detalles de inventario"
-        tools:layout="@layout/fragment_details__inventory_employed"/>
+        tools:layout="@layout/fragment_details_inventory_employed"/>
 
     <fragment
         android:id="@+id/navigation_Details_BackOrder"

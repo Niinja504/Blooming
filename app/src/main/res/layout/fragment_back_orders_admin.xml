@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".back_orders_adminFragment" >
+    tools:context=".Admin.orders.Earrings" >
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="198dp"
-        android:layout_height="155dp"
-        android:text="Pendientes"
-        android:textSize="34sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RCV_BackOrder_Admin"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

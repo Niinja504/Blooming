@@ -22,4 +22,6 @@
     <string name="title_activity_card_users">Card_Users</string>
     <!--DropDown-->
     <string name="Categoria">Seleccione una categoria</string>
+    <!--KEY-->
+    <string name="GoogleMap">AIzaSyD-Ks7scHfVt0FHCllI0zwB7QiWZYmKARM</string>
 </resources>

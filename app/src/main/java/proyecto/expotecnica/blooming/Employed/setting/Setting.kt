@@ -27,14 +27,14 @@ class Setting : Fragment() {
         val root = inflater.inflate(R.layout.fragment_setting_employed, container, false)
 
         //Variables que se van a utilizar
-        /*val Ic_Regresar = root.findViewById<ImageView>(R.id.Regresar_setting_e)
+        val Ic_Regresar = root.findViewById<ImageView>(R.id.IC_Regresar_Ajustes_Employed)
 
-        val IG = root.findViewById<ImageView>(R.id.IC_IG_Setting_Admin)
-        val X = root.findViewById<ImageView>(R.id.IC_X_Setting_Admin)
-        val TikTok = root.findViewById<ImageView>(R.id.IC_TikTok_Setting_Admin)
+        val IG = root.findViewById<ImageView>(R.id.IC_IG_Setting_Employed)
+        val X = root.findViewById<ImageView>(R.id.IC_X_Setting_Employed)
+        val TikTok = root.findViewById<ImageView>(R.id.IC_TikTok_Setting_Employed)
 
         Ic_Regresar.setOnClickListener{
-            findNavController().navigate(R.id.navigation_profile_admin)
+            findNavController().navigate(R.id.navigation_profile_employed)
         }
 
         IG.setOnClickListener {
@@ -47,7 +47,7 @@ class Setting : Fragment() {
 
         TikTok.setOnClickListener {
             openUrl("https://www.tiktok.com/@sistema_blooming?is_from_webapp=1&sender_device=pc")
-        }*/
+        }
 
         return root
     }

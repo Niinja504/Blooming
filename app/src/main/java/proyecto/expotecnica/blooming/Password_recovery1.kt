@@ -78,8 +78,6 @@ class Password_recovery1 : AppCompatActivity() {
                         }
                     }
                 }
-
-
             }
         }
 

@@ -10,4 +10,5 @@ data class DataInventory(
     var CategoriaDiseno: String,
     var CategoriaEventos: String,
     var Descripcion: String
+
 )

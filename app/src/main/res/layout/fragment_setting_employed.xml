@@ -7,11 +7,25 @@
     android:background="#FFFCF5"
     tools:context=".Employed.setting.Setting">
 
+    <ImageView
+        android:id="@+id/IC_Regresar_Ajustes_Employed"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        tools:ignore="ContentDescription" />
+
     <TextView
         android:id="@+id/lbl_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/underlined_text5"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.095"
@@ -33,7 +47,7 @@
         app:layout_constraintVertical_bias="0.737" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/IC_IG_Setting_Employed"
         android:layout_width="57dp"
         android:layout_height="41dp"
         android:src="@drawable/ic_instagram"
@@ -60,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Idioma"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.141"
@@ -68,7 +83,7 @@
         app:layout_constraintVertical_bias="0.36" />
 
     <ImageView
-        android:id="@+id/imageView12"
+        android:id="@+id/IC_TikTok_Setting_Employed"
         android:layout_width="41dp"
         android:layout_height="41dp"
         android:src="@drawable/ic_tiktok"
@@ -84,6 +99,7 @@
         android:layout_width="336dp"
         android:layout_height="90dp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam scelerisque nunc sed enim iaculis, id ultrices nisl sodales. Quisque rhoncus elit non erat pharetra, id tincidunt orci molestie. "
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -135,6 +151,7 @@
         android:layout_width="85dp"
         android:layout_height="16dp"
         android:text="Modo oscuro"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
@@ -157,7 +174,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/IC_X_Setting_Employed"
         android:layout_width="42dp"
         android:layout_height="41dp"
         android:src="@drawable/ic_x_twitter"

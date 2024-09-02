@@ -1,27 +1,32 @@
 package proyecto.expotecnica.blooming.Admin.users
-import RecyclerViewHelpers.Adaptador_Users
+import DataC.DataUsers_Admin
+import RecyclerViewHelpers.Adaptador_Users_Admin
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import DataC.DataUsers
 import proyecto.expotecnica.blooming.R
 
 class Users : Fragment() {
+    private var imageUrl: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            imageUrl = it.getString("URL_IMAGEN")
         }
     }
 
@@ -33,6 +38,17 @@ class Users : Fragment() {
 
         val Agregar = root.findViewById<Button>(R.id.btn_AddUsers_Admin)
 
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Users)
+
+        imageUrl?.let { url ->
+            Log.d("Dashboard", "Cargando imagen desde URL: $url")
+            Glide.with(IMGUser.context)
+                .load(url)
+                .placeholder(R.drawable.profile_user)
+                .error(R.drawable.profile_user)
+                .into(IMGUser)
+        } ?: Log.e("Dashboard", "URL de imagen no válida o vacía")
+
         val RCV_Users = root.findViewById<RecyclerView>(R.id.RCV_AddUser_Admin)
         //Asignarle un Layout al RecyclerView
         RCV_Users.layoutManager = LinearLayoutManager(requireContext())
@@ -41,7 +57,7 @@ class Users : Fragment() {
             findNavController().navigate(R.id.AddUsers_admin)
         }
 
-        suspend fun MostrarDatos(): List<DataUsers> {
+        suspend fun MostrarDatos(): List<DataUsers_Admin> {
             //1- Creo un objeto de la clase conexion
             val objConexion = ClaseConexion().CadenaConexion()
 
@@ -51,7 +67,7 @@ class Users : Fragment() {
 
             //Voy a guardar all lo que me traiga el Select
 
-            val Usuarios = mutableListOf<DataUsers>()
+            val Usuarios = mutableListOf<DataUsers_Admin>()
 
             while (resultSet.next()){
                 val Nombre = resultSet.getString("Nombres_User")
@@ -65,7 +81,7 @@ class Users : Fragment() {
                 val Rol = resultSet.getString("Rol_User")
                 val Sesion = resultSet.getInt("Sesion_User")
                 val uuid = resultSet.getString("UUID_User")
-                val Usuario = DataUsers(uuid, Nombre, Apellido, NombreUsuario, Telefono, Edad, Correo, Contra, IMG_User,Rol , Sesion)
+                val Usuario = DataUsers_Admin(uuid, Nombre, Apellido, NombreUsuario, Telefono, Edad, Correo, Contra, IMG_User,Rol , Sesion)
                 Usuarios.add(Usuario)
             }
             return Usuarios
@@ -75,7 +91,7 @@ class Users : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val UsuarioDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Users(UsuarioDB)
+                val miAdaptador = Adaptador_Users_Admin(UsuarioDB)
                 RCV_Users.adapter = miAdaptador
             }
         }

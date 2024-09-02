@@ -5,25 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFCF5"
-    tools:context=".Employed.cash_register.CashRegisterFragment">
+    tools:context=".Employed.cash_register.CashRegister">
 
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="370dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#F38F9A"
-        android:text="Confirmar venta"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RCV_CashRegister_Employed"
+        android:layout_width="409dp"
+        android:layout_height="634dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.730" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewProfile"
+        android:id="@+id/IMG_User_CashRegister"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="center"

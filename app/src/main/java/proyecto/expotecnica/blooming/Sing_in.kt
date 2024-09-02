@@ -56,6 +56,9 @@ import com.google.firebase.auth.GoogleAuthProvider.getCredential
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.google.firebase.appcheck.FirebaseAppCheck
+import proyecto.expotecnica.blooming.Password_recovery3.DeviceDetails
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class Sing_in : AppCompatActivity() {
@@ -114,24 +117,50 @@ class Sing_in : AppCompatActivity() {
             return bytes.joinToString("") { "%02x".format(it) }
         }
 
-        fun enviarCorreo(text: String) {
-            CoroutineScope(Dispatchers.IO).launch {
+        fun enviarCorreo(destinatario: String) {
+                  CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val deviceDetails = getDeviceDetails()
                     val message = """
-                        Se ha iniciado sesión en un nuevo dispositivo.
-                        Nombre del dispositivo: ${deviceDetails.deviceName}
-                        Modelo: ${deviceDetails.model}
-                        Marca: ${deviceDetails.manufacturer}
-                    """.trimIndent()
-                    EnvioCorreo.EnvioDeCorreo(text, "Nuevo Inicio de Sesión", message)
+                <html>
+                <body>
+                    <p>Se ha iniciado sesión en un nuevo dispositivo.</p>
+                    <p><strong>Fecha:</strong> ${deviceDetails.date}</p>
+                    <p><strong>Hora:</strong> ${deviceDetails.time}</p>
+                    <p><strong>Nombre del dispositivo:</strong> ${deviceDetails.deviceName}</p>
+                    <p><strong>Modelo:</strong> ${deviceDetails.model}</p>
+                    <p><strong>Marca:</strong> ${deviceDetails.manufacturer}</p>
+                    <br>
+                    <p>Saludos cordiales,</p>
+                    <footer style="text-align: center; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
+                        <strong>Soporte de Blooming</strong>
+                        <p>Ubicación: San Salvador, El Salvador</p>
+                        <p>Correo: <a href="mailto:bloomingservicee@gmail.com">bloomingservicee@gmail.com</a></p>
+                        <p>Síguenos en nuestras redes sociales:</p>
+                        <p>
+                            <a href="https://www.instagram.com/_sistema_blooming?igsh=aWRtOWZ4cHZsMnli" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/15713/15713420.png" alt="Facebook" width="24" height="24"/>
+                            </a>
+                            <a href="https://x.com/SistemaBlooming" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/5968/5968830.png" alt="Twitter" width="24" height="24"/>
+                            </a>
+                            <a href="https://www.tiktok.com/@sistema_blooming?_t=8oRwbbrEw6g&_r=1" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/15713/15713399.png" alt="Instagram" width="24" height="24"/>
+                            </a>
+                        </p>
+                    </footer>
+                </body>
+                </html>
+            """.trimIndent()
+
+                    EnvioCorreo.EnvioDeCorreo(destinatario, "Nuevo Inicio de Sesión", message)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
         }
 
-            // Inicio de sesión con correo y contraseña
+        // Inicio de sesión con correo y contraseña
         btnIniciarSesion.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
                 try {
@@ -149,7 +178,7 @@ class Sing_in : AppCompatActivity() {
                         ComprobarUsuario.setString(2, contrasenaEncriptada)
                         val Resultado: ResultSet = ComprobarUsuario.executeQuery()
 
-                        // Verificar el rol en la segunda tabla
+                        // Verificar el rol en la  tabla =)
                         if (Resultado.next()) {
                             usuarioEncontrado = true
                             val rolString = Resultado.getString("Rol_User")
@@ -168,13 +197,13 @@ class Sing_in : AppCompatActivity() {
                             if (usuarioEncontrado) {
                                 when (rol) {
                                     0 -> {
-                                        val pantallaAdmin = Intent(this@Sing_in, Dashboard_client::class.java)
+                                        val pantallaAdmin = Intent(this@Sing_in, Dashboard_admin::class.java)
                                         pantallaAdmin.putExtra("UUID", uuid)
                                         startActivity(pantallaAdmin) // Administrador
                                     }
 
                                     1 -> {
-                                        val pantallaEmpleado = Intent(this@Sing_in, Dashboard_client::class.java)
+                                        val pantallaEmpleado = Intent(this@Sing_in, Dashboard_employed::class.java)
                                         pantallaEmpleado.putExtra("UUID", uuid)
                                         startActivity(pantallaEmpleado) // Empleado
                                     }
@@ -565,41 +594,8 @@ class Sing_in : AppCompatActivity() {
         }
     }
 
-    suspend fun obtenerRolPorEmail(email: String): String? {
-        val sql = "SELECT Rol_Employed_Admin FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ?"
-        val claseConexion = ClaseConexion()
-        val conexion: Connection? = claseConexion.CadenaConexion()
-
-        var rol: String? = null
-
-        if (conexion != null) {
-            try {
-                val statement: PreparedStatement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
-                statement.setString(1, email)
-
-                val resultado: ResultSet = withContext(Dispatchers.IO) { statement.executeQuery() }
-
-                if (resultado.next()) {
-                    rol = resultado.getString("Rol_Employed_Admin")
-                }
-            } catch (e: Exception) {
-                println("Error al ejecutar la consulta SQL: $e")
-            } finally {
-                try {
-                    withContext(Dispatchers.IO) { conexion.close() }
-                } catch (e: Exception) {
-                    println("Error al cerrar la conexión: $e")
-                }
-            }
-        } else {
-            println("No se pudo establecer la conexión a la base de datos.")
-        }
-
-        return rol
-    }
-
     // Método para obtener los detalles del dispositivo
-    data class DeviceDetails(val deviceName: String, val manufacturer: String, val model: String)
+    data class DeviceDetails(val deviceName: String, val manufacturer: String, val model: String, val date: String, val time: String)
 
     private fun getDeviceDetails(): DeviceDetails {
         val manufacturer = Build.MANUFACTURER.capitalize()
@@ -609,6 +605,13 @@ class Sing_in : AppCompatActivity() {
         } else {
             "$manufacturer $model"
         }
-        return DeviceDetails(deviceName, manufacturer, model)
+
+        val now = LocalDateTime.now()
+        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+        val date = now.format(dateFormatter)
+        val time = now.format(timeFormatter)
+
+        return DeviceDetails(deviceName, manufacturer, model, date, time)
     }
 }

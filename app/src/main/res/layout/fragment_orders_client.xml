@@ -48,20 +48,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.024" />
 
-    <ImageView
-        android:id="@+id/imageViewSettings"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
     <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButton_Employed"
+        android:id="@+id/toggleButton_Client"
         android:layout_width="319dp"
         android:layout_height="46dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,7 +60,7 @@
         app:singleSelection="true">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Pedidos_Pendientes_Employed"
+            android:id="@+id/btn_Pedidos_Pendientes_Client"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
@@ -80,7 +68,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_Pedidos_Entregados_Employed"
+            android:id="@+id/btn_Pedidos_Entregados_Client"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
@@ -95,7 +83,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toggleButton_Employed"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintTop_toBottomOf="@id/toggleButton_Client"
+        app:layout_constraintVertical_bias="0.1"
+        tools:ignore="UnknownId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

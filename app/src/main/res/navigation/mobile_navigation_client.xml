@@ -13,9 +13,19 @@
         <argument
             android:name="UUID"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_shop_cart_client"
+        android:name="proyecto.expotecnica.blooming.Client.shop_cart.ShopCart"
+        android:label="Carro de compra"
+        tools:layout="@layout/fragment_shop_cart_client">
         <action
-            android:id="@+id/action_setting_client"
-            app:destination="@+id/setting_client" />
+            android:id="@+id/action_Delivered_Date"
+            app:destination="@+id/delivered_date"/>
+        <argument
+            android:name="UUID"
+            app:argType="string" />
     </fragment>
 
     <fragment
@@ -27,7 +37,6 @@
             android:name="UUID"
             app:argType="string" />
     </fragment>
-
 
     <fragment
         android:id="@+id/navigation_orders_client"
@@ -51,16 +60,73 @@
            app:destination="@+id/ChangePassword_client"/>
     </fragment>
 
-    <!---->
+    <!--Actions-->
+    <fragment
+        android:id="@+id/delivered_date"
+        android:name="proyecto.expotecnica.blooming.Client.delivery_date.DeliveryDate"
+        android:label="Fecha de entrega"
+        tools:layout="@layout/fragment_delivery_date_client">
+        <action
+            android:id="@+id/action_Delivered_Address"
+            app:destination="@+id/delivered_Address"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/delivered_Address"
+        android:name="proyecto.expotecnica.blooming.Client.delivery_address.DeliveryAddress"
+        android:label="Dirección de entrega"
+        tools:layout="@layout/fragment_delivery_address_client">
+        <action
+            android:id="@+id/action_Dedication"
+            app:destination="@+id/Dedication"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/Dedication"
+        android:name="proyecto.expotecnica.blooming.Client.dedication.Dedication"
+        android:label="Dedicatión"
+        tools:layout="@layout/fragment_dedication_client"/>
+
     <fragment
         android:id="@+id/setting_client"
         android:name="proyecto.expotecnica.blooming.Client.setting.Setting"
         android:label="Ajustes"
         tools:layout="@layout/fragment_setting_client" />
+
     <fragment
         android:id="@+id/ChangePassword_client"
         android:name="proyecto.expotecnica.blooming.Client.change_password.ChangePassword"
         android:label="Cambio de contraseña"
         tools:layout="@layout/fragment_change_password_client"/>
+
+    <!--Details-->
+    <fragment
+        android:id="@+id/navigation_Details_Offer_Client"
+        android:name="proyecto.expotecnica.blooming.Client.details.Details_Offer"
+        android:label="Detalles de oferta"
+        tools:layout="@layout/fragment_details_offers_client"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_Inventory_Client"
+        android:name="proyecto.expotecnica.blooming.Client.details.Details_Inventory"
+        android:label="Detalles de articulo"
+        tools:layout="@layout/fragment_details_inventory_client"/>
+    <fragment
+        android:id="@+id/navigation_Details_ShopCart_Client"
+        android:name="proyecto.expotecnica.blooming.Client.details.Details_ShopCart"
+        android:label="Detalles de articulo"
+        tools:layout="@layout/fragment_details_shop_cart_client"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_BackOrder_Client"
+        android:name="proyecto.expotecnica.blooming.Client.details.Details_BackOrder"
+        android:label="Detalles de pedido pendiente"
+        tools:layout="@layout/fragment_details_back_order_client"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_OrderDelivered_Client"
+        android:name="proyecto.expotecnica.blooming.Client.details.Details_OrderDelivered"
+        android:label="Detalles de pedido entregado"
+        tools:layout="@layout/fragment_details_order_delivered_client"/>
 
 </navigation>

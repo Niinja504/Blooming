@@ -1,6 +1,6 @@
 package proyecto.expotecnica.blooming.Admin.inventory
 
-import DataC.DataInventory
+import DataC.DataInventory_Admin
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +11,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import modelo.ClaseConexion
-import RecyclerViewHelpers.Adaptador_Inventory
+import RecyclerViewHelpers.Adaptador_Inventory_Admin
+import android.util.Log
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import proyecto.expotecnica.blooming.Admin.ImageViewModel_Admin
+import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
 import proyecto.expotecnica.blooming.R
 
 class Inventory : Fragment() {
+    private val imageViewModel: ImageViewModel_Admin by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,6 +41,17 @@ class Inventory : Fragment() {
         //Variables que se van a utilizar
         val IC_ShippinCost = root.findViewById<ImageView>(R.id.IC_ShippingCost)
         val AgregarProducto = root.findViewById<Button>(R.id.btn_AgregarProducto_Inventory)
+        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Inventory)
+
+        imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
+            url?.let { imageUrl ->
+                Glide.with(IMGUser.context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.profile_user)
+                    .error(R.drawable.profile_user)
+                    .into(IMGUser)
+            }
+        }
 
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_Inventory_Admin)
         //Asignarle un Layout al RecyclerView
@@ -48,7 +65,7 @@ class Inventory : Fragment() {
             findNavController().navigate(R.id.action_AddProduct_admin)
         }
 
-        suspend fun MostrarDatos(): List<DataInventory> {
+        suspend fun MostrarDatos(): List<DataInventory_Admin> {
             //1- Creo un objeto de la clase conexion
             val objConexion = ClaseConexion().CadenaConexion()
 
@@ -58,7 +75,7 @@ class Inventory : Fragment() {
 
             //Voy a guardar all lo que me traiga el Select
 
-            val Productos = mutableListOf<DataInventory>()
+            val Productos = mutableListOf<DataInventory_Admin>()
 
             while (ResultSet.next()){
                 val IMG_Produc = ResultSet.getString("Img_Producto")
@@ -70,7 +87,7 @@ class Inventory : Fragment() {
                 val CategoriaEvento = ResultSet.getString("Categoria_Evento")
                 val Descripcion = ResultSet.getString("Descripcion_Producto")
                 val uuid = ResultSet.getString("UUID_Producto")
-                val Producto = DataInventory(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
+                val Producto = DataInventory_Admin(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
                 Productos.add(Producto)
             }
             return Productos
@@ -80,7 +97,7 @@ class Inventory : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val ProductosDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Inventory(ProductosDB)
+                val miAdaptador = Adaptador_Inventory_Admin(ProductosDB)
                 RCV_Inventory.adapter = miAdaptador
             }
         }

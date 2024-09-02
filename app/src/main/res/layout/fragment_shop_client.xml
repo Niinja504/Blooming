@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.215" />
+        app:layout_constraintVertical_bias="0.18" />
 
     <TextView
         android:id="@+id/textViewInicio"
@@ -62,18 +62,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
-
-    <ImageView
-        android:id="@+id/ic_Setting_Shop_Client"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
 
     <ImageView
         android:id="@+id/imageView15"
@@ -135,12 +123,13 @@
         tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="410dp"
-        android:layout_height="533dp"
+        android:id="@+id/RCV_Shop_Client"
+        android:layout_width="409dp"
+        android:layout_height="560dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+        app:layout_constraintVertical_bias="0.847" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

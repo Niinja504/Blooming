@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import proyecto.expotecnica.blooming.R
-
 class Details_Products : Fragment() {
     companion object{
         fun newInstance(

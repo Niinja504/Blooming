@@ -8,6 +8,16 @@
     android:background="#FFFCF5"
     tools:context=".Client.dashboard.Dashboard">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RCV_Offers_Client"
+        android:layout_width="409dp"
+        android:layout_height="634dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.850" />
+
     <TextView
         android:id="@+id/textViewInicio"
         android:layout_width="wrap_content"
@@ -23,18 +33,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
-    <ImageView
-        android:id="@+id/ic_Settings_client"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
     <TextView
         android:id="@+id/lbl_ofertas_client"
         android:layout_width="wrap_content"
@@ -45,10 +43,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintVertical_bias="0.117" />
 
     <ImageView
         android:id="@+id/imageViewCart"

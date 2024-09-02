@@ -32,7 +32,7 @@ object EnvioCorreo {
             message.setFrom(InternetAddress(username))
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario))
             message.subject = asunto
-            message.setText(cuerpo)
+            message.setContent(cuerpo, "text/html")
 
             Transport.send(message)
 

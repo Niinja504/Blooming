@@ -1,26 +1,23 @@
 package proyecto.expotecnica.blooming.Client.dashboard
 
+import DataC.DataOffers_Admin
+import RecyclerViewHelpers.Adaptador_Offers_Client
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
-import modelo.MostrarIMG
 import proyecto.expotecnica.blooming.R
-import java.sql.Connection
 
 
 class Dashboard : Fragment() {
@@ -41,12 +38,11 @@ class Dashboard : Fragment() {
     ): View {
         val root = inflater.inflate(R.layout.fragment_dashboard_client, container, false)
 
-        val IC_Setting = root.findViewById<ImageView>(R.id.ic_Settings_client)
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Dashboard)
 
-        IC_Setting.setOnClickListener{
-            findNavController().navigate(R.id.action_setting_client)
-        }
+        val RCV_Offers = root.findViewById<RecyclerView>(R.id.RCV_Offers_Client)
+        //Asignarle un Layout al RecyclerView
+        RCV_Offers.layoutManager = LinearLayoutManager(requireContext())
 
         imageUrl?.let { url ->
             Log.d("Dashboard", "Cargando imagen desde URL: $url")
@@ -56,6 +52,40 @@ class Dashboard : Fragment() {
                 .error(R.drawable.profile_user)
                 .into(IMGUser)
         } ?: Log.e("Dashboard", "URL de imagen no válida o vacía")
+
+        suspend fun MostrarDatos(): List<DataOffers_Admin> {
+            //1- Creo un objeto de la clase conexion
+            val objConexion = ClaseConexion().CadenaConexion()
+
+            //2- Creo un Statement
+            val statement = objConexion?.createStatement()
+            val ResultSet = statement?.executeQuery("SELECT * FROM TbOfertas")!!
+
+            //Voy a guardar all lo que me traiga el Select
+
+            val Ofertas = mutableListOf<DataOffers_Admin>()
+
+            while (ResultSet.next()){
+                val UUID_Oferta = ResultSet.getString("UUID_Oferta")
+                val UUIDProducts = ResultSet.getString("UUID_Producto")
+                val Titulo = ResultSet.getString("Titulo")
+                val Porcentaje = ResultSet.getString("Porcentaje_Oferta")
+                val Descripcion = ResultSet.getString("Decripcion_Oferta")
+                val IMG_Offer = ResultSet.getString("Img_oferta")
+                val Oferta = DataOffers_Admin(UUID_Oferta, UUIDProducts, Titulo, Porcentaje, Descripcion, IMG_Offer)
+                Ofertas.add(Oferta)
+            }
+            return Ofertas
+        }
+
+        CoroutineScope(Dispatchers.IO).launch{
+            //Creo una variable que ejecute la funcion de mostrar datos
+            val ProductosDB = MostrarDatos()
+            withContext(Dispatchers.Main){
+                val miAdaptador = Adaptador_Offers_Client(ProductosDB)
+                RCV_Offers.adapter = miAdaptador
+            }
+        }
 
         return root
     }
