@@ -68,6 +68,7 @@ class Profile : Fragment() {
     ): View {
         val root = inflater.inflate(R.layout.fragment_profile_admin, container, false)
 
+        //Variables que se van a utilizar
         IMG_Perfil = root.findViewById(R.id.IMG_User_Profile_Admin)
         val ChangePassword = root.findViewById<ImageView>(R.id.IC_ChangePassword_Admin)
         val IC_Settings = root.findViewById<ImageView>(R.id.IC_Settings_Admin)
@@ -81,6 +82,7 @@ class Profile : Fragment() {
         val btn_Edit = root.findViewById<ImageView>(R.id.Ic_Edit_Profile_Admin)
         val btn_Cerrar = root.findViewById<Button>(R.id.btn_CerrarSesion_Profile_Admin)
 
+        // Observar los cambios en imageUrl
         imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
             url?.let { imageUrl ->
                 Glide.with(IMG_Perfil.context)

@@ -144,7 +144,7 @@ class Profile : Fragment() {
                 putString("UUID", uuid)
                 putString("Correo", Correo)
             }
-            findNavController().navigate(R.id.action_ChangePassword_Admin, bundle)
+            findNavController().navigate(R.id.action_ChangePassword_Client, bundle)
         }
 
         IC_Settings.setOnClickListener {
