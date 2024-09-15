@@ -100,7 +100,7 @@ class Password_recovery2 : AppCompatActivity() {
     }
 
     private fun generateNewCode(): String {
-        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        val chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz123456789"
         var code = ""
         for (i in 0 until 6) {
             code += chars[(Math.random() * chars.length).toInt()]

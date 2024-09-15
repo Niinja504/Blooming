@@ -92,6 +92,7 @@
         android:minHeight="48dp"
         android:paddingStart="8dp"
         android:textAllCaps="false"
+        android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"

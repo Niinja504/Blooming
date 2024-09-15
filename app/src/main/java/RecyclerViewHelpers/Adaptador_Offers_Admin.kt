@@ -21,6 +21,8 @@ import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.Adapter<ViewHolder_Offers_Admin>() {
+    private var datosFiltrados = Datos
+
     fun ActualizarListaDespuesDeEditar(UUID: String, NuevoTitulo: String){
         val Index = Datos.indexOfFirst { it.UUID_Oferta == UUID }
         Datos[Index].Titulo = NuevoTitulo
@@ -70,10 +72,10 @@ class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.A
         return  ViewHolder_Offers_Admin(Vista)
     }
 
-    override fun getItemCount() = Datos.size
+    override fun getItemCount() = datosFiltrados.size
 
     override fun onBindViewHolder(holder: ViewHolder_Offers_Admin, posicion: Int){
-        val item = Datos[posicion]
+        val item = datosFiltrados[posicion]
         holder.CampoTitulo.text = item.Titulo
 
         Glide.with(holder.IMG_Archivo.context)
@@ -140,6 +142,17 @@ class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.A
             val navController = findNavController(holder.itemView)
             navController.navigate(R.id.navigation_Details_Offers, bundle)
         }
+    }
+
+    fun filtrar(texto: String) {
+        datosFiltrados = if (texto.isEmpty()) {
+            Datos
+        } else {
+            Datos.filter {
+                it.Titulo.contains(texto, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     private fun findNavController(view: View): NavController {

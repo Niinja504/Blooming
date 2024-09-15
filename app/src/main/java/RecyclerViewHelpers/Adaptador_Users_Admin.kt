@@ -1,6 +1,6 @@
 package RecyclerViewHelpers
 
-import DataC.DataUsers_Admin
+import DataC.DataUsers
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
@@ -26,7 +26,9 @@ import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 import java.security.MessageDigest
 
-class Adaptador_Users_Admin (var Datos: List<DataUsers_Admin>): RecyclerView.Adapter<ViewHolder_Users_Admin>()  {
+class  Adaptador_Users_Admin (var Datos: List<DataUsers>): RecyclerView.Adapter<ViewHolder_Users_Admin>()  {
+    private var datosFiltrados = Datos
+
     fun ActualizarListaDespuesDeEditar(uuid: String, NuevoNombre: String, NuevoUsuario: String, NuevoApellido: String, NuevoTelefono: String, NuevoCorreo: String){
         val Index = Datos.indexOfFirst { it.uuid == uuid }
         Datos[Index].Nombres = NuevoNombre
@@ -100,11 +102,10 @@ class Adaptador_Users_Admin (var Datos: List<DataUsers_Admin>): RecyclerView.Ada
         return ViewHolder_Users_Admin(vista)
     }
 
-    override fun getItemCount() = Datos.size
+    override fun getItemCount() = datosFiltrados.size
 
     override fun onBindViewHolder(holder: ViewHolder_Users_Admin, position: Int) {
-        //Poder darle clic a la elemento de la card
-        val item = Datos[position]
+        val item = datosFiltrados[position]
         holder.Nombre_Usuario.text = item.Nombres
         holder.NomberDeUsuario.text = item.NombreUser
         holder.RolUsuario.text = item.Rol
@@ -212,6 +213,17 @@ class Adaptador_Users_Admin (var Datos: List<DataUsers_Admin>): RecyclerView.Ada
             val navController = findNavController(holder.itemView)
             navController.navigate(R.id.navigation_Details_Users, bundle)
         }
+    }
+
+    fun filtrar(texto: String) {
+        datosFiltrados = if (texto.isEmpty()) {
+            Datos
+        } else {
+            Datos.filter {
+                it.Nombres.contains(texto, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     private fun hashSHA256(contrasenaEscrita: String): String {

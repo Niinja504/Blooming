@@ -56,6 +56,9 @@
             android:name="UUID"
             app:argType="string" />
         <action
+            android:id="@+id/action_Setting_Client"
+            app:destination="@+id/Setting_client"/>
+        <action
            android:id="@+id/action_ChangePassword_Client"
            app:destination="@+id/ChangePassword_client"/>
     </fragment>
@@ -88,7 +91,7 @@
         tools:layout="@layout/fragment_dedication_client"/>
 
     <fragment
-        android:id="@+id/setting_client"
+        android:id="@+id/Setting_client"
         android:name="proyecto.expotecnica.blooming.Client.setting.Setting"
         android:label="Ajustes"
         tools:layout="@layout/fragment_setting_client" />
@@ -118,15 +121,15 @@
         tools:layout="@layout/fragment_details_shop_cart_client"/>
 
     <fragment
-        android:id="@+id/navigation_Details_BackOrder_Client"
-        android:name="proyecto.expotecnica.blooming.Client.details.Details_BackOrder"
-        android:label="Detalles de pedido pendiente"
-        tools:layout="@layout/fragment_details_back_order_client"/>
+        android:id="@+id/navigation_Details_Order_Client"
+        android:name="proyecto.expotecnica.blooming.Client.details.Details_Orders"
+        android:label="Detalles de pedido entregado"
+        tools:layout="@layout/fragment_details_orders_client"/>
 
     <fragment
-        android:id="@+id/navigation_Details_OrderDelivered_Client"
-        android:name="proyecto.expotecnica.blooming.Client.details.Details_OrderDelivered"
-        android:label="Detalles de pedido entregado"
-        tools:layout="@layout/fragment_details_order_delivered_client"/>
+        android:id="@+id/navigation_Details_favorites_Profile"
+        android:name="proyecto.expotecnica.blooming.Client.details.Details_Favorite_Profile"
+        android:label="Dettalles de favoritos"
+        tools:layout="@layout/fragment_details_favorite_profile_client"/>
 
 </navigation>

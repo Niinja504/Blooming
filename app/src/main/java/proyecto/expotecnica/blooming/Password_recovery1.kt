@@ -81,19 +81,15 @@ class Password_recovery1 : AppCompatActivity() {
             }
         }
 
-
         RecuerdaSuContra.setOnClickListener {
             val intent = Intent(this,Sing_in::class.java)
             startActivity(intent)
             finish()
         }
-
-
     }
 
     private suspend fun correoExisteBD(correo: String): Boolean {
         val sql_BD1 = "SELECT COUNT(*) AS correo_existe FROM TbUsers WHERE Email_User = ?"
-        val sql_BD2 = "SELECT COUNT(*) AS correo_existe FROM TbUSers_Employed_Admin WHERE Correo_Employed_Admin = ?"
         val claseConexion = ClaseConexion()
         val conexion = claseConexion.CadenaConexion()
         var correoExiste = false
@@ -108,18 +104,6 @@ class Password_recovery1 : AppCompatActivity() {
                 if (resultado1.next()) {
                     val count1 = resultado1.getInt("correo_existe")
                     correoExiste = count1 > 0
-                }
-
-                // Verificar en la segunda tabla si no se encontró en la primera
-                if (!correoExiste) {
-                    val statement2 = withContext(Dispatchers.IO) { conexion.prepareStatement(sql_BD2) }
-                    statement2.setString(1, correo)
-
-                    val resultado2 = withContext(Dispatchers.IO) { statement2.executeQuery() }
-                    if (resultado2.next()) {
-                        val count2 = resultado2.getInt("correo_existe")
-                        correoExiste = count2 > 0
-                    }
                 }
             } catch (e: Exception) {
                 println("Error al ejecutar la consulta SQL: $e")
@@ -137,9 +121,8 @@ class Password_recovery1 : AppCompatActivity() {
         return correoExiste
     }
 
-
     private fun generateRandomCode(): String {
-        val chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        val chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz123456789"
         return (1..6)
             .map { chars[SecureRandom().nextInt(chars.length)] }
             .joinToString("")

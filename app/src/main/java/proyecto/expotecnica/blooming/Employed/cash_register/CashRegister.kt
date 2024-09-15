@@ -3,10 +3,13 @@ package proyecto.expotecnica.blooming.Employed.cash_register
 import DataC.DataInventory
 import RecyclerViewHelpers.Adaptador_CashRegister_Employed
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -19,16 +22,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import proyecto.expotecnica.blooming.Employed.ImageViewModel_Employed
 import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product_Employed
 import proyecto.expotecnica.blooming.R
 
 class CashRegister : Fragment() {
-    private var imageUrl: String? = null
+    private val imageViewModel: ImageViewModel_Employed by activityViewModels()
     private val sharedViewModel: SharedViewModel_Product_Employed by activityViewModels()
+    private var miAdaptador: Adaptador_CashRegister_Employed? = null
+    private lateinit var Buscador: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            imageUrl = it.getString("URL_IMAGEN")
         }
     }
 
@@ -39,22 +45,25 @@ class CashRegister : Fragment() {
         val root = inflater.inflate(R.layout.fragment_cash_register_employed, container, false)
 
         val RCV_Cash = root.findViewById<RecyclerView>(R.id.RCV_CashRegister_Employed)
-        //Asignarle un Layout al RecyclerView
-        RCV_Cash.layoutManager = LinearLayoutManager(requireContext())
-
-        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
-        RCV_Cash.layoutManager = gridLayoutManager
+        RCV_Cash.layoutManager = GridLayoutManager(requireContext(), 2)
 
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_CashRegister)
+        Buscador = root.findViewById(R.id.txt_Buscar_CashRegister)
+        val LimpiarBuscador = root.findViewById<ImageView>(R.id.IC_Limpiar_Bucador_CashRegister)
 
-        imageUrl?.let { url ->
-            Log.d("Dashboard", "Cargando imagen desde URL: $url")
-            Glide.with(IMGUser.context)
-                .load(url)
-                .placeholder(R.drawable.profile_user)
-                .error(R.drawable.profile_user)
-                .into(IMGUser)
-        } ?: Log.e("Dashboard", "URL de imagen no válida o vacía")
+        imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
+            url?.let { imageUrl ->
+                Glide.with(IMGUser.context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.profile_user)
+                    .error(R.drawable.profile_user)
+                    .into(IMGUser)
+            }
+        }
+
+        LimpiarBuscador.setOnClickListener {
+            Limpiar()
+        }
 
         suspend fun MostrarDatos(): List<DataInventory> {
             //1- Creo un objeto de la clase conexion
@@ -87,11 +96,25 @@ class CashRegister : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val productosDB = MostrarDatos()
             withContext(Dispatchers.Main) {
-                val miAdaptador = Adaptador_CashRegister_Employed(productosDB, sharedViewModel)
+                miAdaptador = Adaptador_CashRegister_Employed(productosDB, sharedViewModel)
                 RCV_Cash.adapter = miAdaptador
             }
         }
 
+        //Buscador que funciona por medio del nombre =)
+        Buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                miAdaptador?.filtrar(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         return root
+    }
+
+    fun Limpiar(){
+        Buscador.text.clear()
+        Buscador.clearFocus()
     }
 }

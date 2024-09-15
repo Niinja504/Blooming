@@ -41,6 +41,15 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_sales_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.sales.Sales"
+        android:label="Ventas"
+        tools:layout="@layout/fragment_sales_admin">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_offers_admin"
@@ -146,5 +155,11 @@
         android:name="proyecto.expotecnica.blooming.Admin.details.Details_Shipping"
         android:label="Dettalles del envio"
         tools:layout="@layout/fragment_details_shipping_cost_admin"/>
+
+    <fragment
+        android:id="@+id/navigation_Details_Orders"
+        android:name="proyecto.expotecnica.blooming.Admin.details.Details_Orders"
+        android:label="Detalles del envio"
+        tools:layout="@layout/fragment_details_orders_admin"/>
 
 </navigation>

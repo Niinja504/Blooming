@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_Inventory_Employed (var Datos: List<DataInventory>) : RecyclerView.Adapter<ViewHolder_Inventory_Employed>() {
+class Adaptador_Inventory_Employed (
+    var Datos: List<DataInventory>) : RecyclerView.Adapter<ViewHolder_Inventory_Employed>() {
+
+    private var datosFiltrados = Datos
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Inventory_Employed {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_inventory_employed, parent, false)
         return ViewHolder_Inventory_Employed(vista)
     }
 
-    override fun getItemCount() = Datos.size
+    override fun getItemCount() = datosFiltrados.size
 
     override fun onBindViewHolder(holder: ViewHolder_Inventory_Employed, position: Int) {
-        val item = Datos[position]
+        val item = datosFiltrados[position]
         holder.Nombre_Producto.text = item.Nombre
         holder.Precio_Producto.text = item.Precio.toString()
         holder.CantidadDisponible.text = item.CantidadBode.toString()
@@ -50,6 +53,17 @@ class Adaptador_Inventory_Employed (var Datos: List<DataInventory>) : RecyclerVi
             val navController = findNavController(holder.itemView)
             navController.navigate(R.id.navigation_Details_Inventory, bundle)
         }
+    }
+
+    fun filtrar(texto: String) {
+        datosFiltrados = if (texto.isEmpty()) {
+            Datos
+        } else {
+            Datos.filter {
+                it.Nombre.contains(texto, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     private fun findNavController(view: View): NavController {

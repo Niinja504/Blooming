@@ -27,11 +27,13 @@ class Dashboard_admin : AppCompatActivity() {
         binding = ActivityDashboardAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Inicializar el ViewModel
         imageViewModel = ViewModelProvider(this).get(ImageViewModel_Admin::class.java)
 
         val navView: BottomNavigationView = binding.navView
 
         val uuid = intent.getStringExtra("UUID")
+        val correo = intent.getStringExtra("Correo")
         if (uuid != null){
             Log.d("Dashboard_Admin", "UUID recibido: $uuid")
 
@@ -42,9 +44,13 @@ class Dashboard_admin : AppCompatActivity() {
                 val urlImagen = mostrarIMG.obtenerImagenUsuario(uuid)
 
                 imageViewModel.setImageUrl(urlImagen)
+                imageViewModel.setUuid(uuid)
+                imageViewModel.setEmail(correo)
 
                 val bundle = Bundle().apply {
                     putString("URL_IMAGEN", urlImagen)
+                    putString("UUID", uuid)
+                    putString("CORREO", correo)
                 }
 
                 val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_dashboard_admin) as NavHostFragment

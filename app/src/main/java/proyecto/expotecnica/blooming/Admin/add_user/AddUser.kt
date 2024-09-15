@@ -62,7 +62,7 @@ class AddUser : Fragment() {
     private var currentPhotoPath: String? = null
     private var selectedImageUri: Uri? = null
     private lateinit var IMG_Perfil: ImageView
-    private var selectedRole: String? = null  // Variable para almacenar el rol seleccionado
+    private var selectedRole: String? = null  // Variable para almacenar el rol seleccionado =/
     private var ContaUsu = 0
 
 

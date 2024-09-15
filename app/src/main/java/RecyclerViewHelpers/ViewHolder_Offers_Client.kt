@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import proyecto.expotecnica.blooming.R
 
 class ViewHolder_Offers_Client (view: View): RecyclerView.ViewHolder(view)  {
-    val CampoTitulo: TextView = view.findViewById(R.id.lbl_Titulo_CardOffers)
-    val IMG_Archivo: ImageView = view.findViewById(R.id.IMG_Archivo_CardOffers)
-    val CampoPorcentaje: TextView = view.findViewById(R.id.lbl_Porcentaje_CardOffers_Client)
+    val CampoTitulo: TextView = itemView.findViewById(R.id.lbl_Titulo_CardOffers_Client)
+    val CampoPorcentaje: TextView = itemView.findViewById(R.id.lbl_Porcentaje_CardOffers_Client)
+    val IMG_Archivo: ImageView = itemView.findViewById(R.id.IMG_Archivo_CardOffers_Client)
 }

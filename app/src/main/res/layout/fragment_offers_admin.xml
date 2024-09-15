@@ -73,7 +73,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/txt_Nombres_Registrer"
+        android:id="@+id/txt_Buscar_Offers_Admin"
         android:layout_width="285dp"
         android:layout_height="24dp"
         android:background="@drawable/rectangle"
@@ -94,10 +94,10 @@
         tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
 
     <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="21dp"
+        android:id="@+id/IC_Limpiar_Bucador_Offers_Admin"
+        android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_search"
+        android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.817"

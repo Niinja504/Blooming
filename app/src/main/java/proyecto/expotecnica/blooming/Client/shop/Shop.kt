@@ -3,9 +3,12 @@ package proyecto.expotecnica.blooming.Client.shop
 import DataC.DataInventory
 import RecyclerViewHelpers.Adaptador_Shop_Client
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -25,20 +28,31 @@ import proyecto.expotecnica.blooming.Client.SharedViewModel_Product_Client
 class Shop : Fragment() {
     private val imageViewModel: ImageViewModel_Client by activityViewModels()
     private val sharedViewModel: SharedViewModel_Product_Client by activityViewModels()
+    private var miAdaptador: Adaptador_Shop_Client? = null
+    private lateinit var Buscador: EditText
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val root = inflater.inflate(R.layout.fragment_shop_client, container, false)
 
-        val RCV_Cash = root.findViewById<RecyclerView>(R.id.RCV_Shop_Client)
+        val RCV_Shop = root.findViewById<RecyclerView>(R.id.RCV_Shop_Client)
         //Asignarle un Layout al RecyclerView
-        RCV_Cash.layoutManager = LinearLayoutManager(requireContext())
+        RCV_Shop.layoutManager = LinearLayoutManager(requireContext())
 
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
-        RCV_Cash.layoutManager = gridLayoutManager
+        RCV_Shop.layoutManager = gridLayoutManager
 
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Shop)
+        Buscador = root.findViewById(R.id.txt_Buscar_Shop)
+        val LimpiarBuscador = root.findViewById<ImageView>(R.id.IC_Limpiar_Bucador_Shop)
 
         // Observar los cambios en imageUrl
         imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
@@ -49,6 +63,10 @@ class Shop : Fragment() {
                     .error(R.drawable.profile_user)
                     .into(IMGUser)
             }
+        }
+
+        LimpiarBuscador.setOnClickListener {
+            Limpiar()
         }
 
         suspend fun MostrarDatos(): List<DataInventory> {
@@ -82,11 +100,25 @@ class Shop : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             val productosDB = MostrarDatos()
             withContext(Dispatchers.Main) {
-                val miAdaptador = Adaptador_Shop_Client(productosDB, sharedViewModel)
-                RCV_Cash.adapter = miAdaptador
+                miAdaptador = Adaptador_Shop_Client(productosDB, sharedViewModel, imageViewModel)
+                RCV_Shop.adapter = miAdaptador
             }
         }
 
+        //Buscador que funciona por medio del nombre =)
+        Buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                miAdaptador?.filtrar(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         return root
+    }
+
+    fun Limpiar(){
+        Buscador.text.clear()
+        Buscador.clearFocus()
     }
 }

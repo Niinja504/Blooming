@@ -28,11 +28,13 @@ class DeliveryDate : Fragment() {
     private var Horario: String? = null
     companion object{
         fun newInstance(
-            UUID_Pedido: String
+            UUID_Pedido: String,
+            Costo_Venta: Float
         ): DeliveryDate {
             val fragment = DeliveryDate()
             val args = Bundle()
             args.putString("UUID_Pedido", UUID_Pedido)
+            args.putFloat("Costo_Pedido", Costo_Venta)
             fragment.arguments = args
             return fragment
         }
@@ -50,6 +52,7 @@ class DeliveryDate : Fragment() {
         val root = inflater.inflate(R.layout.fragment_delivery_date_client, container, false)
 
         val UUID_PedidoR = arguments?.getString("UUID_Pedido")
+        val Costo_Pedido_Cliente = arguments?.getFloat("Costo_Pedido")
         val Regresar = root.findViewById<ImageView>(R.id.Regresar_Delivery_Date_client)
 
         // Llamar a todos los elementos
@@ -112,6 +115,7 @@ class DeliveryDate : Fragment() {
                 }
                 val bundle = Bundle().apply {
                     putString("UUID_Pedido", UUID_PedidoR)
+                    putFloat("Costo_Pedido", Costo_Pedido_Cliente ?: 0f)
                 }
                 findNavController().navigate(R.id.delivered_Address, bundle)
             }

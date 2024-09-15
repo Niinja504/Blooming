@@ -51,10 +51,10 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/IC_Limpiar_Bucador_Users"
         android:layout_width="21dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_search"
+        android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.817"
@@ -63,7 +63,7 @@
         app:layout_constraintVertical_bias="0.106" />
 
     <EditText
-        android:id="@+id/txt_Nombres_Registrer"
+        android:id="@+id/txt_Buscar_Users"
         android:layout_width="285dp"
         android:layout_height="24dp"
         android:background="@drawable/rectangle"
@@ -101,11 +101,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RCV_AddUser_Admin"
         android:layout_width="409dp"
-        android:layout_height="634dp"
+        android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.850" />
+        app:layout_constraintVertical_bias="0.702" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

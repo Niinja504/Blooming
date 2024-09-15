@@ -9,6 +9,9 @@ class SharedViewModel_Product_Client : ViewModel() {
     private val _productList = MutableLiveData<MutableList<ProductData_Client>>(mutableListOf())
     val productList: LiveData<MutableList<ProductData_Client>> get() = _productList
 
+    private val _descuentos = MutableLiveData<Map<String, Int>>(emptyMap())
+    val descuentos: LiveData<Map<String, Int>> get() = _descuentos
+
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
@@ -38,5 +41,9 @@ class SharedViewModel_Product_Client : ViewModel() {
     fun LimpiarListaProductos() {
         _productList.value?.clear()
         _productList.value = mutableListOf()
+    }
+
+    fun setDescuentos(descuentos: Map<String, Int>) {
+        _descuentos.value = descuentos
     }
 }

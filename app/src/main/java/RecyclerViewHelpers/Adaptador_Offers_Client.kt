@@ -15,7 +15,7 @@ import proyecto.expotecnica.blooming.R
 
 class Adaptador_Offers_Client (var Datos: List<DataOffers_Admin>): RecyclerView.Adapter<ViewHolder_Offers_Client>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_Offers_Client{
-        val Vista = LayoutInflater.from(parent.context).inflate(R.layout.fragment_card_offer_admin, parent, false)
+        val Vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_offers_client, parent, false)
         return  ViewHolder_Offers_Client(Vista)
     }
 
@@ -41,7 +41,7 @@ class Adaptador_Offers_Client (var Datos: List<DataOffers_Admin>): RecyclerView.
             }
 
             val navController = findNavController(holder.itemView)
-            navController.navigate(R.id.navigation_Details_Offers, bundle)
+            navController.navigate(R.id.navigation_Details_Offer_Client, bundle)
         }
     }
 

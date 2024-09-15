@@ -68,6 +68,8 @@ class Sing_in : AppCompatActivity() {
     private var currentPhotoPath: String? = null
     private var selectedImageUri: Uri? = null
     private lateinit var dialogView: View
+    private lateinit var campoCorreo: EditText
+    private lateinit var campoContrasena: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,8 +91,8 @@ class Sing_in : AppCompatActivity() {
         }
 
         // Variables
-        val campoCorreo: EditText = findViewById(R.id.txt_Correo_Sing_In)
-        val campoContrasena: EditText = findViewById(R.id.txt_Contra_Sing_In)
+        campoCorreo = findViewById(R.id.txt_Correo_Sing_In)
+        campoContrasena = findViewById(R.id.txt_Contra_Sing_In)
         val olvidoSuContra: TextView = findViewById(R.id.lbl_ContraOlvidada_Sing_In)
         val btnIniciarSesion: Button = findViewById(R.id.btn_Iniciar_Sesion_Sing_in)
         val btnIngresarConGoogle: Button = findViewById(R.id.btn_Google_Sing_In)
@@ -164,53 +166,84 @@ class Sing_in : AppCompatActivity() {
         btnIniciarSesion.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
                 try {
-                    val objConexion: Connection? = ClaseConexion().CadenaConexion()
-                    val contrasenaEncriptada: String = hashSHA256(campoContrasena.text.toString())
-                    val email = campoCorreo.text.toString()
+                    if (withContext(Dispatchers.Main) { ValidarCampos() }){
+                        val objConexion: Connection? = ClaseConexion().CadenaConexion()
+                        val contrasenaEncriptada: String = hashSHA256(campoContrasena.text.toString())
+                        val email = campoCorreo.text.toString()
 
-                    var rol: Int? = null
-                    var usuarioEncontrado = false
-                    var uuid: String? = null
+                        var rol: Int? = null
+                        var usuarioEncontrado = false
+                        var uuid: String? = null
 
-                    if (!usuarioEncontrado) {
-                        val ComprobarUsuario: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
-                        ComprobarUsuario.setString(1, email)
-                        ComprobarUsuario.setString(2, contrasenaEncriptada)
-                        val Resultado: ResultSet = ComprobarUsuario.executeQuery()
+                        if (!usuarioEncontrado) {
+                            val ComprobarUsuario: PreparedStatement = objConexion?.prepareStatement("SELECT * FROM TbUsers WHERE Email_User = ? AND Contra_User = ?")!!
+                            ComprobarUsuario.setString(1, email)
+                            ComprobarUsuario.setString(2, contrasenaEncriptada)
+                            val Resultado: ResultSet = ComprobarUsuario.executeQuery()
 
-                        // Verificar el rol en la  tabla =)
-                        if (Resultado.next()) {
-                            usuarioEncontrado = true
-                            val rolString = Resultado.getString("Rol_User")
-                            rol = when (rolString) {
-                                "Administrador" -> 0
-                                "Empleado" -> 1
-                                "Cliente" -> 2
-                                else -> null
+                            // Verificar el rol en la  tabla =)
+                            if (Resultado.next()) {
+                                usuarioEncontrado = true
+                                val rolString = Resultado.getString("Rol_User")
+                                rol = when (rolString) {
+                                    "Administrador" -> 0
+                                    "Empleado" -> 1
+                                    "Cliente" -> 2
+                                    else -> null
+                                }
+                                uuid = Resultado.getString("UUID_User")
                             }
-                            uuid = Resultado.getString("UUID_User")
                         }
-                    }
 
-                    // Redireccionar según el rol encontrado
+                        // Redireccionar según el rol encontrado
                         withContext(Dispatchers.Main) {
                             if (usuarioEncontrado) {
                                 when (rol) {
                                     0 -> {
+                                        withContext(Dispatchers.IO){
+                                            val ObjConexion = ClaseConexion().CadenaConexion()
+                                            val Abrir = ObjConexion?.prepareStatement("UPDATE TbUsers SET Sesion_User = ? WHERE UUID_User = ?")!!
+                                            val Abierto = 1
+
+                                            Abrir.setInt(1, Abierto)
+                                            Abrir.setString(2, uuid)
+                                            Abrir.executeUpdate()
+                                        }
                                         val pantallaAdmin = Intent(this@Sing_in, Dashboard_admin::class.java)
                                         pantallaAdmin.putExtra("UUID", uuid)
+                                        pantallaAdmin.putExtra("Correo", email)
                                         startActivity(pantallaAdmin) // Administrador
                                     }
 
                                     1 -> {
+                                        withContext(Dispatchers.IO){
+                                            val ObjConexion = ClaseConexion().CadenaConexion()
+                                            val Abrir = ObjConexion?.prepareStatement("UPDATE TbUsers SET Sesion_User = ? WHERE UUID_User = ?")!!
+                                            val Abierto = 1
+
+                                            Abrir.setInt(1, Abierto)
+                                            Abrir.setString(2, uuid)
+                                            Abrir.executeUpdate()
+                                        }
                                         val pantallaEmpleado = Intent(this@Sing_in, Dashboard_employed::class.java)
                                         pantallaEmpleado.putExtra("UUID", uuid)
+                                        pantallaEmpleado.putExtra("Correo", email)
                                         startActivity(pantallaEmpleado) // Empleado
                                     }
 
                                     2 -> {
+                                        withContext(Dispatchers.IO){
+                                            val ObjConexion = ClaseConexion().CadenaConexion()
+                                            val Abrir = ObjConexion?.prepareStatement("UPDATE TbUsers SET Sesion_User = ? WHERE UUID_User = ?")!!
+                                            val Abierto = 1
+
+                                            Abrir.setInt(1, Abierto)
+                                            Abrir.setString(2, uuid)
+                                            Abrir.executeUpdate()
+                                        }
                                         val pantallaPrincipal = Intent(this@Sing_in, Dashboard_client::class.java)
                                         pantallaPrincipal.putExtra("UUID", uuid)
+                                        pantallaPrincipal.putExtra("Correo", email)
                                         startActivity(pantallaPrincipal) // Cliente
                                     }
                                     else -> Toast.makeText(this@Sing_in, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
@@ -221,6 +254,7 @@ class Sing_in : AppCompatActivity() {
                                 Toast.makeText(this@Sing_in, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
                             }
                         }
+                    }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(this@Sing_in, "Error: ${e.message}", Toast.LENGTH_LONG).show()
@@ -242,6 +276,29 @@ class Sing_in : AppCompatActivity() {
             startActivity(pantallaRegistrarse)
             finish()
         }
+    }
+
+    private fun ValidarCampos(): Boolean {
+        val Correo = campoCorreo.text.toString()
+        val Contra = campoContrasena.text.toString()
+
+        var HayErrores = false
+
+        if (Correo.isEmpty()) {
+            campoCorreo.error = "Este campo es obligatorio"
+            HayErrores = true
+        } else {
+            campoCorreo.error = null
+        }
+
+        if (Contra.isEmpty()) {
+            campoContrasena.error = "Este campo es obligatorio"
+            HayErrores = true
+        } else {
+            campoContrasena.error = null
+        }
+
+        return !HayErrores
     }
 
     private fun signInWithGoogle() {
