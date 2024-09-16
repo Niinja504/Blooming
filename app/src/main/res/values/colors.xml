@@ -6,6 +6,12 @@
     <color name="Brown">#665041</color>
     <color name="transparent">#00000000</color>
     <color name="gray">#AFACA9</color>
+    <color name="peach_background">#ffefe6</color>
+    <color name="rosa_background">#ffd4df</color>
+    <color name="durazno_background">#FFD9D3</color>
+    <color name="morado_background2">#9475ba</color>
+    <color name="rosa_background2">#f2b1cd</color>
+    <color name="durazno_background2">#FEE5E1</color>
     <!--1-->
     <color name="md_theme_primary">#F38F9A</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>

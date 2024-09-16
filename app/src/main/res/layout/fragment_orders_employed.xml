@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFCF5"
-    tools:context=".Employed.orders.Orders">
+    android:background="@drawable/background"
+    tools:context=".Employed.orders.OrdersFragment">
 
     <ImageView
         android:id="@+id/Ic_Sales_Orders_Employed"

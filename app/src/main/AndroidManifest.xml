@@ -79,9 +79,15 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Dashboard_admin"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_dashboard_admin"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Dashboard_client"
             android:exported="false"
@@ -92,13 +98,8 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:windowSoftInputMode="adjustNothing"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Password_recovery3"
             android:exported="false" />
