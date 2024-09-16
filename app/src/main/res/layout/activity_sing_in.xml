@@ -24,11 +24,9 @@
         app:layout_constraintVertical_bias="0.06"
         tools:ignore="MissingConstraints" />
 
-    <!-- Nombre -->
-
     <Button
         android:id="@+id/btn_Iniciar_Sesion_Sing_in"
-        android:layout_width="312dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
         android:backgroundTint="#FFFFFF"
         android:elevation="4dp"
@@ -36,7 +34,7 @@
         android:textColor="#F38F9A"
         android:textColorLink="#000000"
         android:textSize="24sp"
-        app:cornerRadius="0dp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -47,14 +45,14 @@
 
     <Button
         android:id="@+id/btn_Google_Sing_In"
-        android:layout_width="312dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
         android:backgroundTint="#FFFFFF"
         android:elevation="4dp"
         android:text="    Ingresar con Google"
         android:textColor="#F38F9A"
         android:textSize="24sp"
-        app:cornerRadius="0dp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -132,27 +130,50 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/imgNubeLogin"
-        android:layout_width="414dp"
-        android:layout_height="182dp"
+    <TextView
+        android:id="@+id/textView1_singin"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/nubesingin" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.223"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2_singin"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/txt_Contra_Sing_In"
         android:layout_width="310dp"
         android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="text"
         android:shadowColor="#E8DADA"
         android:textColor="#000000"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:textColorHighlight="#FF6E6E6E"
+        android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -165,11 +186,14 @@
         android:id="@+id/txt_Correo_Sing_In"
         android:layout_width="310dp"
         android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="Correo"
         android:inputType="textEmailAddress"
-        android:textColor="#554D4D"
-        android:textColorHint="#FFFFFF"
+        android:shadowColor="#E8DADA"
+        android:textColor="#000000"
+        android:textColorHighlight="#FF6E6E6E"
+        android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"

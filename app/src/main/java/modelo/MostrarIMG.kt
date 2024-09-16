@@ -8,7 +8,6 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 
 class MostrarIMG(private val claseConexion: ClaseConexion) {
-
     suspend fun obtenerImagenUsuario(uuid: String): String? {
         val sql = "SELECT Img_User FROM TbUsers WHERE UUID_User = ?"
         var urlImagen: String? = null
@@ -40,7 +39,7 @@ class MostrarIMG(private val claseConexion: ClaseConexion) {
                 }
             }
         }
-
+        //retornamos en la direcciòn de la imagen
         return urlImagen
     }
 }

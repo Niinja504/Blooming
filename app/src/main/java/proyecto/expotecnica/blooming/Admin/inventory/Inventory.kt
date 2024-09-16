@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import modelo.ClaseConexion
 import RecyclerViewHelpers.Adaptador_Inventory_Admin
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -26,6 +29,9 @@ import proyecto.expotecnica.blooming.R
 
 class Inventory : Fragment() {
     private val imageViewModel: ImageViewModel_Admin by activityViewModels()
+    private var miAdaptador: Adaptador_Inventory_Admin? = null
+    private lateinit var Buscador: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -42,6 +48,8 @@ class Inventory : Fragment() {
         val IC_ShippinCost = root.findViewById<ImageView>(R.id.IC_ShippingCost)
         val AgregarProducto = root.findViewById<Button>(R.id.btn_AgregarProducto_Inventory)
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Inventory)
+        Buscador = root.findViewById(R.id.txt_Buscar_Inventory_Admin)
+        val LimpiarBuscador = root.findViewById<ImageView>(R.id.IC_Limpiar_Bucador_Inventory_Admin)
 
         imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
             url?.let { imageUrl ->
@@ -59,6 +67,10 @@ class Inventory : Fragment() {
 
         IC_ShippinCost.setOnClickListener {
             findNavController().navigate(R.id.navigation_shipping_cost_admin)
+        }
+
+        LimpiarBuscador.setOnClickListener {
+            Limpiar()
         }
 
         AgregarProducto.setOnClickListener{
@@ -97,12 +109,26 @@ class Inventory : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val ProductosDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Inventory_Admin(ProductosDB)
+                miAdaptador = Adaptador_Inventory_Admin(ProductosDB)
                 RCV_Inventory.adapter = miAdaptador
             }
         }
 
+        //Buscador que funciona por medio del nombre =)
+        Buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                miAdaptador?.filtrar(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         return root
+    }
+
+    fun Limpiar(){
+        Buscador.text.clear()
+        Buscador.clearFocus()
     }
 }
 

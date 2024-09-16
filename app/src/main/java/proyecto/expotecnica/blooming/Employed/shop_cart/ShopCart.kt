@@ -2,7 +2,9 @@ package proyecto.expotecnica.blooming.Employed.shop_cart
 
 import RecyclerViewHelpers.Adaptador_ShopCart_Employed
 import android.os.Bundle
+import android.text.Editable
 import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +49,7 @@ class ShopCart : Fragment() {
 
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_ShopCart_Employed)
         RCV_Inventory.layoutManager = LinearLayoutManager(requireContext())
+
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_ShopCart)
 
         imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
@@ -89,7 +92,7 @@ class ShopCart : Fragment() {
                             "INSERT INTO TbVentaEncaja (UUID_Venta, UUID_Empleado, Fecha_Venta, Hora_Venta, Nombre_Cliente, Total_Venta) VALUES (?, ?, ?, ?, ?, ?)"
                         )!!
                         AddVenta.setString(1, UUID_Ven)
-                        AddVenta.setString(2, "156a438c-201f-4065-9903-65d7fc44a65f")
+                        AddVenta.setString(2, imageViewModel.uuid.value)
                         AddVenta.setString(3, Fecha)
                         AddVenta.setString(4, Hora)
                         AddVenta.setString(5, CampoNombre.text.toString())

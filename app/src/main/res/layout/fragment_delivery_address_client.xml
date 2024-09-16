@@ -101,24 +101,6 @@
         app:layout_constraintVertical_bias="0.183"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <EditText
-        android:id="@+id/txt_Colonia_DireEntrega_Pedido"
-        android:layout_width="313dp"
-        android:layout_height="39dp"
-        android:backgroundTint="#000000"
-        android:ems="10"
-        android:hint="Colonia"
-        android:inputType="text"
-        android:textColor="#000000"
-        android:textColorHint="#FF6E6E6E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.283"
-        tools:ignore="TouchTargetSizeCheck" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/MapFragmentDelivery"
         class="com.google.android.gms.maps.SupportMapFragment"
@@ -162,5 +144,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.238" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/Select"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.285"
+        tools:ignore="MissingConstraints">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoComplete_DeliveryAddress_Admin"
+            android:layout_width="332dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

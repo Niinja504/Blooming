@@ -3,9 +3,12 @@ package proyecto.expotecnica.blooming.Employed.inventory
 import DataC.DataInventory
 import RecyclerViewHelpers.Adaptador_Inventory_Employed
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,6 +25,9 @@ import proyecto.expotecnica.blooming.R
 
 class Inventory : Fragment() {
     private val imageViewModel: ImageViewModel_Employed by activityViewModels()
+    private var miAdaptador: Adaptador_Inventory_Employed? = null
+    private lateinit var Buscador: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -37,7 +43,10 @@ class Inventory : Fragment() {
         val RCV_Inventory = root.findViewById<RecyclerView>(R.id.RCV_Inventory_Employed)
         //Asignarle un Layout al RecyclerView
         RCV_Inventory.layoutManager = LinearLayoutManager(requireContext())
+
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Inventory)
+        Buscador = root.findViewById(R.id.txt_Buscador_Inventory)
+        val LimpiarBuscador = root.findViewById<ImageView>(R.id.IC_Limpiar_Bucador_Inventory)
 
         imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
             url?.let { imageUrl ->
@@ -47,6 +56,10 @@ class Inventory : Fragment() {
                     .error(R.drawable.profile_user)
                     .into(IMGUser)
             }
+        }
+
+        LimpiarBuscador.setOnClickListener {
+            Limpiar()
         }
 
         suspend fun MostrarDatos(): List<DataInventory> {
@@ -81,11 +94,25 @@ class Inventory : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val ProductosDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Inventory_Employed(ProductosDB)
+                miAdaptador = Adaptador_Inventory_Employed(ProductosDB)
                 RCV_Inventory.adapter = miAdaptador
             }
         }
 
+        //Buscador que funciona por medio del nombre =)
+        Buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                miAdaptador?.filtrar(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         return root
+    }
+
+    fun Limpiar(){
+        Buscador.text.clear()
+        Buscador.clearFocus()
     }
 }

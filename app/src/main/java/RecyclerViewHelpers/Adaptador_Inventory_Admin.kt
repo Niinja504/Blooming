@@ -23,6 +23,8 @@ import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
 class Adaptador_Inventory_Admin (var Datos: List<DataInventory_Admin>): RecyclerView.Adapter<ViewHolder_Inventory_Admin>() {
+    private var datosFiltrados = Datos
+
     fun ActualizarListaDespuesDeEditar(uuid: String, NuevoNombre: String, NuevoPrecio: Float, NuevaCantidadBode: Int, NuevaCategoriaFlores: String, NuevaCategoriaDiseno: String, NuevaCategoriaEventos: String, NuevaDescripcion: String){
         val Index = Datos.indexOfFirst { it.uuid == uuid }
         Datos[Index].Nombre = NuevoNombre
@@ -100,11 +102,10 @@ class Adaptador_Inventory_Admin (var Datos: List<DataInventory_Admin>): Recycler
         return ViewHolder_Inventory_Admin(vista)
     }
 
-    override fun getItemCount() = Datos.size
+    override fun getItemCount() = datosFiltrados.size
 
     override fun onBindViewHolder(holder: ViewHolder_Inventory_Admin, position: Int) {
-        //Poder darle clic a la elemento de la card
-        val item = Datos[position]
+        val item = datosFiltrados[position]
         holder.Nombre_Producto.text = item.Nombre
         holder.Precio_Producto.text = item.Precio.toString()
         holder.CantidadDisponible.text = item.CantidadBode.toString()
@@ -199,6 +200,17 @@ class Adaptador_Inventory_Admin (var Datos: List<DataInventory_Admin>): Recycler
             val navController = findNavController(holder.itemView)
             navController.navigate(R.id.navigation_Details_Products, bundle)
         }
+    }
+
+    fun filtrar(texto: String) {
+        datosFiltrados = if (texto.isEmpty()) {
+            Datos
+        } else {
+            Datos.filter {
+                it.Nombre.contains(texto, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     private fun findNavController(view: View): NavController {

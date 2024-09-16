@@ -6,20 +6,21 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.PopupMenu
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapFragment
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -29,6 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
+import java.sql.SQLException
 import java.util.UUID
 
 class AddShippingCost : Fragment(), OnMapReadyCallback {
@@ -54,6 +56,8 @@ class AddShippingCost : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.MapFragment) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
 
+        val IC_Regresar = root.findViewById<ImageView>(R.id.Regresar_AddShippingCost_Admin)
+
         CampoZona = root.findViewById(R.id.txt_NombreZona_AddShippingCost_Admin)
         CampoCosto = root.findViewById(R.id.txt_Costo_AddShippingCost_Admin)
         val Btn_AgregarCosto = root.findViewById<Button>(R.id.btn_Agregar_AddShippingCost)
@@ -70,6 +74,10 @@ class AddShippingCost : Fragment(), OnMapReadyCallback {
             val spanString = SpannableString(item.title.toString())
             spanString.setSpan(ForegroundColorSpan(Color.BLACK), 0, spanString.length, 0)
             item.title = spanString
+        }
+
+        IC_Regresar.setOnClickListener{
+            findNavController().navigate(R.id.navigation_shipping_cost_admin)
         }
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
@@ -168,22 +176,45 @@ class AddShippingCost : Fragment(), OnMapReadyCallback {
         return !HayErrores
     }
 
-    private fun INS(){
-        lifecycleScope.launch{
-            withContext(Dispatchers.IO){
+    private fun INS() {
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
                 val ObjConexion = ClaseConexion().CadenaConexion()
-                val Add_Address = ObjConexion?.prepareStatement("INSERT INTO TbCostosEnvio (UUID_CostoEnvio, Nombre_Zona, Costo, Coordernadas_Google) VALUES (?, ?, ?, ?)"
+                val Add_Address = ObjConexion?.prepareStatement(
+                    "INSERT INTO TbCostosEnvio (UUID_CostoEnvio, Nombre_Zona, Costo, Coordernadas_Google) VALUES (?, ?, ?, ?)"
                 )!!
+
+                // Verifica el contenido antes de realizar la inserción
+                Log.d("CampoZonaText", "CampoZona: ${CampoZona.text.toString()}") // Depuración
 
                 Add_Address.setString(1, UUID.randomUUID().toString())
                 Add_Address.setString(2, CampoZona.text.toString())
-                Add_Address.setFloat(3, CampoCosto.text.toString().toFloat())
-                Add_Address.setString(4, Coorde.toString())
-                Add_Address.executeUpdate()
+                val costoText = CampoCosto.text.toString()
+                val costo = try {
+                    if (costoText.isNotEmpty()) {
+                        costoText.toFloat()
+                    } else {
+                        0.0f
+                    }
+                } catch (e: NumberFormatException) {
+                    0.0f
+                }
+
+                Add_Address.setFloat(3, costo)
+                Add_Address.setString(4, Coorde?.toString() ?: "")
+                try {
+                    Add_Address.executeUpdate()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), "Se ha añadido exitosamente", Toast.LENGTH_LONG).show()
+                        Limpiar()
+                    }
+                } catch (e: SQLException) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), "Error al añadir el costo: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
             }
         }
-        Toast.makeText(requireContext(), "Se ha añadido exitosamente", Toast.LENGTH_LONG).show()
-        Limpiar()
     }
 
     private fun Limpiar(){

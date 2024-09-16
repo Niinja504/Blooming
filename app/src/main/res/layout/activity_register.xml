@@ -5,68 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    tools:context=".Register">
-
-    <EditText
-        android:id="@+id/txt_ConfirmarContra_Registrer"
-        android:layout_width="332dp"
-        android:layout_height="39dp"
-        android:ems="10"
-        android:hint="Confirmar contraseña"
-        android:inputType="text"
-        android:textColor="#000000"
-        android:textColorHint="#FF6E6E6E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.687"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/txt_Contrasena_Registrer"
-        android:layout_width="332dp"
-        android:layout_height="39dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="text"
-        android:textColor="#000000"
-        android:textColorHint="#FF6E6E6E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.617"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/txt_Correo_Registrer"
-        android:layout_width="332dp"
-        android:layout_height="39dp"
-        android:ems="10"
-        android:hint="Correo"
-        android:inputType="text"
-        android:textColor="#000000"
-        android:textColorHint="#FF6E6E6E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/imageView19"
-        android:layout_width="413dp"
-        android:layout_height="170dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/nuberegister" />
+    android:background="#D3D3D3"
+    tools:context=".Register"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="31dp">
 
 
     <TextView
@@ -117,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738"
+        app:layout_constraintVertical_bias="0.806"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -128,29 +70,35 @@
         android:text="Registrar"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:cornerRadius="0dp"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.814" />
+        app:layout_constraintVertical_bias="0.885" />
 
-    <ImageView
-        android:id="@+id/imageView18"
-        android:layout_width="126dp"
-        android:layout_height="30dp"
-        android:layout_marginBottom="96dp"
+    <TextView
+        android:id="@+id/textView1_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/registerblooming" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.214"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/txt_Nombres_Registrer"
         android:layout_width="332dp"
-        android:layout_height="39dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="Nombres"
         android:inputType="text"
@@ -161,13 +109,30 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.21"
+        app:layout_constraintVertical_bias="0.214"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView2_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.291"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/txt_Apellidos_Registrer"
         android:layout_width="332dp"
-        android:layout_height="39dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="Apellidos"
         android:inputType="text"
@@ -178,13 +143,30 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.277"
+        app:layout_constraintVertical_bias="0.291"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView3_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/txt_Usuario_Registrer"
         android:layout_width="332dp"
-        android:layout_height="39dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="Usuario"
         android:inputType="text"
@@ -192,33 +174,33 @@
         android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.343"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/txt_Edad_Registrer"
-        android:layout_width="332dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="Edad"
-        android:inputType="number"
-        android:textColor="#000000"
-        android:textColorHint="#FF6E6E6E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.368"
+        tools:ignore="TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
+
+    <TextView
+        android:id="@+id/textView4_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.446"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/txt_Telefono_Registrer"
         android:layout_width="332dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="N° telefonico"
         android:inputType="text"
@@ -229,7 +211,143 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412"
+        app:layout_constraintVertical_bias="0.446"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView5_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.524"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txt_Edad_Registrer"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
+        android:ems="10"
+        android:hint="Edad"
+        android:inputType="number"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.524"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView6_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.603"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txt_Correo_Registrer"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
+        android:ems="10"
+        android:hint="Correo"
+        android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.603"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView7_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txt_Contrasena_Registrer"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView8_Register"
+        android:layout_width="340dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+        android:text="Rectángulo"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txt_ConfirmarContra_Registrer"
+        android:layout_width="332dp"
+        android:layout_height="45dp"
+        android:backgroundTint="@android:color/transparent"
+        android:ems="10"
+        android:hint="Confirmar contraseña"
+        android:inputType="text"
+        android:textColor="#000000"
+        android:textColorHint="#FF6E6E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76"
         tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

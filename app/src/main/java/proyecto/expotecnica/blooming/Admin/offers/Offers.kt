@@ -3,10 +3,13 @@ package proyecto.expotecnica.blooming.Admin.offers
 import DataC.DataOffers_Admin
 import RecyclerViewHelpers.Adaptador_Offers_Admin
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -24,6 +27,9 @@ import proyecto.expotecnica.blooming.R
 
 class Offers : Fragment() {
     private val imageViewModel: ImageViewModel_Admin by activityViewModels()
+    private var miAdaptador: Adaptador_Offers_Admin? = null
+    private lateinit var Buscador: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,6 +44,8 @@ class Offers : Fragment() {
 
         val AgregarOferta = root.findViewById<Button>(R.id.btn_AgregarOferta_Offers)
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Offers)
+        Buscador = root.findViewById(R.id.txt_Buscar_Offers_Admin)
+        val LimpiarBuscador = root.findViewById<ImageView>(R.id.IC_Limpiar_Bucador_Offers_Admin)
 
         val RCV_Offers = root.findViewById<RecyclerView>(R.id.RCV_Offers_Admin)
         //Asignarle un Layout al RecyclerView
@@ -51,6 +59,10 @@ class Offers : Fragment() {
                     .error(R.drawable.profile_user)
                     .into(IMGUser)
             }
+        }
+
+        LimpiarBuscador.setOnClickListener {
+            Limpiar()
         }
 
         AgregarOferta.setOnClickListener{
@@ -87,12 +99,26 @@ class Offers : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val ProductosDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                val miAdaptador = Adaptador_Offers_Admin(ProductosDB)
+                miAdaptador = Adaptador_Offers_Admin(ProductosDB)
                 RCV_Offers.adapter = miAdaptador
             }
         }
 
+        //Buscador que funciona por medio del nombre =)
+        Buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                miAdaptador?.filtrar(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         return root
+    }
+
+    fun Limpiar(){
+        Buscador.text.clear()
+        Buscador.clearFocus()
     }
 }
 

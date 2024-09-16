@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,19 +18,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
 import proyecto.expotecnica.blooming.R
 
 
 class Dashboard : Fragment() {
-
-    private var imageUrl: String? = null
-
+    private val imageViewModel: ImageViewModel_Client by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            imageUrl = it.getString("URL_IMAGEN")
-            Log.d("Dashboard", "URL de imagen recibida en onCreate: $imageUrl")
-        } ?: Log.e("Dashboard", "Argumentos no disponibles en onCreate")
+        }
     }
 
     override fun onCreateView(
@@ -44,14 +42,15 @@ class Dashboard : Fragment() {
         //Asignarle un Layout al RecyclerView
         RCV_Offers.layoutManager = LinearLayoutManager(requireContext())
 
-        imageUrl?.let { url ->
-            Log.d("Dashboard", "Cargando imagen desde URL: $url")
-            Glide.with(IMGUser.context)
-                .load(url)
-                .placeholder(R.drawable.profile_user)
-                .error(R.drawable.profile_user)
-                .into(IMGUser)
-        } ?: Log.e("Dashboard", "URL de imagen no válida o vacía")
+        imageViewModel.imageUrl.observe(viewLifecycleOwner) { url ->
+            url?.let { imageUrl ->
+                Glide.with(IMGUser.context)
+                    .load(url)
+                    .placeholder(R.drawable.profile_user)
+                    .error(R.drawable.profile_user)
+                    .into(IMGUser)
+            }
+        }
 
         suspend fun MostrarDatos(): List<DataOffers_Admin> {
             //1- Creo un objeto de la clase conexion

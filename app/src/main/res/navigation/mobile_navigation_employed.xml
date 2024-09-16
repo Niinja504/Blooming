@@ -37,9 +37,19 @@
 
     <fragment
         android:id="@+id/navigation_orders_employed"
-        android:name="proyecto.expotecnica.blooming.Employed.orders.OrdersFragment"
+        android:name="proyecto.expotecnica.blooming.Employed.orders.Orders"
         android:label="Orders"
         tools:layout="@layout/fragment_orders_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_sales_employed"
+        android:name="proyecto.expotecnica.blooming.Employed.sales.Sales"
+        android:label="Ventas"
+        tools:layout="@layout/fragment_sales_employed">
         <argument
             android:name="UUID"
             app:argType="string" />
@@ -94,15 +104,15 @@
         tools:layout="@layout/fragment_details_inventory_employed"/>
 
     <fragment
-        android:id="@+id/navigation_Details_BackOrder"
-        android:name="proyecto.expotecnica.blooming.Employed.details.Details_BackOrder"
-        android:label="Detalles Pedidos pendientes"
-        tools:layout="@layout/fragment_details_back_order__employed"/>
+        android:id="@+id/navigation_Details_Order_Employed"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_Orders"
+        android:label="Detalles Pedidos entregados"
+        tools:layout="@layout/fragment_details_orders_employed"/>
 
     <fragment
-        android:id="@+id/navigation_Details_OrderDelivered"
-        android:name="proyecto.expotecnica.blooming.Employed.details.Details_OrderDelivered"
+        android:id="@+id/navigation_Details_Sale_Employed"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_Sales"
         android:label="Detalles Pedidos entregados"
-        tools:layout="@layout/fragment_details_order_delivered_employed"/>
+        tools:layout="@layout/fragment_details_sales_employed"/>
 
 </navigation>

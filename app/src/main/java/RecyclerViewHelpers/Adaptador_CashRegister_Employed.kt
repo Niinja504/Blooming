@@ -20,15 +20,17 @@ class Adaptador_CashRegister_Employed(
     var Datos: List<DataInventory>, private val sharedViewModel: SharedViewModel_Product_Employed
 ) : RecyclerView.Adapter<ViewHolder_CashReg_Employed>() {
 
+    private var datosFiltrados = Datos
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder_CashReg_Employed {
         val vista = LayoutInflater.from(parent.context).inflate(R.layout.activity_card_cash_register_employed, parent, false)
         return ViewHolder_CashReg_Employed(vista)
     }
 
-    override fun getItemCount() = Datos.size
+    override fun getItemCount() = datosFiltrados.size
 
     override fun onBindViewHolder(holder: ViewHolder_CashReg_Employed, position: Int) {
-        val item = Datos[position]
+        val item = datosFiltrados[position]
         holder.Nombre_Producto.text = item.Nombre
         holder.Precio_Producto.text = item.Precio.toString()
 
@@ -70,6 +72,17 @@ class Adaptador_CashRegister_Employed(
             val navController = findNavController(holder.itemView)
             navController.navigate(R.id.navigation_Details_ItemCashier, bundle)
         }
+    }
+
+    fun filtrar(texto: String) {
+        datosFiltrados = if (texto.isEmpty()) {
+            Datos
+        } else {
+            Datos.filter {
+                it.Nombre.contains(texto, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
     }
 
     private fun findNavController(view: View): NavController {

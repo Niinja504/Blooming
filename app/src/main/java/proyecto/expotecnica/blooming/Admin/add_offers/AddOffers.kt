@@ -43,7 +43,7 @@ import java.util.UUID
 
 class AddOffers : Fragment() {
     private lateinit var campoTitulo: EditText
-    private var selectedProduct: DataListProducts_Admin? = null // Cambiado para almacenar DataOffers
+    private var selectedProduct: DataListProducts_Admin? = null
     private lateinit var campoPorcentaje: EditText
     private lateinit var campoDescripcion: EditText
     private lateinit var archivoOffer: ImageView

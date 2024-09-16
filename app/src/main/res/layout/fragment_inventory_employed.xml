@@ -10,12 +10,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RCV_Inventory_Employed"
         android:layout_width="409dp"
-        android:layout_height="634dp"
+        android:layout_height="610dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.730" />
+        app:layout_constraintVertical_bias="0.802" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/IMG_User_Inventory"
@@ -30,18 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        android:src="@drawable/ic_filter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093" />
 
     <TextView
         android:id="@+id/textView1_registrer"
@@ -60,10 +48,10 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/IC_Limpiar_Bucador_Inventory"
         android:layout_width="21dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_search"
+        android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.815"
@@ -72,7 +60,7 @@
         app:layout_constraintVertical_bias="0.106" />
 
     <EditText
-        android:id="@+id/txt_Nombres_Registrer"
+        android:id="@+id/txt_Buscador_Inventory"
         android:layout_width="285dp"
         android:layout_height="24dp"
         android:background="@drawable/rectangle"

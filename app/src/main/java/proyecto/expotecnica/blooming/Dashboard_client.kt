@@ -33,6 +33,7 @@ class Dashboard_client : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val uuid = intent.getStringExtra("UUID")
+        val correo = intent.getStringExtra("Correo")
         if (uuid != null) {
             Log.d("Dashboard_client", "UUID recibido: $uuid")
 
@@ -43,9 +44,13 @@ class Dashboard_client : AppCompatActivity() {
                 val urlImagen = mostrarIMG.obtenerImagenUsuario(uuid)
 
                 imageViewModel.setImageUrl(urlImagen)
+                imageViewModel.setUuid(uuid)
+                imageViewModel.setEmail(correo)
 
                 val bundle = Bundle().apply {
                     putString("URL_IMAGEN", urlImagen)
+                    putString("UUID", uuid)
+                    putString("CORREO", correo)
                 }
 
                 val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_dashboard_client) as NavHostFragment

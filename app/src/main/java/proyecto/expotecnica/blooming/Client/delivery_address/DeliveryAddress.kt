@@ -1,5 +1,6 @@
 package proyecto.expotecnica.blooming.Client.delivery_address
 
+import DataC.Data_Address_Admin
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -9,6 +10,9 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -24,30 +28,37 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.materialswitch.MaterialSwitch
-import com.google.android.material.switchmaterial.SwitchMaterial
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import java.sql.SQLException
 
 
 class DeliveryAddress : Fragment(), OnMapReadyCallback {
+    private var selected: Data_Address_Admin? = null
     private var mGoogleMap: GoogleMap? = null
     private var Coorde: LatLng? = null
     private var UUID_PedidoR: String? = null
+    private var Costo_Pedido_Cliente: Float? = null
     private var LugarPedido: String? = null
+    private var Costo: Float? = null
     private lateinit var dialogView: View
     private lateinit var CampoNombreCliente: EditText
     private lateinit var CampoNombreCalle: EditText
-    private lateinit var CampoColonia: EditText
     companion object{
         fun newInstance(
-            UUID_Pedido: String
+            UUID_Pedido: String,
+            Costo_Venta: Float
         ): DeliveryAddress {
             val fragment = DeliveryAddress ()
             val args = Bundle()
             args.putString("UUID_Pedido", UUID_Pedido)
+            args.putFloat("Costo_Pedido", Costo_Venta)
             fragment.arguments = args
             return fragment
         }
@@ -66,20 +77,25 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
         val root = inflater.inflate(R.layout.fragment_delivery_address_client, container, false)
         dialogView = root
 
+        lifecycleScope.launch {
+            val items = ZonaPedido()
+            setupAutoCompleteTextView(root, items)
+        }
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.MapFragmentDelivery) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
 
         UUID_PedidoR = arguments?.getString("UUID_Pedido")
+        Costo_Pedido_Cliente = arguments?.getFloat("Costo_Pedido")
 
         CampoNombreCliente = root.findViewById(R.id.txt_Nombre_DireEntrega_Pedido)
         CampoNombreCalle = root.findViewById(R.id.txt_Calle_DireEntrega_Pedido)
-        CampoColonia = root.findViewById(R.id.txt_Colonia_DireEntrega_Pedido)
+
         val Switch = root.findViewById<MaterialSwitch>(R.id.SW_EntregaLocal)
         val Add_Address = root.findViewById<Button>(R.id.btn_Agregar_DeliveryAddress_client)
 
         CampoNombreCliente.filters = arrayOf(InputFilter.LengthFilter(20))
         CampoNombreCalle.filters = arrayOf(InputFilter.LengthFilter(50))
-        CampoColonia.filters = arrayOf(InputFilter.LengthFilter(40))
 
         Switch.isChecked = false
 
@@ -125,10 +141,45 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
             }
         }
 
-
-
         return root
     }
+
+    private fun setupAutoCompleteTextView(root: View, items: List<Data_Address_Admin>) {
+        val autoComplete: AutoCompleteTextView = root.findViewById(R.id.autoComplete_DeliveryAddress_Admin)
+        val adaptador = ArrayAdapter(requireContext(), R.layout.list_item, items.map { it.nombreZona})
+        autoComplete.setAdapter(adaptador)
+        autoComplete.onItemClickListener = AdapterView.OnItemClickListener { adapterView, _, position, _ ->
+            selected = items[position]
+            selected?.uuid
+            Toast.makeText(requireContext(), "Colonia: ${selected?.nombreZona}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    suspend fun ZonaPedido(): List<Data_Address_Admin> {
+        return withContext(Dispatchers.IO) {
+            val zonaPedidos = mutableListOf<Data_Address_Admin>()
+
+            val conexion = ClaseConexion().CadenaConexion()
+            conexion?.use { conn ->
+                try {
+                    val query = "SELECT UUID_CostoEnvio, Nombre_Zona, Costo FROM TbCostosEnvio"
+                    val statement = conn.createStatement()
+                    val resultSet = statement.executeQuery(query)
+
+                    while (resultSet.next()) {
+                        val uuid = resultSet.getString("UUID_CostoEnvio")
+                        val nombreZona = resultSet.getString("Nombre_Zona")
+                        Costo = resultSet.getFloat("Costo")
+                        zonaPedidos.add(Data_Address_Admin(uuid, nombreZona, Costo))
+                    }
+                } catch (e: SQLException) {
+                    e.printStackTrace()
+                }
+            }
+            zonaPedidos
+        }
+    }
+
 
     private fun changeMap(itemId: Int) {
         when (itemId) {
@@ -185,7 +236,6 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
     private fun ValidarCamp(): Boolean {
         val NombreCliente = CampoNombreCliente.text.toString()
         val NombreCalle = CampoNombreCalle.text.toString()
-        val NombreColonia = CampoColonia.text.toString()
 
         var HayErrores = false
 
@@ -201,13 +251,6 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
             HayErrores = true
         } else {
             CampoNombreCalle.error = null
-        }
-
-        if (NombreColonia.isEmpty()) {
-            CampoColonia.error = "Este campo es obligatorio"
-            HayErrores = true
-        } else {
-            CampoColonia.error = null
         }
 
         return !HayErrores
@@ -252,9 +295,26 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
                 Add_Address.setString(2, CampoNombreCliente.text.toString())
                 Add_Address.setString(3, CampoNombreCalle.text.toString())
                 Add_Address.setString(4, LugarPedido ?: "Sin especificar")
-                Add_Address.setString(5, CampoColonia.text.toString())
-                Add_Address.setString(6, Coorde.toString())
+                Add_Address.setString(5, selected?.uuid ?: "No seleccionado")
+                Add_Address.setString(6, Coorde?.toString() ?: "No especificado")
                 Add_Address.executeUpdate()
+
+                val costoEnvio = Costo ?: 0f
+                val costoPedidoCliente = Costo_Pedido_Cliente ?: 0f
+                val SumaToria = costoEnvio + costoPedidoCliente
+
+                val Add_Envio = ObjConexion?.prepareStatement("UPDATE TbPedido_Cliente SET Costo_Envio = ? WHERE UUID_Pedido = ?")!!
+                Add_Envio.setFloat(1, Costo.toString().toFloat())
+                Add_Envio.setString(2, UUID_PedidoR)
+                Add_Envio.executeUpdate()
+
+
+                val Costo_Final = ObjConexion?.prepareStatement("UPDATE TbPedido_Cliente SET Total = ? WHERE UUID_Pedido = ?")!!
+                Costo_Final.setFloat(1, SumaToria)
+                Costo_Final.setString(2, UUID_PedidoR)
+                Costo_Final.executeUpdate()
+
+
             }
             val bundle = Bundle().apply {
                 putString("UUID_Pedido", UUID_PedidoR)
@@ -268,6 +328,5 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
     private fun LimpiarCampos(){
         CampoNombreCliente.text.clear()
         CampoNombreCalle.text.clear()
-        CampoColonia.text.clear()
     }
 }

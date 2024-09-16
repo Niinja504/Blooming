@@ -7,6 +7,17 @@
     android:background="@drawable/background"
     tools:context=".Client.orders.Orders">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RCV_Orders_Client"
+        android:layout_width="match_parent"
+        android:layout_height="610dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.768" />
+
     <TextView
         android:id="@+id/textViewInicio"
         android:layout_width="wrap_content"
@@ -36,18 +47,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
 
-    <ImageView
-        android:id="@+id/imageViewCart"
-        android:layout_width="31dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_shopping_cart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
-
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggleButton_Client"
         android:layout_width="319dp"
@@ -75,16 +74,5 @@
             android:text="Entregados"
             tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toggleButton_Client"
-        app:layout_constraintVertical_bias="0.1"
-        tools:ignore="UnknownId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

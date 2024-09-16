@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.752"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.864" />
 
     <Button
         android:id="@+id/btn_CrearVenta_Employed"
@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913"
+        app:layout_constraintVertical_bias="0.948"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText
@@ -49,24 +49,8 @@
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76"
+        app:layout_constraintVertical_bias="0.81"
         tools:ignore="TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/textView1_registrer"
-        android:layout_width="340dp"
-        android:layout_height="45dp"
-        android:background="@drawable/search"
-        android:gravity="center"
-        android:text="Rectángulo"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.225"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093"
-        tools:ignore="MissingConstraints" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/IMG_User_ShopCart"
@@ -81,39 +65,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
-
-    <EditText
-        android:id="@+id/txt_Nombres_Registrer"
-        android:layout_width="285dp"
-        android:layout_height="24dp"
-        android:background="@drawable/rectangle"
-        android:backgroundTint="@android:color/transparent"
-        android:ems="10"
-        android:hint="Buscar..."
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:textAllCaps="false"
-        android:textColor="#595959"
-        android:textColorHint="#919191"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106"
-        tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="21dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.817"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106" />
 
     <TextView
         android:id="@+id/textViewInicio"
@@ -143,15 +94,15 @@
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818" />
+        app:layout_constraintVertical_bias="0.864" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RCV_ShopCart_Employed"
         android:layout_width="409dp"
-        android:layout_height="434dp"
+        android:layout_height="450dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintVertical_bias="0.302" />
 </androidx.constraintlayout.widget.ConstraintLayout>

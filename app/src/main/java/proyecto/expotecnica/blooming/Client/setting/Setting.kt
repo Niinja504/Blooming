@@ -33,7 +33,7 @@ class Setting : Fragment() {
         val TikTok = root.findViewById<ImageView>(R.id.IC_TikTok_Setting_Client)
 
         Ic_Regresar.setOnClickListener{
-            findNavController().navigate(R.id.navigation_dashboard_client)
+            findNavController().navigate(R.id.navigation_profile_client)
         }
 
         IG.setOnClickListener {

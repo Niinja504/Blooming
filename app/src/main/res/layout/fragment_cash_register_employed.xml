@@ -11,12 +11,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RCV_CashRegister_Employed"
         android:layout_width="409dp"
-        android:layout_height="634dp"
+        android:layout_height="610dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.730" />
+        app:layout_constraintVertical_bias="0.750" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/IMG_User_CashRegister"
@@ -64,10 +64,10 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="21dp"
+        android:id="@+id/IC_Limpiar_Bucador_CashRegister"
+        android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/ic_search"
+        android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.817"
@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.106" />
 
     <EditText
-        android:id="@+id/txt_Nombres_Registrer"
+        android:id="@+id/txt_Buscar_CashRegister"
         android:layout_width="285dp"
         android:layout_height="24dp"
         android:background="@drawable/rectangle"
@@ -95,18 +95,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.106"
         tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        android:src="@drawable/ic_filter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
