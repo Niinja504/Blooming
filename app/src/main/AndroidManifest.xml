@@ -24,10 +24,19 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
-            android:name=".card_offers_Client"
+            android:name=".Employed.sales.Card"
             android:exported="false" />
         <activity
-            android:name=".card_orders_delivered_admin"
+            android:name=".Admin.sales.Card"
+            android:exported="false" />
+        <activity
+            android:name=".Client.orders.Card"
+            android:exported="false" />
+        <activity
+            android:name=".Employed.orders.Card"
+            android:exported="false" />
+        <activity
+            android:name=".Client.dashboard.Card"
             android:exported="false" />
         <activity
             android:name=".Client.delivery_address.Ven_Nombre"
@@ -69,10 +78,16 @@
             android:label="@string/title_activity_dashboard_admin"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".SplashScreen"
-            android:exported="false"
+            android:name=".Dashboard_admin"
+            android:exported="true"
             android:label="@string/title_activity_dashboard_admin"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Dashboard_client"
             android:exported="false"
@@ -81,15 +96,10 @@
             android:name=".Sing_in"
             android:exported="false" />
         <activity
-            android:name=".Dashboard_admin"
+            android:name=".SplashScreen"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:windowSoftInputMode="adjustNothing"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".Password_recovery3"
             android:exported="false" />
