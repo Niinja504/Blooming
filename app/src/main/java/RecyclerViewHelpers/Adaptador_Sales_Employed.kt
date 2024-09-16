@@ -87,7 +87,7 @@ class Adaptador_Sales_Employed (var Datos: List<Data_Sales>): RecyclerView.Adapt
                 }
 
                 val navController = findNavController(holder.itemView)
-                navController.navigate(R.id.navigation_Details_Sales_admin, bundle)
+                navController.navigate(R.id.navigation_Details_Sale_Employed, bundle)
             }
         }
     }

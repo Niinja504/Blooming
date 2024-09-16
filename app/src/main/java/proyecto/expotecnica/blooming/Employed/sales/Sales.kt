@@ -33,7 +33,8 @@ class Sales : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_sales_employed, container, false)
 
-        UUID_Empleado = imageViewModel.uuid.value.toString()
+        UUID_Empleado = imageViewModel.uuid.value
+
         val IC_Regresar = root.findViewById<ImageView>(R.id.Regresar_Sales_Employed)
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Sales_Employed)
         val RCV_Sales = root.findViewById<RecyclerView>(R.id.RCV_Sales_Employed)
