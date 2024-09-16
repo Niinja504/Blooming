@@ -81,7 +81,7 @@ class Orders : Fragment() {
                     val miAdaptador = Adaptador_Orders_Admin(productosDB)
                     RCV_Pedido.adapter = miAdaptador
                 } else {
-                    Log.w("OrdersFragment", "No se encontraron datos para mostrar.")
+                    Log.w("Pedidos", "No se encontraron datos para mostrar.")
                 }
             }
         }

@@ -105,7 +105,7 @@ class Adaptador_Orders_Admin (var Datos: List<Data_Orders>): RecyclerView.Adapte
                 }
 
                 val navController = findNavController(holder.itemView)
-                navController.navigate(R.id.navigation_Details_Orders, bundle)
+                navController.navigate(R.id.navigation_Details_Orders_admin, bundle)
             }
         }
     }
@@ -114,15 +114,30 @@ class Adaptador_Orders_Admin (var Datos: List<Data_Orders>): RecyclerView.Adapte
         return withContext(Dispatchers.IO) {
             val productos = mutableListOf<Data_Productos>()
             val objConexion = ClaseConexion().CadenaConexion()
-            objConexion?.use {
-                val query = it.prepareStatement("SELECT * FROM TbProductosPedido WHERE UUID_Pedido = ?")
-                query.setString(1, uuid)
-                val resultSet = query.executeQuery()
+            objConexion?.use { conn ->
+                val query = """
+                SELECT 
+                    p.UUID_Producto, 
+                    p.Cantidad_Producto, 
+                    i.Precio_Producto, 
+                    i.Img_Producto AS imageUrl, 
+                    i.Nombre_Producto AS nombre
+                FROM 
+                    TbProductosPedido p
+                JOIN 
+                    TbInventario i ON p.UUID_Producto = i.UUID_Producto
+                WHERE 
+                    p.UUID_Pedido = ?
+            """.trimIndent()
 
+                val statement = conn.prepareStatement(query)
+                statement.setString(1, uuid)
+                val resultSet = statement.executeQuery()
                 try {
                     while (resultSet.next()) {
                         val producto = Data_Productos(
-                            imageUrl = resultSet.getString("UUID_Producto"),
+                            imageUrl = resultSet.getString("imageUrl"),
+                            nombre = resultSet.getString("nombre"),
                             cantidad = resultSet.getInt("Cantidad_Producto"),
                             precio = resultSet.getFloat("Precio_Producto")
                         )
@@ -130,8 +145,9 @@ class Adaptador_Orders_Admin (var Datos: List<Data_Orders>): RecyclerView.Adapte
                     }
                 } catch (e: SQLException) {
                     e.printStackTrace()
+                } finally {
+                    resultSet.close()
                 }
-
             }
             productos
         }

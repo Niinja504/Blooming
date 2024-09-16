@@ -21,6 +21,7 @@ class ViewHolder_ProductDetails (view: View) : RecyclerView.ViewHolder(view) {
             .error(R.drawable.profile_user)
             .into(imageView)
 
+        nombreTextView.text = producto.nombre
         cantidadTextView.text = producto.cantidad.toString()
         precioTextView.text = producto.precio.toString()
     }

@@ -104,8 +104,8 @@
         tools:layout="@layout/fragment_details_inventory_employed"/>
 
     <fragment
-        android:id="@+id/navigation_Details_OrderDelivered"
-        android:name="proyecto.expotecnica.blooming.Employed.details.Details_OrderDelivered"
+        android:id="@+id/navigation_Details_Order_Employed"
+        android:name="proyecto.expotecnica.blooming.Employed.details.Details_Orders"
         android:label="Detalles Pedidos entregados"
         tools:layout="@layout/fragment_details_orders_employed"/>
 

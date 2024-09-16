@@ -9,10 +9,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
 class Details_Orders : Fragment() {
@@ -64,12 +69,12 @@ class Details_Orders : Fragment() {
             return fragment
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -113,7 +118,6 @@ class Details_Orders : Fragment() {
         val lbl_Costo_Envio = root.findViewById<TextView>(R.id.lbl_Envio_Details_Orders_Admin)
         val lbl_Nota_Pedido = root.findViewById<TextView>(R.id.lbl_Nota_Details_Orders_Admin)
         val btn_Eliminar_Pedido = root.findViewById<Button>(R.id.btn_EliminarVenta_Details_Admin)
-        val btn_Confirmar_Venta = root.findViewById<Button>(R.id.btn_ConfirmarVenta_Details_Admin)
 
         lbl_Nombre_Cliente.text = Nombre_Cliente_Recibido
         lbl_Direccion_Entrega.text = Lugar_Entrega_Recibido
@@ -124,6 +128,21 @@ class Details_Orders : Fragment() {
         RCV_Pedido.adapter = adaptador
 
         Regresar_Detalles.setOnClickListener {
+            findNavController().navigate(R.id.navigation_orders_admin)
+        }
+
+        btn_Eliminar_Pedido.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val objConexion = ClaseConexion().CadenaConexion()
+                val Eliminar_Venta = objConexion?.prepareStatement("DELETE FROM TbPedido_Cliente WHERE UUID_Pedido = ?")!!
+
+                Eliminar_Venta.setString(1, uuid_Recibido)
+                Eliminar_Venta.executeUpdate()
+
+                val commit = objConexion.prepareStatement("COMMIT")
+                commit.executeUpdate()
+            }
+            Toast.makeText(requireContext(), "Se ha eliminado el pedido", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.navigation_orders_admin)
         }
 
