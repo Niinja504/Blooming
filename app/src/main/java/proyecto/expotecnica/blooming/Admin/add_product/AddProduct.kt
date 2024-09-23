@@ -140,7 +140,7 @@ class AddProduct : Fragment() {
                     withContext(Dispatchers.IO){
                         val ObjConexion = ClaseConexion().CadenaConexion()
 
-                        val AddProduct = ObjConexion?.prepareStatement("INSERT INTO TbInventario (UUID_Producto, Img_Producto, Nombre_Producto, Precio_Producto, Cantidad_Bodega_Productos, Categoria_Flores, Categoria_Diseno, Categoria_Evento, Descripcion_Producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) "
+                        val AddProduct = ObjConexion?.prepareStatement("INSERT INTO TbInventario (UUID_Producto, Img_Producto, Nombre_Producto, Precio_Producto, Cantidad_Bodega_Productos, Categoria_Flores, Categoria_Diseno, Categoria_Evento, Descripcion_Producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
                         )!!
 
                         AddProduct.setString(1, UUID.randomUUID().toString())

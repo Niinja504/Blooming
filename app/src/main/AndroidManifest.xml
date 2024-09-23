@@ -78,7 +78,7 @@
             android:label="@string/title_activity_dashboard_admin"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".Dashboard_admin"
+            android:name=".SplashScreen"
             android:exported="true"
             android:label="@string/title_activity_dashboard_admin"
             android:windowSoftInputMode="adjustNothing" >
@@ -92,20 +92,24 @@
             android:name=".Dashboard_client"
             android:exported="false"
             android:label="@string/title_activity_dashboard_employed" />
+
         <activity
             android:name=".Sing_in"
             android:exported="false" />
+
         <activity
-            android:name=".SplashScreen"
-            android:exported="true"
+            android:name=".Dashboard_admin"
+            android:exported="false"
             android:windowSoftInputMode="adjustNothing"/>
 
         <activity
             android:name=".Password_recovery3"
             android:exported="false" />
+
         <activity
             android:name=".Password_recovery2"
             android:exported="false" />
+
         <activity
             android:name=".Password_recovery1"
             android:exported="false" />

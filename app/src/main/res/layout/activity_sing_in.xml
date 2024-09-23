@@ -169,7 +169,7 @@
         android:backgroundTint="@android:color/transparent"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:shadowColor="#E8DADA"
         android:textColor="#000000"
         android:textColorHighlight="#FF6E6E6E"

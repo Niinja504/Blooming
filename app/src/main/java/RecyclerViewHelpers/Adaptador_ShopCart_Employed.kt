@@ -12,8 +12,13 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.Employed.SharedViewModel_Product_Employed
 import proyecto.expotecnica.blooming.R
+import java.sql.SQLException
 
 class Adaptador_ShopCart_Employed(
     var Datos: List<ProductData_Employed>, private val sharedViewModel: SharedViewModel_Product_Employed,
@@ -44,6 +49,9 @@ class Adaptador_ShopCart_Employed(
                 item.cantidad--
                 holder.textViewValue.text = item.cantidad.toString()
                 ActualizaTotalVenta()
+                CoroutineScope(Dispatchers.IO).launch {
+                    ActualizarCantidadProducto(item.uuid, -1)
+                }
             }
         }
 
@@ -51,6 +59,9 @@ class Adaptador_ShopCart_Employed(
             item.cantidad++
             holder.textViewValue.text = item.cantidad.toString()
             ActualizaTotalVenta()
+            CoroutineScope(Dispatchers.IO).launch {
+                ActualizarCantidadProducto(item.uuid, 1)
+            }
         }
 
         holder.IC_Delete.setOnClickListener {
@@ -85,6 +96,22 @@ class Adaptador_ShopCart_Employed(
 
             val navController = findNavController(holder.itemView)
             navController.navigate(R.id.navigation_Details_ShopCart, bundle)
+        }
+    }
+
+    private suspend fun ActualizarCantidadProducto(uuidProducto: String, cantidad: Int) {
+        val objConexion = ClaseConexion().CadenaConexion() ?: return
+        val preparedStatement = objConexion.prepareCall("{call ActualizarCantidadProducto(?, ?)}")
+
+        preparedStatement.setString(1, uuidProducto)
+        preparedStatement.setInt(2, cantidad)
+        try {
+            preparedStatement.execute()
+        } catch (e: SQLException) {
+            e.printStackTrace()
+        } finally {
+            preparedStatement.close()
+            objConexion.close()
         }
     }
 
