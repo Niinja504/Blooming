@@ -3,6 +3,7 @@ package proyecto.expotecnica.blooming
 import android.os.Build
 import android.os.Bundle
 import android.text.InputType
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -61,10 +62,10 @@ class Password_recovery3 : AppCompatActivity() {
 
         ImgOjoNuevaContra.setOnClickListener {
             if (isNuevaContraVisible) {
-                CampoNuevaContra.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                CampoNuevaContra.transformationMethod = PasswordTransformationMethod.getInstance()
                 ImgOjoNuevaContra.setImageResource(R.drawable.ic_hide_password)
             } else {
-                CampoNuevaContra.inputType = InputType.TYPE_CLASS_TEXT
+                CampoNuevaContra.transformationMethod = null
                 ImgOjoNuevaContra.setImageResource(R.drawable.ic_show_password)
             }
             isNuevaContraVisible = !isNuevaContraVisible

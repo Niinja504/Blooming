@@ -18,6 +18,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,6 +64,10 @@ class AddUser : Fragment() {
     private var selectedImageUri: Uri? = null
     private lateinit var IMG_Perfil: ImageView
     private var selectedRole: String? = null  // Variable para almacenar el rol seleccionado =/
+    private lateinit var ImgOjoNewContra: ImageView
+    private lateinit var ImgOjoConfirContra: ImageView
+    private var isNewContraVisible = false
+    private var isConfirContraVisible = false
     private var ContaUsu = 0
 
 
@@ -70,6 +75,9 @@ class AddUser : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+
+        val Contador = requireActivity().getSharedPreferences("Preferencias", Context.MODE_PRIVATE)
+        ContaUsu = Contador.getInt("ContaUsu", 0)
     }
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -95,6 +103,8 @@ class AddUser : Fragment() {
         CampoNombres = root.findViewById(R.id.txt_Nombres_Reg_Admin)
         CampoApellidos = root.findViewById(R.id.txt_Apellidos_Reg_Admin)
         CampoCorreo = root.findViewById(R.id.txt_Correo_Reg_Admin)
+        ImgOjoNewContra = root.findViewById(R.id.Img_Add_Users_new_Admin)
+        ImgOjoConfirContra = root.findViewById(R.id.Img_Add_Users_Confirm_Admin)
         CampoContra = root.findViewById(R.id.txt_Contra_Reg_Admin)
         CampoConfirmarContra = root.findViewById(R.id.txt_ConfirmarContra_Reg_Admin)
         CampoEdad = root.findViewById(R.id.txt_Edad_Reg_Admin)
@@ -102,6 +112,30 @@ class AddUser : Fragment() {
         IMG_Perfil = root.findViewById(R.id.Img_AddUser_Admin)
         val SubirFoto = root.findViewById<ImageView>(R.id.ic_SubirIMG_AddUser_Admin)
         val Btn_CrearCuenta = root.findViewById<Button>(R.id.btn_AgregarUser_Admin)
+
+        ImgOjoNewContra.setOnClickListener {
+            if (isNewContraVisible) {
+                CampoContra.transformationMethod = PasswordTransformationMethod.getInstance()
+                ImgOjoNewContra.setImageResource(R.drawable.ic_hide_password)
+            } else {
+                CampoContra.transformationMethod = null
+                ImgOjoNewContra.setImageResource(R.drawable.ic_show_password)
+            }
+            isNewContraVisible = !isNewContraVisible
+            CampoContra.setSelection(CampoContra.text.length)
+        }
+
+        ImgOjoConfirContra.setOnClickListener {
+            if (isConfirContraVisible) {
+                CampoConfirmarContra.transformationMethod = PasswordTransformationMethod.getInstance()
+                ImgOjoConfirContra.setImageResource(R.drawable.ic_hide_password)
+            } else {
+                CampoConfirmarContra.transformationMethod = null
+                ImgOjoConfirContra.setImageResource(R.drawable.ic_show_password)
+            }
+            isConfirContraVisible = !isConfirContraVisible
+            CampoConfirmarContra.setSelection(CampoConfirmarContra.text.length)
+        }
 
         CampoNombres.filters = arrayOf(InputFilter.LengthFilter(15))
         CampoApellidos.filters = arrayOf(InputFilter.LengthFilter(15))
@@ -453,6 +487,16 @@ class AddUser : Fragment() {
         private const val REQUEST_IMAGE_CAPTURE_AddUser = 1
         private const val REQUEST_IMAGE_PICK_AddUser = 2
         private const val REQUEST_CAMERA_PERMISSION_AddUser = 100
+    }
+
+    //Este metodo publico nos permitira guardar el número del contador para que no se reinice en cero
+    override fun onDestroy() {
+        super.onDestroy()
+        val Contador = requireActivity().getSharedPreferences("Preferencias", Context.MODE_PRIVATE)
+        with(Contador.edit()) {
+            putInt("ContaUsu", ContaUsu)
+            apply()
+        }
     }
 
     private fun LimpiarCampo(){

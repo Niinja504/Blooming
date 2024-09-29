@@ -152,7 +152,7 @@
 
     <EditText
         android:id="@+id/txt_Contra_Sing_In"
-        android:layout_width="310dp"
+        android:layout_width="280dp"
         android:layout_height="45dp"
         android:backgroundTint="@android:color/transparent"
         android:ems="10"
@@ -164,11 +164,23 @@
         android:textColorHint="#FF6E6E6E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.381"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.311"
+        app:layout_constraintVertical_bias="0.31"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/Img_SingIn"
+        android:layout_width="38dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.315"
+        app:srcCompat="@drawable/ic_hide_password" />
 
     <EditText
         android:id="@+id/txt_Correo_Sing_In"

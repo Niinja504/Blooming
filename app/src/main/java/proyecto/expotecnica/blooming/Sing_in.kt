@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -70,6 +71,8 @@ class Sing_in : AppCompatActivity() {
     private lateinit var dialogView: View
     private lateinit var campoCorreo: EditText
     private lateinit var campoContrasena: EditText
+    private lateinit var ImgOjo: ImageView
+    private var isContraVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,10 +96,24 @@ class Sing_in : AppCompatActivity() {
         // Variables
         campoCorreo = findViewById(R.id.txt_Correo_Sing_In)
         campoContrasena = findViewById(R.id.txt_Contra_Sing_In)
+        ImgOjo = findViewById(R.id.Img_SingIn)
         val olvidoSuContra: TextView = findViewById(R.id.lbl_ContraOlvidada_Sing_In)
         val btnIniciarSesion: Button = findViewById(R.id.btn_Iniciar_Sesion_Sing_in)
         val btnIngresarConGoogle: Button = findViewById(R.id.btn_Google_Sing_In)
         val registrarse: TextView = findViewById(R.id.lbl_Registar_Sing_In)
+
+        //Condiciòn que nos permite cambiar de icono por medio de un control de click
+        ImgOjo.setOnClickListener {
+            if (isContraVisible) {
+                campoContrasena.transformationMethod = PasswordTransformationMethod.getInstance()
+                ImgOjo.setImageResource(R.drawable.ic_hide_password)
+            } else {
+                campoContrasena.transformationMethod = null
+                ImgOjo.setImageResource(R.drawable.ic_show_password)
+            }
+            isContraVisible = !isContraVisible
+            campoContrasena.setSelection(campoContrasena.text.length)
+        }
 
         // Configurar Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
