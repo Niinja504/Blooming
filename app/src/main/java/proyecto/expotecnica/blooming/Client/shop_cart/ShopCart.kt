@@ -80,6 +80,10 @@ class ShopCart : Fragment() {
         ActualizaTotalVenta()
 
         BtnAdd_Pedido.setOnClickListener {
+            if (sharedViewModel.productList.value.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "No se puede realizar el pedido porque su carrito de compras está vacío. Por favor, elija al menos un producto para continuar.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener //Con este retorno salimos de listener =/
+            }
             lifecycleScope.launch {
                 val totalVenta = calcularTotalVenta().toFloat()
                 val UUID_Pedido = UUID.randomUUID().toString()

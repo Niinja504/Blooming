@@ -57,6 +57,9 @@ class DeliveryDate : Fragment() {
 
         // Llamar a todos los elementos
         val Calendario = root.findViewById<CalendarView>(R.id.CVW_Entrega_Pedido_Client)
+        val calendario = Calendar.getInstance()
+        calendario.timeInMillis = System.currentTimeMillis()
+        Calendario.minDate = calendario.timeInMillis
         val radioGroup = root.findViewById<RadioGroup>(R.id.radioGroupHora)
         val RadioButton8AM = root.findViewById<RadioButton>(R.id.RD_Hora_8AM_date_client)
         val RadioButton12AM = root.findViewById<RadioButton>(R.id.RD_Hora_12AM_date_client)

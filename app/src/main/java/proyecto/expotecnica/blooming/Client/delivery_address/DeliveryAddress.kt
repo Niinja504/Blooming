@@ -276,9 +276,6 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
                     Toast.makeText(requireContext(), "Nombre recibido: $name", Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancelar") { dialog, _ ->
-                dialog.dismiss()
-            }
             .create()
             .show()
     }

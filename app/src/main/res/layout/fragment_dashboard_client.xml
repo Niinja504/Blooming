@@ -48,18 +48,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.117" />
 
-    <ImageView
-        android:id="@+id/imageViewCart"
-        android:layout_width="31dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_shopping_cart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/IMG_User_Dashboard"
         android:layout_width="45dp"

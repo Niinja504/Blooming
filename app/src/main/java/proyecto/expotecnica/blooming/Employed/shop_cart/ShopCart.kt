@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -82,6 +83,10 @@ class ShopCart : Fragment() {
         ActualizaTotalVenta()
 
         BtnAdd_Venta.setOnClickListener {
+            if (sharedViewModel.productList.value.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "No se puede realizar la venta porque su caja de venta está vacía. Por favor, agregue al menos un producto para continuar.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener //Con este retorno salimos de listener =/
+            }
             lifecycleScope.launch {
                 if (ValidarCampo()) {
                     val totalVenta = calcularTotalVenta().toFloat()

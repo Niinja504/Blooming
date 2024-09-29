@@ -81,6 +81,9 @@ class Dedication : Fragment()  {
                     Add_Dedicatoria.setString(5, CampoNombre.text.toString())
                     Add_Dedicatoria.executeUpdate()
                 }
+                fragmentManager?.popBackStack()
+                fragmentManager?.popBackStack()
+                fragmentManager?.popBackStack()
                 findNavController().navigate(R.id.navigation_shop_client)
                 Toast.makeText(requireContext(), "Se ha finalizado el pedido", Toast.LENGTH_LONG).show()
                 LimpiarCamp()
