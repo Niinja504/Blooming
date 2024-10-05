@@ -82,12 +82,11 @@ class AddProduct : Fragment() {
         }
 
         //DropDownDesings
-        val Items1 = listOf("Cajas", "Ramos", "Botellas", "Corazones", "Rosas preservadas")
+        val Items1 = listOf("Cajas", "Ramos", "Botellas", "Corazones", "Rosas preservadas", "Individual")
         val autoComplete1 : AutoCompleteTextView = root.findViewById(R.id.autoComplete_CategoryDesing_AddProduct_Admin)
         val Adaptador1 = ArrayAdapter(requireContext(), R.layout.list_item, Items1)
         autoComplete1.setAdapter(Adaptador1)
-        autoComplete1.onItemClickListener = AdapterView.OnItemClickListener {
-                adapterView, view, i, l ->
+        autoComplete1.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
             selectedDesing = adapterView.getItemAtPosition(i) as String
             Toast.makeText(requireContext(), "Diseño: $selectedDesing", Toast.LENGTH_SHORT).show()
         }
@@ -130,6 +129,7 @@ class AddProduct : Fragment() {
         Btn_Add.setOnClickListener {
             lifecycleScope.launch{
                 if (ValidarCampos()){
+                    Toast.makeText(requireContext(), "Por favor, no cierre la aplicación, ya que se está subiendo el producto. Gracias.", Toast.LENGTH_SHORT).show()
                     val imageUrl = if (selectedImageUri != null) {
                         val imageBitmap = getBitmapFromUri(requireContext(),selectedImageUri!!)
                         val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
@@ -155,6 +155,7 @@ class AddProduct : Fragment() {
                         AddProduct.executeUpdate()
 
                     }
+                    Toast.makeText(requireContext(), "Se subido el producto exitosamente.", Toast.LENGTH_SHORT).show()
                     LimpiarCampo()
                     findNavController().navigate(R.id.navigation_inventory_admin)
                 }

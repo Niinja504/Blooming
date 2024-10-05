@@ -91,6 +91,7 @@ class AddOffers : Fragment() {
                 if (validarCampos()) {
                     val tituloExiste = tituloExiste(campoTitulo.text.toString())
                     if (!tituloExiste) {
+                        Toast.makeText(requireContext(), "Por favor, no cierre la aplicación, ya que se está subiendo la oferta. Gracias.", Toast.LENGTH_SHORT).show()
                         val imageUrl = if (selectedImageUri != null) {
                             val imageBitmap = getBitmapFromUri(requireContext(), selectedImageUri!!)
                             val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
@@ -113,6 +114,7 @@ class AddOffers : Fragment() {
                             agregar.setString(6, imageUrl)
                             agregar.executeUpdate()
                         }
+                        Toast.makeText(requireContext(), "Se subido la oferta exitosamente.", Toast.LENGTH_SHORT).show()
                         LimpiarCampos()
                         findNavController().navigate(R.id.navigation_offers_admin)
                     } else {

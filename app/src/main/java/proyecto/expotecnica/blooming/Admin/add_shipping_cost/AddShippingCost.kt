@@ -207,6 +207,7 @@ class AddShippingCost : Fragment(), OnMapReadyCallback {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), "Se ha añadido exitosamente", Toast.LENGTH_LONG).show()
                         Limpiar()
+                        findNavController().navigate(R.id.navigation_shipping_cost_admin)
                     }
                 } catch (e: SQLException) {
                     withContext(Dispatchers.Main) {

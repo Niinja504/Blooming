@@ -153,7 +153,7 @@ class Adaptador_Inventory_Admin (var Datos: List<DataInventory_Admin>): Recycler
             val Update_Descripcion = dialogView.findViewById<EditText>(R.id.Txt_Descripcion_Product)
 
 
-            Update_Nombre.filters = arrayOf(InputFilter.LengthFilter(10))
+            Update_Nombre.filters = arrayOf(InputFilter.LengthFilter(28))
             Update_Precio.filters = arrayOf(InputFilter.LengthFilter(4))
             Update_Descripcion.filters = arrayOf(InputFilter.LengthFilter(35))
 

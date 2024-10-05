@@ -84,7 +84,7 @@ class ShopCart : Fragment() {
 
         BtnAdd_Venta.setOnClickListener {
             if (sharedViewModel.productList.value.isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "No se puede realizar la venta porque su caja de venta está vacía. Por favor, agregue al menos un producto para continuar.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "No se puede realizar la venta porque su caja de venta está vacía. Por favor, agregue al menos un producto para continuar.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener //Con este retorno salimos de listener =/
             }
             lifecycleScope.launch {

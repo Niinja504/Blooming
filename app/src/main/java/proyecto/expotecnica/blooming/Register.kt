@@ -23,7 +23,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
@@ -41,13 +40,8 @@ import modelo.ImageUtils
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import modelo.AuFi
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.tasks.await
 import java.security.MessageDigest
 import java.util.UUID
@@ -66,8 +60,6 @@ class Register : AppCompatActivity() {
     private lateinit var dialogView: View
     private var currentPhotoPath: String? = null
     private var selectedImageUri: Uri? = null
-    private lateinit var authManager: AuFi
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -82,27 +74,9 @@ class Register : AppCompatActivity() {
 
         setContentView(R.layout.activity_register)
 
-        authManager = AuFi(this)
-        authManager.authenticateUser(
-            onSuccess = {},
-            onFailure = {
-                // Manejar el fallo de autenticación
-                finish()
-            }
-        )
-
 
         FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_register)
-
-        authManager = AuFi(this)
-        authManager.authenticateUser(
-            onSuccess = {},
-            onFailure = {
-                // Manejar el fallo de autenticación
-                finish()
-            }
-        )
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -368,6 +342,8 @@ class Register : AppCompatActivity() {
                     "El usuario eligio la imagen predeternimada"
                 }
 
+                Toast.makeText(applicationContext, "Por favor, no cierre la aplicación, ya que se está creando la cuenta. Gracias", Toast.LENGTH_SHORT).show()
+
                 // Inserción en la base de datos
                 withContext(Dispatchers.IO) {
                     val ObjConexion = ClaseConexion().CadenaConexion()
@@ -396,6 +372,7 @@ class Register : AppCompatActivity() {
                 }
 
                 dialog.dismiss()
+                Toast.makeText(applicationContext, "Se creó la cuenta exitosamente.", Toast.LENGTH_SHORT).show()
                 AbrirVenSingIn()
             }
         }

@@ -43,24 +43,6 @@
         app:layout_constraintVertical_bias="0.469"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/btn_Google_Sing_In"
-        android:layout_width="340dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#FFFFFF"
-        android:elevation="4dp"
-        android:text="    Ingresar con Google"
-        android:textColor="#F38F9A"
-        android:textSize="24sp"
-        app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.582"
-        tools:ignore="MissingConstraints" />
-
 
     <TextView
         android:id="@+id/lbl_Registar_Sing_In"
@@ -74,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.635"
+        app:layout_constraintVertical_bias="0.563"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -104,19 +86,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.144" />
-
-    <TextView
-        android:id="@+id/tv_O"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="----   O   ----"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_Google_Sing_In"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView1_singin"

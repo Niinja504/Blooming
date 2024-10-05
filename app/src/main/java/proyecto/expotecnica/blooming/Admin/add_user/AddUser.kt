@@ -161,6 +161,7 @@ class AddUser : Fragment() {
                 if (ValidarCampos()){
                     val correoExiste = CorreoExiste(CampoCorreo.text.toString())
                     if (!correoExiste){
+                        Toast.makeText(requireContext(), "Por favor, no cierre la aplicación, ya que se está creando la cuenta. Gracias", Toast.LENGTH_SHORT).show()
                         val imageUrl = if (selectedImageUri != null) {
                             val imageBitmap = getBitmapFromUri(requireContext(),selectedImageUri!!)
                             val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
@@ -203,6 +204,7 @@ class AddUser : Fragment() {
                             Crear.setInt(11, Sesion)
                             Crear.executeUpdate()
                         }
+                        Toast.makeText(requireContext(), "Se creó la cuenta exitosamente.", Toast.LENGTH_SHORT).show()
                         LimpiarCampo()
                         findNavController().navigate(R.id.navigation_users_admin)
                     }

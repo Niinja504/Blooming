@@ -11,7 +11,7 @@
         android:layout_width="370dp"
         android:layout_height="40dp"
         android:backgroundTint="#FAD4D4"
-        android:text="Eliminar venta"
+        android:text="Eliminar pedido"
         android:textAlignment="viewStart"
         android:textColor="#625A5A"
         app:layout_constraintBottom_toBottomOf="parent"

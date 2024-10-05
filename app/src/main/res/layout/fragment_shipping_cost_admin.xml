@@ -10,12 +10,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RCV_ShippingCost_Admin"
         android:layout_width="409dp"
-        android:layout_height="634dp"
+        android:layout_height="585dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.678" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/IMG_User_ShippingCost"

@@ -51,18 +51,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
 
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        android:src="@drawable/ic_filter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093" />
-
     <TextView
         android:id="@+id/textView1_registrer"
         android:layout_width="340dp"
