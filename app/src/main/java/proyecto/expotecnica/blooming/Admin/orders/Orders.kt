@@ -65,7 +65,7 @@ class Orders : Fragment() {
                         btnPedidosEntregados.id -> "No"
                         else -> return@launch
                     }
-                    val productosDB = MostrarDatos(pedidoPendiente)
+                    val productosDB = MostrarDatos(pedidoPendiente).distinctBy { it.uuid }
                     withContext(Dispatchers.Main) {
                         val miAdaptador = Adaptador_Orders_Admin(productosDB)
                         RCV_Pedido.adapter = miAdaptador
@@ -75,7 +75,7 @@ class Orders : Fragment() {
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            val productosDB = MostrarDatos("Si")
+            val productosDB = MostrarDatos("Si").distinctBy { it.uuid }
             withContext(Dispatchers.Main) {
                 if (productosDB.isNotEmpty()) {
                     val miAdaptador = Adaptador_Orders_Admin(productosDB)
@@ -92,7 +92,7 @@ class Orders : Fragment() {
     private suspend fun MostrarDatos(pedidoPendiente: String): List<Data_Orders> {
         val objConexion = ClaseConexion().CadenaConexion() ?: return emptyList()
         val preparedStatement = objConexion.prepareStatement("""
-        SELECT 
+        SELECT
         p.UUID_Pedido AS uuid,
         p.UUID_Cliente AS uuid_Cliente,
         p.Fecha_Venta AS FechaVenta,
@@ -119,7 +119,7 @@ class Orders : Fragment() {
         LEFT JOIN TbDireccionPedido d ON p.UUID_Pedido = d.UUID_Pedido
         LEFT JOIN TbDedicatorias de ON p.UUID_Pedido = de.UUID_Pedido
         WHERE p.Pedido_Pendiente = ?
-    """)
+        """)
         preparedStatement.setString(1, pedidoPendiente)
         val resultSet = preparedStatement.executeQuery() ?: return emptyList()
 
@@ -149,6 +149,6 @@ class Orders : Fragment() {
             )
             pedidos.add(pedido)
         }
-        return pedidos
+        return pedidos.toList()
     }
 }

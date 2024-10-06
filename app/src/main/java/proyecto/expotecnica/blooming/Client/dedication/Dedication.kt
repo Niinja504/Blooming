@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -52,11 +53,16 @@ class Dedication : Fragment()  {
         val root = inflater.inflate(R.layout.fragment_dedication_client, container, false)
 
         UUID_PedidoR = arguments?.getString("UUID_Pedido")
+        val Regresar = root.findViewById<ImageView>(R.id.Regresar_Dedication_client)
         val CbSinMensaje = root.findViewById<MaterialCheckBox>(R.id.cbx_SinMensaje_Tarjeta_Client)
         val CbSinNombre = root.findViewById<MaterialCheckBox >(R.id.cbx_SinNombre_Tarjeta_Client)
         CampoDedicatoria = root.findViewById(R.id.txt_Dedicatoria_Pedido_Client)
         CampoNombre = root.findViewById(R.id.txt_Nombre_Pedido_Client)
         val btn_Dedicatoria = root.findViewById<Button>(R.id.btn_Continuar_Didicatoria_client)
+
+        Regresar.setOnClickListener {
+            findNavController().navigate(R.id.delivered_Address)
+        }
 
         CbSinMensaje.setOnCheckedChangeListener { _, isChecked ->
             SinMensaje = if (isChecked) "Si" else "No"
@@ -84,7 +90,6 @@ class Dedication : Fragment()  {
                 fragmentManager?.popBackStack()
                 fragmentManager?.popBackStack()
                 fragmentManager?.popBackStack()
-                findNavController().navigate(R.id.navigation_shop_client)
                 Toast.makeText(requireContext(), "Se ha finalizado el pedido", Toast.LENGTH_LONG).show()
                 LimpiarCamp()
                 delay(3000)

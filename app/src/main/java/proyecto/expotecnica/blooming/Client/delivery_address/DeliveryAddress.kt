@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -87,6 +88,7 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
 
         UUID_PedidoR = arguments?.getString("UUID_Pedido")
         Costo_Pedido_Cliente = arguments?.getFloat("Costo_Pedido")
+        val Regresar = root.findViewById<ImageView>(R.id.Regresar_Delivery_Address_client)
 
         CampoNombreCliente = root.findViewById(R.id.txt_Nombre_DireEntrega_Pedido)
         CampoNombreCalle = root.findViewById(R.id.txt_Calle_DireEntrega_Pedido)
@@ -98,6 +100,10 @@ class DeliveryAddress : Fragment(), OnMapReadyCallback {
         CampoNombreCalle.filters = arrayOf(InputFilter.LengthFilter(50))
 
         Switch.isChecked = false
+
+        Regresar.setOnClickListener {
+            findNavController().navigate(R.id.delivered_date)
+        }
 
         val mapOptionButton: ImageButton = root.findViewById(R.id.MapOptionsMenuDelivery)
         val popupMenu = PopupMenu(requireContext(), mapOptionButton)

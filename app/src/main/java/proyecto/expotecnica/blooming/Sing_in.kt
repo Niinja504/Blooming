@@ -63,6 +63,7 @@ import java.time.format.DateTimeFormatter
 
 
 class Sing_in : AppCompatActivity() {
+    //Variable a nivel de clase =)
     private lateinit var campoCorreo: EditText
     private lateinit var campoContrasena: EditText
     private lateinit var ImgOjo: ImageView
@@ -70,12 +71,6 @@ class Sing_in : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Configurar Firebase App Check
-        val firebaseAppCheck = FirebaseAppCheck.getInstance()
-        firebaseAppCheck.installAppCheckProviderFactory(
-            SafetyNetAppCheckProviderFactory.getInstance()
-        )
 
         enableEdgeToEdge()
         setContentView(R.layout.activity_sing_in)
@@ -85,7 +80,7 @@ class Sing_in : AppCompatActivity() {
             insets
         }
 
-        // Variables
+        // Variables que se estaran utilizando que previamente se inicializaron a nivel de clase =)
         campoCorreo = findViewById(R.id.txt_Correo_Sing_In)
         campoContrasena = findViewById(R.id.txt_Contra_Sing_In)
         ImgOjo = findViewById(R.id.Img_SingIn)
@@ -93,7 +88,7 @@ class Sing_in : AppCompatActivity() {
         val btnIniciarSesion: Button = findViewById(R.id.btn_Iniciar_Sesion_Sing_in)
         val registrarse: TextView = findViewById(R.id.lbl_Registar_Sing_In)
 
-        //Condiciòn que nos permite cambiar de icono por medio de un control de click
+        //Condiciòn que nos permite cambiar de icono por medio de un control de click =)
         ImgOjo.setOnClickListener {
             if (isContraVisible) {
                 campoContrasena.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -154,7 +149,7 @@ class Sing_in : AppCompatActivity() {
             }
         }
 
-        // Inicio de sesión con correo y contraseña
+        // Inicio de sesión con correo y contraseña =)
         btnIniciarSesion.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
                 try {
@@ -162,6 +157,13 @@ class Sing_in : AppCompatActivity() {
                         val objConexion: Connection? = ClaseConexion().CadenaConexion()
                         val contrasenaEncriptada: String = hashSHA256(campoContrasena.text.toString())
                         val email = campoCorreo.text.toString()
+
+                        if (!correoExiste(email)) {
+                            withContext(Dispatchers.Main) {
+                                campoCorreo.error = "El correo no existe"
+                            }
+                            return@launch
+                        }
 
                         var rol: Int? = null
                         var usuarioEncontrado = false
@@ -187,11 +189,12 @@ class Sing_in : AppCompatActivity() {
                             }
                         }
 
-                        // Redireccionar según el rol encontrado
+                        // Redireccionar según el rol encontrado =)
                         withContext(Dispatchers.Main) {
                             if (usuarioEncontrado) {
                                 when (rol) {
                                     0 -> {
+                                        //Tira una coroutina en el hilo io para actualizar la sesion del usuario =)
                                         withContext(Dispatchers.IO){
                                             val ObjConexion = ClaseConexion().CadenaConexion()
                                             val Abrir = ObjConexion?.prepareStatement("UPDATE TbUsers SET Sesion_User = ? WHERE UUID_User = ?")!!
@@ -255,8 +258,7 @@ class Sing_in : AppCompatActivity() {
             }
         }
 
-
-        // Funciones para abrir las otras pantallas
+        // eventos para abrir las otras pantallas
         olvidoSuContra.setOnClickListener {
             val pantallaRecuperarContra = Intent(this, Password_recovery1::class.java)
             startActivity(pantallaRecuperarContra)
@@ -270,6 +272,7 @@ class Sing_in : AppCompatActivity() {
         }
     }
 
+    //Metodo que nos permitira validar todos los campos para que no sean vacios
     private fun ValidarCampos(): Boolean {
         val Correo = campoCorreo.text.toString()
         val Contra = campoContrasena.text.toString()
@@ -293,7 +296,41 @@ class Sing_in : AppCompatActivity() {
         return !HayErrores
     }
 
-    // Método para obtener los detalles del dispositivo
+    private suspend fun correoExiste(correo: String): Boolean {
+        val sql = "SELECT COUNT(*) AS correo_existe FROM TbUsers WHERE Email_User = ?"
+        val claseConexion = ClaseConexion()
+        val conexion = claseConexion.CadenaConexion()
+
+        var correoExiste = false
+
+        if (conexion != null) {
+            try {
+                val statement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
+                statement.setString(1, correo) // Pasamos el parámetro de manera segura
+
+                val resultado = withContext(Dispatchers.IO) { statement.executeQuery() }
+
+                if (resultado.next()) {
+                    val count = resultado.getInt("correo_existe")
+                    correoExiste = count > 0
+                }
+            } catch (e: Exception) {
+                println("Error al ejecutar la consulta SQL: $e")
+            } finally {
+                try {
+                    withContext(Dispatchers.IO) { conexion.close() }
+                } catch (e: Exception) {
+                    println("Error al cerrar la conexión: $e")
+                }
+            }
+        } else {
+            println("No se pudo establecer la conexión a la base de datos.")
+        }
+
+        return correoExiste
+    }
+
+    // Método para obtener los detalles del dispositivo y luego pasarle los parametros al correo que se enviara
     data class DeviceDetails(val deviceName: String, val manufacturer: String, val model: String, val date: String, val time: String)
 
     private fun getDeviceDetails(): DeviceDetails {

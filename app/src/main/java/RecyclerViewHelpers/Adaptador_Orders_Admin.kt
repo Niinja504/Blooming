@@ -27,12 +27,37 @@ class Adaptador_Orders_Admin (var Datos: List<Data_Orders>): RecyclerView.Adapte
 
         CoroutineScope(Dispatchers.IO).launch {
             val objConexion = ClaseConexion().CadenaConexion()
-            val deletePedido = objConexion?.prepareStatement("DELETE FROM TbPedido_Cliente WHERE UUID_Pedido = ?")
-            deletePedido?.setString(1, uuid)
-            deletePedido?.executeUpdate()
 
-            val commit = objConexion?.prepareStatement("COMMIT")
-            commit?.executeUpdate()
+            objConexion?.let { conexion ->
+                try {
+                    val deleteProductos = objConexion?.prepareStatement("DELETE FROM TbProductosPedido WHERE UUID_Pedido = ?")
+                    deleteProductos?.setString(1, uuid)
+                    deleteProductos?.executeUpdate()
+
+                    val deleteHorario = objConexion?.prepareStatement("DELETE FROM TbHorarioPedido WHERE UUID_Pedido = ?")
+                    deleteHorario?.setString(1, uuid)
+                    deleteHorario?.executeUpdate()
+
+                    val deleteDireccion = objConexion?.prepareStatement("DELETE FROM TbDireccionPedido WHERE UUID_Pedido = ?")
+                    deleteDireccion?.setString(1, uuid)
+                    deleteDireccion?.executeUpdate()
+
+                    val deleteDedicatoria = objConexion?.prepareStatement("DELETE FROM TbDedicatorias WHERE UUID_Pedido = ?")
+                    deleteDedicatoria?.setString(1, uuid)
+                    deleteDedicatoria?.executeUpdate()
+
+                    val deletePedido = objConexion?.prepareStatement("DELETE FROM TbPedido_Cliente WHERE UUID_Pedido = ?")
+                    deletePedido?.setString(1, uuid)
+                    deletePedido?.executeUpdate()
+
+                    val commit = objConexion?.prepareStatement("COMMIT")
+                    commit?.executeUpdate()
+                }   catch (e: SQLException) {
+                    e.printStackTrace()
+                } finally {
+                    conexion.close()
+                }
+            }
         }
 
         Datos = ListaDatos.toList()

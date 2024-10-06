@@ -74,10 +74,10 @@ class ChangePassword : Fragment() {
 
         ImgOjoConfirmarContra.setOnClickListener {
             if (isConfirmarContraVisible) {
-                CampoConfirmarContra.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                CampoConfirmarContra.transformationMethod = PasswordTransformationMethod.getInstance()
                 ImgOjoConfirmarContra.setImageResource(R.drawable.ic_hide_password)
             } else {
-                CampoConfirmarContra.inputType = InputType.TYPE_CLASS_TEXT
+                CampoConfirmarContra.transformationMethod = null
                 ImgOjoConfirmarContra.setImageResource(R.drawable.ic_show_password)
             }
             isConfirmarContraVisible = !isConfirmarContraVisible

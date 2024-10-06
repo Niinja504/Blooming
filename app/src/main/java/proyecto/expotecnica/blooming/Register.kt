@@ -62,29 +62,14 @@ class Register : AppCompatActivity() {
     private var selectedImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Inicializar Firebase App Check
-        val firebaseAppCheck = FirebaseAppCheck.getInstance()
-        firebaseAppCheck.installAppCheckProviderFactory(
-            PlayIntegrityAppCheckProviderFactory.getInstance()
-        )
-
-        // Asegúrate de inicializar Firebase antes de usar otras funcionalidades de Firebase
-        FirebaseApp.initializeApp(this)
-
         setContentView(R.layout.activity_register)
-
-
-        FirebaseApp.initializeApp(this)
-        setContentView(R.layout.activity_register)
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicialización de vistas
+        // Inicialización de vistas y componentes
         CampoNombres = findViewById(R.id.txt_Nombres_Registrer)
         CampoApellidos = findViewById(R.id.txt_Apellidos_Registrer)
         CampoUsuario = findViewById(R.id.txt_Usuario_Registrer)
@@ -111,7 +96,7 @@ class Register : AppCompatActivity() {
 
         CampoNombres.requestFocus()
 
-        // Función para abrir la otra pantalla
+        //Evento para abrir la otra pantalla =\
         lbl_IniciarSesion.setOnClickListener {
             AbrirVenSingIn()
         }
@@ -403,10 +388,8 @@ class Register : AppCompatActivity() {
         when (requestCode) {
             REQUEST_CAMERA_PERMISSION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    // El permiso ha sido concedido, abrir la cámara
                     abrirCamara()
                 } else {
-                    // El permiso ha sido denegado, mostrar un mensaje o manejarlo apropiadamente
                     Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show()
                 }
                 return
@@ -416,10 +399,8 @@ class Register : AppCompatActivity() {
 
     private fun abrirCamara() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            // El permiso no está concedido, solicitar el permiso
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), REQUEST_CAMERA_PERMISSION)
         } else {
-            // El permiso está concedido, abrir la cámara
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             val photoFile: File? = try {
                 ImageUtils.createImageFile(this)
@@ -446,7 +427,6 @@ class Register : AppCompatActivity() {
         if (intent.resolveActivity(packageManager) != null) {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_PICK)
         } else {
-            // Show an error message to the user
             Toast.makeText(this, "No application available to pick an image", Toast.LENGTH_SHORT).show()
         }
     }

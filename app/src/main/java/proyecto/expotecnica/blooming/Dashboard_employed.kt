@@ -27,7 +27,7 @@ class Dashboard_employed : AppCompatActivity() {
         binding = ActivityDashboardEmployedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar el ViewModel
+        // Inicializamos el ViewModel :)
         imageViewModel = ViewModelProvider(this).get(ImageViewModel_Employed::class.java)
 
         val navView: BottomNavigationView = binding.navView

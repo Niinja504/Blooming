@@ -8,6 +8,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 
 class MostrarIMG(private val claseConexion: ClaseConexion) {
+    //Este metodo lo que nos permite es mostrar la foto de perfil en la miniatura cicular una vez se inicia sesión =/
     suspend fun obtenerImagenUsuario(uuid: String): String? {
         val sql = "SELECT Img_User FROM TbUsers WHERE UUID_User = ?"
         var urlImagen: String? = null
@@ -39,7 +40,7 @@ class MostrarIMG(private val claseConexion: ClaseConexion) {
                 }
             }
         }
-        //retornamos en la direcciòn de la imagen
+        //retornamos en la direcciòn de la imagen =)
         return urlImagen
     }
 }

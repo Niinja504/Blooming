@@ -24,6 +24,7 @@ import proyecto.expotecnica.blooming.R
 
 class Dashboard : Fragment() {
     private val imageViewModel: ImageViewModel_Client by activityViewModels()
+    private lateinit var IMGUser: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,7 +37,7 @@ class Dashboard : Fragment() {
     ): View {
         val root = inflater.inflate(R.layout.fragment_dashboard_client, container, false)
 
-        val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Dashboard)
+        IMGUser = root.findViewById(R.id.IMG_User_Dashboard)
 
         val RCV_Offers = root.findViewById<RecyclerView>(R.id.RCV_Offers_Client)
         //Asignarle un Layout al RecyclerView

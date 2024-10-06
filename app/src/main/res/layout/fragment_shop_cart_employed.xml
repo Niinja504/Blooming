@@ -25,14 +25,14 @@
     <Button
         android:id="@+id/btn_CrearVenta_Employed"
         android:layout_width="370dp"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:text="Agregar compra"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948"
+        app:layout_constraintVertical_bias="0.999"
         tools:ignore="TouchTargetSizeCheck" />
 
     <EditText

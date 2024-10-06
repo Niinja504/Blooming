@@ -27,7 +27,7 @@ class Dashboard_admin : AppCompatActivity() {
         binding = ActivityDashboardAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Inicializar el ViewModel
+        // Inicializamos el ViewModel =/
         imageViewModel = ViewModelProvider(this).get(ImageViewModel_Admin::class.java)
 
         val navView: BottomNavigationView = binding.navView

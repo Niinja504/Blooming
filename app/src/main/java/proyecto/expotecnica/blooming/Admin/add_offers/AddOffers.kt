@@ -127,10 +127,9 @@ class AddOffers : Fragment() {
         return root
     }
 
-
     private fun setupAutoCompleteTextView(root: View, items: List<DataListProducts_Admin>) {
         val autoComplete: AutoCompleteTextView = root.findViewById(R.id.autoComplete_AddOffers_Admin)
-        val adaptador = ArrayAdapter(requireContext(), R.layout.list_item, items.map { it.nombre }) // Obtener solo los nombres
+        val adaptador = ArrayAdapter(requireContext(), R.layout.list_item, items.map { it.nombre }) // Obtener solo los nombres =)
         autoComplete.setAdapter(adaptador)
         autoComplete.onItemClickListener = AdapterView.OnItemClickListener { adapterView, _, position, _ ->
             selectedProduct = items[position]

@@ -41,7 +41,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import modelo.AuFi
 import modelo.ClaseConexion
 import modelo.ImageUtils
 import proyecto.expotecnica.blooming.R
@@ -316,7 +315,7 @@ class AddUser : Fragment() {
         if (conexion != null) {
             try {
                 val statement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
-                statement.setString(1, correo) // Pasamos el parámetro de manera segura
+                statement.setString(1, correo) // Pasamos el parámetro =)
 
                 val resultado = withContext(Dispatchers.IO) { statement.executeQuery() }
 
@@ -381,10 +380,8 @@ class AddUser : Fragment() {
         when (requestCode) {
             REQUEST_CAMERA_PERMISSION_AddUser -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    // El permiso ha sido concedido, abrir la cámara
                     abrirCamara()
                 } else {
-                    // El permiso ha sido denegado, mostrar un mensaje o manejarlo apropiadamente
                     Toast.makeText(requireContext(), "Permiso de cámara denegado", Toast.LENGTH_SHORT).show()
                 }
                 return
@@ -399,7 +396,6 @@ class AddUser : Fragment() {
         if (intent.resolveActivity(requireActivity().packageManager) != null) {
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_PICK_AddUser)
         } else {
-            // Show an error message to the user
             Toast.makeText(requireContext(), "No application available to pick an image", Toast.LENGTH_SHORT).show()
         }
     }

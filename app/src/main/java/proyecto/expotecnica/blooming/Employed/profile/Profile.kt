@@ -371,7 +371,7 @@ class Profile : Fragment() {
 
     fun CerrarSesion(){
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Actualizar Usuario")
+        builder.setTitle("Cerrar sesión")
         builder.setMessage("¿Estás seguro de que deseas cerrar sesión?")
 
         builder.setPositiveButton("Aceptar") { dialog, _ ->

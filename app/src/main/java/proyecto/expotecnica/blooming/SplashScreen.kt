@@ -24,8 +24,8 @@ class SplashScreen : AppCompatActivity() {
 
         //Corrutine
         GlobalScope.launch(Dispatchers.Main) {
-            //Espera 5.5 segundos antes de abrir la activity por medio de un delay
-            delay(5370)
+            //Espera 3 segundos antes de abrir la activity por medio de un delay
+            delay(3000)
             //Inicia  la activity de sing in
             startActivity(Intent(this@SplashScreen, Sing_in::class.java))
             //Con esto nos aseguramos que se cierre la activity y no se pueda volver a atras

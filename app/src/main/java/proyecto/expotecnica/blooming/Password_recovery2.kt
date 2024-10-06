@@ -34,14 +34,14 @@ class Password_recovery2 : AppCompatActivity() {
             insets
         }
 
-        // Aquí recibirías el correo electrónico enviado desde Password_recovery1
+        // Aquí recibirías el correo electrónico enviado desde Password_recovery1 =)
         val userEmail = intent.getStringExtra("USER_EMAIL")
 
         val campoCodigo = findViewById<EditText>(R.id.txt_Codigo_Password_Recovery2)
         val botonVerificar = findViewById<Button>(R.id.btn_Verificar_Password_Recovery2)
         val resendTextView = findViewById<TextView>(R.id.lbl_ReenviarCodigo_Password_Recovery2)
 
-        // Generar y enviar el código al iniciar la actividad
+        // Generar y enviar el código al iniciar la actividad =)
         resendCode()
 
         botonVerificar.setOnClickListener {
@@ -86,6 +86,7 @@ class Password_recovery2 : AppCompatActivity() {
         }
     }
 
+    //Contador de 30 minutos para poder voler a enviar más correos con códigos =)
     private fun startTimer() {
         isTimerRunning = true
         timer = object : CountDownTimer(30 * 60 * 1000, 1000) {

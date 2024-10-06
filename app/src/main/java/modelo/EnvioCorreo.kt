@@ -9,8 +9,8 @@ import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
 object EnvioCorreo {
-
     fun EnvioDeCorreo(destinatario: String, asunto: String, cuerpo: String) {
+        //Proteger estas credenciales
         val username = "bloomingservicee@gmail.com"
         val password = "sbqjrcgljkkmdlsa"
 

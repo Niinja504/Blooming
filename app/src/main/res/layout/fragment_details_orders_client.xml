@@ -56,21 +56,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.65" />
 
-    <Button
-        android:id="@+id/btn_ConfirmarVenta_Details_Client"
-        android:layout_width="370dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#F38F9A"
-        android:text="Confirmar venta"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.609"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.905"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
-
     <TextView
         android:id="@+id/textView32"
         android:layout_width="wrap_content"
@@ -270,7 +255,22 @@
         app:layout_constraintHorizontal_bias="0.609"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.848"
+        app:layout_constraintVertical_bias="0.850"
+        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btn_ConfirmarVenta_Details_Client"
+        android:layout_width="370dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#F38F9A"
+        android:text="Confirmar venta"
+        android:textAlignment="viewStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.910"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
     <TextView

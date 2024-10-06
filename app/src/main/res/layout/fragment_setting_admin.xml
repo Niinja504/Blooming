@@ -140,7 +140,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switch_setting_admin"
         android:layout_width="95dp"
         android:layout_height="28dp"
         android:thumbTint="#8A1111"

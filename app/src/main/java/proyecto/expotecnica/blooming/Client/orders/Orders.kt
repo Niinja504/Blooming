@@ -62,7 +62,7 @@ class Orders : Fragment() {
                         R.id.btn_Pedidos_Entregados_Client -> "No"
                         else -> return@launch
                     }
-                    val productosDB = MostrarDatos(pedidoPendiente)
+                    val productosDB = MostrarDatos(pedidoPendiente).distinctBy { it.uuid } //Con esto eliminamos los duplicados y usamos el uuid para ver si es duplicado o no =)
                     withContext(Dispatchers.Main) {
                         val miAdaptador = Adaptador_Orders_Client(productosDB)
                         RCV_Pedido.adapter = miAdaptador
@@ -72,7 +72,7 @@ class Orders : Fragment() {
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-            val productosDB = MostrarDatos("Si")
+            val productosDB = MostrarDatos("Si").distinctBy { it.uuid }
             withContext(Dispatchers.Main) {
                 if (productosDB.isNotEmpty()) {
                     val miAdaptador = Adaptador_Orders_Client(productosDB)

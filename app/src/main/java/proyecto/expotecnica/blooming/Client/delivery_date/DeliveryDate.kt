@@ -66,8 +66,56 @@ class DeliveryDate : Fragment() {
         val RadioButton4PM = root.findViewById<RadioButton>(R.id.RD_Hora_4AM_date_client)
         val BtnDate = root.findViewById<Button>(R.id.btn_ADDFecha_Pedidio_client)
 
-        Calendario.setOnDateChangeListener{ _, year, month, dayOfMonth ->
+        // Habilitar los RadioButtons según la hora actual
+        updateRadioButtonState(RadioButton8AM, RadioButton12AM, RadioButton4PM, radioGroup)
+
+        Calendario.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            // Establecemos la fecha seleccionada =)
             Fechaselec = "$dayOfMonth/${month + 1}/$year"
+
+            // Obtenemos la fecha seleccionada =)
+            val selectedDate = Calendar.getInstance().apply {
+                set(year, month, dayOfMonth, 0, 0, 0)
+            }
+
+            val currentDate = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            // Obtenemos la fecha de mañana =)
+            val tomorrow = Calendar.getInstance().apply {
+                add(Calendar.DAY_OF_MONTH, 1)
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+
+            when {
+                selectedDate.after(tomorrow) -> {
+                    // Habilitar todos los radio buttons si es un día futuro
+                    RadioButton8AM.isEnabled = true
+                    RadioButton12AM.isEnabled = true
+                    RadioButton4PM.isEnabled = true
+                    radioGroup.clearCheck()
+                }
+
+                selectedDate.get(Calendar.YEAR) == currentDate.get(Calendar.YEAR) &&
+                        selectedDate.get(Calendar.DAY_OF_YEAR) == currentDate.get(Calendar.DAY_OF_YEAR) -> {
+                    updateRadioButtonState(RadioButton8AM, RadioButton12AM, RadioButton4PM, radioGroup)
+                }
+
+                else -> {
+                    // Deshabilitar todos los botones si es un día pasado
+                    RadioButton8AM.isEnabled = false
+                    RadioButton12AM.isEnabled = false
+                    RadioButton4PM.isEnabled = false
+                    radioGroup.clearCheck()
+                }
+            }
         }
 
         Regresar.setOnClickListener {
@@ -79,27 +127,22 @@ class DeliveryDate : Fragment() {
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.RD_Hora_8AM_date_client -> {
-                    val Hora8 = "8:00 AM - 12:00 PM"
-                    Horario = Hora8
-                    RadioButton8AM.buttonTintList = ColorStateList.valueOf(brownColor)
-                    RadioButton12AM.buttonTintList = ColorStateList.valueOf(Color.BLACK)
-                    RadioButton4PM.buttonTintList = ColorStateList.valueOf(Color.BLACK)
+                    Horario = "8:00 AM - 12:00 PM"
+                    ColorRadioButton(RadioButton8AM, brownColor)
+                    ColorRadioButton(RadioButton12AM, Color.BLACK)
+                    ColorRadioButton(RadioButton4PM, Color.BLACK)
                 }
-
-                R.id.RD_Hora_12AM_date_client-> {
-                    val Hora12 = "12:00 AM - 4:00 PM"
-                    Horario = Hora12
-                    RadioButton8AM.buttonTintList = ColorStateList.valueOf(Color.BLACK)
-                    RadioButton12AM.buttonTintList = ColorStateList.valueOf(brownColor)
-                    RadioButton4PM.buttonTintList = ColorStateList.valueOf(Color.BLACK)
+                R.id.RD_Hora_12AM_date_client -> {
+                    Horario = "12:00 AM - 4:00 PM"
+                    ColorRadioButton(RadioButton8AM, Color.BLACK)
+                    ColorRadioButton(RadioButton12AM, brownColor)
+                    ColorRadioButton(RadioButton4PM, Color.BLACK)
                 }
-
                 R.id.RD_Hora_4AM_date_client -> {
-                    val Hora4 = "4:00 AM - 8:00 PM"
-                    Horario = Hora4
-                    RadioButton8AM.buttonTintList = ColorStateList.valueOf(Color.BLACK)
-                    RadioButton12AM.buttonTintList = ColorStateList.valueOf(Color.BLACK)
-                    RadioButton4PM.buttonTintList = ColorStateList.valueOf(brownColor)
+                    Horario = "4:00 AM - 8:00 PM"
+                    ColorRadioButton(RadioButton8AM, Color.BLACK)
+                    ColorRadioButton(RadioButton12AM, Color.BLACK)
+                    ColorRadioButton(RadioButton4PM, brownColor)
                 }
             }
         }
@@ -124,5 +167,41 @@ class DeliveryDate : Fragment() {
             }
         }
         return root
+    }
+
+    private fun updateRadioButtonState(RadioButton8AM: RadioButton, RadioButton12AM: RadioButton, RadioButton4PM: RadioButton, radioGroup: RadioGroup) {
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        when {
+            currentHour < 12 -> { // Antes de las 12 PM
+                RadioButton8AM.isEnabled = true
+                RadioButton12AM.isEnabled = true
+                RadioButton4PM.isEnabled = true
+            }
+            currentHour < 16 -> { // Entre 12 PM y 4 PM
+                RadioButton8AM.isEnabled = false
+                RadioButton12AM.isEnabled = true
+                RadioButton4PM.isEnabled = true
+            }
+            currentHour < 21 -> { // Entre 4 PM y 9 PM
+                RadioButton8AM.isEnabled = false
+                RadioButton12AM.isEnabled = false
+                RadioButton4PM.isEnabled = true
+                radioGroup.check(RadioButton4PM.id)
+            }
+            else -> { // Después de las 9 PM
+                RadioButton8AM.isEnabled = false
+                RadioButton12AM.isEnabled = false
+                RadioButton4PM.isEnabled = false
+                radioGroup.clearCheck()
+            }
+        }
+    }
+
+    private fun ColorRadioButton(radioButton: RadioButton, color: Int) {
+        if (radioButton.isEnabled) {
+            radioButton.buttonTintList = ColorStateList.valueOf(color)
+        } else {
+            radioButton.buttonTintList = null
+        }
     }
 }

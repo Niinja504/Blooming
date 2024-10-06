@@ -70,8 +70,8 @@ class AddProduct : Fragment() {
         val root = inflater.inflate(R.layout.fragment_add_product_inventory, container, false)
         dialogView = root
 
-        //DropDownFlowers
-        val Items = listOf("Hortencias", "Rosas", "Tulipanes", "Girasoles", "Mixtas")
+        //DropDown tipo de flores =)
+        val Items = listOf("Hortencias", "Rosas", "Tulipanes", "Girasoles", "Mixtas", "Otra")
         val autoComplete : AutoCompleteTextView = root.findViewById(R.id.autoComplete_AddProduct_Admin)
         val Adaptador = ArrayAdapter(requireContext(), R.layout.list_item, Items)
         autoComplete.setAdapter(Adaptador)
@@ -81,7 +81,7 @@ class AddProduct : Fragment() {
             Toast.makeText(requireContext(), "Flores: $selectedFlowers", Toast.LENGTH_SHORT).show()
         }
 
-        //DropDownDesings
+        //DropDown diseño =)
         val Items1 = listOf("Cajas", "Ramos", "Botellas", "Corazones", "Rosas preservadas", "Individual")
         val autoComplete1 : AutoCompleteTextView = root.findViewById(R.id.autoComplete_CategoryDesing_AddProduct_Admin)
         val Adaptador1 = ArrayAdapter(requireContext(), R.layout.list_item, Items1)
@@ -91,8 +91,8 @@ class AddProduct : Fragment() {
             Toast.makeText(requireContext(), "Diseño: $selectedDesing", Toast.LENGTH_SHORT).show()
         }
 
-        //DropDownEvents
-        val Items2 = listOf("Cumpleaños", "Aniversario", "Amor", "Nacimiento", "Condolencias")
+        //DropDown tipo de evento =)
+        val Items2 = listOf("Cumpleaños", "Aniversario", "Amor", "Nacimiento", "Condolencias", "Otro")
         val autoComplete2 : AutoCompleteTextView = root.findViewById(R.id.autoComplete_CategoryEvents_AddProduct_Admin)
         val Adaptador2 = ArrayAdapter(requireContext(), R.layout.list_item, Items2)
         autoComplete2.setAdapter(Adaptador2)

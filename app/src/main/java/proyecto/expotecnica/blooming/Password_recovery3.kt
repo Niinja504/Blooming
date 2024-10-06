@@ -97,6 +97,7 @@ class Password_recovery3 : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            //En este bloque de código se verifica que el correo no sea nulo y también actualiza el password =)
             if (userEmail != null) {
                 GlobalScope.launch {
                     val ObjConexion = ClaseConexion().CadenaConexion()
@@ -187,6 +188,7 @@ class Password_recovery3 : AppCompatActivity() {
         CampoConfirmarContra.text.clear()
     }
 
+    //Metodo en encriptado que es un hash =)
     private fun hashSHA256(input: String): String {
         val bytes: ByteArray = MessageDigest.getInstance("SHA-256").digest(input.toByteArray())
         return bytes.joinToString("") { "%02x".format(it) }

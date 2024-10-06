@@ -29,13 +29,14 @@ class Password_recovery1 : AppCompatActivity() {
             insets
         }
 
+        //Variables que se va a utilizar
         val CampoCorreo = findViewById<EditText>(R.id.txt_Correo_Password_Recovery1)
         val BotonEnviar = findViewById<Button>(R.id.btnIniciarSesion)
         val RecuerdaSuContra = findViewById<TextView>(R.id.lbl_RecuerdaContra_Password_Recovery1)
 
         BotonEnviar.setOnClickListener {
             val text = CampoCorreo.text.toString()
-
+            //Con este bucle de tipo when verificamos que no sea vacio ninguno de los campos =/
             when {
                 text.isEmpty() -> {
                     CampoCorreo.error = "El campo de texto está vacío"
@@ -58,7 +59,7 @@ class Password_recovery1 : AppCompatActivity() {
                                 withContext(Dispatchers.Main) {
                                     Toast.makeText(this@Password_recovery1, "Código enviado a $correo", Toast.LENGTH_SHORT).show()
 
-                                    // Intent para Password_recovery2
+                                    // Intent para Password_recovery2 osea para pasarle los argumentos a la otra pantalla
                                     val intentToRecovery2 = Intent(this@Password_recovery1, Password_recovery2::class.java)
                                     intentToRecovery2.putExtra("SENT_CODE", code)
                                     intentToRecovery2.putExtra("USER_EMAIL", correo)
@@ -81,6 +82,7 @@ class Password_recovery1 : AppCompatActivity() {
             }
         }
 
+        //Navegamos a la otra pantalla si el usuario asi lo desea
         RecuerdaSuContra.setOnClickListener {
             val intent = Intent(this,Sing_in::class.java)
             startActivity(intent)
@@ -88,6 +90,7 @@ class Password_recovery1 : AppCompatActivity() {
         }
     }
 
+    //Con este metodo nos aseguramos que el correo este asociado a una cuenta existente antes de enviar el correo =)
     private suspend fun correoExisteBD(correo: String): Boolean {
         val sql_BD1 = "SELECT COUNT(*) AS correo_existe FROM TbUsers WHERE Email_User = ?"
         val claseConexion = ClaseConexion()
@@ -96,7 +99,7 @@ class Password_recovery1 : AppCompatActivity() {
 
         if (conexion != null) {
             try {
-                // Verificar en la primera tabla
+                // Verificamos en la primera tabla °_°
                 val statement1 = withContext(Dispatchers.IO) { conexion.prepareStatement(sql_BD1) }
                 statement1.setString(1, correo)
 

@@ -9,8 +9,8 @@ import java.util.Date
 import java.util.Locale
 
 object ImageUtils {
-
     @Throws(IOException::class)
+    //Este metodo lo que hace es comprimir la imagen si es mayor a 1080 px esto se hace para ahorrar espacio en firebase =)
     fun resizeImageIfNeeded(imageBitmap: Bitmap): Bitmap {
         val imageHeight = imageBitmap.height
         val imageWidth = imageBitmap.width
@@ -30,6 +30,7 @@ object ImageUtils {
         return imageBitmap
     }
 
+    //Este otro metodo nos permite colorcarle el nombre al archivo .jpg y crearlo obviamente =)
     @Throws(IOException::class)
     fun createImageFile(context: Context): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
