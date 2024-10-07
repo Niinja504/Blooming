@@ -32,6 +32,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -42,6 +43,7 @@ import proyecto.expotecnica.blooming.R
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.sql.SQLException
 import java.util.UUID
 
 class AddProduct : Fragment() {
@@ -137,32 +139,52 @@ class AddProduct : Fragment() {
                     } else {
                         "El usuario eligio la imagen predeternimada"
                     }
-                    withContext(Dispatchers.IO){
-                        val ObjConexion = ClaseConexion().CadenaConexion()
 
-                        val AddProduct = ObjConexion?.prepareStatement("INSERT INTO TbInventario (UUID_Producto, Img_Producto, Nombre_Producto, Precio_Producto, Cantidad_Bodega_Productos, Categoria_Flores, Categoria_Diseno, Categoria_Evento, Descripcion_Producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                        )!!
-
-                        AddProduct.setString(1, UUID.randomUUID().toString())
-                        AddProduct.setString(2, imageUrl)
-                        AddProduct.setString(3, CampoNombre.text.toString())
-                        AddProduct.setFloat(4, CampoPrecio.text.toString().toFloat())
-                        AddProduct.setInt(5, CampoCatidad.text.toString().toInt())
-                        AddProduct.setString(6, selectedFlowers)
-                        AddProduct.setString(7, selectedDesing)
-                        AddProduct.setString(8, selectedEvent)
-                        AddProduct.setString(9, CampoDescripcion.text.toString())
-                        AddProduct.executeUpdate()
-
+                    // Verifica si el producto ya existe
+                    if (ProductoExiste(CampoNombre.text.toString())) {
+                        Toast.makeText(requireContext(), "El producto con ese nombre ya existe.", Toast.LENGTH_SHORT).show()
+                        return@launch
                     }
-                    Toast.makeText(requireContext(), "Se subido el producto exitosamente.", Toast.LENGTH_SHORT).show()
-                    LimpiarCampo()
-                    findNavController().navigate(R.id.navigation_inventory_admin)
+
+                    try {
+                        withContext(Dispatchers.IO) {
+                            val ObjConexion = ClaseConexion().CadenaConexion()
+                            val AddProduct = ObjConexion?.prepareStatement(
+                                "INSERT INTO TbInventario (UUID_Producto, Img_Producto, Nombre_Producto, Precio_Producto, Cantidad_Bodega_Productos, Categoria_Flores, Categoria_Diseno, Categoria_Evento, Descripcion_Producto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                            )!!
+
+                            AddProduct.setString(1, UUID.randomUUID().toString())
+                            AddProduct.setString(2, imageUrl)
+                            AddProduct.setString(3, CampoNombre.text.toString())
+                            AddProduct.setFloat(4, CampoPrecio.text.toString().toFloat())
+                            AddProduct.setInt(5, CampoCatidad.text.toString().toInt())
+                            AddProduct.setString(6, selectedFlowers)
+                            AddProduct.setString(7, selectedDesing)
+                            AddProduct.setString(8, selectedEvent)
+                            AddProduct.setString(9, CampoDescripcion.text.toString())
+                            AddProduct.executeUpdate()
+                        }
+                        Toast.makeText(requireContext(), "Se ha subido el producto exitosamente.", Toast.LENGTH_SHORT).show()
+                        LimpiarCampo()
+                        findNavController().navigate(R.id.navigation_inventory_admin)
+                    } catch (e: SQLException) {
+                        Toast.makeText(requireContext(), "Error al subir el producto: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
 
         return root
+    }
+
+    private suspend fun ProductoExiste(productName: String): Boolean {
+        return withContext(Dispatchers.IO) {
+            val ObjConexion = ClaseConexion().CadenaConexion()
+            val checkStmt = ObjConexion?.prepareStatement("SELECT COUNT(*) FROM TbInventario WHERE Nombre_Producto = ?")!!
+            checkStmt.setString(1, productName)
+            val resultSet = checkStmt.executeQuery()
+            resultSet.next() && resultSet.getInt(1) > 0
+        }
     }
 
     private fun ValidarCampos(): Boolean {

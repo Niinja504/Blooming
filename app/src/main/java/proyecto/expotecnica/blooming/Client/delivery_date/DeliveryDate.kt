@@ -39,6 +39,7 @@ class DeliveryDate : Fragment() {
             return fragment
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
