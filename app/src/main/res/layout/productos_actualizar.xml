@@ -37,7 +37,10 @@
         android:ems="10"
         android:gravity="top|start"
         android:hint="Descripción"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
         android:padding="8dp"
+        android:scrollbars="vertical"
         tools:ignore="TouchTargetSizeCheck" />
 
 </LinearLayout>
