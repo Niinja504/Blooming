@@ -75,12 +75,11 @@
         <activity
             android:name=".Dashboard_employed"
             android:exported="false"
-            android:label="@string/title_activity_dashboard_admin"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SplashScreen"
             android:exported="true"
-            android:label="@string/title_activity_dashboard_admin"
+            android:label="Blooming"
             android:windowSoftInputMode="adjustNothing" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,7 +90,7 @@
         <activity
             android:name=".Dashboard_client"
             android:exported="false"
-            android:label="@string/title_activity_dashboard_employed" />
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".Sing_in"
@@ -100,7 +99,7 @@
         <activity
             android:name=".Dashboard_admin"
             android:exported="false"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity
             android:name=".Password_recovery3"

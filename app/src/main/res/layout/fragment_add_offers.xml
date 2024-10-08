@@ -54,6 +54,7 @@
         android:inputType="text"
         android:textColor="#554D4D"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.202"
@@ -71,6 +72,7 @@
         android:inputType="number"
         android:textColor="#554D4D"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.202"
@@ -90,11 +92,14 @@
         android:hint="Descripción"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
+        android:padding="3dp"
         android:paddingStart="8dp"
         android:scrollbars="vertical"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionDone"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
@@ -144,6 +149,19 @@
         app:layout_constraintVertical_bias="0.183"
         android:adjustViewBounds="true"
         tools:src="@tools:sample/backgrounds/scenic" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_Add_Offers_Admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"

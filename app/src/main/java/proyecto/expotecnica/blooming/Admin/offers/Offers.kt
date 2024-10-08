@@ -99,7 +99,7 @@ class Offers : Fragment() {
             //Creo una variable que ejecute la funcion de mostrar datos
             val ProductosDB = MostrarDatos()
             withContext(Dispatchers.Main){
-                miAdaptador = Adaptador_Offers_Admin(ProductosDB)
+                miAdaptador = Adaptador_Offers_Admin(requireContext(), ProductosDB)
                 RCV_Offers.adapter = miAdaptador
             }
         }

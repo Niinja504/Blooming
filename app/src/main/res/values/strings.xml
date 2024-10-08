@@ -21,7 +21,9 @@
     <string name="Select">Seleccione una opción</string>
     <string name="title_activity_card_users">Card_Users</string>
     <!--DropDown-->
-    <string name="Categoria">Seleccione una categoria</string>
+    <string name="Categoria_Flores">Seleccione un tipo de flores</string>
+    <string name="Categoria_Diseno">Seleccione un tipo de diseño</string>
+    <string name="Categoria_Evento">Seleccione un tipo de evento</string>
     <!--KEY-->
     <string name="GoogleMap">AIzaSyDGMNTY4KDaPUGBzoCn0-RActpllZzy_k0</string>
 </resources>

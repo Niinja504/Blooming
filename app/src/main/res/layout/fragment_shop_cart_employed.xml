@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,12 @@
     android:background="#FFFCF5"
     tools:context=".Employed.shop_cart.ShopCart">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+      <TextView
         android:id="@+id/lbl_TotalVenta_ShopCart_Employed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,20 +27,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.864" />
 
-    <Button
-        android:id="@+id/btn_CrearVenta_Employed"
-        android:layout_width="370dp"
-        android:layout_height="50dp"
-        android:text="Agregar compra"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.999"
-        tools:ignore="TouchTargetSizeCheck" />
+        <Button
+            android:id="@+id/btn_CrearVenta_Employed"
+            android:layout_width="370dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="680dp"
+            android:text="Agregar compra"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.999"
+            tools:ignore="TouchTargetSizeCheck" />
 
-    <EditText
+      <EditText
         android:id="@+id/txt_NombreCliente_Venta_Employed"
         android:layout_width="332dp"
         android:layout_height="39dp"
@@ -52,7 +58,7 @@
         app:layout_constraintVertical_bias="0.81"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+      <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/IMG_User_ShopCart"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -66,7 +72,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
 
-    <TextView
+      <TextView
         android:id="@+id/textViewInicio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +87,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
 
-    <TextView
+      <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,13 +102,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.864" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RCV_ShopCart_Employed"
-        android:layout_width="409dp"
-        android:layout_height="450dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.302" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RCV_ShopCart_Employed"
+            android:layout_width="409dp"
+            android:layout_height="450dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.302" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

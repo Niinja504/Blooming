@@ -66,6 +66,7 @@
         android:inputType="text"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -83,6 +84,7 @@
         android:inputType="numberDecimal"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -100,6 +102,7 @@
         android:inputType="numberDecimal"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -119,11 +122,14 @@
         android:hint="Descripción"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
-        android:padding="8dp"
+        android:padding="3dp"
         android:paddingStart="8dp"
         android:scrollbars="vertical"
         android:textAllCaps="false"
+        android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionDone"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
@@ -174,11 +180,12 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="@string/Categoria"
+        android:hint="@string/Categoria_Flores"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -186,7 +193,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.59"
-        tools:ignore="MissingConstraints" >
+        tools:ignore="MissingConstraints">
 
         <AutoCompleteTextView
             android:id="@+id/autoComplete_AddProduct_Admin"
@@ -200,11 +207,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="@string/Categoria"
+        android:hint="@string/Categoria_Diseno"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +220,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.67"
-        tools:ignore="MissingConstraints" >
+        tools:ignore="MissingConstraints">
 
         <AutoCompleteTextView
             android:id="@+id/autoComplete_CategoryDesing_AddProduct_Admin"
@@ -230,7 +238,7 @@
         android:layout_width="332dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="@string/Categoria"
+        android:hint="@string/Categoria_Evento"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -250,5 +258,18 @@
             android:textSize="12sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar_Add_Product_Admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

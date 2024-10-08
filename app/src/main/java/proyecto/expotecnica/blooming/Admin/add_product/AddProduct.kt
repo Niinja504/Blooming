@@ -21,6 +21,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -113,6 +114,7 @@ class AddProduct : Fragment() {
         IMG_Product = root.findViewById(R.id.Img_AddProduct_Admin)
         val SubirIMG = root.findViewById<ImageView>(R.id.ic_SubirIMG_AddProduct_Admin)
         val Btn_Add = root.findViewById<Button>(R.id.btn_AddProduct_Admin)
+        val ProgessBar = root.findViewById<ProgressBar>(R.id.progressBar_Add_Product_Admin)
 
         CampoNombre.filters = arrayOf(InputFilter.LengthFilter(28))
         CampoPrecio.filters = arrayOf(InputFilter.LengthFilter(8))
@@ -132,6 +134,10 @@ class AddProduct : Fragment() {
             lifecycleScope.launch{
                 if (ValidarCampos()){
                     Toast.makeText(requireContext(), "Por favor, no cierre la aplicación, ya que se está subiendo el producto. Gracias.", Toast.LENGTH_SHORT).show()
+
+                    ProgessBar.visibility = View.VISIBLE
+                    requireView().alpha = 0.5f
+
                     val imageUrl = if (selectedImageUri != null) {
                         val imageBitmap = getBitmapFromUri(requireContext(),selectedImageUri!!)
                         val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
@@ -164,6 +170,10 @@ class AddProduct : Fragment() {
                             AddProduct.setString(9, CampoDescripcion.text.toString())
                             AddProduct.executeUpdate()
                         }
+
+                        ProgessBar.visibility = View.GONE
+                        requireView().alpha = 1f
+
                         Toast.makeText(requireContext(), "Se ha subido el producto exitosamente.", Toast.LENGTH_SHORT).show()
                         LimpiarCampo()
                         findNavController().navigate(R.id.navigation_inventory_admin)

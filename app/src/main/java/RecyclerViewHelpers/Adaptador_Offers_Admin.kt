@@ -2,17 +2,20 @@ package RecyclerViewHelpers
 
 import DataC.DataOffers_Admin
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,7 +23,7 @@ import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
 import proyecto.expotecnica.blooming.R
 
-class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.Adapter<ViewHolder_Offers_Admin>() {
+class Adaptador_Offers_Admin (private val contexto: Context,var Datos: List<DataOffers_Admin>): RecyclerView.Adapter<ViewHolder_Offers_Admin>() {
     private var datosFiltrados = Datos
 
     fun ActualizarListaDespuesDeEditar(UUID: String, NuevoTitulo: String){
@@ -30,23 +33,30 @@ class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.A
     }
 
     fun EliminarDatos(UUID_Oferta: String, posicion: Int){
-        println(UUID_Oferta)
         val ListaDatos = Datos.toMutableList()
         ListaDatos.removeAt(posicion)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val ObjConexion = ClaseConexion().CadenaConexion()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val ObjConexion = ClaseConexion().CadenaConexion()
+                val DeleteTitulo = ObjConexion?.prepareStatement("DELETE TbOfertas WHERE UUID_Oferta = ?")!!
+                DeleteTitulo.setString(1, UUID_Oferta)
+                DeleteTitulo.executeUpdate()
 
-            val DeleteTitulo = ObjConexion?.prepareStatement("DELETE TbOfertas WHERE UUID_Oferta = ?")!!
-            DeleteTitulo.setString(1, UUID_Oferta)
-            DeleteTitulo.executeUpdate()
+                val COMMIT = ObjConexion?.prepareStatement("commit")!!
+                COMMIT.executeUpdate()
 
-            val COMMIT = ObjConexion.prepareStatement("commit")
-            COMMIT.executeUpdate()
+                withContext(Dispatchers.Main) {
+                    Datos = ListaDatos.toList()
+                    notifyItemRemoved(posicion)
+                    notifyDataSetChanged()
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(contexto, "Error al eliminar datos: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
         }
-        Datos = ListaDatos.toList()
-        notifyItemRemoved(posicion)
-        notifyDataSetChanged()
     }
 
     fun ActualizarDato(Titulo: String, UUID: String){
@@ -59,7 +69,7 @@ class Adaptador_Offers_Admin (var Datos: List<DataOffers_Admin>): RecyclerView.A
             UpdateTitulo.executeUpdate()
 
             val COMMIT = ObjConexion.prepareStatement("COMMIT")
-            COMMIT.executeUpdate()
+            COMMIT?.executeUpdate()
 
             withContext(Dispatchers.IO){
                 ActualizarListaDespuesDeEditar(UUID, Titulo)

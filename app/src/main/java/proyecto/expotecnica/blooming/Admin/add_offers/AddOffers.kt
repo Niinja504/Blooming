@@ -22,6 +22,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -30,11 +31,13 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import modelo.ClaseConexion
+import modelo.EnvioCorreo
 import modelo.ImageUtils
 import proyecto.expotecnica.blooming.R
 import java.io.ByteArrayOutputStream
@@ -70,6 +73,7 @@ class AddOffers : Fragment() {
         campoDescripcion = root.findViewById(R.id.txt_Descripcion_AddOffers)
         val uploadImg = root.findViewById<ImageView>(R.id.Ic_upload_AddOffer)
         val agregar = root.findViewById<Button>(R.id.btn_Agregar_AddOffers)
+        val ProgessBar = root.findViewById<ProgressBar>(R.id.progressBar_Add_Offers_Admin)
 
         campoTitulo.filters = arrayOf(InputFilter.LengthFilter(30))
         campoPorcentaje.filters = arrayOf(InputFilter.LengthFilter(3))
@@ -89,9 +93,14 @@ class AddOffers : Fragment() {
         agregar.setOnClickListener {
             lifecycleScope.launch {
                 if (validarCampos()) {
-                    val tituloExiste = tituloExiste(campoTitulo.text.toString())
+                    val titulo = campoTitulo.text.toString()
+                    val tituloExiste = tituloExiste(titulo)
                     if (!tituloExiste) {
                         Toast.makeText(requireContext(), "Por favor, no cierre la aplicación, ya que se está subiendo la oferta. Gracias.", Toast.LENGTH_SHORT).show()
+
+                        ProgessBar.visibility = View.VISIBLE
+                        requireView().alpha = 0.5f
+
                         val imageUrl = if (selectedImageUri != null) {
                             val imageBitmap = getBitmapFromUri(requireContext(), selectedImageUri!!)
                             val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
@@ -108,15 +117,23 @@ class AddOffers : Fragment() {
 
                             agregar.setString(1, UUID.randomUUID().toString())
                             agregar.setString(2, selectedProduct!!.uuid)
-                            agregar.setString(3, campoTitulo.text.toString())
+                            agregar.setString(3, titulo)
                             agregar.setString(4, campoPorcentaje.text.toString())
                             agregar.setString(5, campoDescripcion.text.toString())
                             agregar.setString(6, imageUrl)
                             agregar.executeUpdate()
                         }
+
+                        val correos = obtenerCorreosClientes()
                         Toast.makeText(requireContext(), "Se subido la oferta exitosamente.", Toast.LENGTH_SHORT).show()
                         LimpiarCampos()
                         findNavController().navigate(R.id.navigation_offers_admin)
+                        if (correos.isNotEmpty()) {
+                            enviarCorreos(correos, titulo, campoPorcentaje.text.toString(), campoDescripcion.text.toString(), imageUrl.toString())
+                        }
+                        ProgessBar.visibility = View.GONE
+                        requireView().alpha = 1f
+
                     } else {
                         campoTitulo.error = "Ya hay otra oferta con ese título"
                     }
@@ -228,6 +245,69 @@ class AddOffers : Fragment() {
         }
 
         return tituloExiste
+    }
+
+    private suspend fun obtenerCorreosClientes(): List<String> {
+        val sql = "SELECT Email_User FROM TbUsers WHERE Rol_User = ?"
+        val claseConexion = ClaseConexion()
+        val conexion = claseConexion.CadenaConexion()
+        val correos = mutableListOf<String>()
+
+        if (conexion != null) {
+            try {
+                val statement = withContext(Dispatchers.IO) { conexion.prepareStatement(sql) }
+                statement.setString(1, "Cliente")
+
+                val resultado = withContext(Dispatchers.IO) { statement.executeQuery() }
+
+                while (resultado.next()) {
+                    val email = resultado.getString("Email_User")
+                    correos.add(email)
+                }
+            } catch (e: Exception) {
+                println("Error al ejecutar la consulta SQL: $e")
+            } finally {
+                try {
+                    withContext(Dispatchers.IO) { conexion.close() }
+                } catch (e: Exception) {
+                    println("Error al cerrar la conexión: $e")
+                }
+            }
+        } else {
+            println("No se pudo establecer la conexión a la base de datos.")
+        }
+
+        return correos
+    }
+
+    fun enviarCorreos(correos: List<String>, titulo: String, porcentaje: String, descripcion: String, imageUrl: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val messageTemplate = """
+            <html>
+            <body>
+                <p>Estimado/a cliente:
+                   Nos complace informarle sobre una oferta especial por tiempo limitado de nuestra innovadora aplicación de pedidos en línea. 
+                   No pierda la oportunidad de beneficiarse de esta promoción. Si desea más información, no dude en contactarnos.
+                   <h3>Detalles de la oferta:</h3>
+                   <p><strong>Título:</strong> $titulo</p>
+                   <p><strong>Porcentaje de descuento:</strong> $porcentaje</p>
+                   <p><strong>Descripción:</strong> $descripcion</p>
+                   <p><strong>Imagen de la oferta:</strong></p>
+                   <img src="$imageUrl" alt="Imagen de la oferta" style="max-width: 100%; height: auto;"/>
+                   <p>Si desea más información, no dude en contactarnos.</p>
+                   Atentamente : Equipo de ventas de Blooming</p>
+                </body>
+            </html>
+            """.trimIndent()
+
+                for (correo in correos) {
+                    EnvioCorreo.EnvioDeCorreo(correo, "Nueva oferta", messageTemplate)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun mostrarDialogoSeleccionArchivo() {

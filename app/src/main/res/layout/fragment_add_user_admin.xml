@@ -55,6 +55,7 @@
         android:inputType="text"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -72,6 +73,7 @@
         android:inputType="number"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -89,6 +91,7 @@
         android:inputType="number"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -106,6 +109,7 @@
         android:inputType="textPassword"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.350"
@@ -123,6 +127,7 @@
         android:inputType="textPassword"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.350"
@@ -140,6 +145,7 @@
         android:inputType="textEmailAddress"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -157,6 +163,7 @@
         android:inputType="text"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
+        android:imeOptions="actionNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -270,4 +277,17 @@
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar_Add_user_Admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
 </androidx.constraintlayout.widget.ConstraintLayout>

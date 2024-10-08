@@ -14,10 +14,12 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -30,7 +32,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.FirebaseApp
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,9 +41,9 @@ import modelo.ImageUtils
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
-import com.google.firebase.appcheck.FirebaseAppCheck
-import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.tasks.await
+import modelo.EnvioCorreo
 import java.security.MessageDigest
 import java.util.UUID
 
@@ -60,6 +61,10 @@ class Register : AppCompatActivity() {
     private lateinit var dialogView: View
     private var currentPhotoPath: String? = null
     private var selectedImageUri: Uri? = null
+    private lateinit var ImgOjoNewContra: ImageView
+    private lateinit var ImgOjoConfirContra: ImageView
+    private var isNewContraVisible = false
+    private var isConfirContraVisible = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -76,10 +81,36 @@ class Register : AppCompatActivity() {
         CampoTelefono = findViewById(R.id.txt_Telefono_Registrer)
         CampoEdad = findViewById(R.id.txt_Edad_Registrer)
         CampoCorreo = findViewById(R.id.txt_Correo_Registrer)
+        ImgOjoNewContra = findViewById(R.id.Img_Contra_Register)
+        ImgOjoConfirContra = findViewById(R.id.Img_ConfirmarContra_Register)
         CampoContra = findViewById(R.id.txt_Contrasena_Registrer)
         CampoConfirmarContra = findViewById(R.id.txt_ConfirmarContra_Registrer)
         lbl_IniciarSesion = findViewById(R.id.lbl_IniciarSesion_Register)
         Btn_SubirFoto = findViewById(R.id.btn_foto_perfil_register)
+
+        ImgOjoNewContra.setOnClickListener {
+            if (isNewContraVisible) {
+                CampoContra.transformationMethod = PasswordTransformationMethod.getInstance()
+                ImgOjoNewContra.setImageResource(R.drawable.ic_hide_password)
+            } else {
+                CampoContra.transformationMethod = null
+                ImgOjoNewContra.setImageResource(R.drawable.ic_show_password)
+            }
+            isNewContraVisible = !isNewContraVisible
+            CampoContra.setSelection(CampoContra.text.length)
+        }
+
+        ImgOjoConfirContra.setOnClickListener {
+            if (isConfirContraVisible) {
+                CampoConfirmarContra.transformationMethod = PasswordTransformationMethod.getInstance()
+                ImgOjoConfirContra.setImageResource(R.drawable.ic_hide_password)
+            } else {
+                CampoConfirmarContra.transformationMethod = null
+                ImgOjoConfirContra.setImageResource(R.drawable.ic_show_password)
+            }
+            isConfirContraVisible = !isConfirContraVisible
+            CampoConfirmarContra.setSelection(CampoConfirmarContra.text.length)
+        }
 
         CampoNombres.filters = arrayOf(InputFilter.LengthFilter(15))
         CampoApellidos.filters = arrayOf(InputFilter.LengthFilter(15))
@@ -319,6 +350,7 @@ class Register : AppCompatActivity() {
 
         btnCrearCuenta.setOnClickListener {
             lifecycleScope.launch {
+                val email = CampoCorreo.text.toString()
                 val imageUrl = if (selectedImageUri != null) {
                     val imageBitmap = getBitmapFromUri(selectedImageUri!!)
                     val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
@@ -348,7 +380,7 @@ class Register : AppCompatActivity() {
                     Crear.setString(4, CampoUsuario.text.toString())
                     Crear.setString(5, CampoTelefono.text.toString())
                     Crear.setInt(6, CampoEdad.text.toString().toInt())
-                    Crear.setString(7, CampoCorreo.text.toString())
+                    Crear.setString(7, email)
                     Crear.setString(8, ContraEncrip)
                     Crear.setString(9, imageUrl)
                     Crear.setString(10, Rol)
@@ -359,6 +391,7 @@ class Register : AppCompatActivity() {
                 dialog.dismiss()
                 Toast.makeText(applicationContext, "Se creó la cuenta exitosamente.", Toast.LENGTH_SHORT).show()
                 AbrirVenSingIn()
+                enviarCorreo(email)
             }
         }
 
@@ -517,6 +550,44 @@ class Register : AppCompatActivity() {
         private const val REQUEST_IMAGE_CAPTURE = 1
         private const val REQUEST_IMAGE_PICK = 2
         private const val REQUEST_CAMERA_PERMISSION = 100
+    }
+
+    fun enviarCorreo(destinatario: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val message = """
+                <html>
+                <body>
+                    <p>Le damos una cordial bienvenida a Blooming, nuestro servicio de pedidos en línea. A través de la aplicación, 
+                    podrá realizar pedidos, consultar nuestro catálogo de productos y explorar las ofertas disponibles. 
+                    Agradecemos su interés y esperamos que disfrute de su experiencia con nosotros.</p>
+                    <br>
+                    <footer style="text-align: center; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
+                        <strong>Soporte de Blooming</strong>
+                        <p>Ubicación: San Salvador, El Salvador</p>
+                        <p>Correo: <a href="mailto:bloomingservicee@gmail.com">bloomingservicee@gmail.com</a></p>
+                        <p>Síguenos en nuestras redes sociales:</p>
+                        <p>
+                            <a href="https://www.instagram.com/_sistema_blooming?igsh=aWRtOWZ4cHZsMnli" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/15713/15713420.png" alt="Facebook" width="24" height="24"/>
+                            </a>
+                            <a href="https://x.com/SistemaBlooming" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/5968/5968830.png" alt="Twitter" width="24" height="24"/>
+                            </a>
+                            <a href="https://www.tiktok.com/@sistema_blooming?_t=8oRwbbrEw6g&_r=1" target="_blank">
+                                <img src="https://cdn-icons-png.flaticon.com/128/15713/15713399.png" alt="Instagram" width="24" height="24"/>
+                            </a>
+                        </p>
+                    </footer>
+                </body>
+                </html>
+            """.trimIndent()
+
+                EnvioCorreo.EnvioDeCorreo(destinatario, "Bienvenido a Blooming", message)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun LimpiarCampos() {

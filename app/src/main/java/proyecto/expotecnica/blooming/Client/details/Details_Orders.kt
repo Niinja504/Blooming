@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -23,6 +24,7 @@ import proyecto.expotecnica.blooming.R
 
 class Details_Orders : Fragment() {
     private lateinit var productos: List<Data_Productos>
+    private lateinit var CampoNota: EditText
     companion object{
         fun newInstance(
             UUID: String,
@@ -117,11 +119,12 @@ class Details_Orders : Fragment() {
         val lbl_Dedicatoria = root.findViewById<TextView>(R.id.lbl_Dedicatoria_Orders_Client)
         val lbl_SubTotal = root.findViewById<TextView>(R.id.lbl_SubTotal_Details_Orders_Client)
         val lbl_Costo_Envio = root.findViewById<TextView>(R.id.lbl_Envio_Details_Orders_Client)
-        val lbl_Nota_Pedido = root.findViewById<TextView>(R.id.lbl_Nota_Details_Orders_Client)
+        CampoNota = root.findViewById(R.id.txt_Nota_details_Orders_Client)
         val btn_Eliminar_Pedido = root.findViewById<Button>(R.id.btn_EliminarVenta_Details_Client)
         val btn_Confirmar_Venta = root.findViewById<Button>(R.id.btn_ConfirmarVenta_Details_Client)
 
         lbl_Nombre_Cliente.text = Nombre_Cliente_Recibido
+        lbl_Fecha_Entrega.text = Fecha_Entrega_Recibida
         lbl_Direccion_Entrega.text = Lugar_Entrega_Recibido
         lbl_SubTotal.text = SubTotal_Recibido.toString()
         lbl_Dedicatoria.text = Sin_Mensaje_Recibido
@@ -151,12 +154,18 @@ class Details_Orders : Fragment() {
         btn_Confirmar_Venta.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 val objConexion = ClaseConexion().CadenaConexion()
+
+                val Nota = objConexion?.prepareStatement("INSERT INTO TbNotasPedidodos (UUID_Pedido, Nota_Servicio) VALUES (?, ?)")!!
+                Nota.setString(1, uuid_Recibido)
+                Nota.setString(2, CampoNota.text.toString())
+                Nota.executeUpdate()
+
                 val Confirmar_Venta = objConexion?.prepareStatement("UPDATE TbPedido_Cliente SET Pedido_Pendiente = ? WHERE UUID_Pedido = ?")!!
                 val Estado_Pedido = "No"
-
                 Confirmar_Venta.setString(1,Estado_Pedido)
                 Confirmar_Venta.setString(2, uuid_Recibido)
                 Confirmar_Venta.executeUpdate()
+
             }
             Toast.makeText(requireContext(), "Se ha confirmado el pedido", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.navigation_orders_client)

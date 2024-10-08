@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
@@ -111,6 +112,7 @@ class AddUser : Fragment() {
         IMG_Perfil = root.findViewById(R.id.Img_AddUser_Admin)
         val SubirFoto = root.findViewById<ImageView>(R.id.ic_SubirIMG_AddUser_Admin)
         val Btn_CrearCuenta = root.findViewById<Button>(R.id.btn_AgregarUser_Admin)
+        val ProgessBar = root.findViewById<ProgressBar>(R.id.progressBar_Add_user_Admin)
 
         ImgOjoNewContra.setOnClickListener {
             if (isNewContraVisible) {
@@ -161,6 +163,10 @@ class AddUser : Fragment() {
                     val correoExiste = CorreoExiste(CampoCorreo.text.toString())
                     if (!correoExiste){
                         Toast.makeText(requireContext(), "Por favor, no cierre la aplicación, ya que se está creando la cuenta. Gracias", Toast.LENGTH_SHORT).show()
+
+                        ProgessBar.visibility = View.VISIBLE
+                        requireView().alpha = 0.5f
+
                         val imageUrl = if (selectedImageUri != null) {
                             val imageBitmap = getBitmapFromUri(requireContext(),selectedImageUri!!)
                             val resizedBitmap = ImageUtils.resizeImageIfNeeded(imageBitmap)
@@ -203,6 +209,10 @@ class AddUser : Fragment() {
                             Crear.setInt(11, Sesion)
                             Crear.executeUpdate()
                         }
+
+                        ProgessBar.visibility = View.GONE
+                        requireView().alpha = 1f
+
                         Toast.makeText(requireContext(), "Se creó la cuenta exitosamente.", Toast.LENGTH_SHORT).show()
                         LimpiarCampo()
                         findNavController().navigate(R.id.navigation_users_admin)

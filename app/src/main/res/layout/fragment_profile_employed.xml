@@ -52,31 +52,36 @@
             android:id="@+id/lbl_Nombre_User_Profile_Employed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/lbl_Apellido_User_Profile_Employed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/lbl_Nombre_De_Usuario_Profile_Employed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/lbl_Edad_Profile_Employed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/lbl_Telefono_Profile_Employed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="#000000" />
     </LinearLayout>
 
     <View

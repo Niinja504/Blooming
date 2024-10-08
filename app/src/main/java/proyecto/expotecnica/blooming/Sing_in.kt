@@ -1,63 +1,32 @@
 package proyecto.expotecnica.blooming
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.Editable
-import android.text.InputType
-import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
 import modelo.ClaseConexion
 import modelo.EnvioCorreo
-import modelo.ImageUtils
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.IOException
 import java.security.MessageDigest
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
-import java.util.UUID
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.auth.GoogleAuthProvider.getCredential
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.google.firebase.appcheck.FirebaseAppCheck
-import proyecto.expotecnica.blooming.Password_recovery3.DeviceDetails
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -71,6 +40,11 @@ class Sing_in : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val firebaseAppCheck = FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            SafetyNetAppCheckProviderFactory.getInstance()
+        )
 
         enableEdgeToEdge()
         setContentView(R.layout.activity_sing_in)
