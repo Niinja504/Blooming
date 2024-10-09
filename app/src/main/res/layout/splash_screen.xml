@@ -8,16 +8,24 @@
     android:background="#FAD4D4"
     tools:context=".SplashScreen">
 
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="199dp"
-        android:layout_height="181dp"
-        android:scrollbarDefaultDelayBeforeFade="260"
-        android:scrollbarFadeDuration="270"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_logo" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+          android:id="@+id/imageView"
+          android:layout_width="199dp"
+          android:layout_height="181dp"
+          android:scrollbarDefaultDelayBeforeFade="260"
+          android:scrollbarFadeDuration="270"
+          app:srcCompat="@drawable/splash"
+          android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

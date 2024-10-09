@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/Txt_Nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/Txt_Descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@drawable/edittext_border"
+        android:backgroundTint="@null"
+        android:ems="10"
+        android:gravity="top|start"
+        android:hint="Descripción"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        android:padding="3dp"
+        android:paddingStart="8dp"
+        android:scrollbars="vertical"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        tools:ignore="DuplicateIds,MissingConstraints,TouchTargetSizeCheck" />
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import DataC.DataOffers_Admin
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +27,10 @@ import proyecto.expotecnica.blooming.R
 class Adaptador_Offers_Admin (private val contexto: Context,var Datos: List<DataOffers_Admin>): RecyclerView.Adapter<ViewHolder_Offers_Admin>() {
     private var datosFiltrados = Datos
 
-    fun ActualizarListaDespuesDeEditar(UUID: String, NuevoTitulo: String){
+    fun ActualizarListaDespuesDeEditar(UUID: String, NuevoTitulo: String, NuevaDescripcion: String){
         val Index = Datos.indexOfFirst { it.UUID_Oferta == UUID }
         Datos[Index].Titulo = NuevoTitulo
+        Datos[Index].Descripcion = NuevaDescripcion
         notifyItemChanged(Index)
     }
 
@@ -59,20 +61,21 @@ class Adaptador_Offers_Admin (private val contexto: Context,var Datos: List<Data
         }
     }
 
-    fun ActualizarDato(Titulo: String, UUID: String){
+    fun ActualizarDato(Titulo: String, Descripcion: String, UUID: String){
         GlobalScope.launch(Dispatchers.IO) {
             val ObjConexion = ClaseConexion().CadenaConexion()
 
-            val UpdateTitulo = ObjConexion?.prepareStatement("UPDATE TbOfertas SET Titulo = ? WHERE UUID = ?")!!
+            val UpdateTitulo = ObjConexion?.prepareStatement("UPDATE TbOfertas SET Titulo = ?, Decripcion_Oferta = ? WHERE UUID_Oferta = ?")!!
             UpdateTitulo.setString(1, Titulo)
-            UpdateTitulo.setString(2, UUID)
+            UpdateTitulo.setString(2, Descripcion)
+            UpdateTitulo.setString(3, UUID)
             UpdateTitulo.executeUpdate()
 
             val COMMIT = ObjConexion.prepareStatement("COMMIT")
             COMMIT?.executeUpdate()
 
-            withContext(Dispatchers.IO){
-                ActualizarListaDespuesDeEditar(UUID, Titulo)
+            withContext(Dispatchers.Main){
+                ActualizarListaDespuesDeEditar(UUID, Titulo, Descripcion)
             }
         }
     }
@@ -121,20 +124,30 @@ class Adaptador_Offers_Admin (private val contexto: Context,var Datos: List<Data
         holder.IC_Editar.setOnClickListener{
             val context = holder.itemView.context
 
+            val dialogView = LayoutInflater.from(context).inflate(R.layout.ofertas_update, null)
+
+            val Update_Nombre = dialogView.findViewById<EditText>(R.id.Txt_Nombre)
+            val Update_Descripcion = dialogView.findViewById<EditText>(R.id.Txt_Descripcion)
+
+            Update_Nombre.filters = arrayOf(InputFilter.LengthFilter(14))
+
+            Update_Nombre.setText(item.Titulo)
+            Update_Descripcion.setText(item.Descripcion)
+
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Actualizar")
+            builder.setTitle("Actualizar Usuario")
+            builder.setView(dialogView)
 
-            val cuadroTexto = EditText(context)
-            cuadroTexto.setHint(item.Titulo)
-            builder.setView(cuadroTexto)
+            builder.setPositiveButton("Actualizar"){ dialog, wich ->
+                val TituloOferta = Update_Nombre.text.toString()
+                val DescripcionOferta = Update_Descripcion.text.toString()
 
-            builder.setPositiveButton("Actualizar"){
-                    dialog, wich ->
-                ActualizarDato(cuadroTexto.text.toString(), item.UUID_Oferta)
+                ActualizarDato(TituloOferta , DescripcionOferta, item.UUID_Oferta)
+
+                dialog.dismiss()
             }
 
-            builder.setNegativeButton("Cancelar"){
-                    dialog, wich ->
+            builder.setNegativeButton("Cancelar"){ dialog, wich ->
                 dialog.dismiss()
             }
             val dialog = builder.create()
