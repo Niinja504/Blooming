@@ -12,6 +12,8 @@
     <color name="morado_background2">#9475ba</color>
     <color name="rosa_background2">#f2b1cd</color>
     <color name="durazno_background2">#FEE5E1</color>
+    <color name="rosado_background">#f2bfca</color>
+    <color name="peachdo_background">#fadcca</color>
     <!--1-->
     <color name="md_theme_primary">#F38F9A</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
