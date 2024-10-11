@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFCF5"
+    android:background="@drawable/background_oscuro"
     tools:context=".Admin.sales.Sales" >
 
     <androidx.recyclerview.widget.RecyclerView

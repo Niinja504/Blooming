@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFCF5"
+    android:background="@drawable/background"
     tools:context=".Admin.add_shipping_cost.AddShippingCost" >
 
     <EditText
@@ -48,6 +48,7 @@
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:text="Agregar costo"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
