@@ -120,6 +120,7 @@
         android:ems="10"
         android:gravity="top|start"
         android:hint="Descripción"
+        android:imeOptions="actionDone"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
         android:padding="3dp"
@@ -128,8 +129,7 @@
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
-        android:imeOptions="actionDone"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
@@ -203,7 +203,7 @@
             android:layout_weight="1"
             android:inputType="none"
             android:textColor="#000000"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -230,7 +230,7 @@
             android:layout_weight="1"
             android:inputType="none"
             android:textColor="#000000"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -256,7 +256,7 @@
             android:layout_weight="1"
             android:inputType="none"
             android:textColor="#000000"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
