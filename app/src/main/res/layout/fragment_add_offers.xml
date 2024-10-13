@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFCF5"
+    android:background="@drawable/background"
     tools:context=".Admin.add_offers.AddOffers" >
 
     <View
@@ -37,6 +37,7 @@
         android:layout_width="370dp"
         android:layout_height="45dp"
         android:text="Guardar Cambios"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
@@ -90,6 +91,7 @@
         android:ems="10"
         android:gravity="top|start"
         android:hint="Descripción"
+        android:imeOptions="actionDone"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
         android:padding="3dp"
@@ -98,8 +100,7 @@
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textColorHint="#FF6E6E6E"
-        android:imeOptions="actionDone"
-        android:textSize="14sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.2"
@@ -183,7 +184,7 @@
             android:layout_height="wrap_content"
             android:inputType="none"
             android:textColor="#000000"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
