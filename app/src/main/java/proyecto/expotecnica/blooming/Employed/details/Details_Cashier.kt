@@ -37,13 +37,13 @@ class Details_Cashier : Fragment() {
         val CategoriaEventoRecibida = arguments?.getString("categoriaEvento")
         val DescripcionRecibida = arguments?.getString("descripcion")
 
-        val lbl_Nombre = root.findViewById<TextView>(R.id.lbl_NombreArt_DetailsCashier_Employed)
-        val lbl_Precio = root.findViewById<TextView>(R.id.lbl_Precio_DetailsCashier_Employed)
+        val lbl_Nombre = root.findViewById<TextView>(R.id.lbl_NombreArt_DetailsInventory_Employed)
+        val lbl_Precio = root.findViewById<TextView>(R.id.lbl_Precio_DetailsInventory_Employed)
         val lbl_CantidadDisponible = root.findViewById<TextView>(R.id.lbl_CantidadDis_DetailsCashier_Employed)
-        val lbl_CategoriaFlores = root.findViewById<TextView>(R.id.lbl_CategoriaFlores_DetailsCashier_Employed)
-        val lbl_CategoriaDiseno = root.findViewById<TextView>(R.id.lbl_CategoriaDiseno_DetailsCashier_Employed)
-        val lbl_CategoriaEvento = root.findViewById<TextView>(R.id.lbl_CategoriaEvento_DetailsCashier_Employed)
-        val lbl_Descripcion = root.findViewById<TextView>(R.id.lbl_Descrip_DetailsCashier_Employed)
+        val lbl_CategoriaFlores = root.findViewById<TextView>(R.id.lbl_CategoriaFlores_DetailsInventory_Employed)
+        val lbl_CategoriaDiseno = root.findViewById<TextView>(R.id.lbl_CategoriaDiseno_DetailsInventory_Employed)
+        val lbl_CategoriaEvento = root.findViewById<TextView>(R.id.lbl_CategoriaEvento_DetailsInventory_Employed)
+        val lbl_Descripcion = root.findViewById<TextView>(R.id.lbl_Descrip_DetailsInventory_Employed)
 
         lbl_Nombre.text = NombreRecibido
         lbl_Precio.text = PrecioRecibido.toString()

@@ -2,12 +2,14 @@ package proyecto.expotecnica.blooming.Admin.users
 
 import DataC.DataUsers
 import RecyclerViewHelpers.Adaptador_Users_Admin
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -64,6 +66,7 @@ class Users : Fragment() {
 
         LimpiarBuscador.setOnClickListener {
             Limpiar()
+            Teclado()
         }
 
         Agregar.setOnClickListener {
@@ -83,15 +86,15 @@ class Users : Fragment() {
             val Usuarios = mutableListOf<DataUsers>()
 
             while (resultSet.next()){
-                val Nombre = resultSet.getString("Nombres_User")
-                val Apellido = resultSet.getString("Apellido_User")
-                val NombreUsuario = resultSet.getString("Nombre_de_Usuario")
-                val Telefono = resultSet.getString("Num_Telefono_User")
+                val Nombre = resultSet.getString("Nombres_User") ?: "Sin Nombre"
+                val Apellido = resultSet.getString("Apellido_User") ?: "Sin Apellido"
+                val NombreUsuario = resultSet.getString("Nombre_de_Usuario") ?: "Sin Nombre de usuario"
+                val Telefono = resultSet.getString("Num_Telefono_User") ?: "Sin nùmero"
                 val Edad = resultSet.getInt("Edad_User")
-                val Correo = resultSet.getString("Email_User")
+                val Correo = resultSet.getString("Email_User") ?: "Sin Correo"
                 val Contra = resultSet.getString("Contra_User")
-                val IMG_User = resultSet.getString("Img_User")
-                val Rol = resultSet.getString("Rol_User")
+                val IMG_User = resultSet.getString("Img_User") ?: "Sin Foto de perfil"
+                val Rol = resultSet.getString("Rol_User") ?: "Sin Rol"
                 val Sesion = resultSet.getInt("Sesion_User")
                 val uuid = resultSet.getString("UUID_User")
                 val Usuario = DataUsers(uuid, Nombre, Apellido, NombreUsuario, Telefono, Edad, Correo, Contra, IMG_User,Rol , Sesion)
@@ -124,5 +127,14 @@ class Users : Fragment() {
     fun Limpiar(){
         Buscador.text.clear()
         Buscador.clearFocus()
+    }
+
+    fun Teclado() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentView = activity?.currentFocus
+        currentView?.clearFocus()
+        (view as? View)?.let { v ->
+            imm.hideSoftInputFromWindow(v.windowToken, 0)
+        }
     }
 }

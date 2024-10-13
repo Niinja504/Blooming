@@ -24,20 +24,6 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/lbl_Descrip_DetailsInventory_Client"
-        android:layout_width="318dp"
-        android:layout_height="38dp"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.809" />
-
-    <TextView
         android:id="@+id/lbl_NombreArt_DetailsInventory_Client"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -235,6 +221,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
+
+    <TextView
+        android:id="@+id/lbl_Descrip_DetailsInventory_Client"
+        android:layout_width="318dp"
+        android:layout_height="38dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
 
     <ImageView
         android:id="@+id/ArchivoIMG_DetailsShopCart_Client"

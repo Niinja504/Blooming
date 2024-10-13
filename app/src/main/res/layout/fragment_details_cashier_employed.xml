@@ -40,7 +40,7 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/lbl_NombreArt_DetailsInventory_Client"
+        android:id="@+id/lbl_NombreArt_DetailsInventory_Employed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <TextView
-        android:id="@+id/lbl_CategoriaDiseno_DetailsInventory_Client"
+        android:id="@+id/lbl_CategoriaDiseno_DetailsInventory_Employed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="0.556" />
 
     <TextView
-        android:id="@+id/lbl_Precio_DetailsInventory_Client"
+        android:id="@+id/lbl_Precio_DetailsInventory_Employed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -110,7 +110,7 @@
         app:layout_constraintVertical_bias="0.599" />
 
     <TextView
-        android:id="@+id/lbl_CategoriaFlores_DetailsInventory_Client"
+        android:id="@+id/lbl_CategoriaFlores_DetailsInventory_Employed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -152,7 +152,7 @@
         app:layout_constraintVertical_bias="0.694" />
 
     <TextView
-        android:id="@+id/lbl_CategoriaEvento_DetailsInventory_Client"
+        android:id="@+id/lbl_CategoriaEvento_DetailsInventory_Employed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -195,7 +195,7 @@
         app:layout_constraintVertical_bias="0.498" />
 
     <TextView
-        android:id="@+id/lbl_Descrip_DetailsInventory_Client"
+        android:id="@+id/lbl_Descrip_DetailsInventory_Employed"
         android:layout_width="318dp"
         android:layout_height="38dp"
         android:text="TextView"

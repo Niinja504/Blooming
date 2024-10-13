@@ -64,7 +64,7 @@ class Details_Offer : Fragment() {
             .into(IMG_Offer)
 
         Regresar_Detalles.setOnClickListener{
-            findNavController().navigate(R.id.navigation_dashboard_client)
+            findNavController().navigate(R.id.navigation_offers_client)
         }
 
         return root

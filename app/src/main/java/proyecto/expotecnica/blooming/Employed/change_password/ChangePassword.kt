@@ -32,12 +32,12 @@ class ChangePassword : Fragment() {
     private lateinit var Btn_CambiarContra: Button
     private var isNuevaContraVisible = false
     private var isConfirmarContraVisible = false
-    private var UUID: String? = null
+    private var UUID_User: String? = null
     private var Correo: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            UUID = it.getString("UUID")
+            UUID_User = it.getString("UUID")
             Correo = it.getString("Correo")
         }
     }
@@ -103,11 +103,22 @@ class ChangePassword : Fragment() {
 
                 val Actualizar = ObjConexion?.prepareStatement("UPDATE TbUsers SET Contra_User = ? WHERE UUID_User = ?")!!
                 Actualizar.setString(1, ContraEncrip)
-                Actualizar.setString(2, UUID)
+                Actualizar.setString(2, UUID_User)
                 Actualizar.executeUpdate()
 
                 val COMMIT = ObjConexion.prepareStatement("COMMIT")
                 COMMIT.executeUpdate()
+
+                val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)")!!
+
+                val deviceDetails = getDeviceDetails()
+                Notificacion.setString(1, java.util.UUID.randomUUID().toString())
+                Notificacion.setString(2, UUID_User)
+                Notificacion.setString(3, "Cambio de contraseña")
+                Notificacion.setString(4, "Se ha modificado la contraseña de su cuenta")
+                Notificacion.setString(5, deviceDetails.time)
+                Notificacion.setString(6, deviceDetails.date)
+                Notificacion.executeUpdate()
             }
             LimpiarCampos()
             Toast.makeText(requireContext(), "Su contraseña se ha actualizado", Toast.LENGTH_LONG).show()

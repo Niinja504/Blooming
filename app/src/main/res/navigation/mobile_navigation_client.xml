@@ -3,13 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_dashboard_client">
+    app:startDestination="@+id/navigation_shop_client">
 
     <fragment
-        android:id="@+id/navigation_dashboard_client"
-        android:name="proyecto.expotecnica.blooming.Client.dashboard.Dashboard"
-        android:label="Inicio"
-        tools:layout="@layout/fragment_dashboard_client">
+        android:id="@+id/navigation_shop_client"
+        android:name="proyecto.expotecnica.blooming.Client.shop.Shop"
+        android:label="Tienda"
+        tools:layout="@layout/fragment_shop_client">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_offers_client"
+        android:name="proyecto.expotecnica.blooming.Client.offers.Offers"
+        android:label="Ofertas"
+        tools:layout="@layout/fragment_offers_client">
         <argument
             android:name="UUID"
             app:argType="string" />
@@ -29,20 +39,19 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_shop_client"
-        android:name="proyecto.expotecnica.blooming.Client.shop.Shop"
-        android:label="Tienda"
-        tools:layout="@layout/fragment_shop_client">
-        <argument
-            android:name="UUID"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
         android:id="@+id/navigation_orders_client"
         android:name="proyecto.expotecnica.blooming.Client.orders.Orders"
         android:label="Pedidos"
         tools:layout="@layout/fragment_orders_client" />
+    <argument
+        android:name="UUID"
+        app:argType="string" />
+
+    <fragment
+        android:id="@+id/navigation_notifications_client"
+        android:name="proyecto.expotecnica.blooming.Client.notifications.Notifications"
+        android:label="Notificaciones"
+        tools:layout="@layout/fragment_notifications_client" />
     <argument
         android:name="UUID"
         app:argType="string" />

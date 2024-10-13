@@ -2,12 +2,14 @@ package proyecto.expotecnica.blooming.Admin.shipping_cost
 
 import DataC.DataShippingCost_Admin
 import RecyclerViewHelpers.Adaptador_ShippingCost_Admin
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -69,6 +71,7 @@ class ShippingCost : Fragment()  {
 
         LimpiarBuscador.setOnClickListener {
             Limpiar()
+            Teclado()
         }
 
         AgregarCosto.setOnClickListener {
@@ -122,5 +125,14 @@ class ShippingCost : Fragment()  {
     fun Limpiar(){
         Buscador.text.clear()
         Buscador.clearFocus()
+    }
+
+    fun Teclado() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentView = activity?.currentFocus
+        currentView?.clearFocus()
+        (view as? View)?.let { v ->
+            imm.hideSoftInputFromWindow(v.windowToken, 0)
+        }
     }
 }

@@ -16,6 +16,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_notifications_employed"
+        android:name="proyecto.expotecnica.blooming.Employed.notifications.Notifications"
+        android:label="Notificaciones"
+        tools:layout="@layout/fragment_notifications_employed">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_shop_cart_employed"
         android:name="proyecto.expotecnica.blooming.Employed.shop_cart.ShopCart"
         android:label="Compra"

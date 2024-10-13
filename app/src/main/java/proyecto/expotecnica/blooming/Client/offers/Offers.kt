@@ -1,15 +1,15 @@
-package proyecto.expotecnica.blooming.Client.dashboard
+package proyecto.expotecnica.blooming.Client.offers
 
 import DataC.DataOffers_Admin
 import RecyclerViewHelpers.Adaptador_Offers_Client
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -22,7 +22,7 @@ import proyecto.expotecnica.blooming.Client.ImageViewModel_Client
 import proyecto.expotecnica.blooming.R
 
 
-class Dashboard : Fragment() {
+class Offers : Fragment() {
     private val imageViewModel: ImageViewModel_Client by activityViewModels()
     private lateinit var IMGUser: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,10 +35,10 @@ class Dashboard : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val root = inflater.inflate(R.layout.fragment_dashboard_client, container, false)
+        val root = inflater.inflate(R.layout.fragment_offers_client, container, false)
 
+        val IC_Regresar = root.findViewById<ImageView>(R.id.Regresar_Offers_client)
         IMGUser = root.findViewById(R.id.IMG_User_Dashboard)
-
         val RCV_Offers = root.findViewById<RecyclerView>(R.id.RCV_Offers_Client)
         //Asignarle un Layout al RecyclerView
         RCV_Offers.layoutManager = LinearLayoutManager(requireContext())
@@ -51,6 +51,10 @@ class Dashboard : Fragment() {
                     .error(R.drawable.profile_user)
                     .into(IMGUser)
             }
+        }
+
+        IC_Regresar.setOnClickListener{
+            findNavController().navigate(R.id.navigation_shop_client)
         }
 
         suspend fun MostrarDatos(): List<DataOffers_Admin> {

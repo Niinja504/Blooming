@@ -29,6 +29,7 @@ import com.google.firebase.appcheck.safetynet.SafetyNetAppCheckProviderFactory
 import com.google.firebase.appcheck.FirebaseAppCheck
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.UUID
 
 
 class Sing_in : AppCompatActivity() {
@@ -177,6 +178,20 @@ class Sing_in : AppCompatActivity() {
                                             Abrir.setInt(1, Abierto)
                                             Abrir.setString(2, uuid)
                                             Abrir.executeUpdate()
+
+                                            val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio) VALUES (?, ?, ?, ?, ?)")!!
+
+                                            val deviceDetails = getDeviceDetails()
+                                            Notificacion.setString(1, UUID.randomUUID().toString())
+                                            Notificacion.setString(2, uuid)
+                                            Notificacion.setString(3, "Inicio de sesiòn")
+                                            Notificacion.setString(4, "Se ha iniciado sesión en un nuevo dispositivo:\n" +
+                                                    "Fecha: ${deviceDetails.date}\n" +
+                                                    "Nombre del dispositivo: ${deviceDetails.deviceName}\n" +
+                                                    "Modelo: ${deviceDetails.model}\n" +
+                                                    "Marca: ${deviceDetails.manufacturer}")
+                                            Notificacion.setString(5, deviceDetails.time)
+                                            Notificacion.executeUpdate()
                                         }
                                         val pantallaAdmin = Intent(this@Sing_in, Dashboard_admin::class.java)
                                         pantallaAdmin.putExtra("UUID", uuid)
@@ -193,6 +208,20 @@ class Sing_in : AppCompatActivity() {
                                             Abrir.setInt(1, Abierto)
                                             Abrir.setString(2, uuid)
                                             Abrir.executeUpdate()
+
+                                            val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio) VALUES (?, ?, ?, ?, ?)")!!
+
+                                            val deviceDetails = getDeviceDetails()
+                                            Notificacion.setString(1, UUID.randomUUID().toString())
+                                            Notificacion.setString(2, uuid)
+                                            Notificacion.setString(3, "Inicio de sesiòn")
+                                            Notificacion.setString(4, "Se ha iniciado sesión en un nuevo dispositivo:\n" +
+                                                    "Fecha: ${deviceDetails.date}\n" +
+                                                    "Nombre del dispositivo: ${deviceDetails.deviceName}\n" +
+                                                    "Modelo: ${deviceDetails.model}\n" +
+                                                    "Marca: ${deviceDetails.manufacturer}")
+                                            Notificacion.setString(5, deviceDetails.time)
+                                            Notificacion.executeUpdate()
                                         }
                                         val pantallaEmpleado = Intent(this@Sing_in, Dashboard_employed::class.java)
                                         pantallaEmpleado.putExtra("UUID", uuid)
@@ -209,6 +238,20 @@ class Sing_in : AppCompatActivity() {
                                             Abrir.setInt(1, Abierto)
                                             Abrir.setString(2, uuid)
                                             Abrir.executeUpdate()
+
+                                            val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)")!!
+
+                                            val deviceDetails = getDeviceDetails()
+                                            Notificacion.setString(1, UUID.randomUUID().toString())
+                                            Notificacion.setString(2, uuid)
+                                            Notificacion.setString(3, "Inicio de sesiòn")
+                                            Notificacion.setString(4, "Se ha iniciado sesión en un nuevo dispositivo:\n" +
+                                                    "Nombre del dispositivo: ${deviceDetails.deviceName}\n" +
+                                                    "Modelo: ${deviceDetails.model}\n" +
+                                                    "Marca: ${deviceDetails.manufacturer}")
+                                            Notificacion.setString(5, deviceDetails.time)
+                                            Notificacion.setString(6, deviceDetails.date)
+                                            Notificacion.executeUpdate()
                                         }
                                         val pantallaPrincipal = Intent(this@Sing_in, Dashboard_client::class.java)
                                         pantallaPrincipal.putExtra("UUID", uuid)

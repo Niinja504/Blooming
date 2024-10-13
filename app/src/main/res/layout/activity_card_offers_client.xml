@@ -9,7 +9,7 @@
     app:cardCornerRadius="20dp"
     app:cardUseCompatPadding="true"
     app:contentPadding="15dp"
-    tools:context=".Client.dashboard.Card">
+    tools:context=".Client.offers.Card">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

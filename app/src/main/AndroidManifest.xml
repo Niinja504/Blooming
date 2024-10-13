@@ -24,6 +24,18 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
+            android:name=".activity_card_notifications_employed"
+            android:exported="false"
+            android:theme="@style/Theme.Blooming" />
+        <activity
+            android:name=".Client.notifications.Card"
+            android:exported="false"
+            android:theme="@style/Theme.Blooming" />
+        <activity
+            android:name=".Client.notifications.Card"
+            android:exported="false"
+            android:theme="@style/Theme.Blooming" />
+        <activity
             android:name=".Employed.sales.Card"
             android:exported="false" />
         <activity
@@ -36,7 +48,7 @@
             android:name=".Employed.orders.Card"
             android:exported="false" />
         <activity
-            android:name=".Client.dashboard.Card"
+            android:name=".Client.offers.Card"
             android:exported="false" />
         <activity
             android:name=".Client.delivery_address.Ven_Nombre"
@@ -80,7 +92,7 @@
             android:name=".SplashScreen"
             android:exported="true"
             android:label="Blooming"
-            android:windowSoftInputMode="adjustNothing" >
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -91,24 +103,19 @@
             android:name=".Dashboard_client"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name=".Sing_in"
             android:exported="false" />
-
         <activity
             android:name=".Dashboard_admin"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
-
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Password_recovery3"
             android:exported="false" />
-
         <activity
             android:name=".Password_recovery2"
             android:exported="false" />
-
         <activity
             android:name=".Password_recovery1"
             android:exported="false" />

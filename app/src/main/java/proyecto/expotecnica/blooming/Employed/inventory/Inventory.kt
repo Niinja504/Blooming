@@ -2,12 +2,14 @@ package proyecto.expotecnica.blooming.Employed.inventory
 
 import DataC.DataInventory
 import RecyclerViewHelpers.Adaptador_Inventory_Employed
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
@@ -60,6 +62,7 @@ class Inventory : Fragment() {
 
         LimpiarBuscador.setOnClickListener {
             Limpiar()
+            Teclado()
         }
 
         suspend fun MostrarDatos(): List<DataInventory> {
@@ -75,14 +78,14 @@ class Inventory : Fragment() {
             val Productos = mutableListOf<DataInventory>()
 
             while (ResultSet.next()){
-                val IMG_Produc = ResultSet.getString("Img_Producto")
-                val Nombre = ResultSet.getString("Nombre_Producto")
+                val IMG_Produc = ResultSet.getString("Img_Producto") ?: ""
+                val Nombre = ResultSet.getString("Nombre_Producto") ?: "Sin Nombre"
                 val Precio = ResultSet.getFloat("Precio_Producto")
                 val CantidadBode = ResultSet.getInt("Cantidad_Bodega_Productos")
-                val CategoriaFlores = ResultSet.getString("Categoria_Flores")
-                val CategoriaDiseno = ResultSet.getString("Categoria_Diseno")
-                val CategoriaEvento = ResultSet.getString("Categoria_Evento")
-                val Descripcion = ResultSet.getString("Descripcion_Producto")
+                val CategoriaFlores = ResultSet.getString("Categoria_Flores") ?: "Sin Categoría"
+                val CategoriaDiseno = ResultSet.getString("Categoria_Diseno") ?: "Sin Categoría"
+                val CategoriaEvento = ResultSet.getString("Categoria_Evento") ?: "Sin Categoría"
+                val Descripcion = ResultSet.getString("Descripcion_Producto") ?: "Sin Descripción"
                 val uuid = ResultSet.getString("UUID_Producto")
                 val Producto = DataInventory(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
                 Productos.add(Producto)
@@ -114,5 +117,14 @@ class Inventory : Fragment() {
     fun Limpiar(){
         Buscador.text.clear()
         Buscador.clearFocus()
+    }
+
+    fun Teclado() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentView = activity?.currentFocus
+        currentView?.clearFocus()
+        (view as? View)?.let { v ->
+            imm.hideSoftInputFromWindow(v.windowToken, 0)
+        }
     }
 }

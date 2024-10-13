@@ -7,10 +7,22 @@
     android:background="@drawable/background_oscuro"
     tools:context=".Client.shop.Shop" >
 
+    <ImageView
+        android:id="@+id/IC_Offers_Client"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_offers"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
     <TextView
         android:id="@+id/lbl_ofertas_client"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="89dp"
+        android:layout_height="27dp"
         android:text="Catálogo"
         android:textColor="#665041"
         android:textSize="20sp"
@@ -91,6 +103,8 @@
         android:minHeight="48dp"
         android:textAllCaps="false"
         android:textColor="#000000"
+        android:textColorHint="#919191"
+        android:imeOptions="actionDone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.198"

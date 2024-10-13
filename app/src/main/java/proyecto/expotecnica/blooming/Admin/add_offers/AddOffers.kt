@@ -14,8 +14,11 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -42,6 +45,8 @@ import modelo.ImageUtils
 import proyecto.expotecnica.blooming.R
 import java.io.ByteArrayOutputStream
 import java.sql.SQLException
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.UUID
 
 class AddOffers : Fragment() {
@@ -108,6 +113,9 @@ class AddOffers : Fragment() {
                         } else {
                             "El usuario eligió la imagen predeterminada"
                         }
+
+                        val deviceDetails = getDeviceDetails()
+
                         // Inserción en la base de datos
                         withContext(Dispatchers.IO) {
                             val objConexion = ClaseConexion().CadenaConexion()
@@ -122,6 +130,31 @@ class AddOffers : Fragment() {
                             agregar.setString(5, campoDescripcion.text.toString())
                             agregar.setString(6, imageUrl)
                             agregar.executeUpdate()
+
+                            val UUID_Cli = ObtenerClientes()
+                            val Notificacion = objConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)")!!
+
+                            for (UUID_Clientes in UUID_Cli) {
+                                val notificacionStatement = objConexion?.prepareStatement(
+                                    "INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)"
+                                )!!
+
+                                val Mensaje = StringBuilder().apply {
+                                    append("Aprovecha nuestra nueva oferta por tiempo limitado.\n")
+                                    append("Detalles de la oferta:\n")
+                                    append("• Título: $titulo\n")
+                                    append("• Porcentaje de descuento: ${campoPorcentaje.text}\n")
+                                    append("• Descripción: ${campoDescripcion.text}\n")
+                                }.toString()
+
+                                notificacionStatement.setString(1, UUID.randomUUID().toString())
+                                notificacionStatement.setString(2, UUID_Clientes)
+                                notificacionStatement.setString(3, "Nueva oferta")
+                                notificacionStatement.setString(4, Mensaje)
+                                notificacionStatement.setString(5, deviceDetails.time)
+                                notificacionStatement.setString(6, deviceDetails.date)
+                                notificacionStatement.executeUpdate()
+                            }
                         }
 
                         val correos = obtenerCorreosClientes()
@@ -401,6 +434,30 @@ class AddOffers : Fragment() {
         })
     }
 
+    suspend fun ObtenerClientes(): List<String> {
+        return withContext(Dispatchers.IO) {
+            val UUID_Clientes = mutableListOf<String>()
+            val conexion = ClaseConexion().CadenaConexion()
+            conexion?.let {
+                try {
+                    val query = "SELECT UUID_User FROM TbUsers WHERE Rol_User = 'Cliente'"
+                    val statement = it.createStatement()
+                    val resultSet = statement.executeQuery(query)
+
+                    while (resultSet.next()) {
+                        val uuid = resultSet.getString("UUID_User")
+                        UUID_Clientes.add(uuid)
+                    }
+                } catch (e: SQLException) {
+                    e.printStackTrace()
+                } finally {
+                    it.close()
+                }
+            }
+            UUID_Clientes
+        }
+    }
+
     companion object {
         private const val REQUEST_DOCUMENT_PICK_AddOffer = 1002
         private const val REQUEST_IMAGE_PICK_AddOffer = 2
@@ -410,5 +467,17 @@ class AddOffers : Fragment() {
         campoTitulo.text.clear()
         campoPorcentaje.text.clear()
         campoDescripcion.text.clear()
+    }
+
+    data class DeviceDateTime(val date: String, val time: String)
+
+    private fun getDeviceDetails(): DeviceDateTime {
+        val now = LocalDateTime.now()
+        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+        val date = now.format(dateFormatter)
+        val time = now.format(timeFormatter)
+
+        return DeviceDateTime(date, time)
     }
 }

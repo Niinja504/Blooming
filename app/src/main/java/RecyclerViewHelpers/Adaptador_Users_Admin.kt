@@ -258,7 +258,6 @@ class  Adaptador_Users_Admin (var Datos: List<DataUsers>): RecyclerView.Adapter<
         }
     }
 
-
     private fun findNavController(view: View): NavController {
         val fragment = view.findFragment<Fragment>()
         return NavHostFragment.findNavController(fragment)

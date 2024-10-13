@@ -194,14 +194,14 @@ class Profile : Fragment() {
 
             val Productos = mutableListOf<DataInventory>()
             while (ResultSet.next()) {
-                val IMG_Produc = ResultSet.getString("Img_Producto")
-                val Nombre = ResultSet.getString("Nombre_Producto")
+                val IMG_Produc = ResultSet.getString("Img_Producto") ?: ""
+                val Nombre = ResultSet.getString("Nombre_Producto") ?: "Sin Nombre"
                 val Precio = ResultSet.getFloat("Precio_Producto")
                 val CantidadBode = ResultSet.getInt("Cantidad_Bodega_Productos")
-                val CategoriaFlores = ResultSet.getString("Categoria_Flores")
-                val CategoriaDiseno = ResultSet.getString("Categoria_Diseno")
-                val CategoriaEvento = ResultSet.getString("Categoria_Evento")
-                val Descripcion = ResultSet.getString("Descripcion_Producto")
+                val CategoriaFlores = ResultSet.getString("Categoria_Flores") ?: "Sin Categoría"
+                val CategoriaDiseno = ResultSet.getString("Categoria_Diseno") ?: "Sin Categoría"
+                val CategoriaEvento = ResultSet.getString("Categoria_Evento") ?: "Sin Categoría"
+                val Descripcion = ResultSet.getString("Descripcion_Producto") ?: "Sin Descripción"
                 val uuid = ResultSet.getString("UUID_Producto")
                 val Producto = DataInventory(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
                 Productos.add(Producto)

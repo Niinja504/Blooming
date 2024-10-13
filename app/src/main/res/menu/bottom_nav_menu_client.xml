@@ -2,11 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_dashboard_client"
-        android:icon="@drawable/ic_home"
-        android:title="Inicio" />
-
-    <item
         android:id="@+id/navigation_shop_client"
         android:icon="@drawable/ic_shop"
         android:title="Tienda" />
@@ -20,6 +15,11 @@
         android:id="@+id/navigation_orders_client"
         android:icon="@drawable/ic_orders"
         android:title="Pedidos" />
+
+    <item
+        android:id="@+id/navigation_notifications_client"
+        android:icon="@drawable/ic_notification"
+        android:title="Notificaciones" />
 
     <item
         android:id="@+id/navigation_profile_client"

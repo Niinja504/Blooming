@@ -44,7 +44,10 @@ import java.io.IOException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.tasks.await
 import modelo.EnvioCorreo
+import proyecto.expotecnica.blooming.Sing_in.DeviceDetails
 import java.security.MessageDigest
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.UUID
 
 class Register : AppCompatActivity() {
@@ -374,7 +377,9 @@ class Register : AppCompatActivity() {
                         "INSERT INTO TbUsers (UUID_User, Nombres_User, Apellido_User, Nombre_de_Usuario, Num_Telefono_User, Edad_User, Email_User, Contra_User, Img_User, Rol_User, Sesion_User) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                     )!!
 
-                    Crear.setString(1, UUID.randomUUID().toString())
+                    val UUID_User = UUID.randomUUID().toString()
+
+                    Crear.setString(1, UUID_User)
                     Crear.setString(2, CampoNombres.text.toString())
                     Crear.setString(3, CampoApellidos.text.toString())
                     Crear.setString(4, CampoUsuario.text.toString())
@@ -386,6 +391,17 @@ class Register : AppCompatActivity() {
                     Crear.setString(10, Rol)
                     Crear.setInt(11, Sesion)
                     Crear.executeUpdate()
+
+                    val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)")!!
+
+                    val deviceDetails = getDeviceDetails()
+                    Notificacion.setString(1, UUID.randomUUID().toString())
+                    Notificacion.setString(2, UUID_User)
+                    Notificacion.setString(3, "Bienvenido/a")
+                    Notificacion.setString(4, "¡Bienvenido/a a Bloming, nuestra plataforma de venta de flores en línea!")
+                    Notificacion.setString(5, deviceDetails.time)
+                    Notificacion.setString(6, deviceDetails.date)
+                    Notificacion.executeUpdate()
                 }
 
                 dialog.dismiss()
@@ -600,4 +616,17 @@ class Register : AppCompatActivity() {
         CampoContra.text.clear()
         CampoConfirmarContra.text.clear()
     }
+
+    data class DeviceDateTime(val date: String, val time: String)
+
+    private fun getDeviceDetails(): DeviceDateTime {
+        val now = LocalDateTime.now()
+        val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+        val date = now.format(dateFormatter)
+        val time = now.format(timeFormatter)
+
+        return DeviceDateTime(date, time)
+    }
+
 }

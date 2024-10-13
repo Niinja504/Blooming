@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import modelo.ClaseConexion
 import RecyclerViewHelpers.Adaptador_Inventory_Admin
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
@@ -46,6 +48,7 @@ class Inventory : Fragment() {
 
         //Variables que se van a utilizar
         val IC_ShippinCost = root.findViewById<ImageView>(R.id.IC_ShippingCost)
+        val IC_Offers = root.findViewById<ImageView>(R.id.IC_Offers_Admin)
         val AgregarProducto = root.findViewById<Button>(R.id.btn_AgregarProducto_Inventory)
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Inventory)
         Buscador = root.findViewById(R.id.txt_Buscar_Inventory_Admin)
@@ -69,8 +72,13 @@ class Inventory : Fragment() {
             findNavController().navigate(R.id.navigation_shipping_cost_admin)
         }
 
+        IC_Offers.setOnClickListener {
+            findNavController().navigate(R.id.navigation_offers_admin)
+        }
+
         LimpiarBuscador.setOnClickListener {
             Limpiar()
+            Teclado()
         }
 
         AgregarProducto.setOnClickListener{
@@ -90,14 +98,14 @@ class Inventory : Fragment() {
             val Productos = mutableListOf<DataInventory_Admin>()
 
             while (ResultSet.next()){
-                val IMG_Produc = ResultSet.getString("Img_Producto")
-                val Nombre = ResultSet.getString("Nombre_Producto")
+                val IMG_Produc = ResultSet.getString("Img_Producto") ?: ""
+                val Nombre = ResultSet.getString("Nombre_Producto") ?: "Sin Nombre"
                 val Precio = ResultSet.getFloat("Precio_Producto")
                 val CantidadBode = ResultSet.getInt("Cantidad_Bodega_Productos")
-                val CategoriaFlores = ResultSet.getString("Categoria_Flores")
-                val CategoriaDiseno = ResultSet.getString("Categoria_Diseno")
-                val CategoriaEvento = ResultSet.getString("Categoria_Evento")
-                val Descripcion = ResultSet.getString("Descripcion_Producto")
+                val CategoriaFlores = ResultSet.getString("Categoria_Flores") ?: "Sin Categoría"
+                val CategoriaDiseno = ResultSet.getString("Categoria_Diseno") ?: "Sin Categoría"
+                val CategoriaEvento = ResultSet.getString("Categoria_Evento") ?: "Sin Categoría"
+                val Descripcion = ResultSet.getString("Descripcion_Producto") ?: "Sin Descripción"
                 val uuid = ResultSet.getString("UUID_Producto")
                 val Producto = DataInventory_Admin(uuid, IMG_Produc, Nombre, Precio, CantidadBode, CategoriaFlores, CategoriaDiseno, CategoriaEvento, Descripcion)
                 Productos.add(Producto)
@@ -129,6 +137,15 @@ class Inventory : Fragment() {
     fun Limpiar(){
         Buscador.text.clear()
         Buscador.clearFocus()
+    }
+
+    fun Teclado() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentView = activity?.currentFocus
+        currentView?.clearFocus()
+        (view as? View)?.let { v ->
+            imm.hideSoftInputFromWindow(v.windowToken, 0)
+        }
     }
 }
 

@@ -2,12 +2,14 @@ package proyecto.expotecnica.blooming.Admin.offers
 
 import DataC.DataOffers_Admin
 import RecyclerViewHelpers.Adaptador_Offers_Admin
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -42,6 +44,7 @@ class Offers : Fragment() {
     ): View {
         val root = inflater.inflate(R.layout.fragment_offers_admin, container, false)
 
+        val IC_Regresar = root.findViewById<ImageView>(R.id.Regresar_Offers_Admin)
         val AgregarOferta = root.findViewById<Button>(R.id.btn_AgregarOferta_Offers)
         val IMGUser = root.findViewById<ImageView>(R.id.IMG_User_Offers)
         Buscador = root.findViewById(R.id.txt_Buscar_Offers_Admin)
@@ -61,8 +64,13 @@ class Offers : Fragment() {
             }
         }
 
+        IC_Regresar.setOnClickListener{
+            findNavController().navigate(R.id.navigation_inventory_admin)
+        }
+
         LimpiarBuscador.setOnClickListener {
             Limpiar()
+            Teclado()
         }
 
         AgregarOferta.setOnClickListener{
@@ -119,6 +127,15 @@ class Offers : Fragment() {
     fun Limpiar(){
         Buscador.text.clear()
         Buscador.clearFocus()
+    }
+
+    fun Teclado() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentView = activity?.currentFocus
+        currentView?.clearFocus()
+        (view as? View)?.let { v ->
+            imm.hideSoftInputFromWindow(v.windowToken, 0)
+        }
     }
 }
 

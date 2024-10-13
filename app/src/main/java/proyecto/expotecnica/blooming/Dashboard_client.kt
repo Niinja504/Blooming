@@ -56,14 +56,14 @@ class Dashboard_client : AppCompatActivity() {
                 val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_dashboard_client) as NavHostFragment
                 val navController = navHostFragment.navController
 
-                navController.navigate(R.id.navigation_dashboard_client, bundle)
+                navController.navigate(R.id.navigation_shop_client, bundle)
             }
         }
 
         val navController = findNavController(R.id.nav_host_fragment_activity_dashboard_client)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_dashboard_client, R.id.navigation_shop_client, R.id.navigation_orders_client, R.id.navigation_profile_client
+                R.id.navigation_shop_client, R.id.navigation_offers_client, R.id.navigation_orders_client, R.id.navigation_notifications_client, R.id.navigation_profile_client
             )
         )
         navView.setupWithNavController(navController)

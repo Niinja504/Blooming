@@ -101,6 +101,21 @@ class Password_recovery3 : AppCompatActivity() {
             if (userEmail != null) {
                 GlobalScope.launch {
                     val ObjConexion = ClaseConexion().CadenaConexion()
+
+                    val ObtenerUUID = ObjConexion?.prepareStatement("SELECT UUID_User FROM TbUsers WHERE Email_User = ?")!!
+                    ObtenerUUID.setString(1, userEmail)
+
+                    val resultado = ObtenerUUID.executeQuery()
+                    var uuid: String? = null
+
+                    if (resultado.next()) {
+                        uuid = resultado.getString("UUID_User")
+                    } else {
+                        //Para mostrar si hay error en la terminal y regresar al inicio del bloque de código con el return@launch =)
+                        Log.e("Error", "No se encontró el UUID para el correo electrónico: $userEmail")
+                        return@launch
+                    }
+
                     val ContraEncrip = hashSHA256(nuevaContra)
 
                     val Actualizar = ObjConexion?.prepareStatement("UPDATE TbUsers SET Contra_User = ? WHERE Email_User = ?")!!
@@ -110,6 +125,17 @@ class Password_recovery3 : AppCompatActivity() {
 
                     val COMMIT = ObjConexion.prepareStatement("COMMIT")
                     COMMIT.executeUpdate()
+
+                    val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)")!!
+
+                    val deviceDetails = getDeviceDetails()
+                    Notificacion.setString(1, UUID.randomUUID().toString())
+                    Notificacion.setString(2, uuid)
+                    Notificacion.setString(3, "Cambio de contraseña")
+                    Notificacion.setString(4, "Se ha modificado la contraseña de su cuenta")
+                    Notificacion.setString(5, deviceDetails.time)
+                    Notificacion.setString(6, deviceDetails.date)
+                    Notificacion.executeUpdate()
                 }
                 LimpiarCampos()
                 Toast.makeText(this, "Se ha cambiado correctamente la contraseña", Toast.LENGTH_LONG).show()

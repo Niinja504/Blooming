@@ -78,6 +78,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/navigation_notifications_admin"
+        android:name="proyecto.expotecnica.blooming.Admin.notifications.Notifications"
+        android:label="Notificaciones"
+        tools:layout="@layout/fragment_notifications_admin">
+        <argument
+            android:name="UUID"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_profile_admin"
         android:name="proyecto.expotecnica.blooming.Admin.profile.Profile"
         android:label="Perfil"
