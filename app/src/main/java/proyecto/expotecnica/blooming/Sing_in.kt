@@ -102,13 +102,13 @@ class Sing_in : AppCompatActivity() {
                         <p>Correo: <a href="mailto:bloomingservicee@gmail.com">bloomingservicee@gmail.com</a></p>
                         <p>Síguenos en nuestras redes sociales:</p>
                         <p>
-                            <a href="https://www.instagram.com/_sistema_blooming?igsh=aWRtOWZ4cHZsMnli" target="_blank">
+                            <a href="https://www.instagram.com/ptc_blooming/profilecard/?igsh=MWhoaXdwMTF5cnBndw==" target="_blank">
                                 <img src="https://cdn-icons-png.flaticon.com/128/15713/15713420.png" alt="Facebook" width="24" height="24"/>
                             </a>
-                            <a href="https://x.com/SistemaBlooming" target="_blank">
+                            <a href="https://x.com/bloomingptc?s=21&t=13sdLei3-0u_F-QRr6TXlg" target="_blank">
                                 <img src="https://cdn-icons-png.flaticon.com/128/5968/5968830.png" alt="Twitter" width="24" height="24"/>
                             </a>
-                            <a href="https://www.tiktok.com/@sistema_blooming?_t=8oRwbbrEw6g&_r=1" target="_blank">
+                            <a href="https://www.tiktok.com/@bloomingptc?_t=8qY14Ab1G57&_r=1" target="_blank">
                                 <img src="https://cdn-icons-png.flaticon.com/128/15713/15713399.png" alt="Instagram" width="24" height="24"/>
                             </a>
                         </p>
@@ -179,18 +179,18 @@ class Sing_in : AppCompatActivity() {
                                             Abrir.setString(2, uuid)
                                             Abrir.executeUpdate()
 
-                                            val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio) VALUES (?, ?, ?, ?, ?)")!!
+                                            val Notificacion = ObjConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)")!!
 
                                             val deviceDetails = getDeviceDetails()
                                             Notificacion.setString(1, UUID.randomUUID().toString())
                                             Notificacion.setString(2, uuid)
-                                            Notificacion.setString(3, "Inicio de sesiòn")
+                                            Notificacion.setString(3, "Inicio de sesión")
                                             Notificacion.setString(4, "Se ha iniciado sesión en un nuevo dispositivo:\n" +
-                                                    "Fecha: ${deviceDetails.date}\n" +
                                                     "Nombre del dispositivo: ${deviceDetails.deviceName}\n" +
                                                     "Modelo: ${deviceDetails.model}\n" +
                                                     "Marca: ${deviceDetails.manufacturer}")
                                             Notificacion.setString(5, deviceDetails.time)
+                                            Notificacion.setString(6, deviceDetails.date)
                                             Notificacion.executeUpdate()
                                         }
                                         val pantallaAdmin = Intent(this@Sing_in, Dashboard_admin::class.java)

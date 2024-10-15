@@ -80,7 +80,7 @@ class AddOffers : Fragment() {
         val agregar = root.findViewById<Button>(R.id.btn_Agregar_AddOffers)
         val ProgessBar = root.findViewById<ProgressBar>(R.id.progressBar_Add_Offers_Admin)
 
-        campoTitulo.filters = arrayOf(InputFilter.LengthFilter(30))
+        campoTitulo.filters = arrayOf(InputFilter.LengthFilter(14))
         campoPorcentaje.filters = arrayOf(InputFilter.LengthFilter(3))
         setupPercentageField(campoPorcentaje)
         campoDescripcion.filters = arrayOf(InputFilter.LengthFilter(400))
@@ -132,7 +132,6 @@ class AddOffers : Fragment() {
                             agregar.executeUpdate()
 
                             val UUID_Cli = ObtenerClientes()
-                            val Notificacion = objConexion?.prepareStatement("INSERT INTO TbNotificaciones (UUID_Notificacion, UUID_User, Titulo, Mensaje, Tiempo_Envio, Fecha_Envio) VALUES (?, ?, ?, ?, ?, ?)")!!
 
                             for (UUID_Clientes in UUID_Cli) {
                                 val notificacionStatement = objConexion?.prepareStatement(

@@ -1,4 +1,4 @@
-package proyecto.expotecnica.blooming.Employed.setting
+package proyecto.expotecnica.blooming.Employed.social_media
 
 import android.content.Intent
 import android.net.Uri
@@ -8,12 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import proyecto.expotecnica.blooming.R
-import proyecto.expotecnica.blooming.databinding.FragmentSettingEmployedBinding
 
-class Setting : Fragment() {
+class Social : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,15 +36,15 @@ class Setting : Fragment() {
         }
 
         IG.setOnClickListener {
-            openUrl("https://www.instagram.com/_sistema_blooming?igsh=aWRtOWZ4cHZsMnli")
+            openUrl("https://www.instagram.com/ptc_blooming/profilecard/?igsh=MWhoaXdwMTF5cnBndw==")
         }
 
         X.setOnClickListener {
-            openUrl("https://x.com/SistemaBlooming")
+            openUrl("https://x.com/bloomingptc?s=21&t=13sdLei3-0u_F-QRr6TXlg")
         }
 
         TikTok.setOnClickListener {
-            openUrl("https://www.tiktok.com/@sistema_blooming?is_from_webapp=1&sender_device=pc")
+            openUrl("https://www.tiktok.com/@bloomingptc?_t=8qY14Ab1G57&_r=1")
         }
 
         return root

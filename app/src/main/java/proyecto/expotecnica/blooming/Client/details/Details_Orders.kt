@@ -115,16 +115,17 @@ class Details_Orders : Fragment() {
 
         val lbl_Nombre_Cliente = root.findViewById<TextView>(R.id.lbl_NombreCliente_Details_Orders_Client)
         val lbl_Fecha_Entrega = root.findViewById<TextView>(R.id.lbl_Fecha_Entrega_Details_orders_Client)
+        val lbl_Hora_Entrega = root.findViewById<TextView>(R.id.lbl_Hora_Entrega_Details_orders_Client)
         val lbl_Direccion_Entrega = root.findViewById<TextView>(R.id.lbl_Direccion_Details_Orders_Client)
         val lbl_Dedicatoria = root.findViewById<TextView>(R.id.lbl_Dedicatoria_Orders_Client)
         val lbl_SubTotal = root.findViewById<TextView>(R.id.lbl_SubTotal_Details_Orders_Client)
-        val lbl_Costo_Envio = root.findViewById<TextView>(R.id.lbl_Envio_Details_Orders_Client)
         CampoNota = root.findViewById(R.id.txt_Nota_details_Orders_Client)
         val btn_Eliminar_Pedido = root.findViewById<Button>(R.id.btn_EliminarVenta_Details_Client)
         val btn_Confirmar_Venta = root.findViewById<Button>(R.id.btn_ConfirmarVenta_Details_Client)
 
         lbl_Nombre_Cliente.text = Nombre_Cliente_Recibido
         lbl_Fecha_Entrega.text = Fecha_Entrega_Recibida
+        lbl_Hora_Entrega.text = Horario_Entrega_Recibido
         lbl_Direccion_Entrega.text = Lugar_Entrega_Recibido
         lbl_SubTotal.text = SubTotal_Recibido.toString()
         lbl_Dedicatoria.text = Sin_Mensaje_Recibido

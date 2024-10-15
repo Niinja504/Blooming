@@ -101,7 +101,7 @@
 
     <fragment
         android:id="@+id/Setting_client"
-        android:name="proyecto.expotecnica.blooming.Client.setting.Setting"
+        android:name="proyecto.expotecnica.blooming.Client.social_media.Social"
         android:label="Ajustes"
         tools:layout="@layout/fragment_setting_client" />
 
