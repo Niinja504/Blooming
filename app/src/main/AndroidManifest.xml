@@ -24,7 +24,7 @@
         android:theme="@style/Theme.Blooming"
         tools:targetApi="31">
         <activity
-            android:name=".activity_card_notifications_employed"
+            android:name=".Employed.notifications.Card"
             android:exported="false"
             android:theme="@style/Theme.Blooming" />
         <activity
@@ -32,7 +32,7 @@
             android:exported="false"
             android:theme="@style/Theme.Blooming" />
         <activity
-            android:name=".Client.notifications.Card"
+            android:name=".Admin.notifications.Card"
             android:exported="false"
             android:theme="@style/Theme.Blooming" />
         <activity

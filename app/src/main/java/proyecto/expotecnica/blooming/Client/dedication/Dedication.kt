@@ -65,10 +65,12 @@ class Dedication : Fragment()  {
         }
 
         CbSinMensaje.setOnCheckedChangeListener { _, isChecked ->
+            println("se dio clic al cmombobox AAAA")
             SinMensaje = if (isChecked) "Si" else "No"
         }
 
         CbSinNombre.setOnCheckedChangeListener { _, isChecked ->
+            println("se dio clic al cmombobox BBB")
             SinNombre = if (isChecked) "Si" else "No"
         }
 
